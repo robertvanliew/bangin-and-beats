@@ -4154,7 +4154,7 @@ html.js ul.meta-strip[data-reveal].is-in > li {
   /* New recording is portrait (454x670). Narrower container + taller
      aspect ratio so the video fills the frame without crop or stretch. */
   max-width: 380px;
-  aspect-ratio: 454 / 670;
+  aspect-ratio: 454 / 760;
   background: var(--bg);
   border-radius: 18px;
   overflow: hidden;

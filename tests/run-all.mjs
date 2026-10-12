@@ -2,6 +2,7 @@ import { brandGuard } from './brand-guard.mjs';
 import { rawGuard } from './raw-guard.mjs';
 import { assetsCheck } from './assets.mjs';
 import { homeCheck } from './home.mjs';
+import { playCheck } from './play.mjs';
 
 // Later tasks add suites here (see docs/2026-10-12-bangin-and-beats-rebrand.md).
 // `npm test -- raw` runs only suites whose first word matches.
@@ -10,6 +11,7 @@ const suites = {
   'brand guard': brandGuard,
   'assets check': assetsCheck,
   'home check': homeCheck,
+  'play check': playCheck,
 };
 const extra = process.argv.slice(2);
 let failed = 0;

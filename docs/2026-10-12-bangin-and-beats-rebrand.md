@@ -10,7 +10,7 @@
 
 **Spec:** `docs/spec-owner-copy.md` is the owner's "update website jargon.docx" as plain text. The original Word doc is at `docs/owner/update website jargon.docx`. Logo source: `docs/owner/bangin-beats-logo-source.png` (1920×1280 PNG, about 3 MB, transparent). `docs/owner/` is git-ignored, so those files stay local.
 
-**Status (2026-10-12):** Tasks 1–4 are done. Task 4 notes: the hero sizzle reel and its poster have "THRILLER BINGO" burned into every frame (Owner Input 7), so the hero is a still crowd photo (`photos/GSP_2287.jpg`) until a clean reel exists; the reel JS is null-guarded and comes back by swapping the `<img>`s for `<video>`s. The home gameplay demo video (`videos/play-gameplay-demo.mp4`) shows the old board and is re-recorded in Task 5. The 14 FAQ answers are drafts (Owner Input 5) and are generated together with the FAQPage JSON-LD so the two match. New `--gold-ink` token (#7A5E12) for small gold text on cream sections. `npm test`: assets + home PASS; raw 1089, brand 152 FAIL (other pages). Start at Task 5.
+**Status (2026-10-12):** Tasks 1–5 are done. Task 5 notes: board colors split so states read apart (marked = gold, center BANGIN' = gold on black, winning line = crimson). Win CTA now goes to `/events` (the old SimpleTix link was a past TMBB event) and the reward reads $35 → $31.50 with code THROWBACK10; the owner must create that code on the new ticket platform. The home gameplay demo (`videos/play-gameplay-demo.mp4` + poster) was re-recorded from the new board with Playwright + ffmpeg (279 KB, H.264, faststart). Manual run verified in headless Chromium with a simulated round (win modal, celebration, share card all show B-E-A-T-S / BANGIN'); the real-mic "that's bangin'" check on desktop Chrome and the iPhone check are still to do (Task 11). `npm test`: assets, home, play PASS; raw 1019, brand 132 FAIL (later pages). Start at Task 6.
 
 **Paths used below:**
 - `OLD` = `C:\Users\12124\Documents\Take-me-back-bingo` (the live site; read-only until Task 12)
@@ -736,7 +736,7 @@ git add -A && git commit -m "home: Bangin' & Beats copy (hero, how-it-works, vib
 **Interfaces:**
 - Produces: `CONFIG.voicePhrase = "bangin"`, `CONFIG.centerLabel = "BANGIN'"`, a global `voiceMatches(transcript: string) → boolean` (attached to `window` for testing), and era keys `90s-hiphop`, `90s-rnb`, `2000s-hiphop`, `2000s-rnb`.
 
-- [ ] **Step 1: Write the failing test `tests/play.mjs`**
+- [x] **Step 1: Write the failing test `tests/play.mjs`**
 
 ```js
 import { chromium } from 'playwright';
@@ -776,12 +776,12 @@ export async function playCheck() {
 
 Register it: `import { playCheck } from './play.mjs';` and `'play check': playCheck,`.
 
-- [ ] **Step 2: Run it and confirm it fails**
+- [x] **Step 2: Run it and confirm it fails**
 
 Run: `npm test -- play`
 Expected: FAIL: headers "BINGO", center "FREE", 6 eras, `window.voiceMatches is not a function`.
 
-- [ ] **Step 3: Game logic changes**
+- [x] **Step 3: Game logic changes**
 
 In CONFIG (~line 2763):
 
@@ -831,7 +831,7 @@ and at ~line 3941: `const labelText = song.free ? CONFIG.centerLabel : song.titl
 
 Win audio (~line 4052): leave the loader but point it at `audio/thats-bangin.mp3`. It already fails silently when the file is missing (Owner Input 8).
 
-- [ ] **Step 4: Era data**
+- [x] **Step 4: Era data**
 
 Delete the `80s-rnb` and `80s-hiphop` era buttons (lines ~1455–1460) and their song arrays in the era data object. Set the remaining four buttons, in this order, with the first one `is-active`/`aria-selected="true"`:
 
@@ -846,7 +846,7 @@ Delete the `80s-rnb` and `80s-hiphop` era buttons (lines ~1455–1460) and their
 
 Find the default-era constant (`grep -n "80s-rnb" play.html`) and change it to `90s-hiphop`. After the edit, `grep -n "80s" play.html` should return nothing.
 
-- [ ] **Step 5: Visible copy** (verbatim from spec lines 47–58 and 438–445)
+- [x] **Step 5: Visible copy** (verbatim from spec lines 47–58 and 438–445)
 
 - Board header line 1520: `<span>B</span><span>E</span><span>A</span><span>T</span><span>S</span>`. The headers use the gold display font (`color: var(--gold)` on `.bingo__head span`).
 - Badge `★ FREE ONLINE THROWBACK PREVIEW`; H1 `TEST YOUR THROWBACK VIBE.`; intro sub-text verbatim; nav row `HEAR THE TRACK • LOCK THE VIBE • CLAIM THE NIGHT`.
@@ -858,16 +858,16 @@ Find the default-era constant (`grep -n "80s-rnb" play.html`) and change it to `
 - `<head>`: title `Play The Beat Board™ Free | Bangin' & Beats™ Online Throwback Preview`, a matching description, canonical `https://www.banginandbeats.com/play`, and JSON-LD rewritten (four eras, "THAT'S BANGIN'").
 - `#bingoGrid`'s `aria-label`: `The Beat Board`.
 
-- [ ] **Step 6: Run the play and brand checks**
+- [x] **Step 6: Run the play and brand checks**
 
 Run: `npm test -- play && npm test -- brand 2>&1 | grep "^  /play "`
 Expected: play PASS; no `/play` brand lines.
 
-- [ ] **Step 7: Manual game run**
+- [x] **Step 7: Manual game run**
 
 Open `/play` and press Start the DJ Mix. A clip plays. Mark squares until five line up, then confirm the win modal, the celebration and the Download Card image show B-E-A-T-S and BANGIN'. In Chrome desktop, allow the mic and say "that's bangin'": the win claims.
 
-- [ ] **Step 8: Commit and push**
+- [x] **Step 8: Commit and push**
 
 ```bash
 git add -A && git commit -m "play: THE BEAT BOARD - B-E-A-T-S headers, BANGIN' center, 4 eras, THAT'S BANGIN' voice win" && git push
