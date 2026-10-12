@@ -5225,3 +5225,43 @@ section.blog-index .blog-card { border-radius: 16px; }
 /* No numbered "01 / 02 / 03" labels anywhere (owner feedback: reads as AI). */
 .how .how__step::after, .challenges__card::after, .answer-block__h::before, .songs-list li::before { content: none; }
 .winners__stamp-num { display: none; }
+
+/* ---- Owner update: icon buttons, longer ribbon title, sticky ticket bar ---- */
+.btn__icon { flex-shrink: 0; margin-right: 2px; }
+.hero-stub__title { font-size: clamp(1.3rem, 2.2vw, 1.75rem); line-height: 1.05; }
+.hero-stub__cta .btn__icon { margin-right: 0; }
+
+.ticket-bar { display: none; }
+@media (max-width: 768px) {
+  .ticket-bar {
+    position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom));
+    z-index: 70;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 10px 10px 10px 16px;
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background: linear-gradient(#0D0B09, #0D0B09) padding-box, var(--rope) border-box;
+    box-shadow: 0 18px 40px -12px rgba(0,0,0,.8);
+    color: var(--cream);
+    font: 500 13px/1.2 var(--font-body);
+    opacity: 0;
+    transform: translateY(140%);
+    pointer-events: none;
+    transition: transform 320ms var(--ease-out-strong), opacity 200ms ease;
+  }
+  .ticket-bar.is-on { opacity: 1; transform: none; pointer-events: auto; }
+  .ticket-bar__text { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ticket-bar__text strong { color: var(--gold-hi); font-weight: 700; }
+  .ticket-bar__btn {
+    flex-shrink: 0;
+    padding: 11px 18px; border-radius: 999px;
+    background: var(--metal-gold); color: var(--ink);
+    font: 700 12px/1 var(--font-body); letter-spacing: .14em; text-transform: uppercase; text-decoration: none;
+  }
+  .ticket-bar__btn:active { transform: scale(.97); }
+}
+@media (prefers-reduced-motion: reduce) { .ticket-bar { transition: opacity 200ms ease; transform: none; } }
+
+/* Song-card squares: wrap at word boundaries (hyphenate only real long words). */
+.bingocard__grid .sq { overflow-wrap: normal; word-break: normal; hyphens: auto; }
+@media (max-width: 480px) { .bingocard__grid .sq { font-size: 10px; letter-spacing: -.02em; padding: 2px; } }

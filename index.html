@@ -599,43 +599,49 @@
     </h1>
     <p class="hero-stage__hook">SING-ALONG <span aria-hidden="true">•</span> DANCE <span aria-hidden="true">•</span> PLAY <span aria-hidden="true">•</span> WIN PRIZES</p>
     <div class="hero-stage__ctas">
-      <a href="/play" class="btn btn--primary btn--lg">Play the Board <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h12m0 0L8 3m5 5l-5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a href="/gallery" class="btn btn--ghost btn--lg">Explore the Gallery <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h12m0 0L8 3m5 5l-5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="/events" class="btn btn--primary btn--lg"><svg class="btn__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 0 0 2-2h14a2 2 0 0 0 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 0-2 2H5a2 2 0 0 0-2-2v-2a2 2 0 0 0 0-4z"/><path d="M14 6v2M14 11v2M14 16v2"/></svg> Get Tickets</a>
+      <a href="#contact" class="btn btn--ghost btn--lg" data-open-inquiry data-inquiry-topic="Private booking - Other event"><svg class="btn__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.6"/><path d="M16 14.2a5 5 0 0 1 5.5 5.8"/></svg> Book a Private Party</a>
     </div>
   </div>
 
-  <!-- Ticket stub · next show. No public date is on sale right now, so it
-       points at the list; swap in the date + ticket link when one drops. -->
+  <!-- Ticket stub · next show (owner copy). Points at /events until the
+       date and ticket link are published; then swap the href. -->
   <a class="hero-stub" href="/events">
     <span class="hero-stub__tear" aria-hidden="true">Admit One</span>
     <span class="hero-stub__body">
-      <span class="hero-stub__kicker">Next up · Woodbridge, NJ flagship</span>
-      <span class="hero-stub__title">New tour dates dropping soon</span>
-      <span class="hero-stub__meta">Tickets $35 · Three rounds · Prizes all night</span>
+      <span class="hero-stub__kicker">&#9733; Next stop: Woodbridge, NJ</span>
+      <span class="hero-stub__title">Bangin&rsquo; &amp; Beats&trade;: The All-Black Throwback Experience</span>
+      <span class="hero-stub__meta">3:00 PM &ndash; 9:00 PM &middot; Tickets $35 &middot; Strictly 30 &amp; Up</span>
     </span>
-    <span class="hero-stub__cta">See Tour Dates <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h12m0 0L8 3m5 5l-5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    <span class="hero-stub__cta"><svg class="btn__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 0 0 2-2h14a2 2 0 0 0 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 0-2 2H5a2 2 0 0 0-2-2v-2a2 2 0 0 0 0-4z"/><path d="M14 6v2M14 11v2M14 16v2"/></svg> Buy Tickets Now</span>
   </a>
 
   <!-- Four quick metrics (owner spec, Section 2) -->
   <ul class="meta-strip hero-stage__metrics" data-reveal data-reveal-stagger>
     <li>
       <strong>Fri / Sat / Sun</strong>
-      <span>Upcoming party tour dates</span>
+      <span>Upcoming tour dates</span>
     </li>
     <li>
-      <strong>60 Anthems</strong>
-      <span>Loaded into the music pool</span>
+      <strong>60 Classic Jams</strong>
+      <span>Spun live by the DJ every night</span>
     </li>
     <li>
       <strong>3 Rounds</strong>
-      <span>Of interactive music tracks per night</span>
+      <span>Of The Beat Board&trade; per night</span>
     </li>
     <li>
-      <strong>Dance Battles</strong>
-      <span>Mainstage showcase closers</span>
+      <strong>Mainstage Dance Battles</strong>
+      <span>The last dance party closer</span>
     </li>
   </ul>
 </section>
+
+<!-- Sticky ticket bar (phones): appears once the hero ticket stub scrolls away. -->
+<div class="ticket-bar" data-ticket-bar aria-hidden="true">
+  <span class="ticket-bar__text"><strong>All-Black</strong> &middot; Woodbridge, NJ</span>
+  <a class="ticket-bar__btn" href="/events" tabindex="-1">Buy Tickets</a>
+</div>
 
 <!-- ============ THE REMIX · intro + the song card ============ -->
 <section class="remix" id="remix">
@@ -690,7 +696,7 @@
             <div class="sq">Get Low</div>
             <!-- row 5 -->
             <div class="sq is-daubed">Big Poppa</div>
-            <div class="sq">Promiscuous</div>
+            <div class="sq">Dilemma</div>
             <div class="sq">Lose Yourself</div>
             <div class="sq">Drop It Like It&rsquo;s Hot</div>
             <div class="sq is-daubed">Ignition</div>
@@ -1885,6 +1891,23 @@
         });
       }
     }
+
+    // Sticky ticket bar: show after the hero stub leaves the screen, hide over the footer.
+    (function () {
+      var bar = document.querySelector("[data-ticket-bar]");
+      var stub = document.querySelector(".hero-stub");
+      var foot = document.querySelector("footer.footer");
+      if (!bar || !stub || !("IntersectionObserver" in window)) return;
+      var pastStub = false, atFoot = false;
+      function sync() {
+        var on = pastStub && !atFoot;
+        bar.classList.toggle("is-on", on);
+        bar.setAttribute("aria-hidden", on ? "false" : "true");
+        bar.querySelector("a").tabIndex = on ? 0 : -1;
+      }
+      new IntersectionObserver(function (e) { pastStub = !e[0].isIntersecting && e[0].boundingClientRect.top < 0; sync(); }).observe(stub);
+      if (foot) new IntersectionObserver(function (e) { atFoot = e[0].isIntersecting; sync(); }).observe(foot);
+    })();
 
     // Hero background reel: pause for reduced-motion users; resume after a
     // blocked autoplay (iOS low-power mode) on the first touch.
