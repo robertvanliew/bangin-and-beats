@@ -4507,7 +4507,8 @@ html.js ul.meta-strip[data-reveal].is-in > li {
   --gold-lo:      #8C6A1C;
   --lacquer:      #070606;
   --surface-light: var(--pearl);
-  --rope: repeating-linear-gradient(115deg, #7A5A14 0 3px, #F3D27A 3px 6px, #B8902F 6px 9px);
+  /* Gold edge: polished metallic gold like the logo's letter rims (was a striped rope). */
+  --rope: linear-gradient(135deg, #7A5A14 0%, #E2C15A 16%, #FFF1BE 28%, #D4AF37 44%, #8C6A1C 58%, #E2C15A 74%, #F6E3A1 86%, #A8862A 100%);
   --metal-gold: linear-gradient(180deg, #F6E3A1 0%, #E2C15A 32%, #D4AF37 58%, #A8862A 100%);
   --velvet: radial-gradient(120% 90% at 50% 0%, #6A1616 0%, #3F0C0C 55%, #200707 100%);
   --spot: radial-gradient(60% 46% at 50% 0%, rgba(212,175,55,.12), transparent 72%);
