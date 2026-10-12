@@ -577,11 +577,15 @@
 
 <!-- ============ HERO · FULL-BLEED STAGE ============
      Crowd photo as the stage, the logo as the headline act, the owner's
-     descriptor + slogan, two CTAs, and a gold ticket stub for the next show.
-     (A clean sizzle reel can replace the photo later.) -->
+     descriptor + slogan, two CTAs, and a gold ticket stub for the next show. -->
 <section class="hero hero-stage" id="top">
   <div class="hero-stage__media" aria-hidden="true">
-    <img class="hero-stage__img" src="photos/GSP_2287.jpg" alt="" width="1600" height="1067" fetchpriority="high" />
+    <!-- Muted looping background reel. Cut from the old sizzle reel with the
+         old-brand watermark cropped off and the branded backdrop trimmed out. -->
+    <video class="hero-stage__img hero-stage__video" data-hero-bg autoplay muted loop playsinline preload="metadata"
+           poster="photos/hero-bg-poster.jpg" tabindex="-1">
+      <source src="Video/hero-bg.mp4" type="video/mp4" />
+    </video>
   </div>
 
   <div class="hero-stage__inner">
@@ -761,24 +765,28 @@
 
     <ol class="how__steps" data-reveal data-reveal-stagger>
       <li class="how__step">
+        <span class="how__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/></svg></span>
         <h3 class="how__title">Grab your tracklist card</h3>
         <p class="how__copy">
           When you walk through the doors, we hand you a heavy, custom 5x5 Song Card packed with 24 legendary throwback titles&mdash;classic 90s R&amp;B jams, early 2000s hip-hop club bangers, and undisputed street anthems. No two cards are identical, so you&rsquo;re chasing your own path to a win. The center spot holds our brand-new &ldquo;BANGIN&rsquo;&rdquo; logo space.
         </p>
       </li>
       <li class="how__step">
+        <span class="how__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3a9 9 0 0 1 9 9"/><path d="M12 6.5a5.5 5.5 0 0 1 5.5 5.5"/></svg></span>
         <h3 class="how__title">The DJ drops a jam</h3>
         <p class="how__copy">
           Our DJ turns up the pressure, dropping a 30-to-60 second live clip of an absolute throwback classic. Widescreen video monitors and low neon lights pulse with the vibe. No numbers called here&mdash;just pure heat.
         </p>
       </li>
       <li class="how__step">
+        <span class="how__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></svg></span>
         <h3 class="how__title">Match the vibe, sing the hook</h3>
         <p class="how__copy">
           Recognize the track on your card? Mark your square immediately! Group singing isn&rsquo;t just allowed&mdash;it&rsquo;s mandatory. Sing the hook at the top of your lungs with the rest of the crowd. Hear the track. Lock it in. Claim the night.&trade;
         </p>
       </li>
       <li class="how__step">
+        <span class="how__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6H4.5a2.5 2.5 0 0 0 2.5 4M17 6h2.5a2.5 2.5 0 0 1-2.5 4M12 14v3.5M8.5 21h7M9.5 17.5h5V21h-5z"/></svg></span>
         <h3 class="how__title">Win big, stay for the dance battle</h3>
         <p class="how__copy">
           Be the first to line up 5 matching squares in a row, column, or diagonal? Stand up and command the floor by shouting &ldquo;THAT&rsquo;S BANGIN&rsquo;!&rdquo; Our Hype Emcee verifies your card on the spot, the crowd erupts, and you walk away with premium prize loot.
@@ -812,21 +820,48 @@
   </div>
 </section>
 
-<!-- ============ THE CORE VIBE ENGINE (light surface) ============ -->
+<!-- ============ THE CORE VIBE ENGINE · editorial spread ============
+     Owner spec Section 4, copy verbatim. Left: the hook as a poster headline
+     with two photos from real nights (sticky on desktop). Right: the story,
+     the HEADLINE ACT band, and the close. -->
 <section class="vibe-engine" id="vibe">
-  <div class="vibe-engine__inner" data-reveal>
-    <p>Thought this was just a regular, quiet throwback night? Oh, you must be new here.</p>
-    <p>We don&rsquo;t do passive club playlists or boring trivia games where y&rsquo;all nurse one drink for three hours.</p>
-    <p>So, what is <span class="vibe-engine__pill">BANGIN&rsquo; &amp; BEATS&trade;</span> then?</p>
-    <p>We took the high-stakes fun of a live music board and fused it with the explosive, out-of-your-seat energy of a 90s and 2000s R&amp;B concert.</p>
-    <p>One moment you&rsquo;re minding your business at a high-top table. The next, the DJ drops the first heavy horn stab from Beyonc&eacute;&rsquo;s &ldquo;Crazy in Love,&rdquo; you&rsquo;re locking down a row on your card, and the whole room is screaming the chorus at the top of their lungs!</p>
-    <p>This is not a show where you just sit and watch. You don&rsquo;t just watch the action. You become it.</p>
-    <p><strong class="vibe-engine__headline">&#10132; YOU ARE THE HEADLINE ACT.</strong></p>
-    <p>But the real reason you show up?<br>
-      To catch a vibe. To travel back in time. To be completely, unapologetically grown and sexy with 300+ people who know every single lyric to the soundtrack of your youth.</p>
-    <p>What about the dance battles, lip-sync showdowns, and massive group sing-alongs? Oh, they&rsquo;re baked right into the mix between the music rounds.</p>
-    <p>We could keep explaining the blueprint, but where&rsquo;s the fun in that?</p>
-    <p class="vibe-engine__close">Get the ticket. You&rsquo;ll get it when you get there.</p>
+  <div class="vibe-engine__inner">
+    <div class="vibe-engine__aside">
+      <p class="eyebrow eyebrow--dark" data-reveal><span class="eyebrow__dot"></span> The core vibe</p>
+      <h2 class="vibe-engine__hook" data-reveal>Thought this was just a regular, quiet throwback night? <em>Oh, you must be new here.</em></h2>
+      <div class="vibe-engine__photos" aria-hidden="true">
+        <img class="vibe-engine__photo vibe-engine__photo--a" src="photos/GSP_2295.jpg" alt="" width="1600" height="2400" loading="lazy" />
+        <img class="vibe-engine__photo vibe-engine__photo--b" src="photos/GSP_2298.jpg" alt="" width="1600" height="1067" loading="lazy" />
+      </div>
+    </div>
+
+    <div class="vibe-engine__body">
+      <p class="vibe-engine__lead" data-reveal>We don&rsquo;t do passive club playlists or boring trivia games where y&rsquo;all nurse one drink for three hours.</p>
+
+      <p class="vibe-engine__ask" data-reveal>So, what is <span class="vibe-engine__pill">BANGIN&rsquo; &amp; BEATS&trade;</span> then?</p>
+
+      <p data-reveal>We took the high-stakes fun of a live music board and fused it with the explosive, out-of-your-seat energy of a 90s and 2000s R&amp;B concert.</p>
+
+      <p data-reveal>One moment you&rsquo;re minding your business at a high-top table. The next, the DJ drops the first heavy horn stab from Beyonc&eacute;&rsquo;s &ldquo;Crazy in Love,&rdquo; you&rsquo;re locking down a row on your card, and the whole room is screaming the chorus at the top of their lungs!</p>
+
+      <p data-reveal>This is not a show where you just sit and watch. You don&rsquo;t just watch the action. You become it.</p>
+
+      <p class="vibe-engine__headline" data-reveal><span aria-hidden="true">&#10132;</span> YOU ARE THE HEADLINE ACT.</p>
+
+      <div class="vibe-engine__why" data-reveal>
+        <p class="vibe-engine__ask">But the real reason you show up?</p>
+        <p>To catch a vibe. To travel back in time. To be completely, unapologetically grown and sexy with 300+ people who know every single lyric to the soundtrack of your youth.</p>
+      </div>
+
+      <p data-reveal>What about the dance battles, lip-sync showdowns, and massive group sing-alongs? Oh, they&rsquo;re baked right into the mix between the music rounds.</p>
+
+      <p data-reveal>We could keep explaining the blueprint, but where&rsquo;s the fun in that?</p>
+
+      <div class="vibe-engine__end" data-reveal>
+        <p class="vibe-engine__close">Get the ticket. You&rsquo;ll get it when you get there.</p>
+        <a href="/events" class="btn btn--primary btn--lg">Get Tickets &mdash; $35</a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1850,6 +1885,20 @@
         });
       }
     }
+
+    // Hero background reel: pause for reduced-motion users; resume after a
+    // blocked autoplay (iOS low-power mode) on the first touch.
+    (function () {
+      var v = document.querySelector("[data-hero-bg]");
+      if (!v) return;
+      if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        v.removeAttribute("autoplay"); v.pause(); return;
+      }
+      var p = v.play && v.play();
+      if (p && p.catch) p.catch(function () {
+        document.addEventListener("touchstart", function () { v.play().catch(function () {}); }, { once: true, passive: true });
+      });
+    })();
 
     // === Bio message rotator · cycles between the two body paragraphs ===
     // Auto-advances every 8s. Pauses on hover so people can read. Dots
