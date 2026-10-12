@@ -10,7 +10,7 @@
 
 **Spec:** `docs/spec-owner-copy.md` is the owner's "update website jargon.docx" as plain text. The original Word doc is at `docs/owner/update website jargon.docx`. Logo source: `docs/owner/bangin-beats-logo-source.png` (1920×1280 PNG, about 3 MB, transparent). `docs/owner/` is git-ignored, so those files stay local.
 
-**Status (2026-10-12):** Task 1 is done except Step 9 (creating the GitHub repo and pushing). The site is copied, the raw video originals were dropped (61 MB total), the tests are written, and `npm test` shows the red baseline: raw guard 1352 FAIL, brand guard 188 FAIL. Start at Task 1 Step 9, then Task 2.
+**Status (2026-10-12):** Task 1 is done. The repo is pushed to `github.com/robertvanliew/bangin-and-beats` (private, `main` tracks `origin/main`). `npm test` shows the red baseline: raw guard 1352 FAIL, brand guard 188 FAIL. Start at Task 2.
 
 **Paths used below:**
 - `OLD` = `C:\Users\12124\Documents\Take-me-back-bingo` (the live site; read-only until Task 12)
@@ -276,7 +276,7 @@ Later tasks register more suites by adding imports to `suites` (each task shows 
 Run: `npm test`
 Expected: FAIL with hundreds of raw-guard hits, and brand-guard 404s for the renamed paths (those pages don't exist yet). This is the red baseline.
 
-- [ ] **Step 9: Create the GitHub repo, commit, push**
+- [x] **Step 9: Create the GitHub repo, commit, push**
 
 ```bash
 gh repo create robertvanliew/bangin-and-beats --private --source . --remote origin
