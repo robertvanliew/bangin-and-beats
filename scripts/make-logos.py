@@ -15,12 +15,18 @@ main = fit(img, 1200)
 main.quantize(256, method=Image.FASTOCTREE).save(out / "bangin-beats-logo.png", optimize=True)
 main.save(out / "bangin-beats-logo.webp", quality=85, method=6)
 
-# favicon / touch icon: square, logo centered on black
-for name, size in [("favicon.png", 512), ("apple-touch-icon.png", 180)]:
-    sq = Image.new("RGBA", (size, size), (10, 10, 10, 255))
-    lg = fit(img, int(size * 0.9))
-    sq.alpha_composite(lg, ((size - lg.width) // 2, (size - lg.height) // 2))
-    sq.convert("RGB").save(out / name, optimize=True)
+# favicon: transparent square, logo only, filling the width (browser tabs).
+fav = Image.new("RGBA", (256, 256), (0, 0, 0, 0))
+lg = fit(img, 252)
+fav.alpha_composite(lg, ((256 - lg.width) // 2, (256 - lg.height) // 2))
+fav.quantize(256, method=Image.FASTOCTREE).save(out / "favicon.png", optimize=True)
+
+# apple-touch-icon: iOS paints transparency black anyway and Apple wants it
+# opaque, so the home-screen icon keeps the logo on black.
+sq = Image.new("RGBA", (180, 180), (10, 10, 10, 255))
+lg = fit(img, int(180 * 0.9))
+sq.alpha_composite(lg, ((180 - lg.width) // 2, (180 - lg.height) // 2))
+sq.convert("RGB").save(out / "apple-touch-icon.png", optimize=True)
 
 og = Image.new("RGBA", (1200, 630), (10, 10, 10, 255))
 lg = fit(img, 900)
