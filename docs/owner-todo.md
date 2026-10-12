@@ -36,7 +36,7 @@ The game's win screen shows **THROWBACK10** and **$35 → $31.50**, and the butt
 
 ## 5. Email inbox
 
-- [ ] Set up `info@banginandbeats.com` (forwarding to the owner's existing inbox is fine: registrar forwarding, Cloudflare Email Routing, or ImprovMX).
+- [x] Set up `info@banginandbeats.com` (done 2026-10-12: ImprovMX active, aliases *, info, sha, tickets → banginandbeats@gmail.com; forwarding to the owner's existing inbox is fine: registrar forwarding, Cloudflare Email Routing, or ImprovMX).
 
 ## 6. Social accounts
 
