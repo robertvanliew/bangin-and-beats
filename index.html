@@ -215,6 +215,8 @@
     object-fit: cover;
     background: #000;
   }
+  /* Still logo in the same 4:5 frame: contain, never crop the wordmark */
+  .logo-anim__video--still { object-fit: contain; padding: 8%; background: var(--bg); }
   /* Mobile: taller frame so the animation fills the open vertical space
      under it instead of leaving a black band before the meta-strip */
   @media (max-width: 768px) {
@@ -469,22 +471,24 @@
 <body>
 
 <!-- ============ NAV ============ -->
+<!-- CHROME:NAV -->
 <header class="nav">
-  <a href="#" class="nav__logo" aria-label="Take Me Back Bingo home">
-    <img src="/logos/bangin-beats-logo.png" width="1200" height="699" alt="Take Me Back Bingo" class="nav__logo-img" />
+  <a href="/" class="nav__logo" aria-label="Bangin' &amp; Beats home">
+    <img src="/logos/bangin-beats-logo.png" width="1200" height="699" alt="Bangin' &amp; Beats" class="nav__logo-img" />
   </a>
   <nav class="nav__links" id="primary-nav" aria-label="Primary">
-    <a href="#how">How to Play</a>
-    <a href="/play">Play</a>
-    <a href="/events">Events</a>
-    <a href="/gallery">Gallery</a>
-    <a href="/blog">Blog</a>
-    <a href="#faq">FAQ</a>
+    <a href="/" aria-current="page">Home</a>
+    <a href="/how-it-works">How It Works</a>
+    <a href="/events">Tour Dates</a>
+    <a href="/gallery">Photo Gallery</a>
+    <a href="/blog">Cultural Blog</a>
+    <a href="/#faq">FAQ</a>
     <a href="#contact">Contact</a>
   </nav>
-  <a href="#newsletter" class="btn btn--primary nav__cta" data-cta-when-live="buy" data-href-live="/events" data-text-live="Buy Tickets">Get Notified</a>
+  <a href="/events" class="btn btn--primary nav__cta">Get Tickets</a>
   <button type="button" class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav" onclick="(function(b){var n=b.closest('.nav');var o=n.getAttribute('data-nav-open')==='true';n.setAttribute('data-nav-open',o?'false':'true');b.setAttribute('aria-expanded',o?'false':'true');b.setAttribute('aria-label',o?'Open menu':'Close menu');})(this)"><span class="nav__toggle-bars" aria-hidden="true"></span></button>
 </header>
+<!-- /CHROME:NAV -->
 
 <!-- ============ HERO · MIXTAPE J-CARD ============ -->
 <section class="hero">
@@ -856,20 +860,14 @@
           </div>
         </div>
 
-        <!-- Animation logo · replaces the past-night flyer slider.
+        <!-- Brand logo · replaces the past-night flyer slider (was an animation).
              Sized to the original flyer aspect ratio (4:5) so the
              surrounding layout stays unchanged. -->
         <div class="logo-anim" data-reveal>
-          <video
-            class="logo-anim__video"
-            src="Video/logo-anim-v2.mp4"
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="auto"
-            aria-label="Take Me Back Bingo animated logo"
-          ></video>
+          <picture>
+            <source srcset="/logos/bangin-beats-logo.webp" type="image/webp">
+            <img class="logo-anim__video logo-anim__video--still" src="/logos/bangin-beats-logo.png" alt="Bangin' &amp; Beats" width="1200" height="699" loading="lazy">
+          </picture>
         </div>
       </article>
 
@@ -1555,25 +1553,26 @@
 </section>
 
 <!-- ============ FOOTER ============ -->
+<!-- CHROME:FOOTER -->
 <footer class="footer" id="contact">
   <div class="footer__bleed" aria-hidden="true"></div>
 
   <div class="footer__inner">
 
-    <!-- BIG hero band: logo lockup + tagline -->
-    <div class="footer__lockup" data-reveal>
-      <img src="/logos/bangin-beats-logo.png" width="1200" height="699" alt="Take Me Back Bingo" class="footer__logo" />
+    <!-- BIG hero band: logo lockup + crown slogan -->
+    <div class="footer__lockup">
+      <img src="/logos/bangin-beats-logo.png" width="1200" height="699" alt="Bangin' &amp; Beats" class="footer__logo" loading="lazy" />
       <div class="footer__lockup-copy">
         <p class="footer__tagline">
-          <span class="footer__tagline-script">Bingo for people</span>
-          <span class="footer__tagline-block">who love music.</span>
+          <span class="footer__tagline-script">Retro music nostalgia</span>
+          <span class="footer__tagline-block">for people who love real culture.</span>
         </p>
         <p class="footer__sub">
-          Hip-Hop &amp; R&amp;B bingo, live in your city. Mark the song, line it up, win the round.
+          Authentic 90s &amp; 00s Hip-Hop &amp; R&amp;B live touring experiences. Sing-alongs, mainstage dance battles, premium prize drops, and unforgettable club energy all night long.
         </p>
         <div class="footer__cta-row">
-          <a href="#newsletter" class="btn btn--primary btn--lg" data-cta-when-live="buy" data-href-live="/events" data-text-live="Buy Tickets">Get Notified</a>
-          <a href="#contact" class="btn btn--ghost btn--lg" data-open-inquiry data-inquiry-topic="Private booking - Other event">Book a Private Night</a>
+          <a href="/events" class="btn btn--primary btn--lg">Explore Tour Tickets</a>
+          <a href="/birthday-party" class="btn btn--ghost btn--lg">Request a Private Tour Stop</a>
         </div>
       </div>
     </div>
@@ -1581,72 +1580,74 @@
     <!-- columns -->
     <div class="footer__cols">
       <div class="footer__col">
-        <h4 class="footer__h">Explore</h4>
+        <h4 class="footer__h">Explore the Tour</h4>
         <ul class="footer__list">
-          <li><a href="#how">About</a></li>
-          <li><a href="/what-is-music-bingo">What Is Music Bingo?</a></li>
-          <li><a href="/hip-hop-bingo">Hip-Hop Bingo</a></li>
-          <li><a href="/r-b-bingo">R&amp;B Bingo</a></li>
-          <li><a href="/sunday-bingo-nj">Sunday Bingo NJ</a></li>
-          <li><a href="/bingo-woodbridge-nj">Bingo in Woodbridge NJ</a></li>
-          <li><a href="/bingo-newark-nj">Bingo Near Newark NJ</a></li>
-          <li><a href="/bingo-edison-nj">Bingo Near Edison NJ</a></li>
-          <li><a href="/music-bingo-nyc">Music Bingo NYC</a></li>
-          <li><a href="/events">Events</a></li>
-          <li><a href="/gallery">Gallery</a></li>
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="/how-it-works">How It Works</a></li>
+          <li><a href="/hip-hop-throwback-party">90s Rap Round</a></li>
+          <li><a href="/rnb-throwback-party">90s R&amp;B Vibe Set</a></li>
+          <li><a href="/hip-hop-throwback-party">2000s Hip-Hop Banger Set</a></li>
+          <li><a href="/rnb-throwback-party">2000s R&amp;B Slow Jam Round</a></li>
+          <li><a href="/sunday-day-party-nj">Sunday Day Party Dates</a></li>
+          <li><a href="/woodbridge-nj">Our Woodbridge Flagship Room</a></li>
+          <li><a href="/newark-nj">Newark Venue Takeovers</a></li>
+          <li><a href="/edison-nj">Edison Scheduled Shows</a></li>
+          <li><a href="/nyc-throwback-party">The NYC Event Tour</a></li>
+          <li><a href="/events">View Upcoming Tour Dates</a></li>
+          <li><a href="/gallery">Visual Media Gallery</a></li>
+          <li><a href="/blog">Cultural Blog Columns</a></li>
+          <li><a href="#contact" data-open-inquiry>Master Contact Portal</a></li>
         </ul>
       </div>
 
       <div class="footer__col">
-        <h4 class="footer__h">Work With Us</h4>
+        <h4 class="footer__h">Private Party Takeovers</h4>
         <ul class="footer__list">
-          <li><a href="/bachelorette-party-bingo">Bachelorette Party Bingo</a></li>
-          <li><a href="/birthday-party-bingo">Birthday Party Bingo</a></li>
-          <li><a href="/music-bingo-fundraiser">Fundraiser Events</a></li>
-          <li><a href="#contact" data-open-inquiry data-inquiry-topic="Private booking - Corporate / Office">Corporate Events</a></li>
-          <li><a href="#contact" data-open-inquiry data-inquiry-topic="Brand partnerships">Brand Partnerships</a></li>
-          <li><a href="#contact" data-open-inquiry data-inquiry-topic="Bring us to your city">Bring Us To Your City</a></li>
-          <li><a href="#contact" data-open-inquiry data-inquiry-topic="Press &amp; media">Press &amp; Media</a></li>
+          <li><a href="/bachelorette-party">Private Social Gatherings</a></li>
+          <li><a href="/birthday-party">Celebration Custom Packages</a></li>
+          <li><a href="/fundraiser-events">Non-Profit Venue Shows</a></li>
+          <li><a href="#contact" data-open-inquiry data-inquiry-topic="Private booking - Corporate / Office">Corporate Gala Takeovers</a></li>
+          <li><a href="#contact" data-open-inquiry data-inquiry-topic="Brand partnerships">Brand Sponsorship Loops</a></li>
+          <li><a href="#contact" data-open-inquiry data-inquiry-topic="Bring us to your city">Host a Tour Stop in Your City</a></li>
+          <li><a href="#contact" data-open-inquiry data-inquiry-topic="Press &amp; media">Press &amp; Corporate Media Kit</a></li>
         </ul>
       </div>
 
       <div class="footer__col">
-        <h4 class="footer__h">Stay In The Loop</h4>
+        <h4 class="footer__h">Stay Locked in the Loop</h4>
         <p class="footer__newsletter-copy">
-          New cities, new dates, early ticket drops. No spam.
+          New cities, fresh dates, early ticket drops. Real history, zero spam.
         </p>
         <form id="newsletter" class="footer__newsletter" data-newsletter-form method="POST" action="/api/subscribe" novalidate>
           <label class="sr-only" for="footer-email">Email address</label>
-          <input id="footer-email" name="email" type="email" required placeholder="you@email.com" autocomplete="email" />
+          <input id="footer-email" name="email" type="email" required placeholder="Enter Email Address" autocomplete="email" />
           <button type="submit" aria-label="Subscribe">
             <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h12m0 0L8 3m5 5l-5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
           <p class="footer__newsletter-status" data-newsletter-status role="status" aria-live="polite"></p>
         </form>
         <div class="footer__contact">
-          <a href="tel:+17326467073" class="footer__contact-line">
+          <a href="tel:+12013444589" class="footer__contact-line">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <span>732.646.7073</span>
+            <span>Hotline: 201-344-4589</span>
           </a>
-          <a href="#contact" class="footer__contact-line" data-open-inquiry>
+          <a href="https://www.banginandbeats.com" class="footer__contact-line">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+            <span>Website: banginandbeats.com</span>
+          </a>
+          <a href="mailto:info@banginandbeats.com" class="footer__contact-line" data-open-inquiry>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
-            <span>info@takemebackbingo.com</span>
+            <span>Email: info@banginandbeats.com</span>
           </a>
         </div>
 
         <div class="footer__social">
-          <a href="https://www.instagram.com/takemebackbingo" target="_blank" rel="noopener" aria-label="Instagram">
+          <a href="https://www.instagram.com/banginandbeats" target="_blank" rel="noopener" aria-label="Instagram @banginandbeats">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
           </a>
-          <a href="https://www.tiktok.com/@takemebackbingo" target="_blank" rel="noopener" aria-label="TikTok">
+          <a href="https://www.tiktok.com/@banginandbeats" target="_blank" rel="noopener" aria-label="TikTok @banginandbeats">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 8.5a8.05 8.05 0 0 1-5-2v8.5a6.5 6.5 0 1 1-6.5-6.5h.5v3.5a3 3 0 1 0 3 3V3h3.5a4.5 4.5 0 0 0 4.5 4.5z"/></svg>
           </a>
-          <a href="https://www.facebook.com/share/14YvCAxPKQL/" target="_blank" rel="noopener" aria-label="Facebook">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          </a>
-          <a href="#contact" aria-label="Email" data-open-inquiry>
+          <a href="mailto:info@banginandbeats.com" aria-label="Email" data-open-inquiry>
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
           </a>
         </div>
@@ -1656,21 +1657,26 @@
     <!-- bottom bar -->
     <div class="footer__bottom">
       <div class="footer__bottom-row">
-        <p class="footer__copy">&copy; <span id="year">2026</span> High Class Experience LLC. All rights reserved.</p>
+        <p class="footer__copy">&copy; <span id="year">2026</span> HIGH CLASS EXPERIENCE LLC. ALL RIGHTS RESERVED.</p>
         <p class="footer__credit">
           Designed by <a href="https://robertvanliew.com" target="_blank" rel="noopener">Robert Van Liew</a>
         </p>
         <p class="footer__legal">
-          <a href="/legal#privacy">Privacy</a>
+          <a href="/legal#privacy">Privacy Terms</a>
           <span class="footer__dot">·</span>
-          <a href="/legal#terms">Terms</a>
+          <a href="/legal#terms">Code Compliance</a>
+          <span class="footer__dot">·</span>
+          <a href="/sitemap.xml">Sitemap</a>
           <span class="footer__dot">·</span>
           <a href="/legal#accessibility">Accessibility</a>
         </p>
       </div>
+      <p class="footer__copy">Produced Exclusively by High Class Experience LLC • All Rights Reserved • Strictly 30 &amp; Up</p>
     </div>
   </div>
 </footer>
+<script src="/footer.js" defer></script>
+<!-- /CHROME:FOOTER -->
 
 <!-- ============ INQUIRY MODAL · opens from footer email icon ============ -->
 <div class="modal" id="inquiry-modal" role="dialog" aria-modal="true" aria-labelledby="inquiry-modal-title" hidden>
@@ -1684,14 +1690,14 @@
       <p class="eyebrow"><span class="eyebrow__dot"></span> Get in Touch</p>
       <h2 id="inquiry-modal-title" class="modal__title">Let&rsquo;s Make Some Noise.</h2>
       <p class="modal__sub">
-        Want Take Me Back Bingo at your venue, office, or birthday?
+        Want Bangin' &amp; Beats™ at your venue, office, or birthday?
         Slide into our inbox. We reply within 24 hours.
       </p>
     </header>
 
     <form class="modal__form" data-inquiry-form method="POST" action="https://formspree.io/f/mbdbggbv" novalidate>
       <!-- Populated by JS when the modal is opened with a context-specific CTA -->
-      <input type="hidden" name="_subject" data-inquiry-subject-field value="[Take Me Back Bingo] Inquiry" />
+      <input type="hidden" name="_subject" data-inquiry-subject-field value="[Bangin' &amp; Beats] Inquiry" />
       <input type="hidden" name="context" data-inquiry-context-field value="" />
 
       <div class="modal__row">
@@ -1765,7 +1771,7 @@
           Send Inquiry
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h12m0 0L8 3m5 5l-5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <p class="modal__hint">Or call/text <a href="tel:+17326467073">732.646.7073</a></p>
+        <p class="modal__hint">Or call/text <a href="tel:+12013444589">201-344-4589</a></p>
       </div>
 
       <p class="modal__hint modal__caveat">
@@ -1882,7 +1888,7 @@
 
         // Reset to defaults first so stale state from a previous open doesn't leak.
         if (inquiryTitleEl) inquiryTitleEl.textContent = defaultInquiryTitle;
-        if (inquirySubjEl) inquirySubjEl.value = '[Take Me Back Bingo] Inquiry';
+        if (inquirySubjEl) inquirySubjEl.value = "[Bangin' & Beats] Inquiry";
         if (inquiryCtxEl) inquiryCtxEl.value = '';
         if (inquiryMsgEl) inquiryMsgEl.setAttribute('placeholder', defaultMsgPlaceholder);
         if (inquirySelectEl) inquirySelectEl.selectedIndex = 0;
@@ -1903,7 +1909,7 @@
           }
           // Keep the headline constant ("Let's Make Some Noise."), it's brand,
           // not a context label. The topic is conveyed by the pre-selected option.
-          if (inquirySubjEl) inquirySubjEl.value = '[Take Me Back Bingo] ' + topic;
+          if (inquirySubjEl) inquirySubjEl.value = "[Bangin' & Beats] " + topic;
         }
 
         if (context) {
@@ -1994,80 +2000,6 @@
       });
     }
 
-    // === Footer newsletter, POSTs JSON to /api/subscribe (Resend Audience) ===
-    // Inquiry/booking forms remain on Formspree; only the newsletter moved.
-    var newsletterForm = document.querySelector('[data-newsletter-form]');
-    if (newsletterForm) {
-      var newsletterStatus = newsletterForm.querySelector('[data-newsletter-status]');
-      var newsletterBtn = newsletterForm.querySelector('button[type="submit"]');
-      var newsletterBtnDefault = newsletterBtn ? newsletterBtn.innerHTML : '';
-
-      // Floating toast: created on first use, reused thereafter. The inline
-      // [data-newsletter-status] node is kept as an sr-only aria-live target
-      // so the announcement still reaches screen readers.
-      var newsletterToast = null;
-      var newsletterToastTimer = null;
-      function showNewsletterToast(msg, isError) {
-        if (!msg) return;
-        if (!newsletterToast) {
-          newsletterToast = document.createElement('div');
-          newsletterToast.className = 'toast';
-          newsletterToast.setAttribute('role', 'status');
-          document.body.appendChild(newsletterToast);
-        }
-        newsletterToast.textContent = msg;
-        newsletterToast.classList.toggle('toast--error', !!isError);
-        // Force reflow so the transition fires on re-show
-        void newsletterToast.offsetWidth;
-        newsletterToast.classList.add('is-shown');
-        if (newsletterToastTimer) clearTimeout(newsletterToastTimer);
-        newsletterToastTimer = setTimeout(function () {
-          if (newsletterToast) newsletterToast.classList.remove('is-shown');
-        }, 4500);
-      }
-      function setNewsletterStatus(msg, isError) {
-        if (newsletterStatus) {
-          newsletterStatus.textContent = msg;
-          newsletterStatus.classList.toggle('is-error', !!isError);
-          newsletterStatus.classList.add('is-shown');
-        }
-        if (msg) showNewsletterToast(msg, isError);
-      }
-
-      newsletterForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        if (newsletterBtn) {
-          newsletterBtn.disabled = true;
-          newsletterBtn.textContent = '…';
-        }
-        setNewsletterStatus('', false);
-
-        var endpoint = newsletterForm.getAttribute('action') || '/api/subscribe';
-        var payload = {};
-        new FormData(newsletterForm).forEach(function (v, k) { payload[k] = v; });
-
-        fetch(endpoint, {
-          method: 'POST',
-          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        })
-          .then(function (res) {
-            if (!res.ok) throw new Error('subscribe responded ' + res.status);
-            setNewsletterStatus('You’re on the list. Dates drop soon, check your inbox.', false);
-            newsletterForm.reset();
-            if (newsletterBtn) newsletterBtn.innerHTML = newsletterBtnDefault;
-            // GA4 conversion: a real subscriber added
-            try { if (typeof gtag === 'function') gtag('event', 'newsletter_signup', { method: 'footer_form' }); } catch (e) {}
-          })
-          .catch(function () {
-            setNewsletterStatus('Couldn’t subscribe. Try again or email info@takemebackbingo.com.', true);
-            if (newsletterBtn) newsletterBtn.innerHTML = newsletterBtnDefault;
-          })
-          .then(function () {
-            if (newsletterBtn) newsletterBtn.disabled = false;
-          });
-      });
-    }
 
     // === Hero sizzle reel · respect reduced motion + sound toggle ===
     // Skip the flyer intro on every loop. Tweak this number if the flyer is

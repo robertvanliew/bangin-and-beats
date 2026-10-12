@@ -10,7 +10,7 @@
 
 **Spec:** `docs/spec-owner-copy.md` is the owner's "update website jargon.docx" as plain text. The original Word doc is at `docs/owner/update website jargon.docx`. Logo source: `docs/owner/bangin-beats-logo-source.png` (1920×1280 PNG, about 3 MB, transparent). `docs/owner/` is git-ignored, so those files stay local.
 
-**Status (2026-10-12):** Tasks 1–2 are done. Task 2: new logo, favicons and OG image in `logos/`, black and gold tokens. Two additions beyond the written steps: the nav logo lost its negative margin and shrank to 92/72/60/54px because the new file is trimmed tight and was clipping, and `.h2 em` on the cream sections uses `--primary-700` (deep gold) for contrast. `--primary-700`, `--primary-100` and `--accent-600` are kept as gold shades because about 20 rules still use them. `npm test`: assets PASS; raw guard 1351 and brand guard 188 FAIL (expected until the copy tasks). Start at Task 3.
+**Status (2026-10-12):** Tasks 1–3 are done. Task 3 notes: the footer partial is built on the existing full-footer markup (`footer__lockup`/`footer__list`/`footer__bottom`, `data-newsletter-form`, `data-open-inquiry`) with the spec copy, not the simplified HTML drafted in Step 2. The newsletter submit handler moved from inline JS on index/events/gallery into a shared `/footer.js` loaded by the footer partial, so signup works on all 21 pages. `apply-chrome.mjs` also sets `aria-current` on the current page nav link. The contact modal (index/events/gallery) got the new phone, subject and copy; its Formspree ID is still Task 10. The home logo slot is a still logo with `object-fit: contain` in the old 4:5 frame. Footer Facebook icon dropped (old-brand page; Owner Input 4). `npm test`: assets PASS; raw 1222, brand 175 FAIL (page bodies, heads and admin; later tasks). Start at Task 4.
 
 **Paths used below:**
 - `OLD` = `C:\Users\12124\Documents\Take-me-back-bingo` (the live site; read-only until Task 12)
@@ -461,7 +461,7 @@ git add -A && git commit -m "brand: black/gold palette + Bangin' & Beats logo, f
 - Consumes: logo path from Task 2.
 - Produces: `partials/nav.html` and `partials/footer.html` as the single source; `scripts/apply-chrome.mjs` re-applies them between the `<!-- CHROME:NAV -->`/`<!-- /CHROME:NAV -->` and `<!-- CHROME:FOOTER -->`/`<!-- /CHROME:FOOTER -->` markers. Newsletter form posts to `/api/subscribe` (unchanged). Contact anchor `#contact` stays on the footer.
 
-- [ ] **Step 1: Write `partials/nav.html`**
+- [x] **Step 1: Write `partials/nav.html`**
 
 ```html
 <!-- CHROME:NAV -->
@@ -486,7 +486,7 @@ git add -A && git commit -m "brand: black/gold palette + Bangin' & Beats logo, f
 
 Before saving, open `OLD/index.html` around line 470 and copy any extra attributes on the old `<header class="nav" …>` and logo `<a>` (for example `data-*` hooks used by the scroll JS) onto these elements.
 
-- [ ] **Step 2: Write `partials/footer.html`** (content verbatim from the spec, "QUICK LINKS SITEMAP FOOTER")
+- [x] **Step 2: Write `partials/footer.html`** (content verbatim from the spec, "QUICK LINKS SITEMAP FOOTER")
 
 ```html
 <!-- CHROME:FOOTER -->
@@ -557,7 +557,7 @@ Before saving, open `OLD/index.html` around line 470 and copy any extra attribut
 
 Before saving, compare against `OLD/index.html:1559-1700`. Keep any hidden inputs or the JS hook class the old newsletter form used (for example the `data-` attribute the inline submit handler queries) so the AJAX submit and success message still work. Add `.footer__cols` and `.footer__col` grid rules to `styles.css` only if the old footer didn't use equivalents. Reuse the existing class names wherever possible.
 
-- [ ] **Step 3: Write `scripts/apply-chrome.mjs`**
+- [x] **Step 3: Write `scripts/apply-chrome.mjs`**
 
 ```js
 import { readFile, writeFile, readdir } from 'node:fs/promises';
@@ -595,14 +595,14 @@ for (const rel of PAGES) {
 
 Exclude `legal.html` from the nav swap only if it has no `<header class="nav">` (the script leaves pages without a match unchanged).
 
-- [ ] **Step 4: Apply and check**
+- [x] **Step 4: Apply and check**
 
 ```bash
 node scripts/apply-chrome.mjs
 grep -L "CHROME:FOOTER" *.html blog/*.html   # expect no output
 ```
 
-- [ ] **Step 5: Remove the old logo animation**
+- [x] **Step 5: Remove the old logo animation**
 
 In `index.html`, delete the `<div class="logo-anim" data-reveal>…</div>` block that contains `Video/logo-anim-v2.mp4` and put this in its place:
 
@@ -617,12 +617,12 @@ In `index.html`, delete the `<div class="logo-anim" data-reveal>…</div>` block
 
 (Set `height` to the real height from Task 2, Step 4.) Then `git rm Video/logo-anim-v2.mp4`.
 
-- [ ] **Step 6: Run the guards**
+- [x] **Step 6: Run the guards**
 
 Run: `npm test`
 Expected: still FAIL overall, but no failures report `[links]` or `[text]` hits that come from the nav or footer (spot-check that `/gallery` no longer reports the footer phone number). The assets check passes.
 
-- [ ] **Step 7: Commit and push**
+- [x] **Step 7: Commit and push**
 
 ```bash
 git add -A && git commit -m "chrome: new nav + footer (spec copy), contact details, drop old logo animation" && git push

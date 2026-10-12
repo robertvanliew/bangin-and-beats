@@ -3040,6 +3040,7 @@ h3.faq__q,
 }
 .footer__legal a {
   color: var(--text-muted);
+  white-space: nowrap;
   transition: color var(--dur-fast) var(--ease-out);
 }
 .footer__legal a:hover { color: var(--text); }

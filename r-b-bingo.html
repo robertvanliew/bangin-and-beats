@@ -46,22 +46,24 @@
 </head>
 <body>
 
+<!-- CHROME:NAV -->
 <header class="nav">
-  <a href="/" class="nav__logo" aria-label="Take Me Back Bingo home">
-    <img src="/logos/bangin-beats-logo.png" width="1200" height="699" alt="Take Me Back Bingo" class="nav__logo-img" />
+  <a href="/" class="nav__logo" aria-label="Bangin' &amp; Beats home">
+    <img src="/logos/bangin-beats-logo.png" width="1200" height="699" alt="Bangin' &amp; Beats" class="nav__logo-img" />
   </a>
   <nav class="nav__links" id="primary-nav" aria-label="Primary">
-    <a href="/#how">About</a>
-    <a href="/#how">How to Play</a>
-    <a href="/play">Play</a>
-    <a href="/events">Events</a>
-    <a href="/gallery">Gallery</a>
-    <a href="/blog">Blog</a>
-    <a href="/#contact">Contact</a>
+    <a href="/">Home</a>
+    <a href="/how-it-works">How It Works</a>
+    <a href="/events">Tour Dates</a>
+    <a href="/gallery">Photo Gallery</a>
+    <a href="/blog">Cultural Blog</a>
+    <a href="/#faq">FAQ</a>
+    <a href="#contact">Contact</a>
   </nav>
-  <a href="/events" class="btn btn--primary nav__cta">Buy Tickets</a>
+  <a href="/events" class="btn btn--primary nav__cta">Get Tickets</a>
   <button type="button" class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav" onclick="(function(b){var n=b.closest('.nav');var o=n.getAttribute('data-nav-open')==='true';n.setAttribute('data-nav-open',o?'false':'true');b.setAttribute('aria-expanded',o?'false':'true');b.setAttribute('aria-label',o?'Open menu':'Close menu');})(this)"><span class="nav__toggle-bars" aria-hidden="true"></span></button>
 </header>
+<!-- /CHROME:NAV -->
 
 <main class="lp">
 
@@ -213,34 +215,130 @@
 
 </main>
 
+<!-- CHROME:FOOTER -->
 <footer class="footer" id="contact">
   <div class="footer__bleed" aria-hidden="true"></div>
+
   <div class="footer__inner">
+
+    <!-- BIG hero band: logo lockup + crown slogan -->
     <div class="footer__lockup">
-      <img src="/logos/bangin-beats-logo.png" width="1200" height="699" alt="Take Me Back Bingo" class="footer__logo" />
+      <img src="/logos/bangin-beats-logo.png" width="1200" height="699" alt="Bangin' &amp; Beats" class="footer__logo" loading="lazy" />
       <div class="footer__lockup-copy">
         <p class="footer__tagline">
-          <span class="footer__tagline-script">Bingo for people</span>
-          <span class="footer__tagline-block">who love music.</span>
+          <span class="footer__tagline-script">Retro music nostalgia</span>
+          <span class="footer__tagline-block">for people who love real culture.</span>
+        </p>
+        <p class="footer__sub">
+          Authentic 90s &amp; 00s Hip-Hop &amp; R&amp;B live touring experiences. Sing-alongs, mainstage dance battles, premium prize drops, and unforgettable club energy all night long.
         </p>
         <div class="footer__cta-row">
-          <a href="/events" class="btn btn--primary btn--lg">Buy Tickets</a>
-          <a href="/blog" class="btn btn--ghost btn--lg">Read the Blog</a>
+          <a href="/events" class="btn btn--primary btn--lg">Explore Tour Tickets</a>
+          <a href="/birthday-party" class="btn btn--ghost btn--lg">Request a Private Tour Stop</a>
         </div>
       </div>
     </div>
+
+    <!-- columns -->
+    <div class="footer__cols">
+      <div class="footer__col">
+        <h4 class="footer__h">Explore the Tour</h4>
+        <ul class="footer__list">
+          <li><a href="/how-it-works">How It Works</a></li>
+          <li><a href="/hip-hop-throwback-party">90s Rap Round</a></li>
+          <li><a href="/rnb-throwback-party">90s R&amp;B Vibe Set</a></li>
+          <li><a href="/hip-hop-throwback-party">2000s Hip-Hop Banger Set</a></li>
+          <li><a href="/rnb-throwback-party">2000s R&amp;B Slow Jam Round</a></li>
+          <li><a href="/sunday-day-party-nj">Sunday Day Party Dates</a></li>
+          <li><a href="/woodbridge-nj">Our Woodbridge Flagship Room</a></li>
+          <li><a href="/newark-nj">Newark Venue Takeovers</a></li>
+          <li><a href="/edison-nj">Edison Scheduled Shows</a></li>
+          <li><a href="/nyc-throwback-party">The NYC Event Tour</a></li>
+          <li><a href="/events">View Upcoming Tour Dates</a></li>
+          <li><a href="/gallery">Visual Media Gallery</a></li>
+          <li><a href="/blog">Cultural Blog Columns</a></li>
+          <li><a href="#contact" data-open-inquiry>Master Contact Portal</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4 class="footer__h">Private Party Takeovers</h4>
+        <ul class="footer__list">
+          <li><a href="/bachelorette-party">Private Social Gatherings</a></li>
+          <li><a href="/birthday-party">Celebration Custom Packages</a></li>
+          <li><a href="/fundraiser-events">Non-Profit Venue Shows</a></li>
+          <li><a href="#contact" data-open-inquiry data-inquiry-topic="Private booking - Corporate / Office">Corporate Gala Takeovers</a></li>
+          <li><a href="#contact" data-open-inquiry data-inquiry-topic="Brand partnerships">Brand Sponsorship Loops</a></li>
+          <li><a href="#contact" data-open-inquiry data-inquiry-topic="Bring us to your city">Host a Tour Stop in Your City</a></li>
+          <li><a href="#contact" data-open-inquiry data-inquiry-topic="Press &amp; media">Press &amp; Corporate Media Kit</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4 class="footer__h">Stay Locked in the Loop</h4>
+        <p class="footer__newsletter-copy">
+          New cities, fresh dates, early ticket drops. Real history, zero spam.
+        </p>
+        <form id="newsletter" class="footer__newsletter" data-newsletter-form method="POST" action="/api/subscribe" novalidate>
+          <label class="sr-only" for="footer-email">Email address</label>
+          <input id="footer-email" name="email" type="email" required placeholder="Enter Email Address" autocomplete="email" />
+          <button type="submit" aria-label="Subscribe">
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h12m0 0L8 3m5 5l-5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <p class="footer__newsletter-status" data-newsletter-status role="status" aria-live="polite"></p>
+        </form>
+        <div class="footer__contact">
+          <a href="tel:+12013444589" class="footer__contact-line">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>Hotline: 201-344-4589</span>
+          </a>
+          <a href="https://www.banginandbeats.com" class="footer__contact-line">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+            <span>Website: banginandbeats.com</span>
+          </a>
+          <a href="mailto:info@banginandbeats.com" class="footer__contact-line" data-open-inquiry>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+            <span>Email: info@banginandbeats.com</span>
+          </a>
+        </div>
+
+        <div class="footer__social">
+          <a href="https://www.instagram.com/banginandbeats" target="_blank" rel="noopener" aria-label="Instagram @banginandbeats">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@banginandbeats" target="_blank" rel="noopener" aria-label="TikTok @banginandbeats">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 8.5a8.05 8.05 0 0 1-5-2v8.5a6.5 6.5 0 1 1-6.5-6.5h.5v3.5a3 3 0 1 0 3 3V3h3.5a4.5 4.5 0 0 0 4.5 4.5z"/></svg>
+          </a>
+          <a href="mailto:info@banginandbeats.com" aria-label="Email" data-open-inquiry>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- bottom bar -->
     <div class="footer__bottom">
       <div class="footer__bottom-row">
-        <p class="footer__copy">&copy; <span id="year">2026</span> High Class Experience LLC. All rights reserved.</p>
+        <p class="footer__copy">&copy; <span id="year">2026</span> HIGH CLASS EXPERIENCE LLC. ALL RIGHTS RESERVED.</p>
+        <p class="footer__credit">
+          Designed by <a href="https://robertvanliew.com" target="_blank" rel="noopener">Robert Van Liew</a>
+        </p>
         <p class="footer__legal">
-          <a href="/legal#privacy">Privacy</a>
+          <a href="/legal#privacy">Privacy Terms</a>
           <span class="footer__dot">·</span>
-          <a href="/legal#terms">Terms</a>
+          <a href="/legal#terms">Code Compliance</a>
+          <span class="footer__dot">·</span>
+          <a href="/sitemap.xml">Sitemap</a>
+          <span class="footer__dot">·</span>
+          <a href="/legal#accessibility">Accessibility</a>
         </p>
       </div>
+      <p class="footer__copy">Produced Exclusively by High Class Experience LLC • All Rights Reserved • Strictly 30 &amp; Up</p>
     </div>
   </div>
 </footer>
+<script src="/footer.js" defer></script>
+<!-- /CHROME:FOOTER -->
 
 <script type="application/ld+json">
 {
