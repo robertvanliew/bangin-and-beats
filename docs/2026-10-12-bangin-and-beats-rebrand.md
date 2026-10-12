@@ -10,7 +10,7 @@
 
 **Spec:** `docs/spec-owner-copy.md` is the owner's "update website jargon.docx" as plain text. The original Word doc is at `docs/owner/update website jargon.docx`. Logo source: `docs/owner/bangin-beats-logo-source.png` (1920×1280 PNG, about 3 MB, transparent). `docs/owner/` is git-ignored, so those files stay local.
 
-**Status (2026-10-12):** Tasks 1–8 are done. Task 8 notes: **removed `"type": "module"` from package.json** — every `api/*.js` is CommonJS and under that flag the handlers load as empty module objects (Vercel would have no handler); all test/script ESM files are `.mjs`, so nothing else needed it. Blog posts rewritten from the spec; the existing brand-neutral "The Story Behind It" sections were kept. The planning post shows the spec date (Oct 6, 2026) and uses it for datePublished. The spec's "next show" cards are templates with placeholders and no upcoming date exists, so both song posts say "new dates dropping soon" and link to /events. Juicy spec typo "generations of cars" kept as "ears"; "the club feels earned" kept as written (owner to confirm). Covers using GSP_2436 (Thriller Bingo backdrop) were swapped. Pre-existing bug fixed: blog index showed each date one day early (UTC parse). `$12,000` claim carries the OWNER INPUT 6 comment. `npm test`: assets, home, play PASS; raw/brand FAIL only on Task 9/10 files. Start at Task 9.
+**Status (2026-10-12):** Tasks 1–9 are done; Task 10 is in progress (Steps 3–6 done, Step 2 waits for the owner's Formspree ID). Task 9 notes: the 11 landing pages were rewritten in parallel by three subagents against a per-page checker (forbidden words on every visible surface, JSON-LD parses, FAQ JSON-LD == visible FAQ, canonical, description length); all ALL CLEAN. songs.html is now the 4-round, 100-song Active Music Pool. legal.html: operator line added and the public age changed from 21 to 30 to match the brand (flag for attorney). Many landing-page judgement calls need owner approval (Owner Input 5): new FAQ answers, removed unverified claims ("every night sells out", NYC price ranges, door times), new copy. `npm test`: brand, assets, home, play PASS; raw guard FAILS only on the old Formspree ID (Task 10 Step 2).
 
 **Paths used below:**
 - `OLD` = `C:\Users\12124\Documents\Take-me-back-bingo` (the live site; read-only until Task 12)
@@ -1006,12 +1006,12 @@ git add -A && git commit -m "blog: rebrand index + 3 posts from spec, rename pla
 - Rename (git mv), per the URL Map: `what-is-music-bingo.html`→`how-it-works.html`, `hip-hop-bingo.html`→`hip-hop-throwback-party.html`, `r-b-bingo.html`→`rnb-throwback-party.html`, `bingo-woodbridge-nj.html`→`woodbridge-nj.html`, `bingo-newark-nj.html`→`newark-nj.html`, `bingo-edison-nj.html`→`edison-nj.html`, `sunday-bingo-nj.html`→`sunday-day-party-nj.html`, `music-bingo-nyc.html`→`nyc-throwback-party.html`, `bachelorette-party-bingo.html`→`bachelorette-party.html`, `birthday-party-bingo.html`→`birthday-party.html`, `music-bingo-fundraiser.html`→`fundraiser-events.html`
 - Modify: those 11 plus `songs.html`, `legal.html`
 
-- [ ] **Step 1: Confirm the guard is red for these paths**
+- [x] **Step 1: Confirm the guard is red for these paths**
 
 Run: `npm test -- brand 2>&1 | grep -E "HTTP 404" | wc -l`
 Expected: 11.
 
-- [ ] **Step 2: Rename and fix internal links**
+- [x] **Step 2: Rename and fix internal links**
 
 ```bash
 declare -A MAP=( [what-is-music-bingo]=how-it-works [hip-hop-bingo]=hip-hop-throwback-party [r-b-bingo]=rnb-throwback-party
@@ -1026,7 +1026,7 @@ done
 npm test -- brand 2>&1 | grep -c "HTTP 404"   # expect 0
 ```
 
-- [ ] **Step 3: Rewrite each landing page**
+- [x] **Step 3: Rewrite each landing page**
 
 For each of the 11 pages, keep the structure and the local-SEO substance (city names, venues, neighborhoods, FAQs) and reword every bingo reference with the Term Mapping. Each page's primary keyword becomes:
 
@@ -1050,12 +1050,12 @@ Each page gets a `<title>` ("<H1 short> | Bangin' & Beats™"), a meta descripti
 
 `legal.html`: change the operator to "High Class Experience LLC, doing business as Bangin' & Beats™", the contact email to `info@banginandbeats.com`, and add `id="privacy"`, `id="terms"`, `id="accessibility"` to the matching headings (the footer links to them). Leave the substantive legal terms alone. Flag the page for the owner's attorney.
 
-- [ ] **Step 4: Run all checks**
+- [x] **Step 4: Run all checks**
 
 Run: `npm test`
 Expected: brand guard PASS for all 21 pages. The raw guard may still fail only on `api/`, `admin/`, `sitemap.xml`, `robots.txt`, `llms.txt`, `vercel.json` (Task 10).
 
-- [ ] **Step 5: Commit and push**
+- [x] **Step 5: Commit and push**
 
 ```bash
 git add -A && git commit -m "pages: rename + rewrite 11 landing pages, songs, legal for Bangin' & Beats" && git push
