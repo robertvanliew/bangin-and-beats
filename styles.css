@@ -67,9 +67,9 @@
   --dur-slow: 720ms;
 
   /* ---- Fonts ---- */
-  --font-display: 'Bungee', system-ui, sans-serif;
-  --font-script:  'Permanent Marker', cursive;
-  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+  --font-display: 'Rubik', system-ui, sans-serif;   /* 800/900 only: rounded heavy, like the logo letters */
+  --font-script:  'Rubik', system-ui, sans-serif;   /* accents set in Rubik italic 900 */
+  --font-mono:    'Sora', system-ui, sans-serif;    /* eyebrows/meta: Sora caps, no mono costume */
   --font-body:    'Sora', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
 }
 
@@ -688,7 +688,7 @@ ul, ol { list-style: none; padding: 0; margin: 0; }
 }
 
 .jcard__lede {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-20);
   color: var(--text-muted);
   max-width: 48ch;
@@ -842,7 +842,7 @@ ul, ol { list-style: none; padding: 0; margin: 0; }
   color: var(--text);
 }
 .bingocard__back-copy {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-16);
   line-height: 1.5;
   color: var(--text-muted);
@@ -1449,7 +1449,7 @@ ul, ol { list-style: none; padding: 0; margin: 0; }
   margin: 0 0 var(--s-3);
 }
 .tape-bio__title {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-weight: 500;
   font-size: clamp(var(--fs-20), 1.9vw, var(--fs-30));
   line-height: 1.18;
@@ -1460,7 +1460,7 @@ ul, ol { list-style: none; padding: 0; margin: 0; }
   text-wrap: pretty;
 }
 .tape-bio__dek {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-18);
   line-height: 1.62;
   color: var(--text-muted);
@@ -1472,8 +1472,8 @@ ul, ol { list-style: none; padding: 0; margin: 0; }
 .tape-bio__dek--lead { font-size: 1.18rem; color: var(--text); }
 .tape-bio__quote {
   position: relative;
-  font-family: 'Newsreader', Georgia, serif;
-  font-style: italic;
+  font-family: var(--font-body);
+  font-style: normal;
   font-weight: 500;
   font-size: clamp(var(--fs-18), 1.6vw, var(--fs-24));
   line-height: 1.32;
@@ -1487,7 +1487,7 @@ ul, ol { list-style: none; padding: 0; margin: 0; }
 .tape-bio__quote-mark {
   position: absolute;
   top: -6px; left: 6px;
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-style: normal;
   font-size: 2.4em;
   color: var(--accent);
@@ -1501,7 +1501,7 @@ ul, ol { list-style: none; padding: 0; margin: 0; }
 }
 .tape-bio__dropcap {
   float: left;
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-weight: 600;
   font-size: 3.6em;
   line-height: .82;
@@ -1705,7 +1705,7 @@ ul, ol { list-style: none; padding: 0; margin: 0; }
 }
 .events-page__h1 { margin-bottom: var(--s-3); }
 .events-page__sub {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-20);
   line-height: 1.6;
   color: var(--text-muted);
@@ -1917,7 +1917,7 @@ a.event-card__flyer:hover img { transform: scale(1.03); }
   color: var(--text-muted);
 }
 .event-card__meta dd {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-18);
   color: var(--text);
   margin: 0;
@@ -1925,7 +1925,7 @@ a.event-card__flyer:hover img { transform: scale(1.03); }
 }
 
 .event-card__copy {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-18);
   line-height: 1.6;
   color: var(--text-muted);
@@ -2006,7 +2006,7 @@ a.event-card__flyer:hover img { transform: scale(1.03); }
   line-height: 1.05;
 }
 .events-cta__copy {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-18);
   line-height: 1.55;
   color: var(--text-muted);
@@ -2131,7 +2131,7 @@ a.event-card__flyer:hover img { transform: scale(1.03); }
   color: var(--text);
 }
 .winners__sub {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-18);
   color: var(--text-muted);
   margin: 0;
@@ -2401,7 +2401,7 @@ video::-webkit-media-controls-panel { width: calc(100% + 30px); }
 .how__inner { max-width: 1180px; margin: 0 auto; }
 .how__head { max-width: 760px; margin: 0 0 var(--s-7); }
 .how__intro {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-20);
   line-height: 1.6;
   color: var(--ink-soft);
@@ -2445,7 +2445,7 @@ video::-webkit-media-controls-panel { width: calc(100% + 30px); }
   line-height: 1.1;
 }
 .how__copy {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-16);
   color: var(--ink-soft);
   margin: 0;
@@ -2473,7 +2473,7 @@ video::-webkit-media-controls-panel { width: calc(100% + 30px); }
   margin: 0 0 var(--s-2);
 }
 .how__detail-text {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-16);
   line-height: 1.55;
   color: var(--ink-soft);
@@ -2507,7 +2507,7 @@ video::-webkit-media-controls-panel { width: calc(100% + 30px); }
 .faq__inner { max-width: 1100px; margin: 0 auto; }
 .faq__head { max-width: 760px; margin: 0 0 var(--s-7); }
 .faq__intro {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-20);
   line-height: 1.6;
   color: var(--text-muted);
@@ -2591,7 +2591,7 @@ h3.faq__q,
 }
 .faq__a > p {
   grid-column: 1 / 2;
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-18);
   line-height: 1.65;
   color: var(--text-muted);
@@ -2701,7 +2701,7 @@ h3.faq__q,
   margin: var(--s-3) 0 var(--s-3);
 }
 .modal__sub {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-18);
   line-height: 1.5;
   color: var(--text-muted);
@@ -3826,7 +3826,7 @@ html.js ul.meta-strip[data-reveal].is-in > li {
 .challenges__inner { max-width: 1180px; margin: 0 auto; }
 .challenges__head { max-width: 760px; margin: 0 0 var(--s-7); }
 .challenges__intro {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-20);
   line-height: 1.6;
   color: var(--text-muted);
@@ -3872,7 +3872,7 @@ html.js ul.meta-strip[data-reveal].is-in > li {
   color: var(--text);
 }
 .challenges__copy {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-16);
   color: var(--text-muted);
   line-height: 1.6;
@@ -3902,7 +3902,7 @@ html.js ul.meta-strip[data-reveal].is-in > li {
 }
 .booking__copy { max-width: 60ch; }
 .booking__lede {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-20);
   line-height: 1.6;
   color: var(--ink-soft);
@@ -3969,7 +3969,7 @@ html.js ul.meta-strip[data-reveal].is-in > li {
   gap: var(--s-3);
 }
 .booking__list-items li {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-16);
   color: var(--ink-soft);
   line-height: 1.5;
@@ -4006,7 +4006,7 @@ html.js ul.meta-strip[data-reveal].is-in > li {
 .about__inner { max-width: 1180px; margin: 0 auto; }
 .about__copy { max-width: 64ch; }
 .about__lede {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-20);
   line-height: 1.6;
   color: var(--ink-soft);
@@ -4040,7 +4040,7 @@ html.js ul.meta-strip[data-reveal].is-in > li {
 }
 .taggram__h2 { margin: var(--s-3) 0 var(--s-4); }
 .taggram__copy {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-20);
   line-height: 1.55;
   color: var(--ink-soft);
@@ -4105,7 +4105,7 @@ html.js ul.meta-strip[data-reveal].is-in > li {
   color: var(--text);
 }
 .next-up__copy {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-20);
   line-height: 1.55;
   color: var(--text-muted);
@@ -4140,7 +4140,7 @@ html.js ul.meta-strip[data-reveal].is-in > li {
 }
 .demo-reel__head { max-width: 720px; margin: 0 auto var(--s-7); }
 .demo-reel__sub {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-20);
   line-height: 1.55;
   color: var(--text-muted);
@@ -4203,7 +4203,7 @@ html.js ul.meta-strip[data-reveal].is-in > li {
   color: var(--text);
 }
 .play-about p {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-18);
   line-height: 1.6;
   color: var(--text-muted);
@@ -4240,7 +4240,7 @@ html.js ul.meta-strip[data-reveal].is-in > li {
   margin: var(--s-3) 0 var(--s-5);
 }
 .songs-page__sub {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-20);
   line-height: 1.6;
   color: var(--text-muted);
@@ -4283,7 +4283,7 @@ html.js ul.meta-strip[data-reveal].is-in > li {
   gap: var(--s-3);
   padding: var(--s-3) 0;
   border-bottom: 1px solid rgba(255,248,231,.08);
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-18);
 }
 .songs-list li::before {
@@ -4322,7 +4322,7 @@ html.js ul.meta-strip[data-reveal].is-in > li {
   color: var(--text);
 }
 .songs-cta__copy {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-18);
   line-height: 1.55;
   color: var(--text-muted);
@@ -4389,7 +4389,7 @@ html.js ul.meta-strip[data-reveal].is-in > li {
 }
 .answer-block p,
 .answer-block li {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-18);
   line-height: 1.65;
   color: var(--text-muted);
@@ -4422,7 +4422,7 @@ html.js ul.meta-strip[data-reveal].is-in > li {
 .compare-table {
   width: 100%;
   border-collapse: collapse;
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-body);
   font-size: var(--fs-16);
   text-align: left;
 }
@@ -4491,3 +4491,263 @@ html.js ul.meta-strip[data-reveal].is-in > li {
   .compare-table { font-size: var(--fs-14); }
   .compare-table th, .compare-table td { padding: var(--s-2) var(--s-3); }
 }
+
+/* =========================================================
+   BANGIN' & BEATS · PREMIUM LAYER
+   The logo is the brief: glossy white balloon letters, a braided
+   gold rope outline, black lacquer. Pearl replaces the old aged-paper
+   cream, braided rope replaces tape, crimson velvet marks the VIP /
+   private-party moments. Everything here layers on top of the rules
+   above; delete this block to roll the look back.
+   ========================================================= */
+:root {
+  --pearl:        #F7F4EE;
+  --pearl-hi:     #FFFDF8;
+  --gold-hi:      #F6E3A1;
+  --gold-lo:      #8C6A1C;
+  --lacquer:      #070606;
+  --surface-light: var(--pearl);
+  --rope: repeating-linear-gradient(115deg, #7A5A14 0 3px, #F3D27A 3px 6px, #B8902F 6px 9px);
+  --metal-gold: linear-gradient(180deg, #F6E3A1 0%, #E2C15A 32%, #D4AF37 58%, #A8862A 100%);
+  --velvet: radial-gradient(120% 90% at 50% 0%, #6A1616 0%, #3F0C0C 55%, #200707 100%);
+  --spot: radial-gradient(60% 46% at 50% 0%, rgba(212,175,55,.12), transparent 72%);
+  --ease-out-strong: cubic-bezier(.23, 1, .32, 1);
+}
+
+/* ---- Type: Rubik display + italic accents (no marker script) ---- */
+.h2 em, .jcard__title-script, .footer__tagline-script {
+  font-style: italic;
+  font-weight: 900;
+  transform: none;
+  letter-spacing: -.01em;
+}
+.jcard__title-script {
+  color: var(--gold);
+  -webkit-text-stroke: 0;
+  text-transform: none;
+  filter: drop-shadow(0 2px 0 var(--gold-lo)) drop-shadow(0 8px 16px rgba(0,0,0,.5));
+}
+/* Logo-letter headline: pearl fill, thin gold edge, gold extrude. */
+.challenges .h2, .demo-reel .h2, .answers .h2, .faq .h2,
+.events-page__h1, .gallery__h2, .winners__h2, .reel__h2, .next-up__h2 {
+  color: var(--pearl-hi);
+  text-shadow:
+    1px 0 0 rgba(212,175,55,.85), -1px 0 0 rgba(212,175,55,.85),
+    0 1px 0 rgba(212,175,55,.85), 0 -1px 0 rgba(212,175,55,.85),
+    0 4px 0 var(--gold-lo),
+    0 12px 24px rgba(0,0,0,.55);
+}
+:is(.how, .about, .taggram) .h2 { color: var(--ink); text-shadow: 0 3px 0 rgba(212,175,55,.55); }
+
+/* Eyebrow mark: a tiny braided rope instead of a dot. */
+.eyebrow__dot {
+  width: 22px; height: 5px;
+  border-radius: 3px;
+  background: var(--rope);
+  box-shadow: 0 0 0 1px rgba(0,0,0,.25);
+}
+
+/* ---- Buttons: logo gold + rope-ring ghost ---- */
+.btn--primary {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.28) 0%, rgba(255,255,255,0) 44%, rgba(0,0,0,.08) 100%),
+    var(--metal-gold);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.6),
+    inset 0 -1px 0 rgba(0,0,0,.25),
+    inset 0 0 0 1px rgba(140,106,28,.6),
+    0 10px 22px -10px rgba(212,175,55,.55),
+    0 16px 30px -16px rgba(0,0,0,.6);
+}
+.btn--primary:hover {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.34) 0%, rgba(255,255,255,0) 46%, rgba(0,0,0,.06) 100%),
+    var(--metal-gold);
+}
+.btn--ghost {
+  border: 2px solid transparent;
+  background:
+    linear-gradient(var(--lacquer), var(--lacquer)) padding-box,
+    var(--rope) border-box;
+  color: var(--pearl-hi);
+}
+.btn--ghost:hover { color: var(--gold-hi); }
+:is(.how, .about, .taggram, .vibe-engine) .btn--ghost {
+  background: linear-gradient(var(--pearl), var(--pearl)) padding-box, var(--rope) border-box;
+  color: var(--ink);
+}
+.btn { transition: transform 160ms var(--ease-out-strong), box-shadow 200ms var(--ease-out-strong), color 200ms ease, background 200ms ease; }
+.btn:active { transform: scale(.97); }
+
+/* ---- Section staging ---- */
+.challenges, .demo-reel, .answers, .faq, .next-up {
+  background: var(--rope) top / 100% 3px no-repeat, var(--spot), var(--bg);
+  border-top: 0;
+}
+.how, .about, .taggram {
+  background:
+    radial-gradient(90% 60% at 50% -12%, var(--pearl-hi) 0%, transparent 62%),
+    var(--pearl);
+}
+.vibe-engine {
+  background: var(--rope) top / 100% 3px no-repeat, var(--pearl-hi);
+  border-bottom: 0;
+  box-shadow: inset 0 -3px 0 0 #B8902F;
+}
+
+/* Marquee: a gold rope band instead of moving tape. */
+.marquee {
+  background: var(--metal-gold);
+  border-top: 0; border-bottom: 0;
+  box-shadow: inset 0 3px 0 0 #7A5A14, inset 0 -3px 0 0 #7A5A14;
+}
+.marquee__track { font-family: var(--font-display); letter-spacing: .06em; }
+
+/* Private parties: VIP velvet, framed in rope. */
+.booking {
+  background: var(--rope) top / 100% 4px no-repeat, var(--rope) bottom / 100% 4px no-repeat, var(--velvet);
+  color: var(--pearl);
+}
+.booking .h2 { color: var(--pearl-hi); text-shadow: 0 4px 0 rgba(0,0,0,.35); }
+.booking .eyebrow--dark, .booking__urgency, .booking__list-label { color: var(--gold-hi); }
+.booking__lede { color: rgba(247,244,238,.86); }
+.booking__fine, .booking__phone { color: rgba(247,244,238,.72); }
+.booking__phone { border-bottom-color: rgba(246,227,161,.5); }
+.booking__phone:hover { color: var(--gold-hi); }
+.booking__list {
+  border: 2px solid transparent;
+  background: linear-gradient(#120808, #0B0606) padding-box, var(--rope) border-box;
+  border-radius: 16px;
+  box-shadow: 0 30px 60px -30px rgba(0,0,0,.8);
+}
+.booking__list-items li { color: rgba(247,244,238,.88); }
+
+/* By the numbers: pearl numerals with the gold extrude. */
+.stats-list li { border-top-color: rgba(212,175,55,.35); }
+.stats-list__num {
+  color: var(--pearl-hi);
+  text-shadow: 0 3px 0 var(--gold-lo), 0 0 0 transparent;
+}
+
+/* How-it-works steps: puffy pearl tiles, numbered in gold. */
+.how__step {
+  border-top: 0;
+  padding: var(--s-5);
+  background: linear-gradient(180deg, var(--pearl-hi), #EFE9DD);
+  border-radius: 20px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    inset 0 -2px 0 rgba(140,106,28,.18),
+    0 18px 34px -22px rgba(10,10,10,.45);
+}
+.how__step::before {
+  left: var(--s-5); right: var(--s-5); top: 0; width: auto; height: 3px;
+  background: var(--rope);
+  border-radius: 0 0 3px 3px;
+}
+
+/* FAQ rows: rope underline when open. */
+.faq__item details[open] { box-shadow: inset 0 -2px 0 0 rgba(212,175,55,.55); }
+
+/* ---- Tactile cards ----
+   Press scales down; on hover-capable pointers they lift, catch a
+   gold sheen that follows the pointer (--mx/--my set by footer.js),
+   and their edge warms to gold. Transform/opacity/box-shadow only. */
+:is(.challenges__card, .how__step, .event-card, .booking__list, .winners__tile, .winners__feature,
+    .reel__slide, .songs-era, .blog-card, .bingocard__paper) {
+  transition: transform 260ms var(--ease-out-strong), box-shadow 260ms var(--ease-out-strong), border-color 200ms ease;
+}
+:is(.challenges__card, .event-card, .blog-card) {
+  background-image: radial-gradient(420px circle at var(--mx, 50%) var(--my, -30%), rgba(212,175,55,.13), transparent 42%);
+}
+.how__step {
+  background-image:
+    radial-gradient(360px circle at var(--mx, 50%) var(--my, -40%), rgba(212,175,55,.16), transparent 45%),
+    linear-gradient(180deg, var(--pearl-hi), #EFE9DD);
+}
+:is(.challenges__card, .how__step, .event-card, .blog-card):active { transform: scale(.985); }
+@media (hover: hover) and (pointer: fine) {
+  :is(.challenges__card, .how__step, .event-card, .blog-card, .songs-era):hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 0 1px rgba(212,175,55,.55), 0 26px 48px -26px rgba(212,175,55,.35), 0 30px 60px -30px rgba(0,0,0,.7);
+  }
+  .challenges__card:hover { border-color: rgba(212,175,55,.6); }
+  :is(.winners__tile, .winners__feature, .reel__slide):hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 2px #B8902F, 0 24px 44px -24px rgba(0,0,0,.8);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.challenges__card, .how__step, .event-card, .booking__list, .winners__tile, .winners__feature,
+      .reel__slide, .songs-era, .blog-card, .btn):is(:hover, :active) { transform: none; }
+}
+
+/* ---- Footer + nav finish ---- */
+.footer { box-shadow: inset 0 3px 0 0 #B8902F; }
+.nav { border-bottom: 1px solid rgba(212,175,55,.22); }
+
+/* ---- Short answers: sticky heading column + indexed answers ---- */
+.answers__inner { counter-reset: answer; }
+.answer-block { counter-increment: answer; position: relative; }
+.answer-block__h::before {
+  content: counter(answer, decimal-leading-zero);
+  display: block;
+  margin-bottom: var(--s-2);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: var(--fs-14);
+  letter-spacing: .08em;
+  color: var(--gold);
+}
+@media (min-width: 1024px) {
+  .answers__inner {
+    max-width: 1240px;
+    display: grid;
+    grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+    column-gap: var(--s-9);
+    align-items: start;
+  }
+  .answers__head { position: sticky; top: 120px; grid-row: 1 / span 20; margin: 0; }
+  .answers__inner > .answer-block { grid-column: 2; }
+}
+/* By the numbers: a framed lacquer panel. */
+.answer-block:has(.stats-list) {
+  padding: var(--s-6);
+  border: 2px solid transparent;
+  border-radius: 20px;
+  background: linear-gradient(#0E0C0A, #0A0908) padding-box, var(--rope) border-box;
+}
+.answer-block:has(.stats-list) .answer-block__h::before { content: none; }
+.stats-list__num { font-size: clamp(2.25rem, 4vw, 3.25rem); }
+
+/* Between-rounds cards: big italic index in gold. */
+.challenges__grid { counter-reset: challenge; }
+.challenges__card { counter-increment: challenge; overflow: hidden; }
+.challenges__card::after {
+  content: counter(challenge, decimal-leading-zero);
+  position: absolute;
+  top: var(--s-4); right: var(--s-5);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 3.5rem;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(212,175,55,.45);
+  pointer-events: none;
+}
+
+/* Hero crowd photo: rope-framed like the cards. */
+.logo-anim__video {
+  border-radius: 18px;
+  border: 2px solid transparent;
+  background: var(--rope) border-box;
+  box-shadow: 0 30px 60px -30px rgba(0,0,0,.8);
+}
+@media (max-width: 560px) {
+  .booking__list { padding: var(--s-5) var(--s-4); }
+}
+
+/* Play page accents follow the same italic Rubik treatment. */
+.play__h1 em, .winm__call, .celebration__h2 em { font-style: italic; font-weight: 900; transform: none; }

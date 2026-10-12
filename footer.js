@@ -8,6 +8,22 @@
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  // Tactile cards: a gold sheen follows the pointer (styles.css premium layer
+  // reads --mx/--my). Mouse/trackpad only; off under reduced motion. Delegated
+  // so cards rendered later (events, blog) pick it up too.
+  var fine = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (fine && !still) {
+    var TACTILE = '.challenges__card, .how__step, .event-card, .blog-card';
+    document.addEventListener('pointermove', function (e) {
+      var card = e.target.closest && e.target.closest(TACTILE);
+      if (!card) return;
+      var r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    }, { passive: true });
+  }
+
   var newsletterForm = document.querySelector('[data-newsletter-form]');
   if (!newsletterForm) return;
 

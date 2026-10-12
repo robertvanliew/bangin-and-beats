@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" href="/logos/favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Permanent+Marker&family=Allura&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,800;0,900;1,800;1,900&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
@@ -35,7 +35,7 @@
     background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
     padding: 32px; width: 100%; max-width: 380px; text-align: center;
   }
-  .gate__logo { font-family: Bungee, sans-serif; font-size: 28px; letter-spacing: 1px; color: var(--gold); margin: 0 0 6px; }
+  .gate__logo { font-family: Rubik, sans-serif; font-weight: 900; font-size: 28px; letter-spacing: 1px; color: var(--gold); margin: 0 0 6px; }
   .gate__sub { color: var(--muted); margin: 0 0 24px; font-size: 13px; }
   .gate__input {
     width: 100%; padding: 12px 14px; border-radius: 10px;
@@ -55,7 +55,7 @@
     display: flex; align-items: center; justify-content: space-between;
     padding: 14px 24px; border-bottom: 1px solid var(--line); background: var(--panel);
   }
-  .topbar__brand { font-family: Bungee, sans-serif; color: var(--gold); font-size: 18px; letter-spacing: 1px; }
+  .topbar__brand { font-family: Rubik, sans-serif; font-weight: 900; color: var(--gold); font-size: 18px; letter-spacing: 1px; }
   .topbar__brand small { color: var(--muted); font-family: Sora, sans-serif; font-size: 12px; margin-left: 10px; letter-spacing: 0; }
   .topbar__nav { display: flex; gap: 6px; }
   .topbar__nav a { color: var(--muted); text-decoration: none; padding: 8px 14px; border-radius: 8px; font-size: 14px; }
@@ -64,14 +64,14 @@
   .topbar__logout { background: transparent; border: 1px solid var(--line); color: var(--muted); padding: 8px 14px; border-radius: 8px; cursor: pointer; font-family: inherit; }
 
   .wrap { max-width: 1200px; margin: 0 auto; padding: 32px 24px 80px; }
-  .h1 { font-family: Bungee, sans-serif; font-size: 36px; margin: 0 0 6px; letter-spacing: 0.5px; }
+  .h1 { font-family: Rubik, sans-serif; font-weight: 900; font-size: 36px; margin: 0 0 6px; letter-spacing: 0.5px; }
   .lede { color: var(--muted); margin: 0 0 28px; }
 
   .grid { display: grid; grid-template-columns: 380px 1fr; gap: 28px; }
   @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
 
   .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
-  .card h2 { font-family: Bungee, sans-serif; font-size: 16px; margin: 0 0 16px; color: var(--gold); letter-spacing: 0.5px; }
+  .card h2 { font-family: Rubik, sans-serif; font-weight: 900; font-size: 16px; margin: 0 0 16px; color: var(--gold); letter-spacing: 0.5px; }
 
   .field { margin-bottom: 16px; }
   .field label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -101,7 +101,7 @@
 
   .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 18px; }
   .stats__cell { background: #0e0c0c; border: 1px solid var(--line); border-radius: 8px; padding: 10px; text-align: center; }
-  .stats__n { font-family: Bungee, sans-serif; color: var(--gold); font-size: 20px; }
+  .stats__n { font-family: Rubik, sans-serif; font-weight: 900; color: var(--gold); font-size: 20px; }
   .stats__l { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
 
   /* ---------- Song card design (the printable artifact) ---------- */
@@ -122,9 +122,9 @@
     content: ""; position: absolute; inset: 8px; border: 2px solid #1a1408; border-radius: 6px; pointer-events: none;
   }
   .bcard__head { text-align: center; margin-bottom: 6px; position: relative; z-index: 1; }
-  .bcard__brand-script { font-family: 'Permanent Marker', cursive; font-size: 22px; line-height: 1; color: #1a1408; transform: rotate(-3deg); display: inline-block; }
+  .bcard__brand-script { font-family: Rubik, sans-serif; font-style: italic; font-weight: 900; font-size: 22px; line-height: 1; color: #1a1408; transform: rotate(-3deg); display: inline-block; }
   .bcard__brand-block {
-    font-family: Bungee, sans-serif; font-size: 38px; line-height: 1;
+    font-family: Rubik, sans-serif; font-weight: 900; font-size: 38px; line-height: 1;
     color: var(--gold); -webkit-text-stroke: 2px #1a1408;
     text-shadow: 3px 3px 0 #1a1408;
     letter-spacing: 1px;
@@ -141,7 +141,7 @@
     margin-bottom: 4px; position: relative; z-index: 1;
   }
   .bcard__col-letter {
-    font-family: Bungee, sans-serif; font-size: 26px; text-align: center;
+    font-family: Rubik, sans-serif; font-weight: 900; font-size: 26px; text-align: center;
     color: #1a1408;
   }
   .bcard__grid {
@@ -164,7 +164,7 @@
     object-fit: contain; display: block;
   }
   .bcard__free-text {
-    font-family: Bungee, sans-serif; font-size: 7px; letter-spacing: 1.5px;
+    font-family: Rubik, sans-serif; font-weight: 900; font-size: 7px; letter-spacing: 1.5px;
     color: #1a1408; line-height: 1;
     margin-top: 3px;
   }
@@ -184,7 +184,7 @@
     line-height: 1.35; letter-spacing: 0.2px;
   }
   .bcard__foot-text strong {
-    font-family: 'Permanent Marker', cursive; font-size: 12px;
+    font-family: Rubik, sans-serif; font-style: italic; font-weight: 900; font-size: 12px;
     font-weight: 400; letter-spacing: 0;
   }
   .bcard__handle {

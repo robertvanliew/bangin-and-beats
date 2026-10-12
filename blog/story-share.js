@@ -93,7 +93,7 @@
 
         // Gold kicker over the photo (top-left)
         ctx.fillStyle = '#f1c33b';
-        ctx.font = 'bold 32px "Bungee", "Impact", system-ui, sans-serif';
+        ctx.font = '900 32px "Rubik", "Impact", system-ui, sans-serif';
         ctx.textAlign = 'left';
         ctx.textBaseline = 'top';
         ctx.fillText(spaced(kicker, 4), 64, 64);
@@ -184,7 +184,7 @@
     return s.split('').join(' '.repeat(gap));
   }
 
-  // Wait for fonts to load so canvas draws in Newsreader + Bungee, not fallback
+  // Wait for fonts to load so canvas draws in Newsreader + Rubik, not fallback
   var ready = (document.fonts && document.fonts.ready) || Promise.resolve();
   ready.then(composeStoryCard).then(function (file) { storyFile = file; }).catch(function () {});
 

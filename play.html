@@ -112,7 +112,7 @@
 
 <!-- canvas-confetti · loaded once, fired on win celebration open -->
 <script defer src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Allura&family=Bungee&family=Permanent+Marker&family=Sora:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,800;0,900;1,800;1,900&family=Sora:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="styles.css?v=2" />
 
@@ -154,7 +154,7 @@
     color: var(--tape-yellow);
   }
   .play__lede {
-    font-family: 'Newsreader', Georgia, serif;
+    font-family: var(--font-body);
     font-size: var(--fs-20);
     color: var(--text-muted);
     max-width: 50ch;
@@ -348,7 +348,7 @@
     background: rgba(10,10,10,.05);
     border: 1px solid rgba(10,10,10,.12);
     border-radius: var(--r-md);
-    font-family: 'Newsreader', Georgia, serif;
+    font-family: var(--font-body);
     font-size: clamp(var(--fs-12), 1.4vw, var(--fs-16));
     line-height: 1.15;
     color: var(--ink);
@@ -482,7 +482,7 @@
     color: var(--text);
   }
   .roundover__copy {
-    font-family: 'Newsreader', Georgia, serif;
+    font-family: var(--font-body);
     font-size: var(--fs-16);
     color: var(--text-muted);
     max-width: 50ch;
@@ -869,7 +869,7 @@
     margin: var(--s-2) 0 var(--s-4);
   }
   .winm__copy {
-    font-family: 'Newsreader', Georgia, serif;
+    font-family: var(--font-body);
     font-size: var(--fs-18);
     color: var(--text-muted);
     margin: 0 0 var(--s-5);
@@ -937,7 +937,7 @@
     color: var(--tape-yellow);
   }
   .celebration__copy {
-    font-family: 'Newsreader', Georgia, serif;
+    font-family: var(--font-body);
     font-size: var(--fs-18);
     color: var(--text-muted);
     margin: 0 0 var(--s-5);
@@ -1148,8 +1148,8 @@
   .celebration__urgency svg { stroke: #FFB37A; }
 
   .celebration__footer-text {
-    font-family: 'Newsreader', Georgia, serif;
-    font-style: italic;
+    font-family: var(--font-body);
+    font-style: normal;
     font-size: var(--fs-16);
     color: var(--text-muted);
     margin: var(--s-5) auto 0;
@@ -3300,7 +3300,7 @@ function startTimerBar() {
   }, 200);
 }
 
-/* Booth display: song TITLE large (Bungee, .booth__title) - what the
+/* Booth display: song TITLE large (Rubik, .booth__title) - what the
    player needs to find on their card - with the ARTIST in italic small
    underneath as supporting context. */
 function setBoothPlaying(song) {
@@ -3679,18 +3679,18 @@ function drawShareCard() {
 
   // Top eyebrow band
   ctx.fillStyle = TAPE_HOT;
-  ctx.font = '500 28px "JetBrains Mono", ui-monospace, monospace';
+  ctx.font = '600 28px "Sora", system-ui, sans-serif';
   ctx.textAlign = 'center';
   ctx.fillText("· BANGIN' & BEATS™ ·", W/2, 110);
 
   // Headline
   ctx.fillStyle = TEXT;
-  ctx.font = '900 120px "Bungee", system-ui, sans-serif';
+  ctx.font = '900 120px "Rubik", system-ui, sans-serif';
   ctx.textBaseline = 'top';
   ctx.fillText('I SHOUTED', W/2, 150);
 
   ctx.fillStyle = TAPE_HOT;
-  ctx.font = '400 104px "Permanent Marker", cursive';
+  ctx.font = 'italic 900 104px "Rubik", sans-serif';
   ctx.fillText("\"THAT'S BANGIN'!\"", W/2, 290);
 
   // Stat line
@@ -3717,7 +3717,7 @@ function drawShareCard() {
 
   // B E A T S header (THE BEAT BOARD™)
   ctx.fillStyle = PRIMARY;
-  ctx.font = '400 90px "Bungee", system-ui, sans-serif';
+  ctx.font = '400 90px "Rubik", system-ui, sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'top';
   const headers = ['B','E','A','T','S'];
@@ -3769,11 +3769,11 @@ function drawShareCard() {
         ctx.fill();
       }
 
-      // Song title - Bungee (marquee feel), dark ink on gold/cream.
+      // Song title - Rubik (marquee feel), dark ink on gold/cream.
       // Wraps to fit longer titles.
       const labelText = song.free ? CONFIG.centerLabel : song.title;
       ctx.fillStyle = INK;
-      ctx.font = '900 22px "Bungee", system-ui';
+      ctx.font = '900 22px "Rubik", system-ui';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       wrapText(ctx, labelText, x + w/2, y + h/2, w - 16, 24);
@@ -3784,13 +3784,13 @@ function drawShareCard() {
   // cardH is now dynamic (sized to the grid), so ctaY follows it cleanly.
   const ctaY = cardY + cardH + 50;
   ctx.fillStyle = TEXT;
-  ctx.font = '900 50px "Bungee", system-ui';
+  ctx.font = '900 50px "Rubik", system-ui';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'top';
   ctx.fillText('CATCH THE REAL THING.', W/2, ctaY);
 
   ctx.fillStyle = TAPE_HOT;
-  ctx.font = '500 34px "JetBrains Mono", ui-monospace, monospace';
+  ctx.font = '600 34px "Sora", system-ui, sans-serif';
   ctx.fillText('banginandbeats.com/events', W/2, ctaY + 78);
 
   ctx.fillStyle = TEXT_MUTED;
