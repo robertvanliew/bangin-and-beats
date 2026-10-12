@@ -364,7 +364,7 @@
       <h2 id="inquiry-modal-title" class="modal__title">Let&rsquo;s Make Some Noise.</h2>
       <p class="modal__sub">Want Bangin' &amp; Beats™ at your venue, office, or birthday? Slide into our inbox. We reply within 24 hours.</p>
     </header>
-    <form class="modal__form" data-inquiry-form method="POST" action="https://formspree.io/f/mbdbggbv" novalidate>
+    <form class="modal__form" data-inquiry-form method="POST" action="https://formspree.io/f/xzedaygd" novalidate>
       <input type="hidden" name="_subject" data-inquiry-subject-field value="[Bangin' &amp; Beats] Inquiry" />
       <input type="hidden" name="context" data-inquiry-context-field value="" />
       <div class="modal__row">
@@ -569,7 +569,7 @@
         inquiryStatus.classList.remove('is-error');
         inquiryStatus.classList.add('is-shown');
         inquiryStatus.textContent = '';
-        var endpoint = inquiryForm.getAttribute('action') || 'https://formspree.io/f/mbdbggbv';
+        var endpoint = inquiryForm.getAttribute('action') || 'https://formspree.io/f/xzedaygd';
         var payload = {};
         new FormData(inquiryForm).forEach(function (v, k) { payload[k] = v; });
         fetch(endpoint, {

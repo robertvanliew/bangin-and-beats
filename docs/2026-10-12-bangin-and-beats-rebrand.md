@@ -10,7 +10,7 @@
 
 **Spec:** `docs/spec-owner-copy.md` is the owner's "update website jargon.docx" as plain text. The original Word doc is at `docs/owner/update website jargon.docx`. Logo source: `docs/owner/bangin-beats-logo-source.png` (1920×1280 PNG, about 3 MB, transparent). `docs/owner/` is git-ignored, so those files stay local.
 
-**Status (2026-10-12):** Tasks 1–9 are done. Task 10: Steps 3–6 done (Resend welcome email, API brand strings, admin tools incl. the card printer printing B-E-A-T-S / BANGIN', sitemap/robots/llms, pre-launch noindex). **Waiting on the owner's new Formspree form ID for Step 2**; after that, Steps 7–8 (all suites green, commit). Task 10 extras: `api/publish-events.js` and `api/upload-flyer.js` defaulted GH_REPO to the old `takemebackbingo` repo (now `bangin-and-beats`); the admin soft-gate password changed from the old-brand string to `banginbeats2026` (client-side, visible in source; real protection is ADMIN_PASSWORD on the API); admin events seed now mirrors content/events.json. `npm test`: everything PASS except the raw guard's 10 hits on the old Formspree ID `mbdbggbv`.
+**Status (2026-10-12):** Tasks 1–10 are done; `npm test` is fully green (raw, brand, assets, home, play). Task 10: Formspree now posts to the owner's form `xzedaygd` (contact pop-up on home/events/gallery, Play-page city boxes); ImprovMX forwarding is live (info@, tickets@, sha@, catch-all → banginandbeats@gmail.com; MX + SPF verified in public DNS). Also done since Task 9: logo-matched premium redesign, competitor-informed hero (background video cut from the old reel with branding removed, gold ticket stub, owner's All-Black ribbon copy), sticky mobile ticket bar, transparent favicon, `docs/backend-setup.md`. Still needed from the owner before/at Task 11: Resend key + audience, Brevo key/list + rebranded automation emails, GA4 ID, GitHub token, the All-Black show's date + ticket link. **Next: Task 11 (Vercel + DNS) — check in with the user first.**
 
 **Paths used below:**
 - `OLD` = `C:\Users\12124\Documents\Take-me-back-bingo` (the live site; read-only until Task 12)
@@ -1072,12 +1072,12 @@ git add -A && git commit -m "pages: rename + rewrite 11 landing pages, songs, le
 - Consumes: `FORMSPREE_ID` from Owner Input 3.
 - Produces: Vercel env vars for the new project (set in Task 11): `RESEND_API_KEY`, `RESEND_AUDIENCE_ID` (a **new** audience, "Bangin & Beats"), `NEWSLETTER_FROM="Bangin' & Beats <hello@banginandbeats.com>"`, `NEWSLETTER_REPLY_TO="info@banginandbeats.com"`, `BREVO_API_KEY`, `BREVO_WINNERS_LIST_ID` (a **new** Brevo list), `ADMIN_PASSWORD` (new value), `GH_TOKEN`, `GH_OWNER=robertvanliew`, `GH_REPO=bangin-and-beats`, `GH_BRANCH=main`, `GH_PATH=content/events.json`.
 
-- [ ] **Step 1: Confirm the raw guard fails on these files**
+- [x] **Step 1: Confirm the raw guard fails on these files**
 
 Run: `npm test -- raw`
 Expected: FAIL. Hits in `api/`, `admin/`, the Formspree `mbdbggbv` in 4 pages, `sitemap.xml`, `robots.txt`, `llms.txt`.
 
-- [ ] **Step 2: Formspree** (contact, booking and winner-capture forms → the owner's inbox)
+- [x] **Step 2: Formspree** (contact, booking and winner-capture forms → the owner's inbox)
 
 ```bash
 FORMSPREE_ID=xxxxxxxx   # the ID from Owner Input 3, e.g. the part after /f/ in the owner's new form URL
@@ -1123,12 +1123,12 @@ Sitemap: https://www.banginandbeats.com/sitemap.xml
 
 (Prepend that object as the first entry of the existing `headers` array.)
 
-- [ ] **Step 7: Run everything**
+- [x] **Step 7: Run everything**
 
 Run: `npm test`
 Expected: all suites PASS.
 
-- [ ] **Step 8: Commit and push**
+- [x] **Step 8: Commit and push**
 
 ```bash
 git add -A && git commit -m "forms+email: owner Formspree, Resend/Brevo branding, admin card printer B-E-A-T-S, sitemap/robots/llms, pre-launch noindex" && git push

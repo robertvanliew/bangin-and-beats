@@ -1699,7 +1699,7 @@
 
     <!-- Tour demand capture inside the win modal - peak conversion moment. -->
     <form class="tour-capture" data-tour-form data-tour-source="win-modal"
-          method="POST" action="https://formspree.io/f/mbdbggbv" novalidate>
+          method="POST" action="https://formspree.io/f/xzedaygd" novalidate>
       <p class="tour-capture__h">Don&rsquo;t see your city on the events page?</p>
       <p class="tour-capture__sub">Tell us where to throw the next one. We notify the list first when a date drops.</p>
       <div class="tour-capture__row">
@@ -1744,7 +1744,7 @@
       <p class="tour-bar__sub">Drop your city. We&rsquo;ll let you know when a date hits.</p>
     </div>
     <form class="tour-bar__form" data-tour-form data-tour-source="sticky-bar"
-          method="POST" action="https://formspree.io/f/mbdbggbv" novalidate>
+          method="POST" action="https://formspree.io/f/xzedaygd" novalidate>
       <label class="sr-only" for="tour-email-bar">Email</label>
       <input id="tour-email-bar" name="email" type="email" required placeholder="you@email.com" autocomplete="email" />
       <label class="sr-only" for="tour-city-bar">City</label>
@@ -4253,7 +4253,7 @@ watchForCardInView();
       e.preventDefault();
       if (statusEl) { statusEl.classList.remove('is-error'); statusEl.textContent = ''; }
       if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
-      var endpoint = form.getAttribute('action') || 'https://formspree.io/f/mbdbggbv';
+      var endpoint = form.getAttribute('action') || 'https://formspree.io/f/xzedaygd';
       var payload = {};
       new FormData(form).forEach(function (v, k) { payload[k] = v; });
       fetch(endpoint, {

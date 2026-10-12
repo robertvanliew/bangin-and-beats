@@ -6,7 +6,7 @@ Things to change or confirm outside the code (or that need an owner decision) be
 
 Every form on the site still posts to Formspree form `mbdbggbv`, the old site's form.
 
-- [ ] Decide which way to go:
+- [x] Decide which way to go: **new form `xzedaygd` created and wired in (2026-10-12)**
   - **Keep the old form** (only if the owner's account owns `mbdbggbv`): in Formspree, set its notification email to `info@banginandbeats.com` and add `banginandbeats.com` and `www.banginandbeats.com` to the allowed domains. Tell the developer so the test that blocks the old ID can be removed.
   - **New form**: create "Bangin & Beats Contact" in the owner's Formspree account (notification email `info@banginandbeats.com`) and send the developer the new form ID (the part after `/f/` in the form URL).
 - [ ] After the swap, submit a test from the home page contact form, a private-party request, and the play-page "tell us your city" box. Confirm each one reaches `info@banginandbeats.com`.

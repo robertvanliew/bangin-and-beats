@@ -1505,7 +1505,7 @@
       </p>
     </header>
 
-    <form class="modal__form" data-inquiry-form method="POST" action="https://formspree.io/f/mbdbggbv" novalidate>
+    <form class="modal__form" data-inquiry-form method="POST" action="https://formspree.io/f/xzedaygd" novalidate>
       <!-- Populated by JS when the modal is opened with a context-specific CTA -->
       <input type="hidden" name="_subject" data-inquiry-subject-field value="[Bangin' &amp; Beats] Inquiry" />
       <input type="hidden" name="context" data-inquiry-context-field value="" />
@@ -1748,8 +1748,8 @@
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && !inquiryModal.hidden) closeInquiry();
       });
-      // Single config point, swap mbdbggbv for the real Formspree endpoint.
-      var FORMSPREE_ENDPOINT = 'https://formspree.io/f/mbdbggbv';
+      // Single config point: the owner's Formspree form (notifications -> info@banginandbeats.com).
+      var FORMSPREE_ENDPOINT = 'https://formspree.io/f/xzedaygd';
 
       function postToFormspree(form) {
         // Honor the form's own action if it was overridden in HTML, else fall back to the const.
