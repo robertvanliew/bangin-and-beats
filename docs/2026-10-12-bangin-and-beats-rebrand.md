@@ -10,7 +10,7 @@
 
 **Spec:** `docs/spec-owner-copy.md` is the owner's "update website jargon.docx" as plain text. The original Word doc is at `docs/owner/update website jargon.docx`. Logo source: `docs/owner/bangin-beats-logo-source.png` (1920×1280 PNG, about 3 MB, transparent). `docs/owner/` is git-ignored, so those files stay local.
 
-**Status (2026-10-12):** Tasks 1–10 are done; `npm test` is fully green (raw, brand, assets, home, play). Task 10: Formspree now posts to the owner's form `xzedaygd` (contact pop-up on home/events/gallery, Play-page city boxes); ImprovMX forwarding is live (info@, tickets@, sha@, catch-all → banginandbeats@gmail.com; MX + SPF verified in public DNS). Also done since Task 9: logo-matched premium redesign, competitor-informed hero (background video cut from the old reel with branding removed, gold ticket stub, owner's All-Black ribbon copy), sticky mobile ticket bar, transparent favicon, `docs/backend-setup.md`. Still needed from the owner before/at Task 11: Resend key + audience, Brevo key/list + rebranded automation emails, GA4 ID, GitHub token, the All-Black show's date + ticket link. **Next: Task 11 (Vercel + DNS) — check in with the user first.**
+**Status (2026-10-12):** Tasks 1–10 are done; `npm test` is fully green (raw, brand, assets, home, play). Task 10: Formspree now posts to the owner's form `xzedaygd` (contact pop-up on home/events/gallery, Play-page city boxes); ImprovMX forwarding is live (info@, tickets@, sha@, catch-all → banginandbeats@gmail.com; MX + SPF verified in public DNS). Also done since Task 9: logo-matched premium redesign, competitor-informed hero (background video cut from the old reel with branding removed, gold ticket stub, owner's All-Black ribbon copy), sticky mobile ticket bar, transparent favicon, `docs/backend-setup.md`. Still needed from the owner before/at Task 11: Resend key + audience, Brevo key/list + rebranded automation emails, GA4 ID, GitHub token, the All-Black show's date + ticket link. **Task 11 in progress (2026-10-12):** Steps 1, 2 and 4 are done. www.banginandbeats.com is live on Vercel with SSL; the apex 308-redirects to www; the GoDaddy parking A records were removed; MX for ImprovMX is intact. `X-Robots-Tag: noindex` stays until Task 12. **Next: Task 11 Steps 3, 5–8 (Resend check, live form tests, admin, real iPhone, owner review).**
 
 **Paths used below:**
 - `OLD` = `C:\Users\12124\Documents\Take-me-back-bingo` (the live site; read-only until Task 12)
@@ -1140,16 +1140,16 @@ git add -A && git commit -m "forms+email: owner Formspree, Resend/Brevo branding
 
 Ops work (no code tests). Each step has a concrete check.
 
-- [ ] **Step 1: Vercel project.** Go to vercel.com → Add New → Project → import `robertvanliew/bangin-and-beats`, framework "Other", no build command, output `.`. Add every env var from Task 10's Interfaces to Production and Preview. Deploy.
+- [x] **Step 1: Vercel project.** Go to vercel.com → Add New → Project → import `robertvanliew/bangin-and-beats`, framework "Other", no build command, output `.`. Add every env var from Task 10's Interfaces to Production and Preview. Deploy.
   Check: the `*.vercel.app` URL loads, and `curl -sI https://<project>.vercel.app/ | grep -i x-robots` shows `noindex`.
 
-- [ ] **Step 2: Domain.** In the project, go to Settings → Domains → add `www.banginandbeats.com` (primary) and `banginandbeats.com` (redirects to www). Copy the exact records Vercel shows into the registrar: usually an `A @ 76.76.21.21` and a `CNAME www cname.vercel-dns.com`, but use whatever values Vercel displays.
+- [x] **Step 2: Domain.** In the project, go to Settings → Domains → add `www.banginandbeats.com` (primary) and `banginandbeats.com` (redirects to www). Copy the exact records Vercel shows into the registrar: usually an `A @ 76.76.21.21` and a `CNAME www cname.vercel-dns.com`, but use whatever values Vercel displays.
   Check: `nslookup www.banginandbeats.com` resolves; `curl -sI https://banginandbeats.com/` returns 308 → `https://www.banginandbeats.com/`; SSL is valid.
 
 - [ ] **Step 3: Resend.** In the Resend dashboard, go to Domains → add `banginandbeats.com` and add its SPF, DKIM and return-path records at the registrar. Create the "Bangin & Beats" audience and put its ID into `RESEND_AUDIENCE_ID`. Redeploy.
   Check: the domain shows "Verified"; subscribing a test address on the live site delivers the welcome email to the inbox (not spam) from `hello@banginandbeats.com`.
 
-- [ ] **Step 4: Inbox for `info@banginandbeats.com`** (Owner Input 2). Set up forwarding at the registrar or ImprovMX (MX records). The MX records must not conflict with Resend's records; Resend uses a `send.` subdomain, so they don't.
+- [x] **Step 4: Inbox for `info@banginandbeats.com`** (Owner Input 2). Set up forwarding at the registrar or ImprovMX (MX records). The MX records must not conflict with Resend's records; Resend uses a `send.` subdomain, so they don't.
   Check: an email sent from a personal Gmail to `info@banginandbeats.com` arrives in the owner's inbox.
 
 - [ ] **Step 5: Forms end-to-end.** On the live site, submit the contact form, the private-party request, the play-page winner capture, and the newsletter.
