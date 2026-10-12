@@ -185,10 +185,32 @@
   }
 
   // Wait for fonts to load so canvas draws in Newsreader + Big Shoulders Display, not fallback
-  var ready = (document.fonts && document.fonts.ready) || Promise.resolve();
-  ready.then(composeStoryCard).then(function (file) { storyFile = file; }).catch(function () {});
+  // Compose lazily: the canvas work costs ~2s of main thread on phones, so
+  // start it only when the share button nears the viewport (or is touched),
+  // during idle time. Still well before the tap, so the iOS sync rule holds.
+  var composing = false;
+  function startCompose() {
+    if (composing) return; composing = true;
+    prefetchRaw();
+    var idle = window.requestIdleCallback || function (cb) { setTimeout(cb, 200); };
+    idle(function () {
+      var ready = (document.fonts && document.fonts.ready) || Promise.resolve();
+      ready.then(composeStoryCard).then(function (file) { storyFile = file; }).catch(function () {});
+    }, { timeout: 2000 });
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      if (entries.some(function (e) { return e.isIntersecting; })) { io.disconnect(); startCompose(); }
+    }, { rootMargin: '800px 0px' });
+    io.observe(btn);
+  } else {
+    window.addEventListener('load', startCompose);
+  }
+  ['pointerenter', 'touchstart', 'focus'].forEach(function (ev) { btn.addEventListener(ev, startCompose, { passive: true }); });
 
-  // Prefetch raw cover photo as a fallback (canvas fails, CORS issues, etc.)
+  // Prefetch raw cover photo as a fallback (canvas fails, CORS issues, etc.).
+  // Started from startCompose() so it never competes with the first paint.
+  function prefetchRaw() {
   if (imgPath && typeof fetch === 'function' && typeof File !== 'undefined') {
     fetch(imgPath)
       .then(function (r) { return r.ok ? r.blob() : null; })
@@ -197,6 +219,7 @@
         try { rawPhotoFile = new File([blob], filename, { type: blob.type || 'image/jpeg' }); } catch (e) {}
       })
       .catch(function () {});
+  }
   }
 
   // Adapt hint copy based on file-share capability

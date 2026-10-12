@@ -9,7 +9,7 @@
 
 .lp__hero { max-width: 1100px; margin: 0 auto; padding: 60px 24px 40px; text-align: center; }
 .lp__hero-eyebrow {
-  font-family: 'Big Shoulders Display', sans-serif;
+  font-family: 'Big Shoulders Display', 'BSD Fallback', sans-serif;
   font-size: 11px; letter-spacing: 3px;
   color: #D4AF37; text-transform: uppercase;
   margin: 0 0 24px;
@@ -39,7 +39,7 @@
 .lp__btn {
   display: inline-block;
   padding: 16px 28px;
-  font-family: 'Big Shoulders Display', sans-serif;
+  font-family: 'Big Shoulders Display', 'BSD Fallback', sans-serif;
   font-size: 12px; letter-spacing: 2.5px;
   text-decoration: none;
   text-transform: uppercase;
@@ -55,7 +55,7 @@
   display: inline-flex;
   gap: 14px; flex-wrap: wrap; justify-content: center;
   margin: 32px 0 0;
-  font-family: 'Sora', sans-serif;
+  font-family: 'Sora', 'Sora Fallback', sans-serif;
   font-size: 11px; color: #C9BFA8;
   letter-spacing: 2px; text-transform: uppercase;
 }
@@ -73,7 +73,7 @@
 .lp__section p, .lp__section ul, .lp__section ol { margin: 0; color: #FFF8E7; }
 
 .lp__section-eyebrow {
-  font-family: 'Big Shoulders Display', sans-serif;
+  font-family: 'Big Shoulders Display', 'BSD Fallback', sans-serif;
   font-size: 11px; letter-spacing: 3px;
   color: #D4AF37; text-transform: uppercase;
   padding-top: 32px;
@@ -108,7 +108,7 @@
 .lp__steps li::before {
   content: counter(lp-step, decimal-leading-zero);
   position: absolute; left: 0; top: 22px;
-  font-family: 'Big Shoulders Display', sans-serif;
+  font-family: 'Big Shoulders Display', 'BSD Fallback', sans-serif;
   color: #D4AF37;
   font-size: 22px;
   letter-spacing: 2px;
@@ -134,11 +134,11 @@
   border: 1px solid #2A2A2A;
   border-left: 3px solid #D4AF37;
   padding: 22px 20px;
-  font-family: 'Sora', sans-serif;
+  font-family: 'Sora', 'Sora Fallback', sans-serif;
   font-size: 14px; line-height: 1.5;
 }
 .lp__tracks-block h3 {
-  font-family: 'Big Shoulders Display', sans-serif;
+  font-family: 'Big Shoulders Display', 'BSD Fallback', sans-serif;
   font-size: 10px; letter-spacing: 2.5px;
   color: #D4AF37;
   margin: 0 0 12px !important;
@@ -146,7 +146,7 @@
 }
 .lp__tracks-block ul { list-style: none !important; padding: 0 !important; margin: 0 !important; }
 .lp__tracks-block li { padding: 4px 0 !important; margin: 0 !important; color: #FFF8E7; }
-.lp__tracks-block em { color: #C9BFA8; font-style: normal; font-family: 'Sora', sans-serif; font-size: 12px; display: block; }
+.lp__tracks-block em { color: #C9BFA8; font-style: normal; font-family: 'Sora', 'Sora Fallback', sans-serif; font-size: 12px; display: block; }
 
 .lp__eventcard {
   background: #121212;
@@ -156,7 +156,7 @@
   margin: 30px 0 !important;
 }
 .lp__eventcard-eyebrow {
-  font-family: 'Big Shoulders Display', sans-serif;
+  font-family: 'Big Shoulders Display', 'BSD Fallback', sans-serif;
   font-size: 10px; letter-spacing: 3px;
   color: #D4AF37; text-transform: uppercase;
   margin: 0 0 12px !important;
@@ -170,7 +170,7 @@
   letter-spacing: -0.4px;
 }
 .lp__eventcard-meta {
-  font-family: 'Sora', sans-serif;
+  font-family: 'Sora', 'Sora Fallback', sans-serif;
   font-size: 15px; line-height: 1.6;
   color: #D9CFB8;
   margin: 0 0 24px !important;
@@ -199,7 +199,7 @@
   padding: 60px 24px 80px; text-align: center;
 }
 .lp__closer-eyebrow {
-  font-family: 'Big Shoulders Display', sans-serif; font-weight: 900;
+  font-family: 'Big Shoulders Display', 'BSD Fallback', sans-serif; font-weight: 900;
   font-size: 22px;
   color: #C9A86A;
   margin: 0 0 8px;
@@ -207,7 +207,7 @@
   display: inline-block;
 }
 .lp__closer-title {
-  font-family: 'Big Shoulders Display', sans-serif;
+  font-family: 'Big Shoulders Display', 'BSD Fallback', sans-serif;
   font-size: clamp(28px, 4vw, 44px);
   color: #FFF8E7;
   margin: 0 0 12px;

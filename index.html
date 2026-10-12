@@ -555,7 +555,7 @@
 <!-- CHROME:NAV -->
 <header class="nav">
   <a href="/" class="nav__logo" aria-label="Bangin' &amp; Beats home">
-    <img src="/logos/bangin-beats-logo-480.png" srcset="/logos/bangin-beats-logo-480.png 480w, /logos/bangin-beats-logo-800.png 800w" sizes="170px" width="1200" height="699" alt="Bangin' &amp; Beats" class="nav__logo-img" />
+    <img src="/logos/bangin-beats-logo-320.png" srcset="/logos/bangin-beats-logo-320.png 320w, /logos/bangin-beats-logo-480.png 480w" sizes="170px" width="1200" height="699" alt="Bangin' &amp; Beats" class="nav__logo-img" />
   </a>
   <nav class="nav__links" id="primary-nav" aria-label="Primary">
     <a href="/" aria-current="page">Home</a>
@@ -711,7 +711,7 @@
 
         <div class="bingocard__face bingocard__face--back">
           <figure class="bingocard__photo">
-            <img data-flip-photo loading="lazy" decoding="async" src="photos/GSP_2287.jpg?v=2" alt="Bangin' &amp; Beats crowd shot" />
+            <img data-flip-photo loading="lazy" decoding="async" src="photos/GSP_2287-800.jpg" alt="Bangin' &amp; Beats crowd shot" />
           </figure>
           <div class="bingocard__back-overlay">
             <p class="bingocard__back-title">See the night for yourself.</p>
@@ -832,8 +832,8 @@
       <p class="eyebrow eyebrow--dark" data-reveal><span class="eyebrow__dot"></span> The core vibe</p>
       <h2 class="vibe-engine__hook" data-reveal>Thought this was just a regular, quiet throwback night? <em>Oh, you must be new here.</em></h2>
       <div class="vibe-engine__photos" aria-hidden="true">
-        <img class="vibe-engine__photo vibe-engine__photo--a" src="photos/GSP_2295.jpg" alt="" width="1600" height="2400" loading="lazy" />
-        <img class="vibe-engine__photo vibe-engine__photo--b" src="photos/GSP_2324.jpg" alt="" width="1600" height="1067" loading="lazy" />
+        <img class="vibe-engine__photo vibe-engine__photo--a" src="photos/GSP_2295.jpg" srcset="photos/GSP_2295-800.jpg 800w, photos/GSP_2295.jpg 1600w" sizes="(max-width: 700px) 100vw, 50vw" alt="" width="1600" height="2400" loading="lazy" />
+        <img class="vibe-engine__photo vibe-engine__photo--b" src="photos/GSP_2324.jpg" srcset="photos/GSP_2324-800.jpg 800w, photos/GSP_2324.jpg 1600w" sizes="(max-width: 700px) 100vw, 50vw" alt="" width="1600" height="1067" loading="lazy" />
       </div>
     </div>
 
@@ -1976,13 +1976,13 @@
 
     // === Flippable bingo card · click cycles through gallery photos ===
     var FLIP_PHOTOS = [
-      'photos/GSP_2287.jpg',
-      'photos/GSP_2324.jpg',
-      'photos/GSP_2404.jpg',
-      'photos/GSP_2286.jpg',
-      'photos/GSP_2295.jpg',
-      'photos/GSP_2284.jpg',
-      'photos/GSP_2288.jpg'
+      'photos/GSP_2287-800.jpg',
+      'photos/GSP_2324-800.jpg',
+      'photos/GSP_2404-800.jpg',
+      'photos/GSP_2286-800.jpg',
+      'photos/GSP_2295-800.jpg',
+      'photos/GSP_2284-800.jpg',
+      'photos/GSP_2288-800.jpg'
     ];
     document.querySelectorAll('[data-flip-card]').forEach(function (card) {
       var flipper = card.querySelector('.bingocard__flipper');

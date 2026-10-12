@@ -1437,7 +1437,7 @@
 <!-- CHROME:NAV -->
 <header class="nav">
   <a href="/" class="nav__logo" aria-label="Bangin' &amp; Beats home">
-    <img src="/logos/bangin-beats-logo-480.png" srcset="/logos/bangin-beats-logo-480.png 480w, /logos/bangin-beats-logo-800.png 800w" sizes="170px" width="1200" height="699" alt="Bangin' &amp; Beats" class="nav__logo-img" />
+    <img src="/logos/bangin-beats-logo-320.png" srcset="/logos/bangin-beats-logo-320.png 320w, /logos/bangin-beats-logo-480.png 480w" sizes="170px" width="1200" height="699" alt="Bangin' &amp; Beats" class="nav__logo-img" />
   </a>
   <nav class="nav__links" id="primary-nav" aria-label="Primary">
     <a href="/">Home</a>
@@ -1517,8 +1517,8 @@
          Click primes audio (counts as a user gesture) AND starts the game,
          so it works on first load, after a win, after a new card, and after
          switching eras. The scroll auto-start still works as a backup. -->
-    <button type="button" class="dj-start" id="djStartBtn" aria-label="Start the DJ mix">
-      <span class="dj-start__icon" aria-hidden="true">â–¶</span>
+    <button type="button" class="dj-start" id="djStartBtn">
+      <span class="dj-start__icon" aria-hidden="true">&#9654;</span>
       <span class="dj-start__label">Start the DJ Mix</span>
     </button>
 
@@ -1528,7 +1528,7 @@
       <div class="bingo__head" aria-hidden="true">
         <span>B</span><span>E</span><span>A</span><span>T</span><span>S</span>
       </div>
-      <div class="bingo__grid" id="bingoGrid" role="grid" aria-label="The Beat Board"></div>
+      <div class="bingo__grid" id="bingoGrid" role="group" aria-label="The Beat Board"></div>
     </section>
 
     <button type="button" class="tap-prime" id="tapPrime">Tap to start the DJ mix</button>
@@ -2660,7 +2660,7 @@ function renderCard() {
     const sq = document.createElement('button');
     sq.type = 'button';
     sq.className = song.free ? 'sq sq--free' : 'sq';
-    sq.setAttribute('role', 'gridcell');
+    // Plain buttons inside a labelled group (role=grid would require row/cell structure).
     sq.setAttribute('data-index', String(i));
     sq.setAttribute('aria-label', song.free ? "Bangin' brand square, already marked" : `${song.title} by ${song.artist}`);
     const inner = document.createElement('span');

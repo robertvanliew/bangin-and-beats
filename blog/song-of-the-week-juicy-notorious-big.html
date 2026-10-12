@@ -54,7 +54,7 @@
   @media (max-width: 900px) { .mag__hero { padding: 32px 20px 8px; } .mag__hero-inner { grid-template-columns: 1fr; gap: 32px; } }
   .mag__meta { display: flex; flex-direction: column; gap: 20px; }
   .mag__issue {
-    font-family: 'Big Shoulders Display', sans-serif; font-size: 11px; letter-spacing: 3px;
+    font-family: 'Big Shoulders Display', 'BSD Fallback', sans-serif; font-size: 11px; letter-spacing: 3px;
     color: #D4AF37; text-transform: uppercase; margin: 0 0 20px;
     padding-bottom: 20px; border-bottom: 1px solid #2A2A2A;
     display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
@@ -71,7 +71,7 @@
     font-size: clamp(17px, 1.8vw, 21px); line-height: 1.5; color: #D9CFB8; margin: 0;
   }
   .mag__byline {
-    font-family: 'Sora', sans-serif; font-size: 11px; letter-spacing: 2px;
+    font-family: 'Sora', 'Sora Fallback', sans-serif; font-size: 11px; letter-spacing: 2px;
     text-transform: uppercase; color: #C9BFA8;
     display: flex; gap: 14px; flex-wrap: wrap; align-items: center;
     margin: 0; padding-top: 20px; border-top: 1px solid #2A2A2A;
@@ -99,7 +99,7 @@
   .mag__body p { margin: 0; color: #FFF8E7; }
   .mag__lede { font-size: 23px; line-height: 1.55; color: #FFF8E7; }
   .mag__lede::first-letter {
-    font-family: 'Big Shoulders Display', sans-serif; float: left; font-size: 76px;
+    font-family: 'Big Shoulders Display', 'BSD Fallback', sans-serif; float: left; font-size: 76px;
     line-height: 0.82; padding: 6px 14px 0 0; color: #D4AF37;
   }
   .mag__body a {
@@ -139,7 +139,7 @@
     color: #D4AF37; font-size: 80px; line-height: 0.4; margin-bottom: 20px; font-style: normal;
   }
   .mag__pull-attr {
-    display: block; margin-top: 20px; font-family: 'Sora', sans-serif;
+    display: block; margin-top: 20px; font-family: 'Sora', 'Sora Fallback', sans-serif;
     font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase;
     color: #C9BFA8; font-style: normal;
   }
@@ -147,10 +147,10 @@
   .mag__tracklist {
     background: rgba(212,175,55, 0.04); border: 1px solid #2A2A2A; border-left: 3px solid #D4AF37;
     padding: 32px 32px 28px; margin: 2.5em -8px !important;
-    font-family: 'Sora', sans-serif; font-size: 15px; line-height: 1.6; color: #FFF8E7;
+    font-family: 'Sora', 'Sora Fallback', sans-serif; font-size: 15px; line-height: 1.6; color: #FFF8E7;
   }
   .mag__tracklist-label {
-    font-family: 'Big Shoulders Display', sans-serif; color: #D4AF37; font-size: 10px; letter-spacing: 3px;
+    font-family: 'Big Shoulders Display', 'BSD Fallback', sans-serif; color: #D4AF37; font-size: 10px; letter-spacing: 3px;
     margin: 0 0 8px !important; text-transform: uppercase;
   }
   .mag__tracklist-title {
@@ -161,11 +161,11 @@
   @media (max-width: 500px) { .mag__tracklist ul { columns: 1; } }
   .mag__tracklist ul li { padding: 6px 0 !important; color: #FFF8E7; break-inside: avoid; border: 0 !important; padding-left: 0 !important; }
   .mag__tracklist ul li::before { content: none !important; }
-  .mag__tracklist ul li strong { color: #D4AF37; font-weight: 600; font-family: 'Sora', sans-serif; }
-  .mag__tracklist ul li em { color: #D9CFB8; font-family: 'Sora', sans-serif; font-style: normal; }
+  .mag__tracklist ul li strong { color: #D4AF37; font-weight: 600; font-family: 'Sora', 'Sora Fallback', sans-serif; }
+  .mag__tracklist ul li em { color: #D9CFB8; font-family: 'Sora', 'Sora Fallback', sans-serif; font-style: normal; }
   .mag__tracklist-link {
     display: inline-block; color: #D4AF37 !important; font-weight: 700;
-    font-family: 'Sora', sans-serif; text-decoration: none !important; border: 0 !important;
+    font-family: 'Sora', 'Sora Fallback', sans-serif; text-decoration: none !important; border: 0 !important;
     letter-spacing: 0.5px; text-transform: uppercase; font-size: 12px; padding: 0 !important;
   }
   .mag__tracklist-link::after { content: " →"; }
@@ -177,12 +177,12 @@
     background: #FFF8E7; color: #1a1408; text-align: center;
     position: relative; border-radius: 2px;
   }
-  .mag__cta-eyebrow { font-family: 'Big Shoulders Display', sans-serif; font-size: 10px; letter-spacing: 4px; color: #8B1A1A; margin: 0 0 14px; text-transform: uppercase; }
+  .mag__cta-eyebrow { font-family: 'Big Shoulders Display', 'BSD Fallback', sans-serif; font-size: 10px; letter-spacing: 4px; color: #8B1A1A; margin: 0 0 14px; text-transform: uppercase; }
   .mag__cta-title { font-family: 'Newsreader', Georgia, serif; font-weight: 700; font-size: clamp(26px, 3.5vw, 36px); line-height: 1.1; letter-spacing: -0.5px; color: #1a1408; margin: 0 0 12px; }
   .mag__cta-sub { font-family: 'Newsreader', Georgia, serif; font-style: italic; font-size: 16px; line-height: 1.5; color: #4a3820; margin: 0 0 24px; }
   .mag__cta-btn {
     display: inline-block; background: #1a1408; color: #D4AF37 !important;
-    padding: 14px 32px; font-family: 'Big Shoulders Display', sans-serif; font-size: 12px;
+    padding: 14px 32px; font-family: 'Big Shoulders Display', 'BSD Fallback', sans-serif; font-size: 12px;
     letter-spacing: 2.5px; text-decoration: none; border: 0 !important; text-transform: uppercase;
   }
 
@@ -193,7 +193,7 @@
   .mag__colophon-line { font-family: 'Newsreader', Georgia, serif; font-style: italic; font-size: 14px; color: #C9BFA8; margin: 0 0 24px; line-height: 1.5; }
 
   .mag__share-lead {
-    font-family: 'Sora', sans-serif; font-size: 11px; letter-spacing: 2px;
+    font-family: 'Sora', 'Sora Fallback', sans-serif; font-size: 11px; letter-spacing: 2px;
     text-transform: uppercase; color: #C9BFA8; margin: 0 0 18px; font-weight: 600;
   }
   .mag__share {
@@ -203,7 +203,7 @@
     color: #C9BFA8 !important; background: transparent;
     text-decoration: none !important; padding: 12px 20px;
     border: 1px solid #2A2A2A !important;
-    font-family: 'Sora', sans-serif; font-size: 11px;
+    font-family: 'Sora', 'Sora Fallback', sans-serif; font-size: 11px;
     letter-spacing: 2px; text-transform: uppercase; font-weight: 600;
     cursor: pointer; transition: border-color 0.15s, color 0.15s, background 0.15s;
     display: inline-flex; align-items: center; gap: 8px;
@@ -243,7 +243,7 @@
 <!-- CHROME:NAV -->
 <header class="nav">
   <a href="/" class="nav__logo" aria-label="Bangin' &amp; Beats home">
-    <img src="/logos/bangin-beats-logo-480.png" srcset="/logos/bangin-beats-logo-480.png 480w, /logos/bangin-beats-logo-800.png 800w" sizes="170px" width="1200" height="699" alt="Bangin' &amp; Beats" class="nav__logo-img" />
+    <img src="/logos/bangin-beats-logo-320.png" srcset="/logos/bangin-beats-logo-320.png 320w, /logos/bangin-beats-logo-480.png 480w" sizes="170px" width="1200" height="699" alt="Bangin' &amp; Beats" class="nav__logo-img" />
   </a>
   <nav class="nav__links" id="primary-nav" aria-label="Primary">
     <a href="/">Home</a>
@@ -278,7 +278,7 @@
         </p>
       </div>
       <figure class="mag__figure">
-        <img src="/photos/GSP_2295.jpg" alt="A guest dancing on the floor at a Bangin' &amp; Beats night" width="1600" height="2400" />
+        <img src="/photos/GSP_2295.jpg" srcset="/photos/GSP_2295-800.jpg 800w, /photos/GSP_2295.jpg 1600w" sizes="(max-width: 700px) 100vw, 50vw" alt="A guest dancing on the floor at a Bangin' &amp; Beats night" width="1600" height="2400" />
         <figcaption><strong>Field notes</strong>A moment mid-round at Lake Chateau Banquets, Woodbridge NJ.</figcaption>
       </figure>
     </div>

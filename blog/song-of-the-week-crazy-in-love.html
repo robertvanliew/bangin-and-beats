@@ -78,7 +78,7 @@
     display: flex; flex-direction: column; gap: 20px;
   }
   .mag__issue {
-    font-family: 'Big Shoulders Display', sans-serif;
+    font-family: 'Big Shoulders Display', 'BSD Fallback', sans-serif;
     font-size: 11px;
     letter-spacing: 3px;
     color: #D4AF37;
@@ -116,7 +116,7 @@
     margin: 0;
   }
   .mag__byline {
-    font-family: 'Sora', sans-serif;
+    font-family: 'Sora', 'Sora Fallback', sans-serif;
     font-size: 11px;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -197,7 +197,7 @@
   }
   .mag__lede::first-letter,
   .drop-cap {
-    font-family: 'Big Shoulders Display', sans-serif;
+    font-family: 'Big Shoulders Display', 'BSD Fallback', sans-serif;
     float: left;
     font-size: 76px;
     line-height: 0.82;
@@ -290,7 +290,7 @@
   .mag__pull-attr {
     display: block;
     margin-top: 20px;
-    font-family: 'Sora', sans-serif;
+    font-family: 'Sora', 'Sora Fallback', sans-serif;
     font-size: 12px;
     letter-spacing: 2.5px;
     text-transform: uppercase;
@@ -305,13 +305,13 @@
     border-left: 3px solid #D4AF37;
     padding: 32px 32px 28px;
     margin: 2.5em -8px !important;
-    font-family: 'Sora', sans-serif;
+    font-family: 'Sora', 'Sora Fallback', sans-serif;
     font-size: 15px;
     line-height: 1.6;
     color: #FFF8E7;
   }
   .mag__tracklist-label {
-    font-family: 'Big Shoulders Display', sans-serif;
+    font-family: 'Big Shoulders Display', 'BSD Fallback', sans-serif;
     color: #D4AF37;
     font-size: 10px;
     letter-spacing: 3px;
@@ -344,13 +344,13 @@
     padding-left: 0 !important;
   }
   .mag__tracklist ul li::before { content: none !important; }
-  .mag__tracklist ul li strong { color: #D4AF37; font-weight: 600; font-family: 'Sora', sans-serif; }
-  .mag__tracklist ul li em { color: #D9CFB8; font-family: 'Sora', sans-serif; font-style: normal; }
+  .mag__tracklist ul li strong { color: #D4AF37; font-weight: 600; font-family: 'Sora', 'Sora Fallback', sans-serif; }
+  .mag__tracklist ul li em { color: #D9CFB8; font-family: 'Sora', 'Sora Fallback', sans-serif; font-style: normal; }
   .mag__tracklist-link {
     display: inline-block;
     color: #D4AF37 !important;
     font-weight: 700;
-    font-family: 'Sora', sans-serif;
+    font-family: 'Sora', 'Sora Fallback', sans-serif;
     text-decoration: none !important;
     border: 0 !important;
     letter-spacing: 0.5px;
@@ -401,7 +401,7 @@
   .mag__cta::before { top: 20px; }
   .mag__cta::after { bottom: 20px; }
   .mag__cta-eyebrow {
-    font-family: 'Big Shoulders Display', sans-serif;
+    font-family: 'Big Shoulders Display', 'BSD Fallback', sans-serif;
     font-size: 10px;
     letter-spacing: 4px;
     color: #8B1A1A;
@@ -430,7 +430,7 @@
     background: #1a1408;
     color: #D4AF37 !important;
     padding: 14px 32px;
-    font-family: 'Big Shoulders Display', sans-serif;
+    font-family: 'Big Shoulders Display', 'BSD Fallback', sans-serif;
     font-size: 12px;
     letter-spacing: 2.5px;
     text-decoration: none;
@@ -457,7 +457,7 @@
     line-height: 1.5;
   }
   .mag__share-lead {
-    font-family: 'Sora', sans-serif;
+    font-family: 'Sora', 'Sora Fallback', sans-serif;
     font-size: 11px;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -478,7 +478,7 @@
     text-decoration: none !important;
     padding: 12px 20px;
     border: 1px solid #2A2A2A !important;
-    font-family: 'Sora', sans-serif;
+    font-family: 'Sora', 'Sora Fallback', sans-serif;
     font-size: 11px;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -535,7 +535,7 @@
 <!-- CHROME:NAV -->
 <header class="nav">
   <a href="/" class="nav__logo" aria-label="Bangin' &amp; Beats home">
-    <img src="/logos/bangin-beats-logo-480.png" srcset="/logos/bangin-beats-logo-480.png 480w, /logos/bangin-beats-logo-800.png 800w" sizes="170px" width="1200" height="699" alt="Bangin' &amp; Beats" class="nav__logo-img" />
+    <img src="/logos/bangin-beats-logo-320.png" srcset="/logos/bangin-beats-logo-320.png 320w, /logos/bangin-beats-logo-480.png 480w" sizes="170px" width="1200" height="699" alt="Bangin' &amp; Beats" class="nav__logo-img" />
   </a>
   <nav class="nav__links" id="primary-nav" aria-label="Primary">
     <a href="/">Home</a>
@@ -569,14 +569,14 @@
           <span>4 min read</span>
         </p>
       </div>
-      <figure class="mag__figure mag__slider" id="magSlider" role="region" aria-label="Photos from Bangin' &amp; Beats">
+      <figure class="mag__figure mag__slider" id="magSlider" aria-label="Photos from Bangin' &amp; Beats">
         <div class="mag__slider-track">
-          <img class="mag__slide mag__slide--active" src="/photos/Winners/GSP_2353.jpg" alt="Guests at a Bangin' &amp; Beats night" width="1200" height="1500" />
-          <img class="mag__slide" src="/photos/Winners/GSP_2360.jpg" alt="A winner at a Bangin' &amp; Beats night" width="1200" height="1500" loading="lazy" />
-          <img class="mag__slide" src="/photos/Winners/GSP_2395.jpg" alt="A Bangin' &amp; Beats crowd moment" width="1200" height="1500" loading="lazy" />
-          <img class="mag__slide" src="/photos/GSP_2286.jpg" alt="The host working the room at Bangin' &amp; Beats" width="1200" height="1500" loading="lazy" />
+          <img class="mag__slide mag__slide--active" src="/photos/Winners/GSP_2353.jpg" srcset="/photos/Winners/GSP_2353-800.jpg 800w, /photos/Winners/GSP_2353.jpg 1600w" sizes="(max-width: 700px) 100vw, 50vw" alt="Guests at a Bangin' &amp; Beats night" width="1200" height="1500" />
+          <img class="mag__slide" src="/photos/Winners/GSP_2360.jpg" srcset="/photos/Winners/GSP_2360-800.jpg 800w, /photos/Winners/GSP_2360.jpg 1600w" sizes="(max-width: 700px) 100vw, 50vw" alt="A winner at a Bangin' &amp; Beats night" width="1200" height="1500" loading="lazy" />
+          <img class="mag__slide" src="/photos/Winners/GSP_2395.jpg" srcset="/photos/Winners/GSP_2395-800.jpg 800w, /photos/Winners/GSP_2395.jpg 1600w" sizes="(max-width: 700px) 100vw, 50vw" alt="A Bangin' &amp; Beats crowd moment" width="1200" height="1500" loading="lazy" />
+          <img class="mag__slide" src="/photos/GSP_2286.jpg" srcset="/photos/GSP_2286-800.jpg 800w, /photos/GSP_2286.jpg 1600w" sizes="(max-width: 700px) 100vw, 50vw" alt="The host working the room at Bangin' &amp; Beats" width="1200" height="1500" loading="lazy" />
         </div>
-        <div class="mag__slider-dots" role="tablist" aria-label="Choose photo">
+        <div class="mag__slider-dots" role="group" aria-label="Choose photo">
           <button class="mag__slider-dot mag__slider-dot--active" type="button" aria-label="Photo 1" data-idx="0"></button>
           <button class="mag__slider-dot" type="button" aria-label="Photo 2" data-idx="1"></button>
           <button class="mag__slider-dot" type="button" aria-label="Photo 3" data-idx="2"></button>

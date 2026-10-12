@@ -38,7 +38,7 @@
   .blog-index__head { max-width: 760px; margin: 0 auto 56px; text-align: center; }
   .blog-index__eyebrow {
     color: #D4AF37;
-    font-family: 'Big Shoulders Display', sans-serif;
+    font-family: 'Big Shoulders Display', 'BSD Fallback', sans-serif;
     font-size: 11px;
     letter-spacing: 3px;
     margin: 0 0 20px;
@@ -85,7 +85,7 @@
   .blog-card__eyebrow {
     display: inline-block;
     color: #D4AF37;
-    font-family: 'Big Shoulders Display', sans-serif;
+    font-family: 'Big Shoulders Display', 'BSD Fallback', sans-serif;
     font-size: 10px;
     letter-spacing: 3px;
     padding-bottom: 12px;
@@ -111,7 +111,7 @@
   }
   .blog-card__meta {
     display: flex; gap: 14px;
-    font-family: 'Sora', sans-serif;
+    font-family: 'Sora', 'Sora Fallback', sans-serif;
     font-size: 11px; color: #C9BFA8;
     letter-spacing: 2px; text-transform: uppercase;
     margin-top: auto;
@@ -134,7 +134,7 @@
 <!-- CHROME:NAV -->
 <header class="nav">
   <a href="/" class="nav__logo" aria-label="Bangin' &amp; Beats home">
-    <img src="/logos/bangin-beats-logo-480.png" srcset="/logos/bangin-beats-logo-480.png 480w, /logos/bangin-beats-logo-800.png 800w" sizes="170px" width="1200" height="699" alt="Bangin' &amp; Beats" class="nav__logo-img" />
+    <img src="/logos/bangin-beats-logo-320.png" srcset="/logos/bangin-beats-logo-320.png 320w, /logos/bangin-beats-logo-480.png 480w" sizes="170px" width="1200" height="699" alt="Bangin' &amp; Beats" class="nav__logo-img" />
   </a>
   <nav class="nav__links" id="primary-nav" aria-label="Primary">
     <a href="/">Home</a>
@@ -307,7 +307,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
   function renderCard(p) {
     const dateLabel = new Date(String(p.publishedAt).slice(0, 10) + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
     const readLabel = p.readMinutes ? `${p.readMinutes} min read` : "";
-    const img = p.coverImage ? `/${p.coverImage.replace(/^\//, "")}` : "/logos/og-image.jpg";
+    const img = p.coverImage ? `/${p.coverImage.replace(/^\//, "").replace(/^(photos\/.+)\.jpg$/, "$1-800.jpg")}` : "/logos/og-image.jpg";
     const href = `/${p.path.replace(/^\//, "")}`;
     return `
       <a class="blog-card" href="${esc(href)}">

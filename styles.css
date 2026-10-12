@@ -1,3 +1,8 @@
+/* Metric-matched fallbacks: text wraps the same before and after the web
+   fonts arrive, so nothing jumps (CLS). Ratios measured against Arial. */
+@font-face { font-family: "BSD Fallback"; src: local("Arial Bold"), local("Arial-BoldMT"), local("Arial"); font-weight: 700 900; size-adjust: 62.7%; }
+@font-face { font-family: "Sora Fallback"; src: local("Arial"), local("ArialMT"); size-adjust: 115.1%; }
+
 /* =========================================================
    BANGIN' & BEATS · Mixtape Liner Notes
    Design System: Tokens · 1.25 Type Scale · 8px Grid
@@ -67,10 +72,10 @@
   --dur-slow: 720ms;
 
   /* ---- Fonts ---- */
-  --font-display: 'Big Shoulders Display', system-ui, sans-serif;   /* 700-900: condensed poster caps; the puffy logo stays the playful element */
-  --font-script:  'Big Shoulders Display', system-ui, sans-serif;   /* accent words: same face, set in gold */
+  --font-display: 'Big Shoulders Display', 'BSD Fallback', system-ui, sans-serif;   /* 700-900: condensed poster caps; the puffy logo stays the playful element */
+  --font-script:  'Big Shoulders Display', 'BSD Fallback', system-ui, sans-serif;   /* accent words: same face, set in gold */
   --font-mono:    'Sora', system-ui, sans-serif;    /* eyebrows/meta: Sora caps, no mono costume */
-  --font-body:    'Sora', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-body:    'Sora', 'Sora Fallback', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
