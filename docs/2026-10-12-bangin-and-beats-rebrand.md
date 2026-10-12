@@ -1213,7 +1213,7 @@ process.exit(fail ? 1 : 0);
 Run: `node tests/check-redirects.mjs`
 Expected: FAIL on every line (the old site still serves 200s).
 
-- [ ] **Step 3: Remove the pre-launch noindex from NEW** by deleting the `X-Robots-Tag: noindex` object from `NEW/vercel.json`, then commit and push:
+- [ ] **Step 3: Remove the pre-launch noindex from NEW** by deleting only the `{ "key": "X-Robots-Tag", "value": "noindex" }` entry from the `/(.*)` headers block in `NEW/vercel.json` (keep the security headers next to it), then commit and push:
 
 ```bash
 git add vercel.json && git commit -m "launch: allow indexing" && git push
@@ -1265,6 +1265,8 @@ Expected: `all redirects OK`. If `/hip-hop-bingo.html` fails because cleanUrls 3
   2. Submit `https://www.banginandbeats.com/sitemap.xml`.
   3. In the **old** property, go to Settings → **Change of address** → choose the new property → Validate & update.
   Check: Change of address shows "approved", and the sitemap status is "Success".
+
+- [ ] **Step 6b: Bing + IndexNow.** Add banginandbeats.com in Bing Webmaster Tools (import from Search Console), submit the sitemap, then run `node scripts/indexnow.mjs` (expect 200 or 202). Bing feeds Copilot and ChatGPT search.
 
 - [ ] **Step 7: Off-site updates** (hand this list to the owner and tick each one off): Google Business Profile (name, website), Instagram and TikTok bio links, the Eventbrite or ticket platform's event names and links, Facebook page, Google Analytics data stream URL, and any directory listings. Confirm `takemebackbingo.com` is on **auto-renew** at its registrar.
 
