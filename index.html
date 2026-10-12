@@ -564,7 +564,7 @@
     <a href="/gallery">Photo Gallery</a>
     <a href="/blog">Cultural Blog</a>
     <a href="/#faq">FAQ</a>
-    <a href="#contact">Contact</a>
+    <a href="#contact" data-open-inquiry>Contact</a>
   </nav>
   <a href="/events" class="btn btn--primary nav__cta">Get Tickets</a>
   <button type="button" class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav" onclick="(function(b){var n=b.closest('.nav');var o=n.getAttribute('data-nav-open')==='true';n.setAttribute('data-nav-open',o?'false':'true');b.setAttribute('aria-expanded',o?'false':'true');b.setAttribute('aria-label',o?'Open menu':'Close menu');})(this)"><span class="nav__toggle-bars" aria-hidden="true"></span></button>
@@ -1378,7 +1378,7 @@
         </p>
         <div class="footer__cta-row">
           <a href="/events" class="btn btn--primary btn--lg">Explore Tour Tickets</a>
-          <a href="/birthday-party" class="btn btn--ghost btn--lg">Request a Private Tour Stop</a>
+          <a href="#contact" class="btn btn--ghost btn--lg" data-open-inquiry data-inquiry-topic="Private booking - Other event" data-inquiry-context="Private tour stop">Request a Private Tour Stop</a>
         </div>
       </div>
     </div>
@@ -1482,54 +1482,43 @@
   </div>
 </footer>
 <script src="/footer.js" defer></script>
-<!-- /CHROME:FOOTER -->
-
-<!-- ============ INQUIRY MODAL · opens from footer email icon ============ -->
+<!-- Inquiry pop-up · shared by every page; opened by any [data-open-inquiry] (inquiry.js) -->
 <div class="modal" id="inquiry-modal" role="dialog" aria-modal="true" aria-labelledby="inquiry-modal-title" hidden>
   <div class="modal__scrim" data-modal-close></div>
-  <div class="modal__panel" role="document">
+  <div class="modal__panel" tabindex="-1">
+    <span class="modal__grip" aria-hidden="true"></span>
     <button class="modal__close" type="button" aria-label="Close" data-modal-close>
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
     </button>
 
     <header class="modal__head">
-      <p class="eyebrow"><span class="eyebrow__dot"></span> Get in Touch</p>
+      <p class="eyebrow"><span class="eyebrow__dot"></span> Bookings &amp; Inquiries</p>
       <h2 id="inquiry-modal-title" class="modal__title">Let&rsquo;s Make Some Noise.</h2>
-      <p class="modal__sub">
-        Want Bangin' &amp; Beats™ at your venue, office, or birthday?
-        Slide into our inbox. We reply within 24 hours.
-      </p>
+      <p class="modal__sub">Want Bangin' &amp; Beats™ at your venue, office, or birthday? Tell us about it. We reply within 24 hours.</p>
     </header>
 
     <form class="modal__form" data-inquiry-form method="POST" action="https://formspree.io/f/xzedaygd" novalidate>
-      <!-- Populated by JS when the modal is opened with a context-specific CTA -->
       <input type="hidden" name="_subject" data-inquiry-subject-field value="[Bangin' &amp; Beats] Inquiry" />
       <input type="hidden" name="context" data-inquiry-context-field value="" />
+      <input type="hidden" name="page" data-inquiry-page-field value="" />
+      <!-- Spam trap: people never see or fill this; bots do, and Formspree drops them. -->
+      <input type="text" name="_gotcha" class="modal__trap" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
       <div class="modal__row">
-        <label class="modal__field">
-          <span class="modal__label">Name</span>
-          <input type="text" name="name" required autocomplete="name" placeholder="Your name" />
-        </label>
-        <label class="modal__field">
-          <span class="modal__label">Email</span>
-          <input type="email" name="email" required autocomplete="email" placeholder="you@email.com" />
-        </label>
+        <label class="modal__field"><span class="modal__label">Name</span><input type="text" name="name" required autocomplete="name" placeholder="Your name" enterkeyhint="next" /></label>
+        <label class="modal__field"><span class="modal__label">Email</span><input type="email" name="email" required autocomplete="email" inputmode="email" placeholder="you@email.com" enterkeyhint="next" /></label>
       </div>
-
       <div class="modal__row">
-        <label class="modal__field">
-          <span class="modal__label">Phone <span class="modal__optional">(optional)</span></span>
-          <input type="tel" name="phone" autocomplete="tel" placeholder="555.555.5555" />
-        </label>
-        <label class="modal__field">
-          <span class="modal__label">Inquiry Type</span>
+        <label class="modal__field"><span class="modal__label">Phone <span class="modal__optional">(optional)</span></span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="555.555.5555" enterkeyhint="next" /></label>
+        <label class="modal__field"><span class="modal__label">Inquiry Type</span>
           <select name="topic" required>
             <option value="" disabled selected>Choose one</option>
             <optgroup label="Private bookings">
-              <option>Private booking - Bar / Nightclub</option>
-              <option>Private booking - Corporate / Office</option>
               <option>Private booking - Birthday</option>
+              <option>Private booking - Bachelorette</option>
+              <option>Private booking - Corporate / Office</option>
+              <option>Private booking - Fundraiser</option>
+              <option>Private booking - Bar / Nightclub</option>
               <option>Private booking - Wedding</option>
               <option>Private booking - Other event</option>
             </optgroup>
@@ -1551,44 +1540,40 @@
         </label>
       </div>
 
-      <!-- Booking-only fields · shown when topic starts with "Private booking" -->
+      <!-- Booking-only fields · shown when the topic starts with "Private booking" -->
       <div class="modal__row" data-booking-only hidden>
-        <label class="modal__field">
-          <span class="modal__label">Event Date</span>
-          <input type="date" name="eventDate" />
-        </label>
-        <label class="modal__field">
-          <span class="modal__label">City, State</span>
-          <input type="text" name="city" placeholder="Newark, NJ" autocomplete="address-level2" />
-        </label>
+        <label class="modal__field"><span class="modal__label">Event Date</span><input type="date" name="eventDate" /></label>
+        <label class="modal__field"><span class="modal__label">City, State</span><input type="text" name="city" placeholder="Newark, NJ" autocomplete="address-level2" enterkeyhint="next" /></label>
       </div>
-      <label class="modal__field" data-booking-only hidden>
-        <span class="modal__label">Expected Headcount</span>
-        <input type="number" name="headcount" placeholder="e.g. 75" min="1" inputmode="numeric" />
-      </label>
+      <label class="modal__field" data-booking-only hidden><span class="modal__label">Expected Headcount</span><input type="number" name="headcount" placeholder="e.g. 75" min="1" inputmode="numeric" /></label>
 
-      <label class="modal__field">
-        <span class="modal__label">Message</span>
-        <textarea name="message" rows="5" required placeholder="Tell us about your event: venue type, vibe, must-haves."></textarea>
-      </label>
+      <label class="modal__field"><span class="modal__label">Message</span><textarea name="message" rows="4" required placeholder="Tell us about your event: venue type, vibe, must-haves."></textarea></label>
 
       <div class="modal__actions">
-        <button type="submit" class="btn btn--primary btn--lg">
-          Send Inquiry
+        <button type="submit" class="btn btn--primary btn--lg">Send Inquiry
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h12m0 0L8 3m5 5l-5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <p class="modal__hint">Or call/text <a href="tel:+12013444589">201-344-4589</a></p>
       </div>
-
-      <p class="modal__hint modal__caveat">
-        Based in NY/NJ. Travel fees apply outside.
-        Need tickets instead? <a href="/events">See upcoming nights &rarr;</a>
-      </p>
-
-      <p class="modal__status" data-inquiry-status role="status"></p>
+      <p class="modal__hint modal__caveat">Based in NY/NJ. Travel fees apply outside. Need tickets instead? <a href="/events">See upcoming nights &rarr;</a></p>
+      <p class="modal__status" data-inquiry-status role="status" aria-live="polite"></p>
     </form>
+
+    <div class="modal__done" data-inquiry-done hidden>
+      <span class="modal__done-mark" aria-hidden="true">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+      </span>
+      <h3 class="modal__done-title">You&rsquo;re on our radar<span data-inquiry-name></span>.</h3>
+      <p class="modal__sub">Your message is in. We reply within one business day, usually sooner. Need us now? Text <a href="sms:+12013444589">201-344-4589</a>.</p>
+      <div class="modal__done-ctas">
+        <button type="button" class="btn btn--primary btn--lg" data-modal-close>Back to the Party</button>
+        <a class="btn btn--ghost btn--lg" href="/events">See Tour Dates</a>
+      </div>
+    </div>
   </div>
 </div>
+<script src="/inquiry.js" defer></script>
+<!-- /CHROME:FOOTER -->
 
 <script>
   // Self-contained progressive enhancement. If this runs, content is hidden
@@ -1643,168 +1628,6 @@
 
     var yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-    // === Inquiry modal, opens from any footer email link ===
-    var inquiryModal = document.getElementById('inquiry-modal');
-    if (inquiryModal) {
-      var lastFocus = null;
-      function openInquiry() {
-        lastFocus = document.activeElement;
-        inquiryModal.hidden = false;
-        document.body.style.overflow = 'hidden';
-        requestAnimationFrame(function () {
-          var first = inquiryModal.querySelector('input, select, textarea, button');
-          if (first) first.focus();
-          inquiryModal.classList.add('is-open');
-        });
-      }
-      function closeInquiry() {
-        inquiryModal.classList.remove('is-open');
-        document.body.style.overflow = '';
-        setTimeout(function () {
-          inquiryModal.hidden = true;
-          if (lastFocus && lastFocus.focus) lastFocus.focus();
-        }, 220);
-      }
-      // Default copy for the modal heading + message placeholder, so we can reset
-      // between context-specific opens.
-      var inquiryTitleEl = document.getElementById('inquiry-modal-title');
-      var inquirySubEl = inquiryModal.querySelector('.modal__sub');
-      var defaultInquiryTitle = inquiryTitleEl ? inquiryTitleEl.textContent : 'Send us an inquiry.';
-      var inquirySelectEl = inquiryModal.querySelector('select[name="topic"]');
-      var inquiryMsgEl = inquiryModal.querySelector('textarea[name="message"]');
-      var inquirySubjEl = inquiryModal.querySelector('[data-inquiry-subject-field]');
-      var inquiryCtxEl = inquiryModal.querySelector('[data-inquiry-context-field]');
-      var defaultMsgPlaceholder = inquiryMsgEl ? inquiryMsgEl.getAttribute('placeholder') : '';
-
-      function toggleBookingFields() {
-        var topic = inquirySelectEl ? (inquirySelectEl.value || '') : '';
-        var normalized = topic.toLowerCase();
-        var isBooking = normalized.indexOf('private booking') === 0;
-        inquiryModal.querySelectorAll('[data-booking-only]').forEach(function (el) {
-          // Use inline display rather than the [hidden] attribute; modal__row /
-          // modal__field set display:grid/flex in CSS, which overrides [hidden].
-          el.style.display = isBooking ? '' : 'none';
-        });
-      }
-
-      function applyInquiryContext(trigger) {
-        var topic = trigger && trigger.getAttribute('data-inquiry-topic');
-        var context = trigger && trigger.getAttribute('data-inquiry-context');
-
-        // Reset to defaults first so stale state from a previous open doesn't leak.
-        if (inquiryTitleEl) inquiryTitleEl.textContent = defaultInquiryTitle;
-        if (inquirySubjEl) inquirySubjEl.value = "[Bangin' & Beats] Inquiry";
-        if (inquiryCtxEl) inquiryCtxEl.value = '';
-        if (inquiryMsgEl) inquiryMsgEl.setAttribute('placeholder', defaultMsgPlaceholder);
-        if (inquirySelectEl) inquirySelectEl.selectedIndex = 0;
-
-        if (topic && inquirySelectEl) {
-          // Match an existing <option> case-insensitively; otherwise append one.
-          var matched = false;
-          for (var i = 0; i < inquirySelectEl.options.length; i++) {
-            if (inquirySelectEl.options[i].text.toLowerCase() === topic.toLowerCase()) {
-              inquirySelectEl.selectedIndex = i;
-              matched = true; break;
-            }
-          }
-          if (!matched) {
-            var opt = document.createElement('option');
-            opt.text = topic; opt.value = topic; opt.selected = true;
-            inquirySelectEl.appendChild(opt);
-          }
-          // Keep the headline constant ("Let's Make Some Noise."), it's brand,
-          // not a context label. The topic is conveyed by the pre-selected option.
-          if (inquirySubjEl) inquirySubjEl.value = "[Bangin' & Beats] " + topic;
-        }
-
-        if (context) {
-          if (inquiryCtxEl) inquiryCtxEl.value = context;
-          if (inquiryMsgEl) inquiryMsgEl.setAttribute('placeholder',
-            'Re: ' + context + ', tell us about your group, date, headcount, and the vibe.');
-        }
-
-        toggleBookingFields();
-      }
-
-      if (inquirySelectEl) {
-        inquirySelectEl.addEventListener('change', toggleBookingFields);
-      }
-
-      document.querySelectorAll('[data-open-inquiry]').forEach(function (el) {
-        el.addEventListener('click', function (e) {
-          e.preventDefault();
-          applyInquiryContext(el);
-          openInquiry();
-        });
-      });
-      inquiryModal.querySelectorAll('[data-modal-close]').forEach(function (el) {
-        el.addEventListener('click', closeInquiry);
-      });
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && !inquiryModal.hidden) closeInquiry();
-      });
-      // Single config point: the owner's Formspree form (notifications -> info@banginandbeats.com).
-      var FORMSPREE_ENDPOINT = 'https://formspree.io/f/xzedaygd';
-
-      function postToFormspree(form) {
-        // Honor the form's own action if it was overridden in HTML, else fall back to the const.
-        var endpoint = form.getAttribute('action') || FORMSPREE_ENDPOINT;
-        var payload = {};
-        new FormData(form).forEach(function (v, k) { payload[k] = v; });
-        return fetch(endpoint, {
-          method: 'POST',
-          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-      }
-
-      var inquiryForm = inquiryModal.querySelector('[data-inquiry-form]');
-      var inquiryStatus = inquiryModal.querySelector('[data-inquiry-status]');
-      var inquirySubmitBtn = inquiryForm.querySelector('button[type="submit"]');
-      var inquiryBtnDefault = inquirySubmitBtn ? inquirySubmitBtn.innerHTML : '';
-
-      inquiryForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        // Lock the button so users can't double-submit.
-        if (inquirySubmitBtn) {
-          inquirySubmitBtn.disabled = true;
-          inquirySubmitBtn.textContent = 'Sending…';
-        }
-        inquiryStatus.classList.remove('is-error');
-        inquiryStatus.classList.add('is-shown');
-        inquiryStatus.textContent = '';
-
-        postToFormspree(inquiryForm)
-          .then(function (res) {
-            if (!res.ok) throw new Error('Formspree responded ' + res.status);
-            inquiryStatus.textContent = 'Thanks, we got it. We’ll be back within one business day.';
-            // GA4 conversion: an inquiry was submitted (track the topic for funnel slicing)
-            try {
-              if (typeof gtag === 'function') {
-                var inquiryTopic = (inquirySelectEl && inquirySelectEl.value) || 'unspecified';
-                gtag('event', 'inquiry_submit', { topic: inquiryTopic });
-              }
-            } catch (e) {}
-            inquiryForm.reset();
-            // Keep the modal open for ~2s so the user actually sees the confirmation,
-            // then auto-close. (closeInquiry restores focus and unlocks scroll.)
-            setTimeout(function () {
-              if (!inquiryModal.hidden) closeInquiry();
-            }, 2000);
-          })
-          .catch(function () {
-            inquiryStatus.classList.add('is-error');
-            inquiryStatus.textContent = 'Something went wrong sending that. Please try again, or email info@banginandbeats.com directly.';
-          })
-          .then(function () {
-            if (inquirySubmitBtn) {
-              inquirySubmitBtn.disabled = false;
-              inquirySubmitBtn.innerHTML = inquiryBtnDefault;
-            }
-          });
-      });
-    }
 
 
     // === Hero sizzle reel · respect reduced motion + sound toggle ===

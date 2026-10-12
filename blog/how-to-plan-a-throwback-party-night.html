@@ -208,7 +208,7 @@
     <a href="/gallery">Photo Gallery</a>
     <a href="/blog">Cultural Blog</a>
     <a href="/#faq">FAQ</a>
-    <a href="#contact">Contact</a>
+    <a href="#contact" data-open-inquiry>Contact</a>
   </nav>
   <a href="/events" class="btn btn--primary nav__cta">Get Tickets</a>
   <button type="button" class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav" onclick="(function(b){var n=b.closest('.nav');var o=n.getAttribute('data-nav-open')==='true';n.setAttribute('data-nav-open',o?'false':'true');b.setAttribute('aria-expanded',o?'false':'true');b.setAttribute('aria-label',o?'Open menu':'Close menu');})(this)"><span class="nav__toggle-bars" aria-hidden="true"></span></button>
@@ -344,7 +344,7 @@
 
     <p>Everything else&mdash;the bass response, the neon club lights, the host&rsquo;s jokes&mdash;acts as a massive multiplier once you get the music catalog right. When the tracks are authentic, the room transforms into an absolute community.</p>
 
-    <p>If you are planning an elite private milestone celebration or want to book a custom takeover for your venue, let&rsquo;s collaborate. Get in touch with our booking office at <a href="/#contact">banginandbeats.com</a> or check out our <a href="/events">active schedule</a> to lock in entry passes to our next show!</p>
+    <p>If you are planning an elite private milestone celebration or want to book a custom takeover for your venue, let&rsquo;s collaborate. Get in touch with our booking office at <a href="#contact" data-open-inquiry data-inquiry-topic="Private booking - Other event">our booking form</a> or check out our <a href="/events">active schedule</a> to lock in entry passes to our next show!</p>
 
     <p class="mag__end" aria-hidden="true">■</p>
 
@@ -354,7 +354,7 @@
     <p class="mag__cta-eyebrow">Venue Partnerships</p>
     <h3 class="mag__cta-title">Do you run a high-capacity room or venue?</h3>
     <p class="mag__cta-sub">Want us to bring this exact throwback party energy straight to your venue?<br>We are currently locking in exclusive calendar slots for our upcoming regional tour dates.</p>
-    <a href="/#contact" class="mag__cta-btn">Submit a Venue Inquiry &#10132;</a>
+    <a href="#contact" class="mag__cta-btn" data-open-inquiry data-inquiry-topic="Private booking - Bar / Nightclub" data-inquiry-context="Venue partnership">Submit a Venue Inquiry &#10132;</a>
   </aside>
 
   <aside class="mag__quickbar">
@@ -409,7 +409,7 @@
         </p>
         <div class="footer__cta-row">
           <a href="/events" class="btn btn--primary btn--lg">Explore Tour Tickets</a>
-          <a href="/birthday-party" class="btn btn--ghost btn--lg">Request a Private Tour Stop</a>
+          <a href="#contact" class="btn btn--ghost btn--lg" data-open-inquiry data-inquiry-topic="Private booking - Other event" data-inquiry-context="Private tour stop">Request a Private Tour Stop</a>
         </div>
       </div>
     </div>
@@ -513,6 +513,97 @@
   </div>
 </footer>
 <script src="/footer.js" defer></script>
+<!-- Inquiry pop-up · shared by every page; opened by any [data-open-inquiry] (inquiry.js) -->
+<div class="modal" id="inquiry-modal" role="dialog" aria-modal="true" aria-labelledby="inquiry-modal-title" hidden>
+  <div class="modal__scrim" data-modal-close></div>
+  <div class="modal__panel" tabindex="-1">
+    <span class="modal__grip" aria-hidden="true"></span>
+    <button class="modal__close" type="button" aria-label="Close" data-modal-close>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+
+    <header class="modal__head">
+      <p class="eyebrow"><span class="eyebrow__dot"></span> Bookings &amp; Inquiries</p>
+      <h2 id="inquiry-modal-title" class="modal__title">Let&rsquo;s Make Some Noise.</h2>
+      <p class="modal__sub">Want Bangin' &amp; Beats™ at your venue, office, or birthday? Tell us about it. We reply within 24 hours.</p>
+    </header>
+
+    <form class="modal__form" data-inquiry-form method="POST" action="https://formspree.io/f/xzedaygd" novalidate>
+      <input type="hidden" name="_subject" data-inquiry-subject-field value="[Bangin' &amp; Beats] Inquiry" />
+      <input type="hidden" name="context" data-inquiry-context-field value="" />
+      <input type="hidden" name="page" data-inquiry-page-field value="" />
+      <!-- Spam trap: people never see or fill this; bots do, and Formspree drops them. -->
+      <input type="text" name="_gotcha" class="modal__trap" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+      <div class="modal__row">
+        <label class="modal__field"><span class="modal__label">Name</span><input type="text" name="name" required autocomplete="name" placeholder="Your name" enterkeyhint="next" /></label>
+        <label class="modal__field"><span class="modal__label">Email</span><input type="email" name="email" required autocomplete="email" inputmode="email" placeholder="you@email.com" enterkeyhint="next" /></label>
+      </div>
+      <div class="modal__row">
+        <label class="modal__field"><span class="modal__label">Phone <span class="modal__optional">(optional)</span></span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="555.555.5555" enterkeyhint="next" /></label>
+        <label class="modal__field"><span class="modal__label">Inquiry Type</span>
+          <select name="topic" required>
+            <option value="" disabled selected>Choose one</option>
+            <optgroup label="Private bookings">
+              <option>Private booking - Birthday</option>
+              <option>Private booking - Bachelorette</option>
+              <option>Private booking - Corporate / Office</option>
+              <option>Private booking - Fundraiser</option>
+              <option>Private booking - Bar / Nightclub</option>
+              <option>Private booking - Wedding</option>
+              <option>Private booking - Other event</option>
+            </optgroup>
+            <optgroup label="Public events">
+              <option>Reserve a table</option>
+              <option>Group of 6+</option>
+              <option>Early access / waitlist</option>
+            </optgroup>
+            <optgroup label="Partnerships &amp; press">
+              <option>Brand partnerships</option>
+              <option>Sponsor a night</option>
+              <option>Bring us to your city</option>
+              <option>Press &amp; media</option>
+            </optgroup>
+            <optgroup label="Other">
+              <option>Buy tickets / general</option>
+            </optgroup>
+          </select>
+        </label>
+      </div>
+
+      <!-- Booking-only fields · shown when the topic starts with "Private booking" -->
+      <div class="modal__row" data-booking-only hidden>
+        <label class="modal__field"><span class="modal__label">Event Date</span><input type="date" name="eventDate" /></label>
+        <label class="modal__field"><span class="modal__label">City, State</span><input type="text" name="city" placeholder="Newark, NJ" autocomplete="address-level2" enterkeyhint="next" /></label>
+      </div>
+      <label class="modal__field" data-booking-only hidden><span class="modal__label">Expected Headcount</span><input type="number" name="headcount" placeholder="e.g. 75" min="1" inputmode="numeric" /></label>
+
+      <label class="modal__field"><span class="modal__label">Message</span><textarea name="message" rows="4" required placeholder="Tell us about your event: venue type, vibe, must-haves."></textarea></label>
+
+      <div class="modal__actions">
+        <button type="submit" class="btn btn--primary btn--lg">Send Inquiry
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h12m0 0L8 3m5 5l-5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <p class="modal__hint">Or call/text <a href="tel:+12013444589">201-344-4589</a></p>
+      </div>
+      <p class="modal__hint modal__caveat">Based in NY/NJ. Travel fees apply outside. Need tickets instead? <a href="/events">See upcoming nights &rarr;</a></p>
+      <p class="modal__status" data-inquiry-status role="status" aria-live="polite"></p>
+    </form>
+
+    <div class="modal__done" data-inquiry-done hidden>
+      <span class="modal__done-mark" aria-hidden="true">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+      </span>
+      <h3 class="modal__done-title">You&rsquo;re on our radar<span data-inquiry-name></span>.</h3>
+      <p class="modal__sub">Your message is in. We reply within one business day, usually sooner. Need us now? Text <a href="sms:+12013444589">201-344-4589</a>.</p>
+      <div class="modal__done-ctas">
+        <button type="button" class="btn btn--primary btn--lg" data-modal-close>Back to the Party</button>
+        <a class="btn btn--ghost btn--lg" href="/events">See Tour Dates</a>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/inquiry.js" defer></script>
 <!-- /CHROME:FOOTER -->
 
 <script type="application/ld+json">

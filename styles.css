@@ -5274,3 +5274,95 @@ section.blog-index .blog-card { border-radius: 16px; }
 
 /* Footer legal links: comfortable tap targets (Lighthouse target-size). */
 .footer__legal a { display: inline-block; padding: 8px 2px; }
+
+/* =========================================================
+   INQUIRY POP-UP v2 · shared on every page (inquiry.js)
+   Desktop: centered card. Phones: bottom sheet with safe-area.
+   ========================================================= */
+html.modal-open, html.modal-open body { overflow: hidden; }
+html.modal-open body { position: fixed; left: 0; right: 0; width: 100%; }
+.modal { z-index: 400; overscroll-behavior: contain; }
+.modal__panel {
+  max-height: min(calc(100dvh - 48px), 860px);
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  border-color: rgba(212,175,55,.55);
+  box-shadow:
+    0 0 0 1px rgba(212,175,55,.12),
+    0 1px 0 rgba(255,255,255,.08) inset,
+    0 40px 80px -24px rgba(0,0,0,.8);
+}
+.modal__panel:focus { outline: none; }
+.modal__panel::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px;
+  background: var(--rope); border-radius: 18px 18px 0 0;
+}
+.modal__grip { display: none; }
+.modal__title { font-weight: 900; text-transform: uppercase; letter-spacing: 0; }
+.modal__trap { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; opacity: 0; }
+
+/* Field states */
+.modal__field.is-invalid input,
+.modal__field.is-invalid select,
+.modal__field.is-invalid textarea { border-color: #FF8A6E; background: rgba(255,138,110,.06); }
+.modal__field.is-invalid .modal__label { color: #FF8A6E; }
+.modal__field input:focus-visible,
+.modal__field select:focus-visible,
+.modal__field textarea:focus-visible { box-shadow: 0 0 0 3px rgba(212,175,55,.25); }
+.modal__field input[type="date"] { color-scheme: dark; min-height: 48px; }
+.modal__field input, .modal__field select { min-height: 48px; }
+.modal__actions .btn[disabled] { opacity: .7; cursor: progress; }
+
+/* Success screen */
+.modal__done { text-align: center; padding: var(--s-5) 0 var(--s-2); animation: modalDone .45s var(--ease-out) both; }
+.modal__done[hidden] { display: none; }
+.modal__done-mark {
+  width: 72px; height: 72px; margin: 0 auto var(--s-4); border-radius: 50%;
+  display: grid; place-items: center; color: #0A0A0A;
+  background: linear-gradient(135deg, #F3D77A, var(--gold) 55%, #9C7A1E);
+  box-shadow: 0 10px 30px -8px rgba(212,175,55,.6);
+}
+.modal__done-title {
+  font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
+  font-size: clamp(1.6rem, 4vw, 2.2rem); line-height: 1; margin: 0 0 var(--s-3);
+}
+.modal__done .modal__sub { margin: 0 auto var(--s-5); }
+.modal__done .modal__sub a { color: var(--gold); }
+.modal__done-ctas { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+@keyframes modalDone { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* Phones: bottom sheet */
+@media (max-width: 640px) {
+  .modal { align-items: flex-end; padding: 0; }
+  .modal__panel {
+    width: 100%;
+    max-height: calc(100dvh - 24px);
+    border-radius: 22px 22px 0 0;
+    border-bottom: 0;
+    padding: var(--s-5) var(--s-4) calc(var(--s-5) + env(safe-area-inset-bottom));
+    transform: translateY(100%);
+    transition: opacity 200ms var(--ease-out), transform 360ms var(--ease-out);
+  }
+  .modal__panel::before { border-radius: 22px 22px 0 0; }
+  .modal.is-open .modal__panel { transform: none; }
+  .modal__grip {
+    display: block; width: 44px; height: 5px; border-radius: 3px;
+    background: rgba(255,248,231,.25); margin: -6px auto var(--s-3);
+  }
+  .modal__close { top: 12px; right: 12px; width: 44px; height: 44px; }
+  .modal__head { margin-bottom: var(--s-4); }
+  .modal__title { font-size: clamp(1.7rem, 8vw, 2.1rem); }
+  .modal__sub { font-size: var(--fs-16); }
+  .modal__actions { flex-direction: column; align-items: stretch; gap: var(--s-3); }
+  .modal__actions .btn { width: 100%; justify-content: center; }
+  .modal__actions .modal__hint { text-align: center; }
+  .modal__done-ctas .btn { width: 100%; justify-content: center; }
+}
+@media (max-width: 400px) {
+  .modal { padding: 0; }
+  .modal__panel { border-radius: 18px 18px 0 0; padding: var(--s-4) var(--s-3) calc(var(--s-4) + env(safe-area-inset-bottom)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .modal__panel, .modal__scrim { transition: opacity 120ms linear !important; transform: none !important; }
+  .modal__done { animation: none; }
+}
