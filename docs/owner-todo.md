@@ -31,7 +31,7 @@ The game's win screen shows **THROWBACK10** and **$35 → $31.50**, and the butt
 ## 4. Newsletter (Resend)
 
 - [ ] In Resend, add and verify the domain `banginandbeats.com` (SPF/DKIM records at the registrar).
-- [ ] Create a new "Bangin & Beats" audience and send the developer its ID (`RESEND_AUDIENCE_ID`).
+- [ ] Nothing to create for the list: Resend now uses Contacts (Audiences were retired in Nov 2025). Optional: a "Newsletter" segment (`RESEND_SEGMENT_ID`).
 - [ ] Sending address will be `Bangin' & Beats <hello@banginandbeats.com>`, replies to `info@banginandbeats.com`.
 
 ## 5. Email inbox

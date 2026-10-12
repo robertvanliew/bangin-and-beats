@@ -1070,7 +1070,7 @@ git add -A && git commit -m "pages: rename + rewrite 11 landing pages, songs, le
 
 **Interfaces:**
 - Consumes: `FORMSPREE_ID` from Owner Input 3.
-- Produces: Vercel env vars for the new project (set in Task 11): `RESEND_API_KEY`, `RESEND_AUDIENCE_ID` (a **new** audience, "Bangin & Beats"), `NEWSLETTER_FROM="Bangin' & Beats <hello@banginandbeats.com>"`, `NEWSLETTER_REPLY_TO="info@banginandbeats.com"`, `BREVO_API_KEY`, `BREVO_WINNERS_LIST_ID` (a **new** Brevo list), `ADMIN_PASSWORD` (new value), `GH_TOKEN`, `GH_OWNER=robertvanliew`, `GH_REPO=bangin-and-beats`, `GH_BRANCH=main`, `GH_PATH=content/events.json`.
+- Produces: Vercel env vars for the new project (set in Task 11): `RESEND_API_KEY`, `RESEND_SEGMENT_ID` (optional; Resend retired Audiences in Nov 2025 and `api/subscribe.js` now uses `POST /contacts`), `NEWSLETTER_FROM="Bangin' & Beats <hello@banginandbeats.com>"`, `NEWSLETTER_REPLY_TO="info@banginandbeats.com"`, `BREVO_API_KEY`, `BREVO_WINNERS_LIST_ID` (a **new** Brevo list), `ADMIN_PASSWORD` (new value), `GH_TOKEN`, `GH_OWNER=robertvanliew`, `GH_REPO=bangin-and-beats`, `GH_BRANCH=main`, `GH_PATH=content/events.json`.
 
 - [x] **Step 1: Confirm the raw guard fails on these files**
 

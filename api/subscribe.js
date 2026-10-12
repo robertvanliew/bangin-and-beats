@@ -7,7 +7,8 @@
 //
 // What it does:
 //   1. Validate the email server-side
-//   2. Add the contact to the Resend Audience (RESEND_AUDIENCE_ID)
+//   2. Add the contact to Resend Contacts (POST /contacts; Resend replaced
+//      Audiences with Contacts + Segments in Nov 2025, so no audience ID)
 //   3. Send a short welcome email via Resend
 //   4. Return JSON so the inline [data-newsletter-status] handler can show
 //      success/error inline without changing the markup
@@ -16,13 +17,8 @@
 //   RESEND_API_KEY        Resend API key (secret) - needs contacts:write + emails:send
 //
 // Optional env vars:
-//   RESEND_AUDIENCE_ID    The Resend Audience ID. If omitted, the function
-//                         fetches GET /audiences on the first invocation and
-//                         uses the first one (Resend's dashboard hides the
-//                         audience ID, so this is the path of least friction
-//                         for single-audience accounts - and it's cached in
-//                         module scope so subsequent warm invocations skip
-//                         the lookup).
+//   RESEND_SEGMENT_ID     Optional Resend Segment ID. If set, new signups are
+//                         also added to that segment (e.g. "Newsletter").
 //   NEWSLETTER_FROM       e.g. "Bangin' & Beats <hello@banginandbeats.com>"
 //                         Must be on a domain you've verified in Resend.
 //                         Defaults to "Bangin' & Beats <onboarding@resend.dev>"
@@ -43,24 +39,6 @@ function readBody(req) {
     req.on('end', () => { try { resolve(JSON.parse(data || '{}')); } catch (e) { resolve({}); } });
     req.on('error', () => resolve({}));
   });
-}
-
-// Cached across warm invocations of the same serverless container, so we only
-// hit GET /audiences once per cold start when RESEND_AUDIENCE_ID isn't set.
-let cachedAudienceId = null;
-
-async function resolveAudienceId(apiKey) {
-  if (process.env.RESEND_AUDIENCE_ID) return process.env.RESEND_AUDIENCE_ID;
-  if (cachedAudienceId) return cachedAudienceId;
-  const r = await fetch('https://api.resend.com/audiences', {
-    headers: { Authorization: 'Bearer ' + apiKey },
-  });
-  if (!r.ok) throw new Error('audience lookup failed: ' + r.status);
-  const json = await r.json().catch(() => ({}));
-  const list = (json && json.data) || [];
-  if (!list.length) throw new Error('no audiences found on this Resend account');
-  cachedAudienceId = list[0].id;
-  return cachedAudienceId;
 }
 
 const WELCOME_SUBJECT = "You\u2019re locked in: Bangin\u2019 & Beats\u2122";
@@ -130,25 +108,16 @@ module.exports = async (req, res) => {
     return;
   }
 
-  let audienceId;
-  try {
-    audienceId = await resolveAudienceId(apiKey);
-  } catch (e) {
-    console.error('subscribe: ' + (e && e.message));
-    res.status(500).json({ error: 'audience unavailable' });
-    return;
-  }
-
   const from = process.env.NEWSLETTER_FROM
     || "Bangin' & Beats <onboarding@resend.dev>"; // TODO: set NEWSLETTER_FROM
   const replyTo = process.env.NEWSLETTER_REPLY_TO || undefined;
 
-  // --- 1. Add contact to the Resend Audience ---
-  // Resend treats a re-add of the same email as success (it just updates the
-  // existing contact), so we don't need to dedupe up front.
+  // --- 1. Add the contact (Resend Contacts API) ---
+  // A repeat signup of the same email is treated as success.
+  const segmentId = process.env.RESEND_SEGMENT_ID;
   try {
     const addRes = await fetch(
-      'https://api.resend.com/audiences/' + encodeURIComponent(audienceId) + '/contacts',
+      'https://api.resend.com/contacts',
       {
         method: 'POST',
         headers: {
@@ -159,13 +128,14 @@ module.exports = async (req, res) => {
           email: email,
           first_name: firstName || undefined,
           unsubscribed: false,
+          segments: segmentId ? [{ id: segmentId }] : undefined,
         }),
       }
     );
 
     // 200 / 201 are both success. Resend may also return a 200 with an
     // existing contact id - that's fine.
-    if (!addRes.ok && addRes.status !== 422 /* already exists */) {
+    if (!addRes.ok && addRes.status !== 409 && addRes.status !== 422 /* already exists */) {
       const detail = await addRes.text().catch(() => '');
       console.error('subscribe: resend add-contact failed', {
         status: addRes.status,

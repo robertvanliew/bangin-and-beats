@@ -104,24 +104,24 @@ Free-plan note: Formspree's free tier caps monthly submissions; upgrade if booki
 
 ## 4. Newsletter (Resend)
 
-The footer email box adds people to a Resend **Audience** and sends a branded welcome email ("You're locked in: Bangin' & Beats™").
+The footer email box adds people to Resend **Contacts** and sends a branded welcome email ("You're locked in: Bangin' & Beats™").
 
 - [ ] Create or log in to resend.com (owner's account).
 - [ ] **Domains → Add Domain** → `banginandbeats.com`, region **us-east-1**. Add the `send` MX, `send` SPF TXT and `resend._domainkey` DKIM records it shows. Wait for **Verified**.
-- [ ] **Audiences → Create** → "Bangin & Beats". Copy its ID.
-- [ ] **API Keys → Create** with **Full access** (the contacts/audience endpoints need it; a "sending only" key fails).
+- [ ] No audience to create: Resend replaced Audiences with **Contacts** (plus optional Segments) in Nov 2025, and the site adds signups straight to Contacts. Optional: **Contacts → Segments → create** "Newsletter" and use its ID as `RESEND_SEGMENT_ID` to keep website signups grouped.
+- [ ] **API Keys → Create** with **Full access** (the contacts endpoint needs it; a "sending only" key fails).
 - [ ] **Send to developer / put in Vercel:**
 
 | Variable | Value |
 |---|---|
 | `RESEND_API_KEY` | the new key (`re_…`) |
-| `RESEND_AUDIENCE_ID` | the "Bangin & Beats" audience ID |
+| `RESEND_SEGMENT_ID` | optional: a segment ID, or leave unset |
 | `NEWSLETTER_FROM` | `Bangin' & Beats <hello@banginandbeats.com>` |
 | `NEWSLETTER_REPLY_TO` | `info@banginandbeats.com` |
 
 `hello@` does not need a real inbox; replies go to `info@` (ImprovMX).
-- [ ] Test after deploy: subscribe a test address on the live site; the welcome email should land in the inbox (not spam) and the address should appear in the audience.
-- [ ] Old subscribers: if the owner wants to keep the Take Me Back list, export it from the old Resend audience and import it into the new one (only people who opted in).
+- [ ] Test after deploy: subscribe a test address on the live site; the welcome email should land in the inbox (not spam) and the address should appear under Contacts.
+- [ ] Old subscribers: if the owner wants to keep the Take Me Back list, export it from the old Resend account and import it into the new Contacts (only people who opted in).
 
 ---
 
@@ -176,7 +176,7 @@ Every page still sends visits to the **old Take Me Back Bingo** Google Analytics
 | Variable | Value | Notes |
 |---|---|---|
 | `RESEND_API_KEY` | from section 4 | |
-| `RESEND_AUDIENCE_ID` | from section 4 | |
+| `RESEND_SEGMENT_ID` | from section 4 | optional |
 | `NEWSLETTER_FROM` | `Bangin' & Beats <hello@banginandbeats.com>` | |
 | `NEWSLETTER_REPLY_TO` | `info@banginandbeats.com` | |
 | `BREVO_API_KEY` | from section 5 | |
@@ -221,7 +221,7 @@ Every page still sends visits to the **old Take Me Back Bingo** Google Analytics
 ## What to send the developer (summary)
 
 1. Formspree: "keep mbdbggbv" **or** the new form ID
-2. Resend: API key + audience ID
+2. Resend: API key (+ optional segment ID)
 3. Brevo: API key (+ list ID if new) and confirmation the automation emails are rebranded
 4. Ticketing: event date, ticket link, promo code, DJ/host, dress code, clean flyer
 5. Google Analytics: new GA4 Measurement ID
