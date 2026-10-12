@@ -1,0 +1,17 @@
+# Dependencies / tooling
+node_modules/
+.vercel/
+.env
+.env.local
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.log
+
+# Design-context docs - local only
+PRODUCT.md
+DESIGN.md
+
+# Owner source files (3 MB logo original, Word doc) - local only
+docs/owner/

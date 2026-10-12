@@ -1,0 +1,1027 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex,nofollow" />
+<title>Bingo Card Generator · Take Me Back Bingo Admin</title>
+<link rel="icon" type="image/svg+xml" href="/logos/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Permanent+Marker&family=Allura&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+
+<style>
+  :root {
+    --bg: #141111;
+    --panel: #1c1818;
+    --line: #2b2525;
+    --ink: #f4ede1;
+    --muted: #b6ad9c;
+    --gold: #f1c33b;
+    --cream: #f6e9c8;
+    --red: #c1462e;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: Sora, system-ui, sans-serif; }
+  a { color: var(--gold); }
+
+  /* ---------- Login gate ---------- */
+  .gate { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+  .gate__card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
+    padding: 32px; width: 100%; max-width: 380px; text-align: center;
+  }
+  .gate__logo { font-family: Bungee, sans-serif; font-size: 28px; letter-spacing: 1px; color: var(--gold); margin: 0 0 6px; }
+  .gate__sub { color: var(--muted); margin: 0 0 24px; font-size: 13px; }
+  .gate__input {
+    width: 100%; padding: 12px 14px; border-radius: 10px;
+    border: 1px solid var(--line); background: #0e0c0c; color: var(--ink);
+    font-size: 15px; margin-bottom: 12px;
+  }
+  .gate__btn {
+    width: 100%; padding: 12px 14px; border: 0; border-radius: 10px;
+    background: var(--gold); color: #1a1408; font-weight: 700; cursor: pointer; font-family: inherit;
+  }
+  .gate__err { color: var(--red); font-size: 13px; margin: 8px 0 0; min-height: 18px; }
+
+  /* ---------- App shell ---------- */
+  .shell { display: none; }
+  .shell.active { display: block; }
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 24px; border-bottom: 1px solid var(--line); background: var(--panel);
+  }
+  .topbar__brand { font-family: Bungee, sans-serif; color: var(--gold); font-size: 18px; letter-spacing: 1px; }
+  .topbar__brand small { color: var(--muted); font-family: Sora, sans-serif; font-size: 12px; margin-left: 10px; letter-spacing: 0; }
+  .topbar__nav { display: flex; gap: 6px; }
+  .topbar__nav a { color: var(--muted); text-decoration: none; padding: 8px 14px; border-radius: 8px; font-size: 14px; }
+  .topbar__nav a.active { background: var(--gold); color: #1a1408; font-weight: 700; }
+  .topbar__nav a:not(.active):hover { background: var(--line); color: var(--ink); }
+  .topbar__logout { background: transparent; border: 1px solid var(--line); color: var(--muted); padding: 8px 14px; border-radius: 8px; cursor: pointer; font-family: inherit; }
+
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 32px 24px 80px; }
+  .h1 { font-family: Bungee, sans-serif; font-size: 36px; margin: 0 0 6px; letter-spacing: 0.5px; }
+  .lede { color: var(--muted); margin: 0 0 28px; }
+
+  .grid { display: grid; grid-template-columns: 380px 1fr; gap: 28px; }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+  .card h2 { font-family: Bungee, sans-serif; font-size: 16px; margin: 0 0 16px; color: var(--gold); letter-spacing: 0.5px; }
+
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .field input[type=text], .field input[type=date], .field input[type=number], .field select {
+    width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line);
+    background: #0e0c0c; color: var(--ink); font-size: 14px; font-family: inherit;
+  }
+  .checks { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; margin-top: 4px; }
+  .checks label { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink); text-transform: none; letter-spacing: 0; margin: 0; cursor: pointer; }
+  .checks input { accent-color: var(--gold); }
+
+  .btn {
+    display: inline-block; padding: 12px 20px; border: 0; border-radius: 10px;
+    background: var(--gold); color: #1a1408; font-weight: 700; cursor: pointer;
+    font-family: inherit; font-size: 14px; letter-spacing: 0.3px;
+  }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn--ghost { background: transparent; border: 1px solid var(--line); color: var(--ink); }
+  .btn-row { display: flex; gap: 10px; margin-top: 8px; flex-wrap: wrap; }
+
+  .status { font-size: 13px; color: var(--muted); margin-top: 14px; min-height: 18px; }
+  .status.ok { color: #6dd47e; }
+  .status.err { color: var(--red); }
+
+  .progress { margin-top: 12px; height: 8px; background: #0e0c0c; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); }
+  .progress__bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--gold), var(--cream)); transition: width 0.2s; }
+
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 18px; }
+  .stats__cell { background: #0e0c0c; border: 1px solid var(--line); border-radius: 8px; padding: 10px; text-align: center; }
+  .stats__n { font-family: Bungee, sans-serif; color: var(--gold); font-size: 20px; }
+  .stats__l { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+
+  /* ---------- Bingo card design (the printable artifact) ---------- */
+  .preview-wrap { display: flex; flex-direction: column; gap: 22px; align-items: center; }
+  .bcard {
+    width: 480px; aspect-ratio: 5 / 7;
+    background: var(--cream);
+    color: #1a1408;
+    border-radius: 12px;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.45);
+    padding: 24px 22px 18px;
+    display: flex; flex-direction: column;
+    font-family: Sora, sans-serif;
+    position: relative;
+    overflow: hidden;
+  }
+  .bcard::before {
+    content: ""; position: absolute; inset: 8px; border: 2px solid #1a1408; border-radius: 6px; pointer-events: none;
+  }
+  .bcard__head { text-align: center; margin-bottom: 6px; position: relative; z-index: 1; }
+  .bcard__brand-script { font-family: 'Permanent Marker', cursive; font-size: 22px; line-height: 1; color: #1a1408; transform: rotate(-3deg); display: inline-block; }
+  .bcard__brand-block {
+    font-family: Bungee, sans-serif; font-size: 38px; line-height: 1;
+    color: var(--gold); -webkit-text-stroke: 2px #1a1408;
+    text-shadow: 3px 3px 0 #1a1408;
+    letter-spacing: 1px;
+    display: block;
+    margin-top: 4px;
+  }
+  .bcard__brand-cursive { font-family: Allura, cursive; font-size: 28px; color: #c1462e; line-height: 1; display: inline-block; margin-top: -2px; }
+  .bcard__event {
+    margin: 6px 0 10px; font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; text-align: center; color: #1a1408;
+  }
+  .bcard__cols {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px;
+    margin-bottom: 4px; position: relative; z-index: 1;
+  }
+  .bcard__col-letter {
+    font-family: Bungee, sans-serif; font-size: 26px; text-align: center;
+    color: #1a1408;
+  }
+  .bcard__grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(5, 1fr);
+    gap: 4px; flex: 1; position: relative; z-index: 1;
+  }
+  .bcard__cell {
+    background: #fff8e7; border: 1.5px solid #1a1408; border-radius: 4px;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    padding: 4px 3px; font-size: 11.5px; font-weight: 700; line-height: 1.15;
+    word-break: break-word; hyphens: auto;
+  }
+  .bcard__cell--free {
+    background: var(--gold); color: #1a1408;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 5px 4px 3px;
+  }
+  .bcard__free-logo {
+    width: 92%; height: auto; max-height: 78%;
+    object-fit: contain; display: block;
+  }
+  .bcard__free-text {
+    font-family: Bungee, sans-serif; font-size: 7px; letter-spacing: 1.5px;
+    color: #1a1408; line-height: 1;
+    margin-top: 3px;
+  }
+  .bcard__foot {
+    display: flex; align-items: center; gap: 10px;
+    margin-top: 10px; position: relative; z-index: 1;
+  }
+  .bcard__qr {
+    width: 84px; height: 84px; flex-shrink: 0;
+    background: #fff; padding: 4px;
+    border: 2px solid #1a1408; border-radius: 4px;
+    display: block;
+    image-rendering: pixelated;
+  }
+  .bcard__foot-text {
+    flex: 1; text-align: left; font-size: 9px; color: #1a1408;
+    line-height: 1.35; letter-spacing: 0.2px;
+  }
+  .bcard__foot-text strong {
+    font-family: 'Permanent Marker', cursive; font-size: 12px;
+    font-weight: 400; letter-spacing: 0;
+  }
+  .bcard__handle {
+    font-weight: 700; font-size: 10.5px; color: #c1462e; letter-spacing: 0.3px;
+  }
+  .bcard__num { position: absolute; bottom: 6px; right: 12px; font-size: 9px; color: #1a1408; opacity: 0.65; }
+
+  /* ---------- Hidden render target (off-screen, used by html2canvas) ---------- */
+  .render-stage {
+    position: fixed; left: -10000px; top: 0;
+    width: 480px; /* must match .bcard width */
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== Login Gate ===================== -->
+<section class="gate" id="gate">
+  <form class="gate__card" onsubmit="event.preventDefault(); tryLogin();">
+    <h1 class="gate__logo">TMB ADMIN</h1>
+    <p class="gate__sub">Take Me Back Bingo · Card Generator</p>
+    <input type="password" id="pw" class="gate__input" placeholder="Password" autocomplete="current-password" autofocus />
+    <button type="submit" class="gate__btn">Unlock</button>
+    <p class="gate__err" id="gateErr"></p>
+  </form>
+</section>
+
+<!-- ===================== App ===================== -->
+<div class="shell" id="shell">
+  <div class="topbar">
+    <div class="topbar__brand">TMB ADMIN <small>Bingo Card Generator</small></div>
+    <nav class="topbar__nav">
+      <a href="/admin/cards" class="active">Card Generator</a>
+      <a href="/admin/events">Events</a>
+      <a href="/admin/reviews">Reviews</a>
+    </nav>
+    <button class="topbar__logout" onclick="logout()">Lock</button>
+  </div>
+
+  <div class="wrap">
+    <h1 class="h1">Generate Bingo Cards</h1>
+    <p class="lede">Configure the event, pick which era pools to draw from, and download a print-ready PDF. All processing happens in your browser &mdash; nothing uploads anywhere.</p>
+
+    <div class="grid">
+      <!-- Config panel -->
+      <div class="card">
+        <h2>Event &amp; Settings</h2>
+
+        <div class="field">
+          <label for="eventName">Event Name</label>
+          <input type="text" id="eventName" value="Summer Jam" />
+        </div>
+        <div class="field">
+          <label for="eventDate">Event Date</label>
+          <input type="date" id="eventDate" value="2026-06-26" />
+        </div>
+        <div class="field">
+          <label for="qrUrl">QR Code Link</label>
+          <input type="text" id="qrUrl" value="https://www.takemebackbingo.com" placeholder="https://www.takemebackbingo.com" />
+        </div>
+        <div class="field">
+          <label for="igHandle">Social Handle</label>
+          <input type="text" id="igHandle" value="@takemebackbingo" />
+        </div>
+        <div class="field">
+          <label for="cardCount">Number of Cards</label>
+          <input type="number" id="cardCount" value="100" min="1" max="500" />
+        </div>
+        <div class="field">
+          <label for="cardsPerPage">Cards Per Page</label>
+          <select id="cardsPerPage">
+            <option value="1">1 per page · portrait, 7.1" × 10"</option>
+            <option value="2" selected>2 per page · landscape, 5" × 7" each</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Era Pools to Include</label>
+          <div class="checks" id="poolChecks">
+            <!-- populated by JS -->
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn--ghost" onclick="renderPreview()">Preview 3 cards</button>
+          <button class="btn" id="genBtn" onclick="generatePdf()">Generate Cards PDF</button>
+          <button class="btn btn--ghost" id="keyBtn" onclick="generateAnswerKey()">DJ Answer Key</button>
+        </div>
+
+        <div class="progress"><div class="progress__bar" id="progBar"></div></div>
+        <div class="status" id="status"></div>
+
+        <div class="stats">
+          <div class="stats__cell"><div class="stats__n" id="statPool">0</div><div class="stats__l">Songs</div></div>
+          <div class="stats__cell"><div class="stats__n" id="statArtists">0</div><div class="stats__l">Artists</div></div>
+          <div class="stats__cell"><div class="stats__n" id="statCards">0</div><div class="stats__l">Cards</div></div>
+        </div>
+      </div>
+
+      <!-- Preview panel -->
+      <div class="card">
+        <h2>Preview</h2>
+        <div class="preview-wrap" id="previewWrap">
+          <p style="color:var(--muted); font-size:14px;">Click <strong>Preview 3 cards</strong> to see what they&rsquo;ll look like before generating the full PDF.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Off-screen render stage used by html2canvas during PDF generation -->
+  <div class="render-stage" id="renderStage"></div>
+</div>
+
+<script>
+/* =========================================================================
+   PASSWORD GATE (MVP — client-side hash check)
+   ------------------------------------------------------------------------
+   This is a soft gate. It keeps the page out of search and prevents casual
+   discovery, but it is NOT cryptographically secure for hostile networks
+   since the hash is shipped to the browser. Replace with Netlify Identity
+   or proper auth in Phase 2.
+
+   Default password: "takemeback2026"
+   SHA-256 hash:     stored below
+   To change the password: hash a new string and replace PW_HASH.
+   ========================================================================= */
+const PW_HASH = "0c8e9b3d3b7e3e2f8a2d2c7e9c4e1b5a6f3d2c1b0a9e8d7c6b5a4f3e2d1c0b9a"; // placeholder, see initPw
+const SESSION_KEY = "tmb_admin_unlocked";
+
+async function sha256(str) {
+  const buf = new TextEncoder().encode(str);
+  const hash = await crypto.subtle.digest("SHA-256", buf);
+  return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
+// On first load: compute the hash for the default password and store it,
+// so devs don't have to pre-compute it. This is regenerated on every load
+// so the source-code value is informational only.
+let RUNTIME_PW_HASH = null;
+(async () => {
+  RUNTIME_PW_HASH = await sha256("takemeback2026");
+})();
+
+async function tryLogin() {
+  const pw = document.getElementById("pw").value;
+  const errEl = document.getElementById("gateErr");
+  errEl.textContent = "";
+  if (!pw) { errEl.textContent = "Enter the password."; return; }
+  const h = await sha256(pw);
+  if (h === RUNTIME_PW_HASH) {
+    sessionStorage.setItem(SESSION_KEY, "1");
+    showApp();
+  } else {
+    errEl.textContent = "Wrong password.";
+  }
+}
+
+function showApp() {
+  document.getElementById("gate").style.display = "none";
+  document.getElementById("shell").classList.add("active");
+  initApp();
+}
+
+function logout() {
+  sessionStorage.removeItem(SESSION_KEY);
+  location.reload();
+}
+
+if (sessionStorage.getItem(SESSION_KEY) === "1") {
+  // Already unlocked this session — wait until hash is computed, then show
+  const waitForHash = setInterval(() => {
+    if (RUNTIME_PW_HASH) { clearInterval(waitForHash); showApp(); }
+  }, 50);
+}
+
+/* =========================================================================
+   SONG POOLS (mirrors songs.html — 150 tracks, 6 era buckets)
+   ========================================================================= */
+const POOLS = {
+  "80s R&B": [
+    "Smooth Operator — Sade",
+    "I Wanna Dance With Somebody — Whitney Houston",
+    "All Night Long — Lionel Richie",
+    "Sweet Love — Anita Baker",
+    "Never Too Much — Luther Vandross",
+    "On My Own — Patti LaBelle & Michael McDonald",
+    "Kiss — Prince",
+    "Rock Steady — The Whispers",
+    "Rock With You — Michael Jackson",
+    "I'm Coming Out — Diana Ross",
+    "Billie Jean — Michael Jackson",
+    "P.Y.T. — Michael Jackson",
+    "When Doves Cry — Prince",
+    "Word Up! — Cameo",
+    "Saving All My Love for You — Whitney Houston",
+    "Caribbean Queen — Billy Ocean",
+    "Tender Love — Force MDs",
+    "Just the Two of Us — Grover Washington Jr.",
+    "Computer Love — Zapp & Roger",
+    "Saturday Love — Cherrelle & Alexander O'Neal",
+    "Outstanding — The Gap Band",
+    "Endless Love — Diana Ross & Lionel Richie",
+    "Square Biz — Teena Marie",
+    "Hello — Lionel Richie",
+    "Slow Jam — Midnight Star"
+  ],
+  "80s Hip-Hop": [
+    "Walk This Way — Run-DMC",
+    "Fight For Your Right — Beastie Boys",
+    "Rapper's Delight — Sugarhill Gang",
+    "I Need Love — LL Cool J",
+    "Fight the Power — Public Enemy",
+    "Push It — Salt-N-Pepa",
+    "The Show — Doug E. Fresh",
+    "Parents Just Don't Understand — DJ Jazzy Jeff & Fresh Prince",
+    "Paid in Full — Eric B. & Rakim",
+    "My Adidas — Run-DMC",
+    "It Takes Two — Rob Base & DJ E-Z Rock",
+    "Bring the Noise — Public Enemy",
+    "It's Tricky — Run-DMC",
+    "Children's Story — Slick Rick",
+    "Eric B. Is President — Eric B. & Rakim",
+    "Straight Outta Compton — N.W.A.",
+    "The Message — Grandmaster Flash",
+    "Planet Rock — Afrika Bambaataa",
+    "Going Back to Cali — LL Cool J",
+    "Brass Monkey — Beastie Boys",
+    "La Di Da Di — Doug E. Fresh & Slick Rick",
+    "King of Rock — Run-DMC",
+    "Wild Wild West — Kool Moe Dee",
+    "Friends — Whodini",
+    "Roxanne, Roxanne — UTFO"
+  ],
+  "90s R&B": [
+    "No Scrubs — TLC",
+    "End of the Road — Boyz II Men",
+    "Fantasy — Mariah Carey",
+    "Are You That Somebody — Aaliyah",
+    "The Boy Is Mine — Brandy & Monica",
+    "Don't Let Go (Love) — En Vogue",
+    "Bills, Bills, Bills — Destiny's Child",
+    "Un-Break My Heart — Toni Braxton",
+    "Waterfalls — TLC",
+    "Doo Wop (That Thing) — Lauryn Hill",
+    "Pony — Ginuwine",
+    "Creep — TLC",
+    "Killing Me Softly — Fugees",
+    "I'll Make Love to You — Boyz II Men",
+    "Always Be My Baby — Mariah Carey",
+    "Weak — SWV",
+    "Real Love — Mary J. Blige",
+    "Bump n' Grind — R. Kelly",
+    "This Is How We Do It — Montell Jordan",
+    "Candy Rain — Soul For Real",
+    "I Wanna Be Down — Brandy",
+    "Brown Sugar — D'Angelo",
+    "Anniversary — Tony! Toni! Toné!",
+    "All My Life — K-Ci & JoJo",
+    "Can We Talk — Tevin Campbell"
+  ],
+  "90s Hip-Hop": [
+    "Juicy — The Notorious B.I.G.",
+    "California Love — 2Pac feat. Dr. Dre",
+    "C.R.E.A.M. — Wu-Tang Clan",
+    "Nuthin' But a G Thang — Dr. Dre & Snoop Dogg",
+    "Gin and Juice — Snoop Dogg",
+    "Hip Hop Hooray — Naughty by Nature",
+    "N.Y. State of Mind — Nas",
+    "Ms. Jackson — Outkast",
+    "It Was a Good Day — Ice Cube",
+    "Hypnotize — The Notorious B.I.G.",
+    "Big Poppa — The Notorious B.I.G.",
+    "Mo Money Mo Problems — The Notorious B.I.G.",
+    "Dear Mama — 2Pac",
+    "Regulate — Warren G & Nate Dogg",
+    "Jump Around — House of Pain",
+    "Insane in the Brain — Cypress Hill",
+    "Hard Knock Life — Jay-Z",
+    "Mama Said Knock You Out — LL Cool J",
+    "O.P.P. — Naughty by Nature",
+    "Scenario — A Tribe Called Quest",
+    "Triumph — Wu-Tang Clan",
+    "The World Is Yours — Nas",
+    "Still D.R.E. — Dr. Dre feat. Snoop Dogg",
+    "Ready or Not — Fugees",
+    "Passin' Me By — The Pharcyde"
+  ],
+  "2000s R&B": [
+    "Crazy in Love — Beyoncé feat. Jay-Z",
+    "Yeah! — Usher feat. Lil Jon & Ludacris",
+    "So Sick — Ne-Yo",
+    "Fallin' — Alicia Keys",
+    "Family Affair — Mary J. Blige",
+    "Foolish — Ashanti",
+    "Differences — Ginuwine",
+    "Ordinary People — John Legend",
+    "Let Me Love You — Mario",
+    "U Remind Me — Usher",
+    "Say My Name — Destiny's Child",
+    "Survivor — Destiny's Child",
+    "Irreplaceable — Beyoncé",
+    "Burn — Usher",
+    "Confessions Part II — Usher",
+    "If I Ain't Got You — Alicia Keys",
+    "We Belong Together — Mariah Carey",
+    "Be Without You — Mary J. Blige",
+    "Umbrella — Rihanna feat. Jay-Z",
+    "Pon de Replay — Rihanna",
+    "Try Again — Aaliyah",
+    "Rock the Boat — Aaliyah",
+    "Dilemma — Nelly feat. Kelly Rowland",
+    "Cry Me a River — Justin Timberlake",
+    "A Long Walk — Jill Scott"
+  ],
+  "2000s Hip-Hop": [
+    "In Da Club — 50 Cent",
+    "99 Problems — Jay-Z",
+    "Lose Yourself — Eminem",
+    "Gold Digger — Kanye West feat. Jamie Foxx",
+    "Hot in Herre — Nelly",
+    "Get Ur Freak On — Missy Elliott",
+    "Move Bitch — Ludacris",
+    "Whatever You Like — T.I.",
+    "Get Low — Lil Jon",
+    "Drop It Like It's Hot — Snoop Dogg feat. Pharrell",
+    "Big Pimpin' — Jay-Z feat. UGK",
+    "Empire State of Mind — Jay-Z feat. Alicia Keys",
+    "Izzo (H.O.V.A.) — Jay-Z",
+    "Without Me — Eminem",
+    "Stan — Eminem",
+    "Jesus Walks — Kanye West",
+    "Stronger — Kanye West",
+    "Good Life — Kanye West feat. T-Pain",
+    "Candy Shop — 50 Cent",
+    "P.I.M.P. — 50 Cent",
+    "A Milli — Lil Wayne",
+    "Lollipop — Lil Wayne",
+    "Crank That — Soulja Boy",
+    "Country Grammar — Nelly",
+    "Ridin' — Chamillionaire feat. Krayzie Bone"
+  ]
+};
+const POOL_NAMES = Object.keys(POOLS);
+
+/* =========================================================================
+   APP INIT
+   ========================================================================= */
+let LOGO_DATA_URL = null;
+
+async function loadLogo() {
+  // Try a few sensible paths so this works in production and locally.
+  const candidates = ["/logos/logo.png", "../logos/logo.png", "logos/logo.png"];
+  for (const path of candidates) {
+    try {
+      const res = await fetch(path);
+      if (!res.ok) continue;
+      const blob = await res.blob();
+      return await new Promise((resolve, reject) => {
+        const r = new FileReader();
+        r.onload = () => resolve(r.result);
+        r.onerror = reject;
+        r.readAsDataURL(blob);
+      });
+    } catch (e) { /* try next */ }
+  }
+  return null;
+}
+
+async function initApp() {
+  const wrap = document.getElementById("poolChecks");
+  wrap.innerHTML = POOL_NAMES.map(name => `
+    <label>
+      <input type="checkbox" value="${name}" checked onchange="updateStats()" />
+      ${name}
+    </label>
+  `).join("");
+  updateStats();
+  LOGO_DATA_URL = await loadLogo();
+}
+
+function getSelectedPools() {
+  return Array.from(document.querySelectorAll("#poolChecks input:checked")).map(el => el.value);
+}
+
+function getCombinedSongPool() {
+  const selected = getSelectedPools();
+  const songs = [];
+  selected.forEach(name => songs.push(...POOLS[name]));
+  return songs;
+}
+
+/* Parse "Song Title — Artist Name (feat. X)" into structured parts.
+   The em dash separator matches what we ship in the POOLS data. */
+function parseEntry(entry) {
+  const m = entry.match(/^(.+?)\s+—\s+(.+)$/);
+  if (!m) return { title: entry, artist: entry, primaryArtist: entry };
+  const title = m[1].trim();
+  const fullArtist = m[2].trim();
+  // For display + uniqueness, strip "feat. …" suffixes so
+  // "Beyoncé feat. Jay-Z" and "Beyoncé" both count as Beyoncé.
+  const primaryArtist = fullArtist.replace(/\s+feat\.?\s+.+$/i, "").trim();
+  return { title, artist: fullArtist, primaryArtist };
+}
+
+function uniqueArtists(pool) {
+  const set = new Set();
+  pool.forEach(e => set.add(parseEntry(e).primaryArtist));
+  return set;
+}
+
+function updateStats() {
+  const pool = getCombinedSongPool();
+  const cards = parseInt(document.getElementById("cardCount").value, 10) || 0;
+  const artists = uniqueArtists(pool);
+  document.getElementById("statPool").textContent = pool.length;
+  document.getElementById("statArtists").textContent = artists.size;
+  document.getElementById("statCards").textContent = cards;
+}
+document.addEventListener("input", e => {
+  if (e.target.id === "cardCount") updateStats();
+});
+
+/* =========================================================================
+   CARD GENERATION ALGORITHM
+   ------------------------------------------------------------------------
+   - Fisher-Yates shuffle for uniform randomness
+   - Take 24 songs per card, place into 5x5 grid (center = FREE)
+   - Fingerprint each card (sorted song set); reject collisions
+   ========================================================================= */
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+/* Pick 24 songs whose primary artists are all distinct.
+   Returns null if the pool can't supply 24 unique artists. */
+function makeCard(pool) {
+  const shuffled = shuffle(pool);
+  const picks = [];
+  const usedArtists = new Set();
+  for (const entry of shuffled) {
+    const { primaryArtist } = parseEntry(entry);
+    if (usedArtists.has(primaryArtist)) continue;
+    usedArtists.add(primaryArtist);
+    picks.push(entry);
+    if (picks.length === 24) break;
+  }
+  if (picks.length < 24) return null;
+  const grid = [];
+  let pi = 0;
+  for (let i = 0; i < 25; i++) {
+    grid.push(i === 12 ? "FREE" : picks[pi++]);
+  }
+  return grid;
+}
+
+/* Fingerprint by song titles (the underlying identity) so two cards
+   that happen to draw the same set of artists with different songs
+   are still considered unique. */
+function fingerprint(grid) {
+  return grid.filter(s => s !== "FREE").slice().sort().join("|");
+}
+
+function generateUniqueCards(pool, count) {
+  const artists = uniqueArtists(pool);
+  if (artists.size < 24) {
+    throw new Error(`Need at least 24 distinct artists in the pool. Currently ${artists.size}. Add more eras.`);
+  }
+  const cards = [];
+  const seen = new Set();
+  let attempts = 0;
+  const maxAttempts = count * 10;
+  while (cards.length < count && attempts < maxAttempts) {
+    attempts++;
+    const g = makeCard(pool);
+    if (!g) continue;
+    const fp = fingerprint(g);
+    if (seen.has(fp)) continue;
+    seen.add(fp);
+    cards.push(g);
+  }
+  if (cards.length < count) {
+    throw new Error(`Could only generate ${cards.length} unique cards. Add more eras to widen the artist pool.`);
+  }
+  return cards;
+}
+
+/* =========================================================================
+   CARD RENDERING (HTML)
+   ========================================================================= */
+function renderCardEl(grid, opts) {
+  const { eventName, eventDate, cardNum, totalCards, qrDataUrl, handle, logoDataUrl } = opts;
+  const dateStr = eventDate ? formatDate(eventDate) : "";
+  const letters = ["T", "M", "B", "B", "N"];
+  const handleSafe = (handle || "@takemebackbingo").trim();
+  const freeCellHtml = logoDataUrl
+    ? `<div class="bcard__cell bcard__cell--free"><img class="bcard__free-logo" src="${logoDataUrl}" alt="" /><span class="bcard__free-text">FREE</span></div>`
+    : `<div class="bcard__cell bcard__cell--free"><span class="bcard__free-text">FREE</span><span class="bcard__free-text">TAKE ME BACK</span></div>`;
+  const html = `
+    <div class="bcard">
+      <div class="bcard__head">
+        <span class="bcard__brand-script">TAKE ME BACK</span>
+        <span class="bcard__brand-block">BINGO</span>
+      </div>
+      <div class="bcard__event">${escapeHtml(eventName)}${dateStr ? " · " + dateStr : ""}</div>
+      <div class="bcard__cols">
+        ${letters.map(l => `<div class="bcard__col-letter">${l}</div>`).join("")}
+      </div>
+      <div class="bcard__grid">
+        ${grid.map(s => {
+          if (s === "FREE") return freeCellHtml;
+          const { primaryArtist } = parseEntry(s);
+          return `<div class="bcard__cell">${escapeHtml(primaryArtist)}</div>`;
+        }).join("")}
+      </div>
+      <div class="bcard__foot">
+        ${qrDataUrl ? `<img class="bcard__qr" src="${qrDataUrl}" alt="Scan to visit Take Me Back Bingo" />` : ""}
+        <div class="bcard__foot-text">
+          <div>Yell <strong>&ldquo;TAKE ME BACK!&rdquo;</strong> to win</div>
+          <div><span class="bcard__handle">${escapeHtml(handleSafe)}</span> &middot; #TakeMeBackBingo</div>
+        </div>
+      </div>
+    </div>
+  `;
+  const div = document.createElement("div");
+  div.innerHTML = html.trim();
+  return div.firstChild;
+}
+
+/* =========================================================================
+   QR CODE — generate once per run, embed as data URL in each card
+   ========================================================================= */
+function generateQrDataUrl(text, size) {
+  if (typeof QRCode === "undefined") return null;
+  const holder = document.createElement("div");
+  holder.style.position = "absolute";
+  holder.style.left = "-9999px";
+  document.body.appendChild(holder);
+  try {
+    // qrcodejs renders synchronously to a <canvas> (preferred) + <img>
+    /* eslint-disable no-new */
+    new QRCode(holder, {
+      text: text,
+      width: size || 480,
+      height: size || 480,
+      colorDark: "#1a1408",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+    /* eslint-enable no-new */
+    const canvas = holder.querySelector("canvas");
+    const img = holder.querySelector("img");
+    if (canvas) return canvas.toDataURL("image/png");
+    if (img && img.src) return img.src;
+    return null;
+  } catch (e) {
+    return null;
+  } finally {
+    document.body.removeChild(holder);
+  }
+}
+
+function formatDate(iso) {
+  try {
+    const [y, m, d] = iso.split("-").map(Number);
+    const date = new Date(y, m - 1, d);
+    return date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  } catch { return iso; }
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+}
+
+/* =========================================================================
+   PREVIEW
+   ========================================================================= */
+function renderPreview() {
+  const status = document.getElementById("status");
+  status.className = "status";
+  status.textContent = "";
+  try {
+    const pool = getCombinedSongPool();
+    if (pool.length < 24) throw new Error("Pick more era pools — need at least 24 songs.");
+    const cards = generateUniqueCards(pool, 3);
+    const eventName = document.getElementById("eventName").value || "Take Me Back Bingo";
+    const eventDate = document.getElementById("eventDate").value;
+    const qrUrl = document.getElementById("qrUrl").value || "https://www.takemebackbingo.com";
+    const handle = document.getElementById("igHandle").value || "@takemebackbingo";
+    const qrDataUrl = generateQrDataUrl(qrUrl, 480);
+    const wrap = document.getElementById("previewWrap");
+    wrap.innerHTML = "";
+    cards.forEach((g, i) => {
+      const el = renderCardEl(g, { eventName, eventDate, cardNum: i + 1, totalCards: 3, qrDataUrl, handle, logoDataUrl: LOGO_DATA_URL });
+      wrap.appendChild(el);
+    });
+    status.className = "status ok";
+    status.textContent = "Preview generated. These 3 cards are samples — the full PDF re-generates from scratch.";
+  } catch (e) {
+    status.className = "status err";
+    status.textContent = e.message;
+  }
+}
+
+/* =========================================================================
+   PDF GENERATION
+   ------------------------------------------------------------------------
+   - Generate all unique cards
+   - For each card: render HTML offscreen → html2canvas → image → jsPDF
+   - 1 or 2 cards per US Letter page (8.5 x 11)
+   ========================================================================= */
+async function generatePdf() {
+  const btn = document.getElementById("genBtn");
+  const status = document.getElementById("status");
+  const bar = document.getElementById("progBar");
+  status.className = "status";
+  status.textContent = "";
+  bar.style.width = "0%";
+
+  const eventName = document.getElementById("eventName").value || "Take Me Back Bingo";
+  const eventDate = document.getElementById("eventDate").value;
+  const qrUrl = document.getElementById("qrUrl").value || "https://www.takemebackbingo.com";
+  const handle = document.getElementById("igHandle").value || "@takemebackbingo";
+  const count = Math.max(1, Math.min(500, parseInt(document.getElementById("cardCount").value, 10) || 1));
+  const perPage = parseInt(document.getElementById("cardsPerPage").value, 10);
+
+  try {
+    if (typeof window.jspdf === "undefined" || typeof window.html2canvas === "undefined") {
+      throw new Error("PDF libraries not loaded yet — wait a second and try again.");
+    }
+    if (typeof QRCode === "undefined") {
+      throw new Error("QR library not loaded yet — wait a second and try again.");
+    }
+    const pool = getCombinedSongPool();
+    if (pool.length < 24) throw new Error("Pick more era pools — need at least 24 songs.");
+
+    btn.disabled = true;
+    status.textContent = "Generating " + count + " unique cards…";
+
+    const qrDataUrl = generateQrDataUrl(qrUrl, 480);
+    const cards = generateUniqueCards(pool, count);
+
+    const { jsPDF } = window.jspdf;
+
+    // The HTML card is 5:7 (width:height). The PDF slots MUST match that
+    // aspect or the printed card will be stretched. Letter = 8.5 x 11.
+    const ASPECT = 5 / 7; // width / height
+    let pdf, pageW, pageH, cardW, cardH, slots;
+
+    if (perPage === 1) {
+      // Portrait Letter, one big card centered with ~0.5" margins.
+      pdf = new jsPDF({ unit: "in", format: "letter", orientation: "portrait" });
+      pageW = 8.5; pageH = 11;
+      cardH = 10;                          // 0.5" top + 0.5" bottom margins
+      cardW = cardH * ASPECT;              // 7.14"
+      slots = [{ x: (pageW - cardW) / 2, y: (pageH - cardH) / 2 }];
+    } else {
+      // Landscape Letter, two cards side-by-side. Card width is constrained
+      // by horizontal page space: 2 * cardW + gap + side-margins <= 11".
+      // With cardH = 7", cardW = 5.0", gap = 0.5", margins = 0.25" each.
+      pdf = new jsPDF({ unit: "in", format: "letter", orientation: "landscape" });
+      pageW = 11; pageH = 8.5;
+      cardH = 7.0;                         // 0.75" top/bottom margins
+      cardW = cardH * ASPECT;              // 5.0"
+      const gap = 0.5;
+      const totalW = cardW * 2 + gap;      // 10.5" — leaves 0.25" each side
+      const startX = (pageW - totalW) / 2;
+      const y = (pageH - cardH) / 2;
+      slots = [
+        { x: startX,                 y: y },
+        { x: startX + cardW + gap,   y: y }
+      ];
+    }
+
+    const stage = document.getElementById("renderStage");
+
+    for (let i = 0; i < cards.length; i++) {
+      const slotIdx = i % slots.length;
+      if (i > 0 && slotIdx === 0) pdf.addPage();
+      const slot = slots[slotIdx];
+
+      const el = renderCardEl(cards[i], { eventName, eventDate, cardNum: i + 1, totalCards: cards.length, qrDataUrl, handle, logoDataUrl: LOGO_DATA_URL });
+      stage.innerHTML = "";
+      stage.appendChild(el);
+
+      // Wait one frame so layout/fonts settle
+      await new Promise(r => requestAnimationFrame(r));
+
+      const canvas = await html2canvas(el, { backgroundColor: null, scale: 3, logging: false, useCORS: true });
+      const imgData = canvas.toDataURL("image/jpeg", 0.96);
+      pdf.addImage(imgData, "JPEG", slot.x, slot.y, cardW, cardH, undefined, "FAST");
+
+      const pct = Math.round(((i + 1) / cards.length) * 100);
+      bar.style.width = pct + "%";
+      status.textContent = `Rendering card ${i + 1} of ${cards.length}…`;
+      if (i % 5 === 0) await new Promise(r => setTimeout(r, 0)); // yield to UI
+    }
+
+    stage.innerHTML = "";
+    const fname = `TMB-Bingo-Cards-${slug(eventName)}-${eventDate || "event"}.pdf`;
+    pdf.save(fname);
+    status.className = "status ok";
+    status.textContent = `Done. ${cards.length} cards saved as ${fname}.`;
+  } catch (e) {
+    status.className = "status err";
+    status.textContent = e.message;
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+function slug(s) { return String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
+
+/* =========================================================================
+   DJ ANSWER KEY — text-based PDF listing every song in the selected eras
+   ------------------------------------------------------------------------
+   The cards only show artist names. The DJ uses this key to know which
+   songs to play. Each line: [ ] Song Title — Artist Name (with checkbox
+   so the DJ can mark what's been played during the night).
+   ========================================================================= */
+async function generateAnswerKey() {
+  const status = document.getElementById("status");
+  const btn = document.getElementById("keyBtn");
+  status.className = "status";
+  status.textContent = "";
+  try {
+    if (typeof window.jspdf === "undefined") {
+      throw new Error("PDF library not loaded yet — wait a second.");
+    }
+    const selectedPools = getSelectedPools();
+    if (!selectedPools.length) throw new Error("Pick at least one era pool.");
+
+    btn.disabled = true;
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({ unit: "in", format: "letter", orientation: "portrait" });
+    const pageW = 8.5, pageH = 11;
+    const marginL = 0.6, marginR = 0.6;
+    const marginTop = 0.6, marginBot = 0.6;
+    const textWidth = pageW - marginL - marginR;
+    const lineH = 0.22;
+    const eventName = document.getElementById("eventName").value || "Take Me Back Bingo";
+    const eventDate = document.getElementById("eventDate").value;
+    const dateStr = eventDate ? formatDate(eventDate) : "";
+
+    // ---------- Page header (drawn once per page) ----------
+    function drawPageHeader() {
+      pdf.setFont("helvetica", "bold");
+      pdf.setFontSize(18);
+      pdf.text("TAKE ME BACK BINGO NIGHTS", pageW / 2, 0.55, { align: "center" });
+      pdf.setFontSize(12);
+      pdf.text("DJ Answer Key — Master Playlist", pageW / 2, 0.8, { align: "center" });
+      pdf.setFont("helvetica", "normal");
+      pdf.setFontSize(10);
+      pdf.text(`${eventName}${dateStr ? "  ·  " + dateStr : ""}`, pageW / 2, 1.02, { align: "center" });
+      pdf.setFontSize(8.5);
+      pdf.setTextColor(120, 120, 120);
+      pdf.text("Cards show artist names only.  Check off each song as it plays.", pageW / 2, 1.2, { align: "center" });
+      pdf.setTextColor(0, 0, 0);
+    }
+    drawPageHeader();
+
+    let y = 1.55;
+
+    function ensureRoom(needed) {
+      if (y + needed > pageH - marginBot) {
+        pdf.addPage();
+        drawPageHeader();
+        y = 1.55;
+        return true;
+      }
+      return false;
+    }
+
+    for (const poolName of selectedPools) {
+      const songs = POOLS[poolName].slice().sort((a, b) => {
+        const ea = parseEntry(a), eb = parseEntry(b);
+        const byArtist = ea.primaryArtist.localeCompare(eb.primaryArtist);
+        return byArtist !== 0 ? byArtist : ea.title.localeCompare(eb.title);
+      });
+
+      // Era header — keep header + at least 3 songs together
+      ensureRoom(lineH * 4);
+      pdf.setFont("helvetica", "bold");
+      pdf.setFontSize(11);
+      pdf.setFillColor(241, 195, 59); // gold accent bar
+      pdf.rect(marginL, y - 0.16, textWidth, 0.24, "F");
+      pdf.setTextColor(26, 20, 8);
+      pdf.text(`${poolName.toUpperCase()}    ${songs.length} songs`, marginL + 0.12, y);
+      pdf.setTextColor(0, 0, 0);
+      y += lineH * 1.3;
+      pdf.setFont("helvetica", "normal");
+      pdf.setFontSize(10.5);
+
+      for (const song of songs) {
+        ensureRoom(lineH);
+        const { title, artist } = parseEntry(song);
+
+        // Checkbox — stroke-only, white fill, thin line. The "S" style
+        // is REQUIRED to prevent jsPDF from filling the rect black,
+        // which was the bug that swallowed entire rows in the prior PDF.
+        pdf.setDrawColor(60, 60, 60);
+        pdf.setFillColor(255, 255, 255);
+        pdf.setLineWidth(0.012);
+        pdf.rect(marginL, y - 0.13, 0.14, 0.14, "S");
+
+        const fitted = fitLineToWidth(pdf, `${title}  —  ${artist}`, textWidth - 0.25);
+        pdf.text(fitted, marginL + 0.22, y);
+        y += lineH;
+      }
+      y += lineH * 0.4;
+    }
+
+    const fname = `TMB-DJ-Answer-Key-${slug(eventName)}-${eventDate || "event"}.pdf`;
+    pdf.save(fname);
+    status.className = "status ok";
+    status.textContent = `Answer key downloaded as ${fname}.`;
+  } catch (e) {
+    status.className = "status err";
+    status.textContent = e.message;
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+function fitLineToWidth(pdf, text, maxWidth) {
+  const w = pdf.getTextWidth(text);
+  if (w <= maxWidth) return text;
+  let s = text;
+  while (s.length > 4 && pdf.getTextWidth(s + "…") > maxWidth) {
+    s = s.slice(0, -1);
+  }
+  return s + "…";
+}
+</script>
+</body>
+</html>
