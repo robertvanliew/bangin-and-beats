@@ -6,7 +6,7 @@
 
 <!-- Analytics: GA4, lazy-loaded (see /analytics.js) -->
 <script src="/analytics.js" defer></script>
-<title>Tour Dates | Bangin' &amp; Beats™ | 90s &amp; 00s Throwback Party in NJ &amp; NYC</title>
+<title>Tour Dates: Throwback Parties in NJ &amp; NYC | Bangin' &amp; Beats™</title>
 <meta name="description" content="Bangin' &amp; Beats™ tour dates: live 90s &amp; 00s hip-hop and R&amp;B interactive throwback parties in NJ &amp; NYC. Tickets $35. Strictly 30 &amp; Up." />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <link rel="icon" type="image/png" href="/logos/favicon.png?v=2" />
@@ -1022,10 +1022,20 @@
       </li>`;
   }
 
+  // America/New_York UTC offset for a local "YYYY-MM-DDTHH:MM" (EDT -04:00, EST -05:00).
+  function nyOffset(local) {
+    try {
+      const p = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", timeZoneName: "shortOffset" })
+        .formatToParts(new Date(local + ":00Z")).find(x => x.type === "timeZoneName").value; // "GMT-4"
+      const n = parseInt(p.replace("GMT", ""), 10) || -5;
+      return (n < 0 ? "-" : "+") + String(Math.abs(n)).padStart(2, "0") + ":00";
+    } catch (err) { return "-05:00"; }
+  }
+
   function buildSchema(e) {
     const url = `https://www.banginandbeats.com/events#${e.id}`;
-    const startISO = e.startDate ? e.startDate + ":00-04:00" : "";
-    const endISO   = e.endDate   ? e.endDate   + ":00-04:00" : "";
+    const startISO = e.startDate ? e.startDate + ":00" + nyOffset(e.startDate) : "";
+    const endISO   = e.endDate   ? e.endDate   + ":00" + nyOffset(e.endDate)   : "";
     const availability = e.status === "soldout" ? "https://schema.org/SoldOut" : "https://schema.org/InStock";
     const performers = [];
     if (e.dj)   performers.push({ "@type": "Person", "name": e.dj });
@@ -1065,10 +1075,10 @@
           "addressCountry": "US"
         }
       },
-      "image": e.flyer ? [`https://www.banginandbeats.com/${e.flyer}`] : [],
+      "image": [e.flyer ? `https://www.banginandbeats.com/${e.flyer.replace(/^\//, "")}` : "https://www.banginandbeats.com/logos/og-image.jpg"],
       "description": e.copy || `${e.title} at ${e.venue || "Lake Chateau Banquets"}.`,
       "url": url,
-      "organizer": { "@id": "https://www.banginandbeats.com/#organization" },
+      "organizer": { "@type": "Organization", "name": "Bangin' & Beats", "url": "https://www.banginandbeats.com/" },
       "typicalAgeRange": "30+"
     };
     if (performers.length) schema.performer = performers;
@@ -1077,30 +1087,6 @@
     return schema;
   }
 
-  function buildBlogPostingSchema(e) {
-    // Discover treats each event as a piece of content to be surfaced in
-    // the mobile feed. BlogPosting gives it the shape it wants: headline,
-    // dated image, publisher, and clear datePublished/dateModified.
-    if (!e.flyer) return null; // no image = no Discover eligibility anyway
-    const url = `https://www.banginandbeats.com/events#${e.id}`;
-    const imgUrl = `https://www.banginandbeats.com/${e.flyer.replace(/^\//, "")}`;
-    const now = new Date().toISOString();
-    return {
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      "headline": `${e.title}${e.dateLabel ? " — " + e.dateLabel : ""}`,
-      "image": [imgUrl],
-      "datePublished": e.startDate ? e.startDate + ":00-04:00" : now,
-      "dateModified": now,
-      "author":    { "@type": "Organization", "name": "Bangin' & Beats", "url": "https://www.banginandbeats.com/" },
-      "publisher": { "@id": "https://www.banginandbeats.com/#organization" },
-      "url": url,
-      "mainEntityOfPage": { "@type": "WebPage", "@id": url },
-      "description": (e.copy || `${e.title} at ${e.venue || "Lake Chateau Banquets"}.`).slice(0, 300),
-      "keywords": "throwback party, 90s hip hop party, R&B party, NJ nightlife, throwback night, live music, Bangin' & Beats",
-      "articleSection": e.section === "past" ? "Past Events" : "Upcoming Events"
-    };
-  }
 
   function renderAll(events) {
     const upcoming = events.filter(e => e.section === "upcoming");
@@ -1133,14 +1119,10 @@
     // Replace existing event-card JSON-LD scripts with fresh ones generated
     // from the current data. We tag ours with data-events-schema so we don't
     // wipe the site-wide Organization / WebSite schemas.
-    // For each event we emit TWO schemas:
-    //   1. Event  — for Google Search's event card in SERP
-    //   2. BlogPosting — for Google Discover eligibility. Discover strongly
-    //      prefers Article/BlogPosting/NewsArticle over Event schema for
-    //      surfacing content in the mobile feed, so we layer both.
+    // One Event schema per event, for Google Search event results.
     document.querySelectorAll("script[data-events-schema]").forEach(s => s.remove());
     events.forEach(e => {
-      [buildSchema(e), buildBlogPostingSchema(e)].forEach(schema => {
+      [buildSchema(e)].forEach(schema => {
         if (!schema) return;
         const s = document.createElement("script");
         s.type = "application/ld+json";
