@@ -5221,3 +5221,7 @@ section.blog-index .blog-card { border-radius: 16px; }
 }
 .vibe-engine .vibe-engine__headline { font-size: clamp(1.9rem, 3.2vw, 2.9rem); white-space: nowrap; }
 @media (max-width: 520px) { .vibe-engine .vibe-engine__headline { white-space: normal; font-size: 2rem; } }
+
+/* No numbered "01 / 02 / 03" labels anywhere (owner feedback: reads as AI). */
+.how .how__step::after, .challenges__card::after, .answer-block__h::before, .songs-list li::before { content: none; }
+.winners__stamp-num { display: none; }
