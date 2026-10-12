@@ -22,6 +22,7 @@
   --primary:          var(--gold);
   --primary-700:      #A8862A;   /* deep gold (hover/pressed) */
   --primary-100:      #F6EBC8;   /* pale gold wash */
+  --gold-ink:         #7A5E12;   /* gold for small text on cream (5.7:1) */
 
   --accent:           var(--champagne);
   --accent-600:       #A88A4E;
@@ -228,7 +229,7 @@ ul, ol { list-style: none; padding: 0; margin: 0; }
   color: var(--accent);
   margin: 0 0 var(--s-4);
 }
-.eyebrow--dark { color: var(--primary); }
+.eyebrow--dark { color: var(--gold-ink); }
 .eyebrow__dot {
   width: 7px; height: 7px;
   border-radius: 50%;
@@ -633,6 +634,38 @@ ul, ol { list-style: none; padding: 0; margin: 0; }
 .jcard__title-block em {
   font-style: normal;
   color: var(--text);
+}
+/* Home hero: logo on top, then the long descriptor line + script slogan.
+   The descriptor is a sentence, not a word, so it runs far smaller than
+   --fs-display, with a shallower extrude to match. */
+.jcard__logo {
+  display: block;
+  width: min(340px, 72%);
+  height: auto;
+  margin: 0 0 var(--s-5);
+  filter: drop-shadow(0 8px 22px rgba(0,0,0,.55));
+}
+.jcard__title .jcard__title-block--descriptor {
+  font-size: clamp(1.6rem, 3.4vw, 2.75rem);
+  line-height: 1.08;
+  letter-spacing: 0;
+  -webkit-text-stroke: 1px var(--accent);
+  text-shadow:
+    1px 1px 0 var(--primary),
+    2px 2px 0 var(--primary),
+    3px 3px 0 var(--primary-700),
+    4px 4px 0 var(--primary-700),
+    5px 8px 10px rgba(0,0,0,.38);
+  margin-bottom: var(--s-4);
+}
+.jcard__title-block--descriptor + .jcard__title-script {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  line-height: 1.1;
+  margin-bottom: 0;
+}
+.jcard__hook { margin: 0 0 var(--s-4); }
+@media (max-width: 480px) {
+  .jcard__title .jcard__title-block--descriptor { display: block; }
 }
 /* 'Nights' cursive flourish - vintage club / Studio 54 sign vibe.
    Allura is an elegant calligraphic Google Font rendered in brand
@@ -2319,6 +2352,44 @@ video::-webkit-media-controls-enclosure { overflow: hidden; }
 video::-webkit-media-controls-panel { width: calc(100% + 30px); }
 
 /* =========================================================
+   THE CORE VIBE ENGINE · white manifesto block after #how
+   (owner spec Section 4; inline styles moved here)
+   ========================================================= */
+.vibe-engine {
+  background: #FFFFFF;
+  color: var(--ink);
+  text-align: center;
+  padding: var(--s-9) 5%;
+  border-bottom: 1px solid var(--gold);
+}
+.vibe-engine__inner {
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: clamp(1.125rem, 2.2vw, 1.375rem);
+  font-weight: 700;
+  line-height: 1.6;
+}
+.vibe-engine__inner p { margin: 0 0 1.6em; }
+.vibe-engine__inner p:last-child { margin-bottom: 0; }
+.vibe-engine__pill,
+.vibe-engine__headline {
+  color: var(--gold);
+  background: var(--bg);
+  border-radius: 4px;
+  font-weight: 900;
+}
+.vibe-engine__pill { padding: 2px 8px; white-space: nowrap; }
+.vibe-engine__headline {
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: clamp(1.25rem, 2.6vw, 1.625rem);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.vibe-engine__close { font-size: clamp(1.25rem, 2.4vw, 1.5rem); font-weight: 900; }
+
+/* =========================================================
    HOW IT PLAYS Â· light surface section
    ========================================================= */
 .how {
@@ -2398,7 +2469,7 @@ video::-webkit-media-controls-panel { width: calc(100% + 30px); }
   font-weight: 700;
   letter-spacing: .22em;
   text-transform: uppercase;
-  color: var(--primary);
+  color: var(--gold-ink);
   margin: 0 0 var(--s-2);
 }
 .how__detail-text {
@@ -3842,7 +3913,7 @@ html.js ul.meta-strip[data-reveal].is-in > li {
   font-family: var(--font-display);
   font-size: var(--fs-24);
   line-height: 1.15;
-  color: var(--primary);
+  color: var(--gold-ink);
   margin: var(--s-5) 0 var(--s-3);
   letter-spacing: -.01em;
 }
@@ -3886,7 +3957,7 @@ html.js ul.meta-strip[data-reveal].is-in > li {
   font-weight: 700;
   letter-spacing: .22em;
   text-transform: uppercase;
-  color: var(--primary);
+  color: var(--gold-ink);
   margin: 0 0 var(--s-3);
 }
 .booking__list-items {
@@ -3947,7 +4018,7 @@ html.js ul.meta-strip[data-reveal].is-in > li {
   font-size: var(--fs-12);
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: var(--primary);
+  color: var(--gold-ink);
   margin: 0;
   line-height: 1.5;
   max-width: 52ch;

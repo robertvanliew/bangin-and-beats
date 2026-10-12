@@ -10,7 +10,7 @@
 
 **Spec:** `docs/spec-owner-copy.md` is the owner's "update website jargon.docx" as plain text. The original Word doc is at `docs/owner/update website jargon.docx`. Logo source: `docs/owner/bangin-beats-logo-source.png` (1920×1280 PNG, about 3 MB, transparent). `docs/owner/` is git-ignored, so those files stay local.
 
-**Status (2026-10-12):** Tasks 1–3 are done. Task 3 notes: the footer partial is built on the existing full-footer markup (`footer__lockup`/`footer__list`/`footer__bottom`, `data-newsletter-form`, `data-open-inquiry`) with the spec copy, not the simplified HTML drafted in Step 2. The newsletter submit handler moved from inline JS on index/events/gallery into a shared `/footer.js` loaded by the footer partial, so signup works on all 21 pages. `apply-chrome.mjs` also sets `aria-current` on the current page nav link. The contact modal (index/events/gallery) got the new phone, subject and copy; its Formspree ID is still Task 10. The home logo slot is a still logo with `object-fit: contain` in the old 4:5 frame. Footer Facebook icon dropped (old-brand page; Owner Input 4). `npm test`: assets PASS; raw 1222, brand 175 FAIL (page bodies, heads and admin; later tasks). Start at Task 4.
+**Status (2026-10-12):** Tasks 1–4 are done. Task 4 notes: the hero sizzle reel and its poster have "THRILLER BINGO" burned into every frame (Owner Input 7), so the hero is a still crowd photo (`photos/GSP_2287.jpg`) until a clean reel exists; the reel JS is null-guarded and comes back by swapping the `<img>`s for `<video>`s. The home gameplay demo video (`videos/play-gameplay-demo.mp4`) shows the old board and is re-recorded in Task 5. The 14 FAQ answers are drafts (Owner Input 5) and are generated together with the FAQPage JSON-LD so the two match. New `--gold-ink` token (#7A5E12) for small gold text on cream sections. `npm test`: assets + home PASS; raw 1089, brand 152 FAIL (other pages). Start at Task 5.
 
 **Paths used below:**
 - `OLD` = `C:\Users\12124\Documents\Take-me-back-bingo` (the live site; read-only until Task 12)
@@ -653,7 +653,7 @@ Spec sections and where they go. Copy is **verbatim** from `spec-owner-copy.md` 
 | "THE STORY BEHIND BANGIN' & BEATS™" block (lines 363–372) | the about/story section |
 | "HOW DO I BOOK A PRIVATE EVENT?" + sidebar (lines 376–395) | the private-parties section. The button is `REQUEST A PRIVATE PARTY` → `#contact` (the Formspree form), plus `OR TEXT 201-344-4589` as `tel:` |
 
-- [ ] **Step 1: Write the failing homepage test `tests/home.mjs`**
+- [x] **Step 1: Write the failing homepage test `tests/home.mjs`**
 
 ```js
 import { chromium } from 'playwright';
@@ -689,12 +689,12 @@ export async function homeCheck() {
 
 Register it: `import { homeCheck } from './home.mjs';` and `'home check': homeCheck,`.
 
-- [ ] **Step 2: Run it and confirm it fails**
+- [x] **Step 2: Run it and confirm it fails**
 
 Run: `npm test -- home`
 Expected: FAIL listing all 10 missing strings.
 
-- [ ] **Step 3: Rewrite `<head>`**
+- [x] **Step 3: Rewrite `<head>`**
 
 ```html
 <title>Bangin' &amp; Beats™ | 90s &amp; 00s Hip-Hop &amp; R&amp;B Interactive Throwback Party | NJ &amp; NYC</title>
@@ -710,16 +710,16 @@ Expected: FAIL listing all 10 missing strings.
 
 In JSON-LD: set `"name": "Bangin' & Beats"`, `"url": "https://www.banginandbeats.com/"`, `"telephone": "+1-201-344-4589"`, `"email": "info@banginandbeats.com"`, `"sameAs": ["https://www.instagram.com/banginandbeats"]`, add `"parentOrganization": {"@type": "Organization", "name": "High Class Experience LLC"}`, and rewrite every `description`/FAQ `acceptedAnswer` to match the new visible FAQ text exactly. Keep the existing `speakable` block and point its selectors at the new hero and FAQ.
 
-- [ ] **Step 4: Replace each body section per the table above**
+- [x] **Step 4: Replace each body section per the table above**
 
 Work top to bottom, one section at a time, keeping the existing wrapper elements and class names so the layout CSS still applies. After each section, reload `http://localhost:4174/` and check it visually.
 
-- [ ] **Step 5: Run the home and brand checks**
+- [x] **Step 5: Run the home and brand checks**
 
 Run: `npm test -- home && npm test -- brand 2>&1 | grep "^  / "`
 Expected: home PASS; no brand-guard lines that start with `/ [`.
 
-- [ ] **Step 6: Commit and push**
+- [x] **Step 6: Commit and push**
 
 ```bash
 git add -A && git commit -m "home: Bangin' & Beats copy (hero, how-it-works, vibe engine, FAQ, story, private events)" && git push
