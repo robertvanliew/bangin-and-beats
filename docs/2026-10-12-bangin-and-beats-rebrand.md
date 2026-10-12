@@ -10,7 +10,7 @@
 
 **Spec:** `docs/spec-owner-copy.md` is the owner's "update website jargon.docx" as plain text. The original Word doc is at `docs/owner/update website jargon.docx`. Logo source: `docs/owner/bangin-beats-logo-source.png` (1920×1280 PNG, about 3 MB, transparent). `docs/owner/` is git-ignored, so those files stay local.
 
-**Status (2026-10-12):** Task 1 is done. The repo is pushed to `github.com/robertvanliew/bangin-and-beats` (private, `main` tracks `origin/main`). `npm test` shows the red baseline: raw guard 1352 FAIL, brand guard 188 FAIL. Start at Task 2.
+**Status (2026-10-12):** Tasks 1–2 are done. Task 2: new logo, favicons and OG image in `logos/`, black and gold tokens. Two additions beyond the written steps: the nav logo lost its negative margin and shrank to 92/72/60/54px because the new file is trimmed tight and was clipping, and `.h2 em` on the cream sections uses `--primary-700` (deep gold) for contrast. `--primary-700`, `--primary-100` and `--accent-600` are kept as gold shades because about 20 rules still use them. `npm test`: assets PASS; raw guard 1351 and brand guard 188 FAIL (expected until the copy tasks). Start at Task 3.
 
 **Paths used below:**
 - `OLD` = `C:\Users\12124\Documents\Take-me-back-bingo` (the live site; read-only until Task 12)
@@ -299,7 +299,7 @@ Don't connect Vercel yet (Task 11).
 **Interfaces:**
 - Produces: CSS tokens `--bg #0A0A0A`, `--bg-elev #141414`, `--gold #D4AF37`, `--champagne #C9A86A`, `--cream #FFF8E7`, `--crimson #8B1A1A`, `--purple #7C3AED`. The existing names `--primary`, `--accent`, `--tape-yellow*`, `--surface-light`, `--text` are remapped so the existing components re-skin without markup changes. Logo path: `/logos/bangin-beats-logo.png` (with a `.webp` sibling).
 
-- [ ] **Step 1: Write the failing asset test `tests/assets.mjs`**
+- [x] **Step 1: Write the failing asset test `tests/assets.mjs`**
 
 ```js
 import { stat } from 'node:fs/promises';
@@ -334,12 +334,12 @@ export async function assetsCheck() {
 
 Register it in `tests/run-all.mjs`: add `import { assetsCheck } from './assets.mjs';` and `'assets check': assetsCheck,` to `suites`.
 
-- [ ] **Step 2: Run it and confirm it fails**
+- [x] **Step 2: Run it and confirm it fails**
 
 Run: `npm test -- assets`
 Expected: FAIL with "missing" for all 5 files and the old colors present.
 
-- [ ] **Step 3: Write `scripts/make-logos.py`**
+- [x] **Step 3: Write `scripts/make-logos.py`**
 
 ```python
 import sys
@@ -378,7 +378,7 @@ print("ok")
 Run: `python -I scripts/make-logos.py docs/owner/bangin-beats-logo-source.png`
 If `bangin-beats-logo.png` comes out over 400 KB, quantize it: change the save line to `main.quantize(256, method=Image.FASTOCTREE).save(..., optimize=True)`.
 
-- [ ] **Step 4: Remove the old logo files and repoint every reference**
+- [x] **Step 4: Remove the old logo files and repoint every reference**
 
 ```bash
 git rm logos/logo-yellow.png logos/logo.png logos/favicon.svg "logos/Resized_Take-Me-Back-FB-Profile-Pic---Shakim.jpeg"
@@ -395,7 +395,7 @@ grep -rn --include=*.html -E "logo-yellow|logos/logo\.png|favicon\.svg" . --excl
 
 Nav logo `<img>` tags: add `width="1200" height="` + the real height printed by `python -c "from PIL import Image;print(Image.open('logos/bangin-beats-logo.png').size)"` + `"` so iOS reserves space. The nav CSS already constrains the rendered height.
 
-- [ ] **Step 5: Re-skin the tokens in `styles.css`** (replace lines 8–30 with the following; keep all other tokens)
+- [x] **Step 5: Re-skin the tokens in `styles.css`** (replace lines 8–30 with the following; keep all other tokens)
 
 ```css
   --bg:               #0A0A0A;   /* matte black */
@@ -433,16 +433,16 @@ sed -i -E 's/#7B2D8E/#D4AF37/gI; s/#C9962B/#C9A86A/gI; s/#EFC53A/#D4AF37/gI; s/#
 
 Also replace `rgba(123,45,142,` (old purple) with `rgba(212,175,55,` in the same files.
 
-- [ ] **Step 6: Run the test and confirm it passes**
+- [x] **Step 6: Run the test and confirm it passes**
 
 Run: `npm test -- assets`
 Expected: PASS
 
-- [ ] **Step 7: Visual check**
+- [x] **Step 7: Visual check**
 
 Run `node -e "import('./tests/static-server.mjs').then(m=>m.startServer(4173))"`, open `http://localhost:4173/` in Chrome, and confirm a black background, gold accents, and the new logo in the nav. Stop the server.
 
-- [ ] **Step 8: Commit and push**
+- [x] **Step 8: Commit and push**
 
 ```bash
 git add -A && git commit -m "brand: black/gold palette + Bangin' & Beats logo, favicons, OG image" && git push

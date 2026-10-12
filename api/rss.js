@@ -91,7 +91,7 @@ function renderFeed(feedItems) {
     <lastBuildDate>${now}</lastBuildDate>
     <ttl>60</ttl>
     <image>
-      <url>${SITE}/logos/logo.png</url>
+      <url>${SITE}/logos/og-image.jpg</url>
       <title>Take Me Back Bingo</title>
       <link>${SITE}/</link>
     </image>
@@ -110,7 +110,7 @@ function renderEventItem(e) {
   const title = `${e.title}${e.dateLabel ? " — " + e.dateLabel : ""}`;
   const pub = e.startDate ? new Date(e.startDate).toUTCString() : new Date().toUTCString();
   const description = buildEventDescription(e);
-  const imageUrl = e.flyer ? `${SITE}/${e.flyer.replace(/^\//, "")}` : `${SITE}/logos/logo.png`;
+  const imageUrl = e.flyer ? `${SITE}/${e.flyer.replace(/^\//, "")}` : `${SITE}/logos/og-image.jpg`;
   return `    <item>
       <title>${xml(title)}</title>
       <link>${xml(url)}</link>
@@ -128,7 +128,7 @@ function renderEventItem(e) {
 function renderPostItem(p) {
   const url = `${SITE}/${(p.path || "blog/" + p.slug).replace(/^\//, "")}`;
   const pub = p.publishedAt ? new Date(p.publishedAt).toUTCString() : new Date().toUTCString();
-  const imageUrl = p.coverImage ? `${SITE}/${p.coverImage.replace(/^\//, "")}` : `${SITE}/logos/logo.png`;
+  const imageUrl = p.coverImage ? `${SITE}/${p.coverImage.replace(/^\//, "")}` : `${SITE}/logos/og-image.jpg`;
   const excerpt = p.excerpt || "";
   const category = (p.tags && p.tags[0]) || "Blog";
   return `    <item>

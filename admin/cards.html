@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex,nofollow" />
 <title>Bingo Card Generator · Take Me Back Bingo Admin</title>
-<link rel="icon" type="image/svg+xml" href="/logos/favicon.svg" />
+<link rel="icon" type="image/png" href="/logos/favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Permanent+Marker&family=Allura&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -16,7 +16,7 @@
 
 <style>
   :root {
-    --bg: #141111;
+    --bg: #0A0A0A;
     --panel: #1c1818;
     --line: #2b2525;
     --ink: #f4ede1;
@@ -536,7 +536,7 @@ let LOGO_DATA_URL = null;
 
 async function loadLogo() {
   // Try a few sensible paths so this works in production and locally.
-  const candidates = ["/logos/logo.png", "../logos/logo.png", "logos/logo.png"];
+  const candidates = ["/logos/bangin-beats-logo.png", "../logos/bangin-beats-logo.png", "logos/bangin-beats-logo.png"];
   for (const path of candidates) {
     try {
       const res = await fetch(path);

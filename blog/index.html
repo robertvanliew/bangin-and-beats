@@ -16,12 +16,11 @@
 <title>Blog · Take Me Back Bingo · Song of the Week &amp; More</title>
 <meta name="description" content="Take Me Back Bingo blog — Song of the Week features, event recaps, DJ interviews, and the culture behind our hip-hop and R&B live music bingo nights." />
 <meta name="robots" content="index,follow,max-image-preview:large" />
-<meta name="theme-color" content="#141111" />
+<meta name="theme-color" content="#0A0A0A" />
 <link rel="canonical" href="https://www.takemebackbingo.com/blog" />
 
-<link rel="icon" type="image/svg+xml" href="/logos/favicon.svg" />
-<link rel="icon" type="image/png" href="/logos/logo.png" />
-<link rel="apple-touch-icon" href="/logos/logo.png" />
+<link rel="icon" type="image/png" href="/logos/favicon.png" />
+<link rel="apple-touch-icon" href="/logos/apple-touch-icon.png" />
 
 <link rel="alternate" type="application/rss+xml" title="Take Me Back Bingo" href="/rss.xml" />
 
@@ -30,7 +29,7 @@
 <meta property="og:title" content="Blog · Take Me Back Bingo" />
 <meta property="og:description" content="Song of the Week features, event recaps, and the culture behind our music bingo nights." />
 <meta property="og:url" content="https://www.takemebackbingo.com/blog" />
-<meta property="og:image" content="https://www.takemebackbingo.com/logos/logo.png" />
+<meta property="og:image" content="https://www.takemebackbingo.com/logos/og-image.jpg" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,7 +39,7 @@
 <!-- All colors hard-coded to avoid the CSS-variable collision with
      styles.css that made body text invisible on the previous version. -->
 <style>
-  .blog-index { max-width: 1100px; margin: 0 auto; padding: 60px 24px 80px; background: #141111; }
+  .blog-index { max-width: 1100px; margin: 0 auto; padding: 60px 24px 80px; background: #0A0A0A; }
   .blog-index__head { max-width: 760px; margin: 0 auto 56px; text-align: center; }
   .blog-index__eyebrow {
     color: #f1c33b;
@@ -139,7 +138,7 @@
 
 <header class="nav">
   <a href="/" class="nav__logo" aria-label="Take Me Back Bingo home">
-    <img src="/logos/logo-yellow.png" alt="Take Me Back Bingo" class="nav__logo-img" />
+    <img src="/logos/bangin-beats-logo.png" width="1200" height="699" alt="Take Me Back Bingo" class="nav__logo-img" />
   </a>
   <nav class="nav__links" id="primary-nav" aria-label="Primary">
     <a href="/#how">About</a>
@@ -170,7 +169,7 @@
   <div class="footer__bleed" aria-hidden="true"></div>
   <div class="footer__inner">
     <div class="footer__lockup">
-      <img src="/logos/logo-yellow.png" alt="Take Me Back Bingo" class="footer__logo" />
+      <img src="/logos/bangin-beats-logo.png" width="1200" height="699" alt="Take Me Back Bingo" class="footer__logo" />
       <div class="footer__lockup-copy">
         <p class="footer__tagline">
           <span class="footer__tagline-script">Bingo for people</span>
@@ -215,7 +214,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
   function renderCard(p) {
     const dateLabel = new Date(p.publishedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
     const readLabel = p.readMinutes ? `${p.readMinutes} min read` : "";
-    const img = p.coverImage ? `/${p.coverImage.replace(/^\//, "")}` : "/logos/logo.png";
+    const img = p.coverImage ? `/${p.coverImage.replace(/^\//, "")}` : "/logos/og-image.jpg";
     const href = `/${p.path.replace(/^\//, "")}`;
     return `
       <a class="blog-card" href="${esc(href)}">

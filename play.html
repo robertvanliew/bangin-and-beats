@@ -16,15 +16,14 @@
 <title>Play Music Bingo Free &middot; Hip-Hop &amp; R&amp;B Online Game &middot; Take Me Back Bingo</title>
 <meta name="description" content="Play music bingo free in your browser. The DJ drops 30-second clips of 80s, 90s, and 00s hip-hop &amp; R&amp;B hits. Mark song titles on your card, yell TAKE ME BACK to win, unlock 10% off a real ticket. No download. No signup." />
 <meta name="robots" content="index,follow,max-image-preview:large" />
-<meta name="theme-color" content="#141111" />
+<meta name="theme-color" content="#0A0A0A" />
 <link rel="canonical" href="https://www.takemebackbingo.com/play" />
 
 <!-- RSS feed · Chrome mobile Follow + standard readers -->
 <link rel="alternate" type="application/rss+xml" title="Take Me Back Bingo" href="/rss.xml" />
 
-<link rel="icon" type="image/svg+xml" href="logos/favicon.svg" />
-<link rel="icon" type="image/png" href="logos/logo.png" />
-<link rel="apple-touch-icon" href="logos/logo.png" />
+<link rel="icon" type="image/png" href="/logos/favicon.png" />
+<link rel="apple-touch-icon" href="/logos/apple-touch-icon.png" />
 
 <!-- Open Graph · iMessage, Slack, Facebook, LinkedIn -->
 <meta property="og:type" content="website" />
@@ -32,14 +31,14 @@
 <meta property="og:title" content="Play Music Bingo Free &middot; Hip-Hop &amp; R&amp;B Online Game" />
 <meta property="og:description" content="Free in-browser hip-hop &amp; R&amp;B music bingo. Mark the throwbacks, yell the brand call, win 10% off a real ticket." />
 <meta property="og:url" content="https://www.takemebackbingo.com/play" />
-<meta property="og:image" content="https://www.takemebackbingo.com/logos/logo.png" />
+<meta property="og:image" content="https://www.takemebackbingo.com/logos/og-image.jpg" />
 <meta property="og:image:alt" content="Take Me Back Bingo logo" />
 
 <!-- Twitter / X card -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Play Music Bingo Free &middot; Hip-Hop &amp; R&amp;B Online Game" />
 <meta name="twitter:description" content="Free in-browser hip-hop &amp; R&amp;B music bingo. Mark the throwbacks, yell the brand call, win 10% off a real ticket." />
-<meta name="twitter:image" content="https://www.takemebackbingo.com/logos/logo.png" />
+<meta name="twitter:image" content="https://www.takemebackbingo.com/logos/og-image.jpg" />
 
 <!-- SoftwareApplication schema · the playable, in-browser music bingo
      experience. Free, no install, gated only by the win-share moment. -->
@@ -63,9 +62,9 @@
   "browserRequirements": "Requires JavaScript and audio playback. Works in modern Chrome, Safari, Firefox, and Edge.",
   "description": "Free in-browser music bingo. The DJ plays 30-second clips of 80s, 90s, and 2000s hip-hop and R&B hits, you mark matching song titles on a 5x5 card, and yell TAKE ME BACK when you line up five in a row. Winners unlock a 10% discount code for a real Take Me Back Bingo ticket.",
   "image": [
-    "https://www.takemebackbingo.com/logos/logo.png"
+    "https://www.takemebackbingo.com/logos/og-image.jpg"
   ],
-  "screenshot": "https://www.takemebackbingo.com/logos/logo.png",
+  "screenshot": "https://www.takemebackbingo.com/logos/og-image.jpg",
   "featureList": [
     "Six eras to choose from: 80s R&B, 80s Hip-Hop, 90s R&B, 90s Hip-Hop, 2000s R&B, 2000s Hip-Hop",
     "Fresh randomized bingo card every round",
@@ -112,15 +111,15 @@
     /* Scope-override the tape-yellow tokens so every "yellow" inside the
        bingo game (era pills, DJ start button, daubed squares, mute hover,
        etc.) matches the warm muted gold used in the logo art. */
-    --tape-yellow:      #C9962B;
+    --tape-yellow:      #C9A86A;
     --tape-yellow-hot:  #D8A52E;
-    --tape-yellow-warm: #A87B1E;
+    --tape-yellow-warm: #A88A4E;
 
     position: relative;
     min-height: 70vh;
     padding: var(--s-8) var(--s-5) var(--s-9);
     background:
-      radial-gradient(60% 50% at 50% 0%, rgba(123,45,142,.18), transparent 70%),
+      radial-gradient(60% 50% at 50% 0%, rgba(212,175,55,.18), transparent 70%),
       var(--bg);
     color: var(--text);
   }
@@ -266,7 +265,7 @@
     grid-column: 1 / -1;
     height: 3px;
     border-radius: 2px;
-    background: rgba(242,234,219,.08);
+    background: rgba(255,248,231,.08);
     overflow: hidden;
   }
   .booth__timer-fill {
@@ -321,8 +320,8 @@
     justify-content: center;
     text-align: center;
     padding: var(--s-2);
-    background: rgba(24,18,18,.05);
-    border: 1px solid rgba(24,18,18,.12);
+    background: rgba(10,10,10,.05);
+    border: 1px solid rgba(10,10,10,.12);
     border-radius: var(--r-md);
     font-family: 'Newsreader', Georgia, serif;
     font-size: clamp(var(--fs-12), 1.4vw, var(--fs-16));
@@ -338,7 +337,7 @@
   .sq:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
   .sq.is-now {
     border-color: var(--primary);
-    box-shadow: 0 0 0 2px rgba(123,45,142,.35);
+    box-shadow: 0 0 0 2px rgba(212,175,55,.35);
   }
   /* Marked square: yellow-tinted CELL (not a covering circle) so the
      song name stays fully readable. Small dauber stamp in the corner
@@ -387,8 +386,8 @@
   }
   .sq.is-win.is-daubed { color: #fff; }
   @keyframes winPulse {
-    from { box-shadow: 0 0 0 2px rgba(123,45,142,.4); }
-    to   { box-shadow: 0 0 0 6px rgba(123,45,142,.0); }
+    from { box-shadow: 0 0 0 2px rgba(212,175,55,.4); }
+    to   { box-shadow: 0 0 0 6px rgba(212,175,55,.0); }
   }
 
   /* --- Round-over panel - appears when the 15-song cap is hit
@@ -413,7 +412,7 @@
      a single pseudo-card-sized block via grid + padding. */
   .roundover__card {
     width: min(540px, 92vw);
-    background: linear-gradient(135deg, rgba(123,45,142,.95), rgba(20,17,17,.96));
+    background: linear-gradient(135deg, rgba(212,175,55,.95), rgba(10,10,10,.96));
     border: 1px solid var(--rule-strong);
     border-radius: var(--r-lg);
     box-shadow: 0 30px 80px -20px rgba(0,0,0,.7);
@@ -528,7 +527,7 @@
     transform: translate(-50%, 140%);
     width: min(880px, calc(100% - 24px));
     z-index: 70;
-    background: linear-gradient(180deg, rgba(36, 28, 50, .98), rgba(20, 17, 17, .98));
+    background: linear-gradient(180deg, rgba(36, 28, 50, .98), rgba(10,10,10, .98));
     border: 1px solid var(--rule-strong);
     border-radius: 14px;
     box-shadow: 0 30px 80px -20px rgba(0,0,0,.7);
@@ -667,12 +666,12 @@
     max-width: 560px;
     padding: var(--s-4);
     background:
-      radial-gradient(120% 100% at 50% 0%, rgba(201,150,43,.14), transparent 70%),
+      radial-gradient(120% 100% at 50% 0%, rgba(201,168,106,.14), transparent 70%),
       rgba(255,255,255,.04);
-    border: 1px solid rgba(201,150,43,.45);
+    border: 1px solid rgba(201,168,106,.45);
     border-radius: 14px;
     text-align: left;
-    box-shadow: 0 0 0 1px rgba(201,150,43,.10), 0 18px 36px -20px rgba(0,0,0,.6);
+    box-shadow: 0 0 0 1px rgba(201,168,106,.10), 0 18px 36px -20px rgba(0,0,0,.6);
   }
   .winner-capture__h {
     font-family: var(--font-display);
@@ -807,7 +806,7 @@
   .winm[hidden] { display: none; }
   .winm__scrim {
     position: absolute; inset: 0;
-    background: radial-gradient(80% 70% at 50% 40%, rgba(123,45,142,.55), rgba(0,0,0,.85) 70%);
+    background: radial-gradient(80% 70% at 50% 40%, rgba(212,175,55,.55), rgba(0,0,0,.85) 70%);
     backdrop-filter: blur(8px);
   }
   .winm__panel {
@@ -894,7 +893,7 @@
     padding: var(--s-5) var(--s-4);
     overflow-y: auto;
     background:
-      radial-gradient(80% 60% at 50% 20%, rgba(123,45,142,.4), transparent 70%),
+      radial-gradient(80% 60% at 50% 20%, rgba(212,175,55,.4), transparent 70%),
       var(--bg);
   }
   .celebration[hidden] { display: none; }
@@ -945,7 +944,7 @@
   }
   .celebration__cta a {
     color: var(--tape-yellow);
-    border-bottom: 1px solid rgba(239,197,58,.4);
+    border-bottom: 1px solid rgba(212,175,55,.4);
   }
   .celebration__credit {
     margin: var(--s-6) auto 0;
@@ -993,12 +992,12 @@
     max-width: 540px;
     padding: var(--s-4) var(--s-5);
     background:
-      radial-gradient(120% 100% at 50% 0%, rgba(201,150,43,.18), transparent 70%),
+      radial-gradient(120% 100% at 50% 0%, rgba(201,168,106,.18), transparent 70%),
       rgba(255,255,255,.04);
-    border: 1px solid rgba(201,150,43,.45);
+    border: 1px solid rgba(201,168,106,.45);
     border-radius: 14px;
     box-shadow:
-      0 0 0 1px rgba(201,150,43,.10),
+      0 0 0 1px rgba(201,168,106,.10),
       0 18px 36px -20px rgba(0,0,0,.6);
     text-align: center;
   }
@@ -1061,7 +1060,7 @@
     align-items: flex-start;
     padding: 10px 18px;
     background: var(--bg);
-    border: 1px dashed rgba(201,150,43,.55);
+    border: 1px dashed rgba(201,168,106,.55);
     border-radius: 10px;
     text-align: left;
   }
@@ -1176,7 +1175,7 @@
   .celebration__credit a {
     color: var(--tape-yellow);
     text-decoration: none;
-    border-bottom: 1px dotted rgba(239,197,58,.4);
+    border-bottom: 1px dotted rgba(212,175,55,.4);
     transition: color .15s ease, border-bottom-color .15s ease;
   }
   .celebration__credit a:hover {
@@ -1262,8 +1261,8 @@
     color: var(--ink);
     box-shadow:
       inset 0 1px 0 rgba(255,255,255,.25),
-      0 0 0 1px rgba(201,150,43,.45),
-      0 0 18px -2px rgba(201,150,43,.55);
+      0 0 0 1px rgba(201,168,106,.45),
+      0 0 18px -2px rgba(201,168,106,.55);
   }
   .era-pill.is-soon {
     color: var(--text-muted);
@@ -1415,7 +1414,7 @@
 <!-- ============ NAV (mirrors index.html) ============ -->
 <header class="nav">
   <a href="/" class="nav__logo" aria-label="Take Me Back Bingo home">
-    <img src="logos/logo-yellow.png" alt="Take Me Back Bingo" class="nav__logo-img" />
+    <img src="/logos/bangin-beats-logo.png" width="1200" height="699" alt="Take Me Back Bingo" class="nav__logo-img" />
   </a>
   <nav class="nav__links" id="primary-nav" aria-label="Primary">
     <a href="/play" aria-current="page">Play</a>
@@ -3825,15 +3824,15 @@ function drawShareCard() {
   const ctx = canvas.getContext('2d');
 
   // Brand tokens (mirror styles.css so design stays on-brand)
-  const BG          = '#141111';
-  const BG_ELEV     = '#1B1717';
-  const SURFACE     = '#EFE5D2';
-  const INK         = '#181212';
-  const PRIMARY     = '#7B2D8E';
-  const PRIMARY_700 = '#5E2270';
-  const TAPE_HOT    = '#FFD84D';
-  const ACCENT      = '#C9962B';
-  const TEXT        = '#F2EADB';
+  const BG          = '#0A0A0A';
+  const BG_ELEV     = '#141414';
+  const SURFACE     = '#FFF8E7';
+  const INK         = '#0A0A0A';
+  const PRIMARY     = '#D4AF37';
+  const PRIMARY_700 = '#A8862A';
+  const TAPE_HOT    = '#E6C55A';
+  const ACCENT      = '#C9A86A';
+  const TEXT        = '#FFF8E7';
   const TEXT_MUTED  = '#A89C8A';
 
   // Background - radial gradient + grain feel via overlay rect
@@ -3918,7 +3917,7 @@ function drawShareCard() {
         tintGrad.addColorStop(1, TAPE_HOT);
         ctx.fillStyle = tintGrad;
       } else {
-        ctx.fillStyle = 'rgba(24,18,18,0.06)';
+        ctx.fillStyle = 'rgba(10,10,10,0.06)';
       }
       roundRect(ctx, x, y, w, h, 12);
       ctx.fill();
@@ -4036,7 +4035,7 @@ function showCelebration() {
         startVelocity: 55,
         ticks: 260,
         zIndex: 290,
-        colors: ['#C9962B', '#FFD84D', '#7B2D8E', '#FBF5E6', '#EFC53A']
+        colors: ['#C9A86A', '#E6C55A', '#D4AF37', '#FBF5E6', '#D4AF37']
       }, opts));
       // Big bottom-left & bottom-right cannons + a rain burst from the top
       fire({ x: 0.2, y: 0.9 }, 0.45, { angle: 60 });
