@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex,nofollow" />
-<title>Review Request Tool · Take Me Back Bingo Admin</title>
+<title>Review Request Tool · Bangin' &amp; Beats Admin</title>
 <link rel="icon" type="image/png" href="/logos/favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -81,7 +81,7 @@
 
 <section class="gate" id="gate">
   <form class="gate__card" onsubmit="event.preventDefault(); tryLogin();">
-    <h1 class="gate__logo">TMB ADMIN</h1>
+    <h1 class="gate__logo">B&amp;B ADMIN</h1>
     <p class="gate__sub">Review Request Tool</p>
     <input type="password" id="pw" class="gate__input" placeholder="Password" autocomplete="current-password" autofocus />
     <button type="submit" class="gate__btn">Unlock</button>
@@ -91,7 +91,7 @@
 
 <div class="shell" id="shell">
   <div class="topbar">
-    <div class="topbar__brand">TMB ADMIN <small>Review Requests</small></div>
+    <div class="topbar__brand">B&amp;B ADMIN <small>Review Requests</small></div>
     <nav class="topbar__nav">
       <a href="/admin/cards">Card Generator</a>
       <a href="/admin/events">Events</a>
@@ -119,7 +119,7 @@
       <h2>Message Template</h2>
       <div class="field">
         <label for="msgTemplate">The text you&rsquo;ll send</label>
-        <textarea id="msgTemplate">Hey {name}! Hope you had a great time at Take Me Back Bingo. Quick favor — could you leave us a Google review? 30 seconds, huge help for us. Direct link: {link}
+        <textarea id="msgTemplate">Hey {name}! Hope you had a great time at Bangin' & Beats. Quick favor — could you leave us a Google review? 30 seconds, huge help for us. Direct link: {link}
 Thanks 🙏</textarea>
         <p class="field__hint">Use <strong>&#123;name&#125;</strong> and <strong>&#123;link&#125;</strong> as placeholders. They&rsquo;ll auto-fill below when you enter someone&rsquo;s name.</p>
       </div>
@@ -134,7 +134,7 @@ Thanks 🙏</textarea>
       </div>
       <div class="field">
         <label for="attendeePhone">Their phone number (optional)</label>
-        <input type="tel" id="attendeePhone" placeholder="732-555-0100" />
+        <input type="tel" id="attendeePhone" placeholder="201-555-0100" />
         <p class="field__hint">For direct SMS / WhatsApp links. Not saved anywhere.</p>
       </div>
 
@@ -169,10 +169,10 @@ Thanks 🙏</textarea>
 </div>
 
 <script>
-const SESSION_KEY = "tmb_admin_unlocked";
-const PW_KEY = "tmb_admin_pw";
-const REVIEW_LINK_KEY = "tmb_review_link";
-const MSG_TEMPLATE_KEY = "tmb_msg_template";
+const SESSION_KEY = "bnb_admin_unlocked";
+const PW_KEY = "bnb_admin_pw";
+const REVIEW_LINK_KEY = "bnb_review_link";
+const MSG_TEMPLATE_KEY = "bnb_msg_template";
 let RUNTIME_PW_HASH = null;
 
 async function sha256(s) {
@@ -180,7 +180,7 @@ async function sha256(s) {
   const h = await crypto.subtle.digest("SHA-256", buf);
   return Array.from(new Uint8Array(h)).map(b => b.toString(16).padStart(2, "0")).join("");
 }
-(async () => { RUNTIME_PW_HASH = await sha256("takemeback2026"); })();
+(async () => { RUNTIME_PW_HASH = await sha256("banginbeats2026"); })();
 
 async function tryLogin() {
   const pw = document.getElementById("pw").value;

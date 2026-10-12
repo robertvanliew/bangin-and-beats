@@ -1,5 +1,5 @@
-// Vercel serverless function - captures a bingo winner's email and adds them
-// to the Brevo "Bingo Winners" contact list, which triggers the 24h/47h
+// Vercel serverless function - captures a Beat Board winner's email and adds them
+// to the Brevo winners contact list (BREVO_WINNERS_LIST_ID), which triggers the 24h/47h
 // THROWBACK10 follow-up automation built in Brevo.
 //
 // Same-origin POST from the play-page win screen (/api/winner), so no CORS.

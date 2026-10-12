@@ -19,12 +19,12 @@
 //
 // Optional env vars:
 //   GH_OWNER         GitHub user/org. Defaults to "robertvanliew".
-//   GH_REPO          Repo name. Defaults to "takemebackbingo".
+//   GH_REPO          Repo name. Defaults to "bangin-and-beats".
 //   GH_BRANCH        Branch to commit to. Defaults to "main".
 //   GH_PATH          Path of the JSON file. Defaults to "content/events.json".
 
 const DEFAULT_OWNER  = "robertvanliew";
-const DEFAULT_REPO   = "takemebackbingo";
+const DEFAULT_REPO   = "bangin-and-beats";
 const DEFAULT_BRANCH = "main";
 const DEFAULT_PATH   = "content/events.json";
 
@@ -92,7 +92,7 @@ module.exports = async (req, res) => {
     "Authorization": `Bearer ${ghToken}`,
     "Accept":        "application/vnd.github+json",
     "X-GitHub-Api-Version": "2022-11-28",
-    "User-Agent":    "tmb-events-admin"
+    "User-Agent":    "bnb-events-admin"
   };
 
   // ---------- Build the resulting array based on the request mode ----------

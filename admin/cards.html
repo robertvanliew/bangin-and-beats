@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex,nofollow" />
-<title>Bingo Card Generator · Take Me Back Bingo Admin</title>
+<title>Song Card Generator · Bangin' &amp; Beats Admin</title>
 <link rel="icon" type="image/png" href="/logos/favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -104,7 +104,7 @@
   .stats__n { font-family: Bungee, sans-serif; color: var(--gold); font-size: 20px; }
   .stats__l { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
 
-  /* ---------- Bingo card design (the printable artifact) ---------- */
+  /* ---------- Song card design (the printable artifact) ---------- */
   .preview-wrap { display: flex; flex-direction: column; gap: 22px; align-items: center; }
   .bcard {
     width: 480px; aspect-ratio: 5 / 7;
@@ -204,8 +204,8 @@
 <!-- ===================== Login Gate ===================== -->
 <section class="gate" id="gate">
   <form class="gate__card" onsubmit="event.preventDefault(); tryLogin();">
-    <h1 class="gate__logo">TMB ADMIN</h1>
-    <p class="gate__sub">Take Me Back Bingo · Card Generator</p>
+    <h1 class="gate__logo">B&amp;B ADMIN</h1>
+    <p class="gate__sub">Bangin' &amp; Beats · Song Card Generator</p>
     <input type="password" id="pw" class="gate__input" placeholder="Password" autocomplete="current-password" autofocus />
     <button type="submit" class="gate__btn">Unlock</button>
     <p class="gate__err" id="gateErr"></p>
@@ -215,7 +215,7 @@
 <!-- ===================== App ===================== -->
 <div class="shell" id="shell">
   <div class="topbar">
-    <div class="topbar__brand">TMB ADMIN <small>Bingo Card Generator</small></div>
+    <div class="topbar__brand">B&amp;B ADMIN <small>Song Card Generator</small></div>
     <nav class="topbar__nav">
       <a href="/admin/cards" class="active">Card Generator</a>
       <a href="/admin/events">Events</a>
@@ -225,7 +225,7 @@
   </div>
 
   <div class="wrap">
-    <h1 class="h1">Generate Bingo Cards</h1>
+    <h1 class="h1">Generate Song Cards</h1>
     <p class="lede">Configure the event, pick which era pools to draw from, and download a print-ready PDF. All processing happens in your browser &mdash; nothing uploads anywhere.</p>
 
     <div class="grid">
@@ -235,19 +235,19 @@
 
         <div class="field">
           <label for="eventName">Event Name</label>
-          <input type="text" id="eventName" value="Summer Jam" />
+          <input type="text" id="eventName" value="Bangin' &amp; Beats Night" />
         </div>
         <div class="field">
           <label for="eventDate">Event Date</label>
-          <input type="date" id="eventDate" value="2026-06-26" />
+          <input type="date" id="eventDate" value="" />
         </div>
         <div class="field">
           <label for="qrUrl">QR Code Link</label>
-          <input type="text" id="qrUrl" value="https://www.takemebackbingo.com" placeholder="https://www.takemebackbingo.com" />
+          <input type="text" id="qrUrl" value="https://www.banginandbeats.com" placeholder="https://www.banginandbeats.com" />
         </div>
         <div class="field">
           <label for="igHandle">Social Handle</label>
-          <input type="text" id="igHandle" value="@takemebackbingo" />
+          <input type="text" id="igHandle" value="@banginandbeats" />
         </div>
         <div class="field">
           <label for="cardCount">Number of Cards</label>
@@ -307,12 +307,12 @@
    since the hash is shipped to the browser. Replace with Netlify Identity
    or proper auth in Phase 2.
 
-   Default password: "takemeback2026"
+   Default password: "banginbeats2026" (soft gate only; visible in page source)
    SHA-256 hash:     stored below
    To change the password: hash a new string and replace PW_HASH.
    ========================================================================= */
 const PW_HASH = "0c8e9b3d3b7e3e2f8a2d2c7e9c4e1b5a6f3d2c1b0a9e8d7c6b5a4f3e2d1c0b9a"; // placeholder, see initPw
-const SESSION_KEY = "tmb_admin_unlocked";
+const SESSION_KEY = "bnb_admin_unlocked";
 
 async function sha256(str) {
   const buf = new TextEncoder().encode(str);
@@ -325,7 +325,7 @@ async function sha256(str) {
 // so the source-code value is informational only.
 let RUNTIME_PW_HASH = null;
 (async () => {
-  RUNTIME_PW_HASH = await sha256("takemeback2026");
+  RUNTIME_PW_HASH = await sha256("banginbeats2026");
 })();
 
 async function tryLogin() {
@@ -361,64 +361,10 @@ if (sessionStorage.getItem(SESSION_KEY) === "1") {
 }
 
 /* =========================================================================
-   SONG POOLS (mirrors songs.html — 150 tracks, 6 era buckets)
+   SONG POOLS (mirrors songs.html — 100 tracks, 4 era rounds)
    ========================================================================= */
 const POOLS = {
-  "80s R&B": [
-    "Smooth Operator — Sade",
-    "I Wanna Dance With Somebody — Whitney Houston",
-    "All Night Long — Lionel Richie",
-    "Sweet Love — Anita Baker",
-    "Never Too Much — Luther Vandross",
-    "On My Own — Patti LaBelle & Michael McDonald",
-    "Kiss — Prince",
-    "Rock Steady — The Whispers",
-    "Rock With You — Michael Jackson",
-    "I'm Coming Out — Diana Ross",
-    "Billie Jean — Michael Jackson",
-    "P.Y.T. — Michael Jackson",
-    "When Doves Cry — Prince",
-    "Word Up! — Cameo",
-    "Saving All My Love for You — Whitney Houston",
-    "Caribbean Queen — Billy Ocean",
-    "Tender Love — Force MDs",
-    "Just the Two of Us — Grover Washington Jr.",
-    "Computer Love — Zapp & Roger",
-    "Saturday Love — Cherrelle & Alexander O'Neal",
-    "Outstanding — The Gap Band",
-    "Endless Love — Diana Ross & Lionel Richie",
-    "Square Biz — Teena Marie",
-    "Hello — Lionel Richie",
-    "Slow Jam — Midnight Star"
-  ],
-  "80s Hip-Hop": [
-    "Walk This Way — Run-DMC",
-    "Fight For Your Right — Beastie Boys",
-    "Rapper's Delight — Sugarhill Gang",
-    "I Need Love — LL Cool J",
-    "Fight the Power — Public Enemy",
-    "Push It — Salt-N-Pepa",
-    "The Show — Doug E. Fresh",
-    "Parents Just Don't Understand — DJ Jazzy Jeff & Fresh Prince",
-    "Paid in Full — Eric B. & Rakim",
-    "My Adidas — Run-DMC",
-    "It Takes Two — Rob Base & DJ E-Z Rock",
-    "Bring the Noise — Public Enemy",
-    "It's Tricky — Run-DMC",
-    "Children's Story — Slick Rick",
-    "Eric B. Is President — Eric B. & Rakim",
-    "Straight Outta Compton — N.W.A.",
-    "The Message — Grandmaster Flash",
-    "Planet Rock — Afrika Bambaataa",
-    "Going Back to Cali — LL Cool J",
-    "Brass Monkey — Beastie Boys",
-    "La Di Da Di — Doug E. Fresh & Slick Rick",
-    "King of Rock — Run-DMC",
-    "Wild Wild West — Kool Moe Dee",
-    "Friends — Whodini",
-    "Roxanne, Roxanne — UTFO"
-  ],
-  "90s R&B": [
+  "90s R&B Vibe Set": [
     "No Scrubs — TLC",
     "End of the Road — Boyz II Men",
     "Fantasy — Mariah Carey",
@@ -445,7 +391,7 @@ const POOLS = {
     "All My Life — K-Ci & JoJo",
     "Can We Talk — Tevin Campbell"
   ],
-  "90s Hip-Hop": [
+  "90s Rap Round": [
     "Juicy — The Notorious B.I.G.",
     "California Love — 2Pac feat. Dr. Dre",
     "C.R.E.A.M. — Wu-Tang Clan",
@@ -472,7 +418,7 @@ const POOLS = {
     "Ready or Not — Fugees",
     "Passin' Me By — The Pharcyde"
   ],
-  "2000s R&B": [
+  "2000s Slow Jams": [
     "Crazy in Love — Beyoncé feat. Jay-Z",
     "Yeah! — Usher feat. Lil Jon & Ludacris",
     "So Sick — Ne-Yo",
@@ -499,7 +445,7 @@ const POOLS = {
     "Cry Me a River — Justin Timberlake",
     "A Long Walk — Jill Scott"
   ],
-  "2000s Hip-Hop": [
+  "2000s Hip-Hop Bangers": [
     "In Da Club — 50 Cent",
     "99 Problems — Jay-Z",
     "Lose Yourself — Eminem",
@@ -611,7 +557,7 @@ document.addEventListener("input", e => {
    CARD GENERATION ALGORITHM
    ------------------------------------------------------------------------
    - Fisher-Yates shuffle for uniform randomness
-   - Take 24 songs per card, place into 5x5 grid (center = FREE)
+   - Take 24 songs per card, place into 5x5 grid (center = BANGIN' brand square; "FREE" is the internal sentinel)
    - Fingerprint each card (sorted song set); reject collisions
    ========================================================================= */
 function shuffle(arr) {
@@ -682,16 +628,16 @@ function generateUniqueCards(pool, count) {
 function renderCardEl(grid, opts) {
   const { eventName, eventDate, cardNum, totalCards, qrDataUrl, handle, logoDataUrl } = opts;
   const dateStr = eventDate ? formatDate(eventDate) : "";
-  const letters = ["T", "M", "B", "B", "N"];
-  const handleSafe = (handle || "@takemebackbingo").trim();
+  const letters = ["B", "E", "A", "T", "S"];
+  const handleSafe = (handle || "@banginandbeats").trim();
   const freeCellHtml = logoDataUrl
-    ? `<div class="bcard__cell bcard__cell--free"><img class="bcard__free-logo" src="${logoDataUrl}" alt="" /><span class="bcard__free-text">FREE</span></div>`
-    : `<div class="bcard__cell bcard__cell--free"><span class="bcard__free-text">FREE</span><span class="bcard__free-text">TAKE ME BACK</span></div>`;
+    ? `<div class="bcard__cell bcard__cell--free"><img class="bcard__free-logo" src="${logoDataUrl}" alt="" /><span class="bcard__free-text">BANGIN&rsquo;</span></div>`
+    : `<div class="bcard__cell bcard__cell--free"><span class="bcard__free-text">BANGIN&rsquo;</span></div>`;
   const html = `
     <div class="bcard">
       <div class="bcard__head">
-        <span class="bcard__brand-script">TAKE ME BACK</span>
-        <span class="bcard__brand-block">BINGO</span>
+        <span class="bcard__brand-script">Bangin&rsquo;</span>
+        <span class="bcard__brand-block">&amp; BEATS&trade;</span>
       </div>
       <div class="bcard__event">${escapeHtml(eventName)}${dateStr ? " · " + dateStr : ""}</div>
       <div class="bcard__cols">
@@ -705,10 +651,10 @@ function renderCardEl(grid, opts) {
         }).join("")}
       </div>
       <div class="bcard__foot">
-        ${qrDataUrl ? `<img class="bcard__qr" src="${qrDataUrl}" alt="Scan to visit Take Me Back Bingo" />` : ""}
+        ${qrDataUrl ? `<img class="bcard__qr" src="${qrDataUrl}" alt="Scan to visit Bangin' &amp; Beats" />` : ""}
         <div class="bcard__foot-text">
-          <div>Yell <strong>&ldquo;TAKE ME BACK!&rdquo;</strong> to win</div>
-          <div><span class="bcard__handle">${escapeHtml(handleSafe)}</span> &middot; #TakeMeBackBingo</div>
+          <div>Shout <strong>&ldquo;THAT&rsquo;S BANGIN&rsquo;!&rdquo;</strong> to win</div>
+          <div><span class="bcard__handle">${escapeHtml(handleSafe)}</span> &middot; #BanginAndBeats</div>
         </div>
       </div>
     </div>
@@ -774,10 +720,10 @@ function renderPreview() {
     const pool = getCombinedSongPool();
     if (pool.length < 24) throw new Error("Pick more era pools — need at least 24 songs.");
     const cards = generateUniqueCards(pool, 3);
-    const eventName = document.getElementById("eventName").value || "Take Me Back Bingo";
+    const eventName = document.getElementById("eventName").value || "Bangin' & Beats";
     const eventDate = document.getElementById("eventDate").value;
-    const qrUrl = document.getElementById("qrUrl").value || "https://www.takemebackbingo.com";
-    const handle = document.getElementById("igHandle").value || "@takemebackbingo";
+    const qrUrl = document.getElementById("qrUrl").value || "https://www.banginandbeats.com";
+    const handle = document.getElementById("igHandle").value || "@banginandbeats";
     const qrDataUrl = generateQrDataUrl(qrUrl, 480);
     const wrap = document.getElementById("previewWrap");
     wrap.innerHTML = "";
@@ -808,10 +754,10 @@ async function generatePdf() {
   status.textContent = "";
   bar.style.width = "0%";
 
-  const eventName = document.getElementById("eventName").value || "Take Me Back Bingo";
+  const eventName = document.getElementById("eventName").value || "Bangin' & Beats";
   const eventDate = document.getElementById("eventDate").value;
-  const qrUrl = document.getElementById("qrUrl").value || "https://www.takemebackbingo.com";
-  const handle = document.getElementById("igHandle").value || "@takemebackbingo";
+  const qrUrl = document.getElementById("qrUrl").value || "https://www.banginandbeats.com";
+  const handle = document.getElementById("igHandle").value || "@banginandbeats";
   const count = Math.max(1, Math.min(500, parseInt(document.getElementById("cardCount").value, 10) || 1));
   const perPage = parseInt(document.getElementById("cardsPerPage").value, 10);
 
@@ -888,7 +834,7 @@ async function generatePdf() {
     }
 
     stage.innerHTML = "";
-    const fname = `TMB-Bingo-Cards-${slug(eventName)}-${eventDate || "event"}.pdf`;
+    const fname = `Bangin-Beats-Song-Cards-${slug(eventName)}-${eventDate || "event"}.pdf`;
     pdf.save(fname);
     status.className = "status ok";
     status.textContent = `Done. ${cards.length} cards saved as ${fname}.`;
@@ -929,7 +875,7 @@ async function generateAnswerKey() {
     const marginTop = 0.6, marginBot = 0.6;
     const textWidth = pageW - marginL - marginR;
     const lineH = 0.22;
-    const eventName = document.getElementById("eventName").value || "Take Me Back Bingo";
+    const eventName = document.getElementById("eventName").value || "Bangin' & Beats";
     const eventDate = document.getElementById("eventDate").value;
     const dateStr = eventDate ? formatDate(eventDate) : "";
 
@@ -937,7 +883,7 @@ async function generateAnswerKey() {
     function drawPageHeader() {
       pdf.setFont("helvetica", "bold");
       pdf.setFontSize(18);
-      pdf.text("TAKE ME BACK BINGO NIGHTS", pageW / 2, 0.55, { align: "center" });
+      pdf.text("BANGIN' & BEATS  ·  THE BEAT BOARD", pageW / 2, 0.55, { align: "center" });
       pdf.setFontSize(12);
       pdf.text("DJ Answer Key — Master Playlist", pageW / 2, 0.8, { align: "center" });
       pdf.setFont("helvetica", "normal");
@@ -1001,7 +947,7 @@ async function generateAnswerKey() {
       y += lineH * 0.4;
     }
 
-    const fname = `TMB-DJ-Answer-Key-${slug(eventName)}-${eventDate || "event"}.pdf`;
+    const fname = `Bangin-Beats-DJ-Answer-Key-${slug(eventName)}-${eventDate || "event"}.pdf`;
     pdf.save(fname);
     status.className = "status ok";
     status.textContent = `Answer key downloaded as ${fname}.`;

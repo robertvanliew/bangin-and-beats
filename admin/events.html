@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex,nofollow" />
-<title>Events Manager · Take Me Back Bingo Admin</title>
+<title>Events Manager · Bangin' &amp; Beats Admin</title>
 <link rel="icon" type="image/png" href="/logos/favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -108,8 +108,8 @@
 <!-- Login Gate -->
 <section class="gate" id="gate">
   <form class="gate__card" onsubmit="event.preventDefault(); tryLogin();">
-    <h1 class="gate__logo">TMB ADMIN</h1>
-    <p class="gate__sub">Take Me Back Bingo · Events Manager</p>
+    <h1 class="gate__logo">B&amp;B ADMIN</h1>
+    <p class="gate__sub">Bangin' &amp; Beats · Events Manager</p>
     <input type="password" id="pw" class="gate__input" placeholder="Password" autocomplete="current-password" autofocus />
     <button type="submit" class="gate__btn">Unlock</button>
     <p class="gate__err" id="gateErr"></p>
@@ -119,7 +119,7 @@
 <!-- App -->
 <div class="shell" id="shell">
   <div class="topbar">
-    <div class="topbar__brand">TMB ADMIN <small>Events Manager</small></div>
+    <div class="topbar__brand">B&amp;B ADMIN <small>Events Manager</small></div>
     <nav class="topbar__nav">
       <a href="/admin/cards">Card Generator</a>
       <a href="/admin/events" class="active">Events</a>
@@ -183,7 +183,7 @@
           </div>
           <div class="field--row">
             <div class="field"><label for="f_dateLabel">Date Label (display)</label><input type="text" id="f_dateLabel" placeholder="Friday, June 26, 2026" /></div>
-            <div class="field"><label for="f_timeLabel">Time Label (display)</label><input type="text" id="f_timeLabel" placeholder="Doors 6PM · Show 7PM · 21+" /></div>
+            <div class="field"><label for="f_timeLabel">Time Label (display)</label><input type="text" id="f_timeLabel" placeholder="Doors 6PM · Show 7PM · 30 &amp; Up" /></div>
           </div>
           <div class="field"><label for="f_venue">Venue Name</label><input type="text" id="f_venue" placeholder="Lake Chateau Banquets" /></div>
           <div class="field"><label for="f_venueAddr">Venue Display</label><input type="text" id="f_venueAddr" placeholder="Lake Chateau Banquets · Woodbridge, NJ" /></div>
@@ -201,7 +201,7 @@
             <div class="field"><label for="f_dj">DJ</label><input type="text" id="f_dj" placeholder="DJ Tameil" /></div>
             <div class="field"><label for="f_host">Host</label><input type="text" id="f_host" placeholder="Comedian Talent" /></div>
           </div>
-          <div class="field"><label for="f_music">Music Label</label><input type="text" id="f_music" placeholder="80s, 90s, 00s · Dance & lip sync battles" /></div>
+          <div class="field"><label for="f_music">Music Label</label><input type="text" id="f_music" placeholder="90s &amp; 00s · Dance &amp; lip-sync battles" /></div>
           <div class="field"><label for="f_afterParty">After-party Label</label><input type="text" id="f_afterParty" placeholder="10:00 PM – 12:00 AM" /></div>
 
           <div class="section-h">Pricing</div>
@@ -224,7 +224,7 @@
             <input type="text" id="f_flyer" placeholder="flyers/your-flyer.jpg" style="margin-top:10px;" />
             <div class="field__hint">Pick an image (auto-resized to 1600px, JPEG 0.85) — uploads when you click <strong>Save Draft</strong>. Or type a path manually if the file is already in the repo.</div>
           </div>
-          <div class="field"><label for="f_flyerAlt">Flyer Alt Text</label><input type="text" id="f_flyerAlt" placeholder="Take Me Back Bingo Summer Jam flyer · Friday June 26" /></div>
+          <div class="field"><label for="f_flyerAlt">Flyer Alt Text</label><input type="text" id="f_flyerAlt" placeholder="Bangin' &amp; Beats tour night flyer · Saturday at Lake Chateau Banquets" /></div>
           <div class="field"><label for="f_copy">Description Copy</label><textarea id="f_copy" placeholder="Comedian Talent (Def Comedy Jam…) on the mic, DJ Tameil on the ones and twos…"></textarea></div>
 
           <div class="section-h">Ticket Links</div>
@@ -274,10 +274,10 @@
 
 <script>
 /* ==========================================================================
-   PASSWORD GATE (shared session with /admin/cards via "tmb_admin_unlocked")
+   PASSWORD GATE (shared session with /admin/cards via "bnb_admin_unlocked")
    ========================================================================== */
-const SESSION_KEY = "tmb_admin_unlocked";
-const PW_KEY = "tmb_admin_pw"; // captured at login so the publish API can verify
+const SESSION_KEY = "bnb_admin_unlocked";
+const PW_KEY = "bnb_admin_pw"; // captured at login so the publish API can verify
 let RUNTIME_PW_HASH = null;
 
 async function sha256(s) {
@@ -286,7 +286,7 @@ async function sha256(s) {
   return Array.from(new Uint8Array(h)).map(b => b.toString(16).padStart(2, "0")).join("");
 }
 
-(async () => { RUNTIME_PW_HASH = await sha256("takemeback2026"); })();
+(async () => { RUNTIME_PW_HASH = await sha256("banginbeats2026"); })();
 
 async function tryLogin() {
   const pw = document.getElementById("pw").value;
@@ -417,77 +417,132 @@ if (sessionStorage.getItem(SESSION_KEY) === "1") {
 }
 
 /* ==========================================================================
-   SEED DATA — mirrors current events.html
+   SEED DATA — mirrors content/events.json
    ========================================================================== */
 const SEED_EVENTS = [
   {
-    id: "evt-summer-jam-2026",
-    title: "Summer Jam",
-    kicker: "DJ Tameil · Hosted by Comedian Talent",
-    status: "onsale",
-    section: "upcoming",
-    startDate: "2026-06-26T19:00",
-    endDate: "2026-06-27T00:00",
-    dateLabel: "Friday, June 26, 2026",
-    timeLabel: "Doors 6:00 PM · Show 7:00 PM · 21+",
-    venue: "Lake Chateau Banquets",
-    venueAddr: "Lake Chateau Banquets · Woodbridge, NJ",
-    street: "1002 US-9", city: "Woodbridge Township", region: "NJ", postal: "07095",
-    dj: "DJ Tameil", host: "Comedian Talent",
-    music: "80s, 90s, 00s · Dance & lip sync battles",
-    afterParty: "10:00 PM – 12:00 AM",
-    priceLabel: "Early bird $40", price: "40.00",
-    flyer: "flyers/june-26-2026-tmb-bingo.jpeg",
-    flyerAlt: "Take Me Back Bingo Summer Jam flyer · Friday June 26 at Lake Chateau Banquets",
-    copy: "Comedian Talent (Def Comedy Jam, BET's Comic View, The Apollo) on the mic, DJ Tameil on the ones and twos. 80s through 2000s all night, dance and lip sync battles between rounds, prizes on the table. Cancer-free folks on the B-day guestlist.",
-    simpletix: "https://www.simpletix.com/e/take-me-back-bingo-summer-jam-tickets-278482",
-    eventbrite: "https://www.eventbrite.com/e/take-me-back-bingo-summer-jam-tickets-1991192623739",
-    posh: "https://posh.vip/e/take-me-back-bingo-summer-jam",
-    fb: "https://www.facebook.com/events/1264566722162854"
+    "id": "evt-summer-jam-2026",
+    "title": "Summer Jam",
+    "kicker": "DJ Tameil · Hosted by Comedian Talent",
+    "status": "past",
+    "section": "past",
+    "startDate": "2026-06-26T19:00",
+    "endDate": "2026-06-27T00:00",
+    "dateLabel": "Friday, June 26, 2026",
+    "timeLabel": "Doors 6:00 PM · Show 7:00 PM",
+    "venue": "Lake Chateau Banquets",
+    "venueAddr": "Lake Chateau Banquets · Woodbridge, NJ",
+    "street": "1002 US-9",
+    "city": "Woodbridge Township",
+    "region": "NJ",
+    "postal": "07095",
+    "dj": "DJ Tameil",
+    "host": "Comedian Talent",
+    "music": "90s & 00s · Dance & lip sync battles",
+    "afterParty": "10:00 PM – 12:00 AM",
+    "priceLabel": "Early bird $40",
+    "price": "40.00",
+    "flyer": "",
+    "flyerAlt": "",
+    "copy": "Comedian Talent (Def Comedy Jam, BET's Comic View, The Apollo) on the mic, DJ Tameil on the ones and twos. 90s and 2000s all night, dance and lip sync battles between rounds, prizes on the table. Cancer-free folks on the B-day guestlist.",
+    "simpletix": "",
+    "eventbrite": "",
+    "posh": "",
+    "fb": ""
   },
   {
-    id: "evt-thriller",
-    title: "Thriller Bingo",
-    kicker: "Michael Jackson Tribute",
-    status: "soldout",
-    section: "past",
-    startDate: "2026-03-14T19:00",
-    endDate: "2026-03-15T01:00",
-    dateLabel: "Saturday, March 14, 2026",
-    timeLabel: "",
-    venue: "Lake Chateau Banquets",
-    venueAddr: "Lake Chateau Banquets · Woodbridge, NJ",
-    street: "1002 US-9", city: "Woodbridge Township", region: "NJ", postal: "07095",
-    dj: "DJ Nix In The Mix", host: "Rey Gibbs",
-    music: "", afterParty: "", priceLabel: "", price: "",
-    flyer: "flyers/Thriller-Bingo-High-Class.jpg",
-    flyerAlt: "Thriller Bingo flyer · past Michael Jackson tribute night",
-    copy: "An MJ-only set list. From Off the Wall through Thriller, Bad, Dangerous and the late-era hits. Hosted by Rey Gibbs with DJ Nix In The Mix. Sold out the room.",
-    simpletix: "", eventbrite: "", posh: "", fb: ""
+    "id": "evt-thriller",
+    "title": "Thriller Night",
+    "kicker": "Michael Jackson Tribute",
+    "status": "soldout",
+    "section": "past",
+    "startDate": "2026-03-14T19:00",
+    "endDate": "2026-03-15T01:00",
+    "dateLabel": "Saturday, March 14, 2026",
+    "timeLabel": "",
+    "venue": "Lake Chateau Banquets",
+    "venueAddr": "Lake Chateau Banquets · Woodbridge, NJ",
+    "street": "1002 US-9",
+    "city": "Woodbridge Township",
+    "region": "NJ",
+    "postal": "07095",
+    "dj": "DJ Nix In The Mix",
+    "host": "Rey Gibbs",
+    "music": "",
+    "afterParty": "",
+    "priceLabel": "",
+    "price": "",
+    "flyer": "",
+    "flyerAlt": "",
+    "copy": "An MJ-only set list. From Off the Wall through Thriller, Bad, Dangerous and the late-era hits. Hosted by Rey Gibbs with DJ Nix In The Mix. Sold out the room.",
+    "simpletix": "",
+    "eventbrite": "",
+    "posh": "",
+    "fb": ""
   },
   {
-    id: "evt-reminisce",
-    title: "Reminisce Bingo",
-    kicker: "High Class Exclusive",
-    status: "soldout",
-    section: "past",
-    startDate: "2026-04-25T19:00",
-    endDate: "2026-04-26T01:00",
-    dateLabel: "Saturday, April 25, 2026",
-    timeLabel: "",
-    venue: "Lake Chateau Banquets",
-    venueAddr: "Lake Chateau Banquets · Woodbridge, NJ",
-    street: "1002 US-9", city: "Woodbridge Township", region: "NJ", postal: "07095",
-    dj: "", host: "",
-    music: "", afterParty: "", priceLabel: "", price: "",
-    flyer: "flyers/Reminisce-Bingo-High-Class-Exclusive.jpg",
-    flyerAlt: "Reminisce Bingo flyer · past Take Me Back night",
-    copy: "The launch night. Packed room, hip-hop and R&B from the 90s and 2000s, dance battle into the early hours. Photos live in the gallery.",
-    simpletix: "", eventbrite: "", posh: "", fb: ""
+    "id": "evt-reminisce",
+    "title": "Reminisce Night",
+    "kicker": "High Class Exclusive",
+    "status": "soldout",
+    "section": "past",
+    "startDate": "2026-04-25T19:00",
+    "endDate": "2026-04-26T01:00",
+    "dateLabel": "Saturday, April 25, 2026",
+    "timeLabel": "",
+    "venue": "Lake Chateau Banquets",
+    "venueAddr": "Lake Chateau Banquets · Woodbridge, NJ",
+    "street": "1002 US-9",
+    "city": "Woodbridge Township",
+    "region": "NJ",
+    "postal": "07095",
+    "dj": "",
+    "host": "",
+    "music": "",
+    "afterParty": "",
+    "priceLabel": "",
+    "price": "",
+    "flyer": "",
+    "flyerAlt": "",
+    "copy": "The launch night. Packed room, hip-hop and R&B from the 90s and 2000s, dance battle into the early hours. Photos live in the gallery.",
+    "simpletix": "",
+    "eventbrite": "",
+    "posh": "",
+    "fb": ""
+  },
+  {
+    "id": "evt-hip-hop-rnb-tour-2026-08-15",
+    "title": "Hip-Hop & R&B Tour — Summer",
+    "kicker": "The Bounce Masta DJ Doo Wop + Jersey Club King DJ Tameil",
+    "status": "past",
+    "section": "past",
+    "startDate": "2026-08-15T15:00",
+    "endDate": "2026-08-15T21:00",
+    "dateLabel": "Saturday, August 15, 2026",
+    "timeLabel": "3:00 PM · Showtime 4:00 PM",
+    "venue": "Lake Chateau Banquets",
+    "venueAddr": "Lake Chateau Banquets · Woodbridge, NJ",
+    "street": "1002 US-9",
+    "city": "Woodbridge Township",
+    "region": "NJ",
+    "postal": "07095",
+    "dj": "The Bounce Masta DJ Doo Wop + Jersey Club King DJ Tameil",
+    "host": "",
+    "music": "90s and 2000s Heat",
+    "afterParty": "Day party vibes. After party 7-9PM included. Birthday squads: ask about group of 6+ perks.",
+    "priceLabel": "$40",
+    "price": "40.00",
+    "flyer": "",
+    "flyerAlt": "",
+    "copy": "",
+    "simpletix": "",
+    "eventbrite": "",
+    "posh": "",
+    "fb": ""
   }
 ];
 
-const STORAGE_KEY = "tmb_events_draft";
+const STORAGE_KEY = "bnb_events_draft";
 
 function loadEvents() {
   const raw = localStorage.getItem(STORAGE_KEY);
@@ -789,7 +844,7 @@ function eventToHtml(e) {
   const sameAs = [e.eventbrite, e.fb, e.posh].filter(Boolean).map(u => `"${escapeJson(u)}"`).join(", ");
 
   return `        <li class="${cardCls}" id="${escapeAttr(e.id)}" data-reveal
-            data-share-title="Take Me Back Bingo: ${escapeAttr(e.title)}"
+            data-share-title="Bangin' &amp; Beats: ${escapeAttr(e.title)}"
             data-share-text="${escapeAttr(e.copy.slice(0, 140))}"
             data-share-image="${escapeAttr(e.flyer)}"
             data-share-image-name="${escapeAttr((e.title || "Event").replace(/[^a-zA-Z0-9]+/g, "-"))}-Flyer.jpg">
@@ -813,7 +868,7 @@ ${ctaButtons.join("\n")}
           {
             "@context": "https://schema.org",
             "@type": "Event",
-            "name": "Take Me Back Bingo: ${escapeJson(e.title)}",
+            "name": "Bangin' & Beats: ${escapeJson(e.title)}",
             "startDate": "${startISO}",
             "endDate": "${endISO}",
             "eventStatus": "https://schema.org/EventScheduled",
@@ -830,7 +885,7 @@ ${ctaButtons.join("\n")}
                 "addressCountry": "US"
               }
             },
-            "image": ["https://www.takemebackbingo.com/${escapeJson(e.flyer)}"],
+            "image": ["https://www.banginandbeats.com/${escapeJson(e.flyer)}"],
             "description": "${escapeJson(e.copy)}",
             "performer": [
 ${performers.join(",\n")}
@@ -839,8 +894,8 @@ ${performers.join(",\n")}
 ${offers.join(",\n")}
             ],
             "sameAs": [${sameAs}],
-            "organizer": { "@id": "https://www.takemebackbingo.com/#organization" },
-            "typicalAgeRange": "21+"
+            "organizer": { "@id": "https://www.banginandbeats.com/#organization" },
+            "typicalAgeRange": "30+"
           }
           </` + `script>
         </li>`;

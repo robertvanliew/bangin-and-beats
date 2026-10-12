@@ -9,11 +9,11 @@
 // Required env vars (same as publish-events):
 //   ADMIN_PASSWORD, GH_TOKEN
 // Optional:
-//   GH_OWNER (default robertvanliew), GH_REPO (default takemebackbingo),
+//   GH_OWNER (default robertvanliew), GH_REPO (default bangin-and-beats),
 //   GH_BRANCH (default main)
 
 const DEFAULT_OWNER  = "robertvanliew";
-const DEFAULT_REPO   = "takemebackbingo";
+const DEFAULT_REPO   = "bangin-and-beats";
 const DEFAULT_BRANCH = "main";
 
 const ALLOWED_EXT = { jpg: "jpg", jpeg: "jpeg", png: "png", webp: "webp" };
@@ -66,7 +66,7 @@ module.exports = async (req, res) => {
     "Authorization": `Bearer ${ghToken}`,
     "Accept":        "application/vnd.github+json",
     "X-GitHub-Api-Version": "2022-11-28",
-    "User-Agent":    "tmb-events-admin"
+    "User-Agent":    "bnb-events-admin"
   };
 
   // Look up existing file SHA (PUT requires it if the file exists)

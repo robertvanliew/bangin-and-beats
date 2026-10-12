@@ -23,12 +23,12 @@
 //                         for single-audience accounts - and it's cached in
 //                         module scope so subsequent warm invocations skip
 //                         the lookup).
-//   NEWSLETTER_FROM       e.g. "Take Me Back Bingo <hello@takemebackbingo.com>"
+//   NEWSLETTER_FROM       e.g. "Bangin' & Beats <hello@banginandbeats.com>"
 //                         Must be on a domain you've verified in Resend.
-//                         Defaults to "Take Me Back Bingo <onboarding@resend.dev>"
+//                         Defaults to "Bangin' & Beats <onboarding@resend.dev>"
 //                         which only works for sending to your own verified
 //                         account email - fine for testing, not production.
-//   NEWSLETTER_REPLY_TO   e.g. "info@takemebackbingo.com" (optional)
+//   NEWSLETTER_REPLY_TO   e.g. "info@banginandbeats.com" (optional)
 //
 // The inquiry/booking forms stay on Formspree. Do NOT route them through here.
 
@@ -63,24 +63,29 @@ async function resolveAudienceId(apiKey) {
   return cachedAudienceId;
 }
 
-const WELCOME_SUBJECT = "You're on the list. Dates drop soon.";
+const WELCOME_SUBJECT = "You\u2019re locked in: Bangin\u2019 & Beats\u2122";
+const EVENTS_URL = 'https://www.banginandbeats.com/events';
 
 function welcomeHtml() {
   // Plain, on-brand. No images, no tracking pixels. Keep it short.
   return [
     '<!doctype html>',
-    '<html><body style="margin:0;padding:0;background:#141111;color:#F2EADB;font-family:Helvetica,Arial,sans-serif;">',
+    '<html><body style="margin:0;padding:0;background:#0A0A0A;color:#FFF8E7;font-family:Helvetica,Arial,sans-serif;">',
     '<div style="max-width:520px;margin:0 auto;padding:32px 24px;">',
-    '<h1 style="font-size:22px;letter-spacing:-.01em;margin:0 0 16px;color:#F2EADB;">You’re on the list.</h1>',
-    '<p style="font-size:16px;line-height:1.55;margin:0 0 14px;color:#A89C8A;">',
-    'Thanks for signing up to Take Me Back Bingo. We’re finalizing the next ',
-    'round of dates right now. You’ll be among the first to know when they drop.',
+    '<p style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin:0 0 12px;color:#D4AF37;">Bangin\u2019 &amp; Beats\u2122</p>',
+    '<h1 style="font-size:22px;letter-spacing:-.01em;margin:0 0 16px;color:#FFF8E7;">You\u2019re locked in.</h1>',
+    '<p style="font-size:16px;line-height:1.55;margin:0 0 14px;color:#C9BFA8;">',
+    'Thanks for joining the Bangin\u2019 &amp; Beats\u2122 list. New cities, fresh dates, and early ticket drops ',
+    'land in your inbox first. Real history, zero spam.',
     '</p>',
-    '<p style="font-size:16px;line-height:1.55;margin:0 0 14px;color:#A89C8A;">',
-    'Want to book a private night before then? Hit reply or text 732.646.7073.',
+    '<p style="margin:22px 0;"><a href="' + EVENTS_URL + '" style="display:inline-block;background:#D4AF37;color:#0A0A0A;',
+    'font-weight:700;text-decoration:none;padding:12px 22px;border-radius:999px;">See upcoming tour dates</a></p>',
+    '<p style="font-size:16px;line-height:1.55;margin:0 0 14px;color:#C9BFA8;">',
+    'Want a private party before then? Hit reply or text 201-344-4589.',
     '</p>',
-    '<p style="font-size:13px;line-height:1.55;margin:24px 0 0;color:#A89C8A;opacity:.7;">',
-    'Take Me Back Bingo · Bingo for people who love music.',
+    '<p style="font-size:13px;line-height:1.55;margin:24px 0 0;color:#C9A86A;">',
+    'High Class Experience LLC \u00b7 info@banginandbeats.com<br>',
+    'Retro music nostalgia for people who love real culture.',
     '</p>',
     '</div></body></html>',
   ].join('');
@@ -88,14 +93,17 @@ function welcomeHtml() {
 
 function welcomeText() {
   return [
-    "You're on the list.",
+    "You're locked in.",
     '',
-    "Thanks for signing up to Take Me Back Bingo. We're finalizing the next round",
-    "of dates right now. You'll be among the first to know when they drop.",
+    "Thanks for joining the Bangin' & Beats list. New cities, fresh dates, and early",
+    'ticket drops land in your inbox first. Real history, zero spam.',
     '',
-    "Want to book a private night before then? Hit reply or text 732.646.7073.",
+    'See upcoming tour dates: ' + EVENTS_URL,
     '',
-    'Take Me Back Bingo · Bingo for people who love music.',
+    'Want a private party before then? Hit reply or text 201-344-4589.',
+    '',
+    'High Class Experience LLC \u00b7 info@banginandbeats.com',
+    'Retro music nostalgia for people who love real culture.',
   ].join('\n');
 }
 
@@ -132,7 +140,7 @@ module.exports = async (req, res) => {
   }
 
   const from = process.env.NEWSLETTER_FROM
-    || 'Take Me Back Bingo <onboarding@resend.dev>'; // TODO: set NEWSLETTER_FROM
+    || "Bangin' & Beats <onboarding@resend.dev>"; // TODO: set NEWSLETTER_FROM
   const replyTo = process.env.NEWSLETTER_REPLY_TO || undefined;
 
   // --- 1. Add contact to the Resend Audience ---

@@ -10,7 +10,7 @@
 
 **Spec:** `docs/spec-owner-copy.md` is the owner's "update website jargon.docx" as plain text. The original Word doc is at `docs/owner/update website jargon.docx`. Logo source: `docs/owner/bangin-beats-logo-source.png` (1920×1280 PNG, about 3 MB, transparent). `docs/owner/` is git-ignored, so those files stay local.
 
-**Status (2026-10-12):** Tasks 1–9 are done; Task 10 is in progress (Steps 3–6 done, Step 2 waits for the owner's Formspree ID). Task 9 notes: the 11 landing pages were rewritten in parallel by three subagents against a per-page checker (forbidden words on every visible surface, JSON-LD parses, FAQ JSON-LD == visible FAQ, canonical, description length); all ALL CLEAN. songs.html is now the 4-round, 100-song Active Music Pool. legal.html: operator line added and the public age changed from 21 to 30 to match the brand (flag for attorney). Many landing-page judgement calls need owner approval (Owner Input 5): new FAQ answers, removed unverified claims ("every night sells out", NYC price ranges, door times), new copy. `npm test`: brand, assets, home, play PASS; raw guard FAILS only on the old Formspree ID (Task 10 Step 2).
+**Status (2026-10-12):** Tasks 1–9 are done. Task 10: Steps 3–6 done (Resend welcome email, API brand strings, admin tools incl. the card printer printing B-E-A-T-S / BANGIN', sitemap/robots/llms, pre-launch noindex). **Waiting on the owner's new Formspree form ID for Step 2**; after that, Steps 7–8 (all suites green, commit). Task 10 extras: `api/publish-events.js` and `api/upload-flyer.js` defaulted GH_REPO to the old `takemebackbingo` repo (now `bangin-and-beats`); the admin soft-gate password changed from the old-brand string to `banginbeats2026` (client-side, visible in source; real protection is ADMIN_PASSWORD on the API); admin events seed now mirrors content/events.json. `npm test`: everything PASS except the raw guard's 10 hits on the old Formspree ID `mbdbggbv`.
 
 **Paths used below:**
 - `OLD` = `C:\Users\12124\Documents\Take-me-back-bingo` (the live site; read-only until Task 12)
@@ -1086,18 +1086,18 @@ grep -rl "formspree.io/f/mbdbggbv" --include=*.html . | xargs sed -i "s#formspre
 
 In each form, set `<input type="hidden" name="_subject" value="New Bangin' & Beats inquiry">` (add it if it's missing). In Formspree's dashboard, add `banginandbeats.com` and `www.banginandbeats.com` to the form's allowed domains.
 
-- [ ] **Step 3: `api/subscribe.js`** (Resend newsletter)
+- [x] **Step 3: `api/subscribe.js`** (Resend newsletter)
 
 Change the fallback `from` (line ~135) to `"Bangin' & Beats <onboarding@resend.dev>"`, update the header comment examples (lines 26–31) to banginandbeats.com, and rewrite the welcome-email HTML/text: subject `You're locked in: Bangin' & Beats™`, the brand name, links to `https://www.banginandbeats.com/events`, footer `High Class Experience LLC · info@banginandbeats.com`, and the gold `#D4AF37` / black `#0A0A0A` colors. Then `grep -n -i "bingo\|take me back" api/*.js` should print nothing.
 
-- [ ] **Step 4: `api/winner.js`, `api/publish-events.js`, `api/upload-flyer.js`, `api/rss.js`**: brand strings and URLs only. Logic stays the same. `rss.js` channel title `Bangin' & Beats™ Blog`, link `https://www.banginandbeats.com/blog`.
+- [x] **Step 4: `api/winner.js`, `api/publish-events.js`, `api/upload-flyer.js`, `api/rss.js`**: brand strings and URLs only. Logic stays the same. `rss.js` channel title `Bangin' & Beats™ Blog`, link `https://www.banginandbeats.com/blog`.
 
-- [ ] **Step 5: Admin**
+- [x] **Step 5: Admin**
 
 - `admin/cards.html` (printable song cards): the default QR URL is `https://www.banginandbeats.com` and the handle `@banginandbeats` (lines 246, 250, 686, 779–780, 813–814). The printed headers become `B E A T S`, and the center cell reads `BANGIN'` (`grep -n "'B','I','N','G','O'\|FREE" admin/cards.html` and change each hit). The logo data URL comes from `/logos/bangin-beats-logo.png`.
 - `admin/index.html`, `admin/events.html`, `admin/reviews.html`: titles and labels per the Term Mapping. Add `<meta name="robots" content="noindex">` if it's missing.
 
-- [ ] **Step 6: SEO files**
+- [x] **Step 6: SEO files**
 
 `sitemap.xml`: rewrite with the 21 `PAGES` from `tests/pages.mjs` as `https://www.banginandbeats.com<path>` (homepage `https://www.banginandbeats.com/`) and `<lastmod>2026-10-12</lastmod>`.
 

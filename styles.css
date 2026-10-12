@@ -588,7 +588,7 @@ ul, ol { list-style: none; padding: 0; margin: 0; }
   margin: 0 0 var(--s-5);
   line-height: .9;
 }
-/* "TAKE ME BACK" â€” purple fill with gold stroke + soft drop shadow for definition */
+/* Script slogan line, gold fill with champagne stroke + soft drop shadow for definition */
 .jcard__title-script {
   display: block;
   font-family: var(--font-script);
