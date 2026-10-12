@@ -4,17 +4,10 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<!-- Google tag (gtag.js) - GA4 Measurement ID G-L8RFG2GF44 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-L8RFG2GF44"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-L8RFG2GF44');
-  gtag('config', 'G-J9NHGQTQ5F');
-</script>
-<title>Bangin' &amp; Beats™ | 90s &amp; 00s Hip-Hop &amp; R&amp;B Interactive Throwback Party | NJ &amp; NYC</title>
-<meta name="description" content="Bangin' &amp; Beats™ is a live 90s &amp; 00s hip-hop and R&amp;B interactive throwback party in New Jersey and NYC. Sing-along, dance, play the board, win prizes. 30 &amp; Up. Tickets $35." />
+<!-- Analytics: GA4, lazy-loaded (see /analytics.js) -->
+<script src="/analytics.js" defer></script>
+<title>Bangin' &amp; Beats™ | 90s &amp; 00s Hip-Hop &amp; R&amp;B Throwback Party</title>
+<meta name="description" content="Live 90s &amp; 00s hip-hop and R&amp;B interactive throwback party in NJ &amp; NYC. Sing along, dance, play the board, win prizes. Strictly 30 &amp; Up. Tickets $35." />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <meta name="theme-color" content="#0A0A0A" />
 <link rel="canonical" href="https://www.banginandbeats.com/" />
@@ -33,6 +26,7 @@
 
 <!-- Favicons -->
 <link rel="icon" type="image/png" href="/logos/favicon.png?v=2" />
+<link rel="preload" as="image" href="photos/hero-bg-poster.jpg" fetchpriority="high">
 <link rel="apple-touch-icon" href="/logos/apple-touch-icon.png" />
 
 <!-- Open Graph · iMessage, Slack, Facebook, LinkedIn -->
@@ -52,7 +46,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Sora:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Sora:wght@400;500;600;700&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 
 <link rel="stylesheet" href="styles.css?v=2" />
 
@@ -559,7 +555,7 @@
 <!-- CHROME:NAV -->
 <header class="nav">
   <a href="/" class="nav__logo" aria-label="Bangin' &amp; Beats home">
-    <img src="/logos/bangin-beats-logo.png" width="1200" height="699" alt="Bangin' &amp; Beats" class="nav__logo-img" />
+    <img src="/logos/bangin-beats-logo-480.png" srcset="/logos/bangin-beats-logo-480.png 480w, /logos/bangin-beats-logo-800.png 800w" sizes="170px" width="1200" height="699" alt="Bangin' &amp; Beats" class="nav__logo-img" />
   </a>
   <nav class="nav__links" id="primary-nav" aria-label="Primary">
     <a href="/" aria-current="page">Home</a>
@@ -590,8 +586,8 @@
 
   <div class="hero-stage__inner">
     <picture>
-      <source srcset="/logos/bangin-beats-logo.webp" type="image/webp">
-      <img class="hero-stage__logo" src="/logos/bangin-beats-logo.png" alt="Bangin' &amp; Beats™" width="1200" height="699" />
+      <source srcset="/logos/bangin-beats-logo-480.webp 480w, /logos/bangin-beats-logo-800.webp 800w, /logos/bangin-beats-logo.webp 1200w" sizes="(max-width: 640px) 70vw, 380px" type="image/webp">
+      <img class="hero-stage__logo" src="/logos/bangin-beats-logo-800.png" srcset="/logos/bangin-beats-logo-480.png 480w, /logos/bangin-beats-logo-800.png 800w" sizes="(max-width: 640px) 70vw, 380px" fetchpriority="high" alt="Bangin' &amp; Beats™" width="1200" height="699" />
     </picture>
     <h1 class="hero-stage__title">
       THE ULTIMATE <span class="nowrap">HIP-HOP</span> &amp; R&amp;B 90'S / 00'S INTERACTIVE THROWBACK EXPERIENCE
@@ -663,7 +659,7 @@
       <!-- Flippable song card · click to reveal a rotating gallery photo.
            The card lives on the front face; back face shows a photo + CTA. -->
       <div class="bingocard" data-reveal data-flip-card>
-        <div class="bingocard__flipper" role="button" tabindex="0" aria-label="Flip the song card to see a photo from a past night" aria-pressed="false">
+        <div class="bingocard__flipper" role="button" tabindex="0" aria-label="Click to flip: see a photo from a past night" aria-pressed="false">
         <div class="bingocard__face bingocard__face--front">
         <div class="bingocard__paper">
           <div class="bingocard__head">
@@ -715,10 +711,10 @@
 
         <div class="bingocard__face bingocard__face--back">
           <figure class="bingocard__photo">
-            <img data-flip-photo src="photos/GSP_2287.jpg?v=2" alt="Bangin' &amp; Beats crowd shot" />
+            <img data-flip-photo loading="lazy" decoding="async" src="photos/GSP_2287.jpg?v=2" alt="Bangin' &amp; Beats crowd shot" />
           </figure>
           <div class="bingocard__back-overlay">
-            <h3 class="bingocard__back-title">See the night for yourself.</h3>
+            <p class="bingocard__back-title">See the night for yourself.</p>
             <p class="bingocard__back-copy">Real photos from past nights on the tour.</p>
             <div class="bingocard__back-cta-row">
               <button type="button" class="btn btn--ghost btn--lg" data-flip-back>Flip back</button>
@@ -1371,7 +1367,7 @@
 
     <!-- BIG hero band: logo lockup + crown slogan -->
     <div class="footer__lockup">
-      <img src="/logos/bangin-beats-logo.png" width="1200" height="699" alt="Bangin' &amp; Beats" class="footer__logo" loading="lazy" />
+      <img src="/logos/bangin-beats-logo-480.png" srcset="/logos/bangin-beats-logo-480.png 480w, /logos/bangin-beats-logo-800.png 800w" sizes="300px" width="1200" height="699" alt="Bangin' &amp; Beats" class="footer__logo" loading="lazy" />
       <div class="footer__lockup-copy">
         <p class="footer__tagline">
           <span class="footer__tagline-script">Retro music nostalgia</span>
@@ -1390,7 +1386,7 @@
     <!-- columns -->
     <div class="footer__cols">
       <div class="footer__col">
-        <h4 class="footer__h">Explore the Tour</h4>
+        <h3 class="footer__h">Explore the Tour</h3>
         <ul class="footer__list">
           <li><a href="/how-it-works">How It Works</a></li>
           <li><a href="/hip-hop-throwback-party">90s Rap Round</a></li>
@@ -1410,7 +1406,7 @@
       </div>
 
       <div class="footer__col">
-        <h4 class="footer__h">Private Party Takeovers</h4>
+        <h3 class="footer__h">Private Party Takeovers</h3>
         <ul class="footer__list">
           <li><a href="/bachelorette-party">Private Social Gatherings</a></li>
           <li><a href="/birthday-party">Celebration Custom Packages</a></li>
@@ -1423,7 +1419,7 @@
       </div>
 
       <div class="footer__col">
-        <h4 class="footer__h">Stay Locked in the Loop</h4>
+        <h3 class="footer__h">Stay Locked in the Loop</h3>
         <p class="footer__newsletter-copy">
           New cities, fresh dates, early ticket drops. Real history, zero spam.
         </p>

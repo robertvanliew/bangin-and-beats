@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="/analytics.js" defer></script>
+<title>Page Not Found | Bangin' &amp; Beats™</title>
+<meta name="description" content="That page skipped the record. Head back to Bangin' &amp; Beats™ tour dates, THE BEAT BOARD™ or the home page." />
+<meta name="robots" content="noindex" />
+<link rel="icon" type="image/png" href="/logos/favicon.png?v=2" />
+<link rel="apple-touch-icon" href="/logos/apple-touch-icon.png" />
+<meta name="theme-color" content="#0A0A0A" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css?v=2" />
+<style>
+  .lost { min-height: 100svh; display: grid; place-items: center; text-align: center; padding: 48px 20px;
+          background: radial-gradient(60% 46% at 50% 0%, rgba(212,175,55,.14), transparent 72%), var(--bg); }
+  .lost__logo { width: min(260px, 60vw); height: auto; margin: 0 auto 28px; display: block; }
+  .lost__code { font-family: var(--font-display); font-weight: 900; font-size: clamp(5rem, 18vw, 9rem); line-height: .85; color: var(--gold); margin: 0; }
+  .lost__h { font-family: var(--font-display); font-weight: 900; text-transform: uppercase; font-size: clamp(1.8rem, 5vw, 2.8rem); line-height: .95; color: var(--pearl-hi); margin: 12px 0 16px; }
+  .lost__p { color: var(--text-muted); max-width: 42ch; margin: 0 auto 28px; line-height: 1.6; }
+  .lost__ctas { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+</style>
+</head>
+<body>
+<main class="lost">
+  <div>
+    <a href="/" aria-label="Bangin' &amp; Beats home">
+      <img class="lost__logo" src="/logos/bangin-beats-logo-480.png" width="1200" height="699" alt="Bangin' &amp; Beats" />
+    </a>
+    <p class="lost__code">404</p>
+    <h1 class="lost__h">This track skipped.</h1>
+    <p class="lost__p">The page you&rsquo;re looking for isn&rsquo;t on the setlist. Head back to the party.</p>
+    <div class="lost__ctas">
+      <a href="/" class="btn btn--primary btn--lg">Back Home</a>
+      <a href="/events" class="btn btn--ghost btn--lg">See Tour Dates</a>
+      <a href="/play" class="btn btn--ghost btn--lg">Play the Board</a>
+    </div>
+  </div>
+</main>
+</body>
+</html>

@@ -4,17 +4,10 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<!-- Google tag (gtag.js) - GA4 Measurement ID G-L8RFG2GF44 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-L8RFG2GF44"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-L8RFG2GF44');
-  gtag('config', 'G-J9NHGQTQ5F');
-</script>
+<!-- Analytics: GA4, lazy-loaded (see /analytics.js) -->
+<script src="/analytics.js" defer></script>
 <title>Play The Beat Board™ Free | Bangin' &amp; Beats™ Online Throwback Preview</title>
-<meta name="description" content="Play The Beat Board™ free in your browser: 30-second clips of 90s and 2000s hip-hop and R&amp;B. Line up five, shout THAT'S BANGIN'!, unlock a ticket discount. No download." />
+<meta name="description" content="Play THE BEAT BOARD™ free: 30-second clips of 90s &amp; 2000s hip-hop and R&amp;B. Line up five, shout THAT'S BANGIN'! and unlock a ticket discount." />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <meta name="theme-color" content="#0A0A0A" />
 <link rel="canonical" href="https://www.banginandbeats.com/play" />
@@ -112,7 +105,9 @@
 
 <!-- canvas-confetti · loaded once, fired on win celebration open -->
 <script defer src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Sora:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Sora:wght@400;500;600;700&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 
 <link rel="stylesheet" href="styles.css?v=2" />
 
@@ -1442,7 +1437,7 @@
 <!-- CHROME:NAV -->
 <header class="nav">
   <a href="/" class="nav__logo" aria-label="Bangin' &amp; Beats home">
-    <img src="/logos/bangin-beats-logo.png" width="1200" height="699" alt="Bangin' &amp; Beats" class="nav__logo-img" />
+    <img src="/logos/bangin-beats-logo-480.png" srcset="/logos/bangin-beats-logo-480.png 480w, /logos/bangin-beats-logo-800.png 800w" sizes="170px" width="1200" height="699" alt="Bangin' &amp; Beats" class="nav__logo-img" />
   </a>
   <nav class="nav__links" id="primary-nav" aria-label="Primary">
     <a href="/">Home</a>
@@ -1633,7 +1628,7 @@
   </button>
   <div class="celebration__inner">
     <p class="eyebrow"><span class="eyebrow__dot"></span> Confirmed</p>
-    <h1 class="celebration__h2"><em>THAT&rsquo;S BANGIN&rsquo;!</em><br>YOU WON</h1>
+    <h2 class="celebration__h2"><em>THAT&rsquo;S BANGIN&rsquo;!</em><br>YOU WON</h2>
     <p class="celebration__subhead">You just beat our <span id="celebrationEraText">90s Rap Round</span>.</p>
 
     <!-- REWARD BLOCK · 10% off discount unlock -->
@@ -1769,7 +1764,7 @@
 
     <!-- BIG hero band: logo lockup + crown slogan -->
     <div class="footer__lockup">
-      <img src="/logos/bangin-beats-logo.png" width="1200" height="699" alt="Bangin' &amp; Beats" class="footer__logo" loading="lazy" />
+      <img src="/logos/bangin-beats-logo-480.png" srcset="/logos/bangin-beats-logo-480.png 480w, /logos/bangin-beats-logo-800.png 800w" sizes="300px" width="1200" height="699" alt="Bangin' &amp; Beats" class="footer__logo" loading="lazy" />
       <div class="footer__lockup-copy">
         <p class="footer__tagline">
           <span class="footer__tagline-script">Retro music nostalgia</span>
@@ -1788,7 +1783,7 @@
     <!-- columns -->
     <div class="footer__cols">
       <div class="footer__col">
-        <h4 class="footer__h">Explore the Tour</h4>
+        <h3 class="footer__h">Explore the Tour</h3>
         <ul class="footer__list">
           <li><a href="/how-it-works">How It Works</a></li>
           <li><a href="/hip-hop-throwback-party">90s Rap Round</a></li>
@@ -1808,7 +1803,7 @@
       </div>
 
       <div class="footer__col">
-        <h4 class="footer__h">Private Party Takeovers</h4>
+        <h3 class="footer__h">Private Party Takeovers</h3>
         <ul class="footer__list">
           <li><a href="/bachelorette-party">Private Social Gatherings</a></li>
           <li><a href="/birthday-party">Celebration Custom Packages</a></li>
@@ -1821,7 +1816,7 @@
       </div>
 
       <div class="footer__col">
-        <h4 class="footer__h">Stay Locked in the Loop</h4>
+        <h3 class="footer__h">Stay Locked in the Loop</h3>
         <p class="footer__newsletter-copy">
           New cities, fresh dates, early ticket drops. Real history, zero spam.
         </p>

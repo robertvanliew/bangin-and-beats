@@ -4,14 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-L8RFG2GF44"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-L8RFG2GF44');
-  gtag('config', 'G-J9NHGQTQ5F');
-</script>
+<script src="/analytics.js" defer></script>
 
 <title>90s &amp; 00s Hip-Hop Throwback Party in NJ &amp; NYC | Bangin' &amp; Beats™</title>
 <meta name="description" content="90s &amp; 00s hip-hop throwback party in NJ &amp; NYC. Biggie to Kanye, live DJ, song cards, prize loot every round. Strictly 30 &amp; Up. Tickets $35." />
@@ -40,7 +33,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Sora:wght@400;500;600;700&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 
 <link rel="stylesheet" href="/styles.css?v=2" />
 <link rel="stylesheet" href="/styles-lp.css?v=1" />
@@ -53,7 +48,7 @@
 <!-- CHROME:NAV -->
 <header class="nav">
   <a href="/" class="nav__logo" aria-label="Bangin' &amp; Beats home">
-    <img src="/logos/bangin-beats-logo.png" width="1200" height="699" alt="Bangin' &amp; Beats" class="nav__logo-img" />
+    <img src="/logos/bangin-beats-logo-480.png" srcset="/logos/bangin-beats-logo-480.png 480w, /logos/bangin-beats-logo-800.png 800w" sizes="170px" width="1200" height="699" alt="Bangin' &amp; Beats" class="nav__logo-img" />
   </a>
   <nav class="nav__links" id="primary-nav" aria-label="Primary">
     <a href="/">Home</a>
@@ -217,7 +212,7 @@
 
     <!-- BIG hero band: logo lockup + crown slogan -->
     <div class="footer__lockup">
-      <img src="/logos/bangin-beats-logo.png" width="1200" height="699" alt="Bangin' &amp; Beats" class="footer__logo" loading="lazy" />
+      <img src="/logos/bangin-beats-logo-480.png" srcset="/logos/bangin-beats-logo-480.png 480w, /logos/bangin-beats-logo-800.png 800w" sizes="300px" width="1200" height="699" alt="Bangin' &amp; Beats" class="footer__logo" loading="lazy" />
       <div class="footer__lockup-copy">
         <p class="footer__tagline">
           <span class="footer__tagline-script">Retro music nostalgia</span>
@@ -236,7 +231,7 @@
     <!-- columns -->
     <div class="footer__cols">
       <div class="footer__col">
-        <h4 class="footer__h">Explore the Tour</h4>
+        <h3 class="footer__h">Explore the Tour</h3>
         <ul class="footer__list">
           <li><a href="/how-it-works">How It Works</a></li>
           <li><a href="/hip-hop-throwback-party">90s Rap Round</a></li>
@@ -256,7 +251,7 @@
       </div>
 
       <div class="footer__col">
-        <h4 class="footer__h">Private Party Takeovers</h4>
+        <h3 class="footer__h">Private Party Takeovers</h3>
         <ul class="footer__list">
           <li><a href="/bachelorette-party">Private Social Gatherings</a></li>
           <li><a href="/birthday-party">Celebration Custom Packages</a></li>
@@ -269,7 +264,7 @@
       </div>
 
       <div class="footer__col">
-        <h4 class="footer__h">Stay Locked in the Loop</h4>
+        <h3 class="footer__h">Stay Locked in the Loop</h3>
         <p class="footer__newsletter-copy">
           New cities, fresh dates, early ticket drops. Real history, zero spam.
         </p>

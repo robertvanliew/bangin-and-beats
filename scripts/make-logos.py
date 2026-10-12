@@ -15,6 +15,12 @@ main = fit(img, 1200)
 main.quantize(256, method=Image.FASTOCTREE).save(out / "bangin-beats-logo.png", optimize=True)
 main.save(out / "bangin-beats-logo.webp", quality=85, method=6)
 
+# smaller variants for the nav (~160px shown), footer and hero (~380px shown)
+for w in (480, 800):
+    v = fit(img, w)
+    v.save(out / f"bangin-beats-logo-{w}.webp", quality=86, method=6)
+    v.quantize(256, method=Image.FASTOCTREE).save(out / f"bangin-beats-logo-{w}.png", optimize=True)
+
 # favicon: transparent square, logo only, filling the width (browser tabs).
 fav = Image.new("RGBA", (256, 256), (0, 0, 0, 0))
 lg = fit(img, 252)

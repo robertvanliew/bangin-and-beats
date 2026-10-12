@@ -5266,3 +5266,6 @@ section.blog-index .blog-card { border-radius: 16px; }
 /* Song-card squares: wrap at word boundaries (hyphenate only real long words). */
 .bingocard__grid .sq { overflow-wrap: normal; word-break: normal; hyphens: auto; }
 @media (max-width: 480px) { .bingocard__grid .sq { font-size: 10px; letter-spacing: -.02em; padding: 2px; } }
+
+/* Footer legal links: comfortable tap targets (Lighthouse target-size). */
+.footer__legal a { display: inline-block; padding: 8px 2px; }
