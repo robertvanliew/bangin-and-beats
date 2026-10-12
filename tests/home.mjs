@@ -24,6 +24,11 @@ export async function homeCheck() {
     if (await page.locator('a[href="/demo"]').count()) f.push('home links to /demo (does not exist)');
     const title = await page.title();
     if (!/Bangin.{0,3}&.{0,3}Beats/i.test(title)) f.push(`home <title> lacks brand: ${title}`);
+
+    await page.goto('http://localhost:4174/events');
+    const ev = await page.evaluate(() => document.body.innerText.replace(/\s+/g, ' ').toUpperCase());
+    for (const must of ["THE ULTIMATE HIP-HOP & R&B 90'S / 00'S INTERACTIVE THROWBACK EXPERIENCE", 'BUY TICKETS — $35', 'EXPLORE PRIVATE PARTIES'])
+      if (!ev.includes(must)) f.push(`events missing: ${must}`);
   } finally { await browser.close(); server.close(); }
   return f;
 }

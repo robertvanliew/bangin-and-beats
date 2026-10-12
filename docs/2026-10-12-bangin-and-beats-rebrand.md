@@ -10,7 +10,7 @@
 
 **Spec:** `docs/spec-owner-copy.md` is the owner's "update website jargon.docx" as plain text. The original Word doc is at `docs/owner/update website jargon.docx`. Logo source: `docs/owner/bangin-beats-logo-source.png` (1920×1280 PNG, about 3 MB, transparent). `docs/owner/` is git-ignored, so those files stay local.
 
-**Status (2026-10-12):** Tasks 1–5 are done. Task 5 notes: board colors split so states read apart (marked = gold, center BANGIN' = gold on black, winning line = crimson). Win CTA now goes to `/events` (the old SimpleTix link was a past TMBB event) and the reward reads $35 → $31.50 with code THROWBACK10; the owner must create that code on the new ticket platform. The home gameplay demo (`videos/play-gameplay-demo.mp4` + poster) was re-recorded from the new board with Playwright + ffmpeg (279 KB, H.264, faststart). Manual run verified in headless Chromium with a simulated round (win modal, celebration, share card all show B-E-A-T-S / BANGIN'); the real-mic "that's bangin'" check on desktop Chrome and the iPhone check are still to do (Task 11). `npm test`: assets, home, play PASS; raw 1019, brand 132 FAIL (later pages). Start at Task 6.
+**Status (2026-10-12):** Tasks 1–6 are done. Task 6 notes: all four events in `content/events.json` have already happened, so all are under Past Nights and the Upcoming list shows the "new dates drop soon / Get Notified" state until the owner publishes a date. Every flyer in `flyers/` has "TAKE ME BACK BINGO" printed in the art (Owner Input 7), so event cards show the existing date-block design instead (`flyer: ""`). The old take-me-back-bingo SimpleTix/Eventbrite/Posh/Facebook listing URLs were cleared from those past events. Event id `evt-hip-hop-rb-bingo-2026-08-15` → `evt-hip-hop-rnb-tour-2026-08-15`. The static no-JS fallback cards (old copies with old JSON-LD) were replaced by the empty state. `admin/events.html` still has old defaults (Task 10). `npm test`: assets, home, play PASS; raw/brand FAIL on later pages. Start at Task 7.
 
 **Paths used below:**
 - `OLD` = `C:\Users\12124\Documents\Take-me-back-bingo` (the live site; read-only until Task 12)
@@ -880,7 +880,7 @@ git add -A && git commit -m "play: THE BEAT BOARD - B-E-A-T-S headers, BANGIN' c
 **Files:**
 - Modify: `NEW/events.html`, `NEW/content/events.json`
 
-- [ ] **Step 1: Add the events page to the home-style must-have test.** Append to `tests/home.mjs` inside the `try`, after the home checks:
+- [x] **Step 1: Add the events page to the home-style must-have test.** Append to `tests/home.mjs` inside the `try`, after the home checks:
 
 ```js
     await page.goto('http://localhost:4174/events');
@@ -891,16 +891,16 @@ git add -A && git commit -m "play: THE BEAT BOARD - B-E-A-T-S headers, BANGIN' c
 
 Run: `npm test -- home`. Expected: FAIL with 3 "events missing" lines.
 
-- [ ] **Step 2: Rewrite the events copy** (spec lines 65–113): the bottom callout banner, the slogan, the sub-text, and `BUY TICKETS — $35` → `/events#upcoming` (or the live ticket URL from the next event in `content/events.json`). `EXPLORE PRIVATE PARTIES` → `/birthday-party`. Apply the Term Mapping to every other visible string, including the event-card templates in the inline `<script>` that renders `events.json` (search `grep -n "bingo\|Bingo\|BINGO" events.html`).
+- [x] **Step 2: Rewrite the events copy** (spec lines 65–113): the bottom callout banner, the slogan, the sub-text, and `BUY TICKETS — $35` → `/events#upcoming` (or the live ticket URL from the next event in `content/events.json`). `EXPLORE PRIVATE PARTIES` → `/birthday-party`. Apply the Term Mapping to every other visible string, including the event-card templates in the inline `<script>` that renders `events.json` (search `grep -n "bingo\|Bingo\|BINGO" events.html`).
 
-- [ ] **Step 3: Rewrite `content/events.json`.** In every event, replace "Bingo" in `title`, `description` and `subtitle` fields per the Term Mapping (for example "Hip-Hop & R&B Summer" stays, and "Take Me Back Bingo: Hip-Hop & R&B Summer" → "Bangin' & Beats™: Hip-Hop & R&B Summer"). Leave ticket URLs alone unless they contain `takemebackbingo` (then flag them to the owner: the Eventbrite/ticket listing itself needs renaming on that platform).
+- [x] **Step 3: Rewrite `content/events.json`.** In every event, replace "Bingo" in `title`, `description` and `subtitle` fields per the Term Mapping (for example "Hip-Hop & R&B Summer" stays, and "Take Me Back Bingo: Hip-Hop & R&B Summer" → "Bangin' & Beats™: Hip-Hop & R&B Summer"). Leave ticket URLs alone unless they contain `takemebackbingo` (then flag them to the owner: the Eventbrite/ticket listing itself needs renaming on that platform).
 
-- [ ] **Step 4: Run the checks**
+- [x] **Step 4: Run the checks**
 
 Run: `npm test -- home && npm test -- brand 2>&1 | grep "^  /events "`
 Expected: PASS; no `/events` brand lines.
 
-- [ ] **Step 5: Commit and push**
+- [x] **Step 5: Commit and push**
 
 ```bash
 git add -A && git commit -m "events: Bangin' & Beats copy + events.json" && git push
