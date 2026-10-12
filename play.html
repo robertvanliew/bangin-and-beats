@@ -112,7 +112,7 @@
 
 <!-- canvas-confetti · loaded once, fired on win celebration open -->
 <script defer src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,800;0,900;1,800;1,900&family=Sora:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Sora:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="styles.css?v=2" />
 
@@ -3300,7 +3300,7 @@ function startTimerBar() {
   }, 200);
 }
 
-/* Booth display: song TITLE large (Rubik, .booth__title) - what the
+/* Booth display: song TITLE large (Big Shoulders Display, .booth__title) - what the
    player needs to find on their card - with the ARTIST in italic small
    underneath as supporting context. */
 function setBoothPlaying(song) {
@@ -3685,12 +3685,12 @@ function drawShareCard() {
 
   // Headline
   ctx.fillStyle = TEXT;
-  ctx.font = '900 120px "Rubik", system-ui, sans-serif';
+  ctx.font = '900 120px "Big Shoulders Display", system-ui, sans-serif';
   ctx.textBaseline = 'top';
   ctx.fillText('I SHOUTED', W/2, 150);
 
   ctx.fillStyle = TAPE_HOT;
-  ctx.font = 'italic 900 104px "Rubik", sans-serif';
+  ctx.font = '900 112px "Big Shoulders Display", sans-serif';
   ctx.fillText("\"THAT'S BANGIN'!\"", W/2, 290);
 
   // Stat line
@@ -3717,7 +3717,7 @@ function drawShareCard() {
 
   // B E A T S header (THE BEAT BOARD™)
   ctx.fillStyle = PRIMARY;
-  ctx.font = '400 90px "Rubik", system-ui, sans-serif';
+  ctx.font = '400 90px "Big Shoulders Display", system-ui, sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'top';
   const headers = ['B','E','A','T','S'];
@@ -3769,11 +3769,11 @@ function drawShareCard() {
         ctx.fill();
       }
 
-      // Song title - Rubik (marquee feel), dark ink on gold/cream.
+      // Song title - Big Shoulders Display (marquee feel), dark ink on gold/cream.
       // Wraps to fit longer titles.
       const labelText = song.free ? CONFIG.centerLabel : song.title;
       ctx.fillStyle = INK;
-      ctx.font = '900 22px "Rubik", system-ui';
+      ctx.font = '900 22px "Big Shoulders Display", system-ui';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       wrapText(ctx, labelText, x + w/2, y + h/2, w - 16, 24);
@@ -3784,7 +3784,7 @@ function drawShareCard() {
   // cardH is now dynamic (sized to the grid), so ctaY follows it cleanly.
   const ctaY = cardY + cardH + 50;
   ctx.fillStyle = TEXT;
-  ctx.font = '900 50px "Rubik", system-ui';
+  ctx.font = '900 50px "Big Shoulders Display", system-ui';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'top';
   ctx.fillText('CATCH THE REAL THING.', W/2, ctaY);

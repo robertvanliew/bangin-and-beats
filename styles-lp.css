@@ -9,7 +9,7 @@
 
 .lp__hero { max-width: 1100px; margin: 0 auto; padding: 60px 24px 40px; text-align: center; }
 .lp__hero-eyebrow {
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Big Shoulders Display', sans-serif;
   font-size: 11px; letter-spacing: 3px;
   color: #D4AF37; text-transform: uppercase;
   margin: 0 0 24px;
@@ -39,7 +39,7 @@
 .lp__btn {
   display: inline-block;
   padding: 16px 28px;
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Big Shoulders Display', sans-serif;
   font-size: 12px; letter-spacing: 2.5px;
   text-decoration: none;
   text-transform: uppercase;
@@ -73,7 +73,7 @@
 .lp__section p, .lp__section ul, .lp__section ol { margin: 0; color: #FFF8E7; }
 
 .lp__section-eyebrow {
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Big Shoulders Display', sans-serif;
   font-size: 11px; letter-spacing: 3px;
   color: #D4AF37; text-transform: uppercase;
   padding-top: 32px;
@@ -108,7 +108,7 @@
 .lp__steps li::before {
   content: counter(lp-step, decimal-leading-zero);
   position: absolute; left: 0; top: 22px;
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Big Shoulders Display', sans-serif;
   color: #D4AF37;
   font-size: 22px;
   letter-spacing: 2px;
@@ -138,7 +138,7 @@
   font-size: 14px; line-height: 1.5;
 }
 .lp__tracks-block h3 {
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Big Shoulders Display', sans-serif;
   font-size: 10px; letter-spacing: 2.5px;
   color: #D4AF37;
   margin: 0 0 12px !important;
@@ -156,7 +156,7 @@
   margin: 30px 0 !important;
 }
 .lp__eventcard-eyebrow {
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Big Shoulders Display', sans-serif;
   font-size: 10px; letter-spacing: 3px;
   color: #D4AF37; text-transform: uppercase;
   margin: 0 0 12px !important;
@@ -199,7 +199,7 @@
   padding: 60px 24px 80px; text-align: center;
 }
 .lp__closer-eyebrow {
-  font-family: Rubik, sans-serif; font-style: italic; font-weight: 900;
+  font-family: 'Big Shoulders Display', sans-serif; font-weight: 900;
   font-size: 22px;
   color: #C9A86A;
   margin: 0 0 8px;
@@ -207,7 +207,7 @@
   display: inline-block;
 }
 .lp__closer-title {
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Big Shoulders Display', sans-serif;
   font-size: clamp(28px, 4vw, 44px);
   color: #FFF8E7;
   margin: 0 0 12px;
@@ -230,3 +230,46 @@
   .lp__hero { padding: 40px 20px 24px; }
   .lp__eventcard { padding: 24px 20px; }
 }
+
+/* ---- Pro pass: same type and button system as the main site ---- */
+.lp__hero-eyebrow, .lp__section-eyebrow, .lp__eventcard-eyebrow, .lp__closer-eyebrow {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: .22em;
+}
+.lp__hero-title, .lp__section-h, .lp__closer-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: .005em;
+  text-wrap: balance;
+}
+.lp__hero-title { font-size: clamp(2.6rem, 6vw, 4.5rem); line-height: .94; }
+.lp__hero-title strong { font-weight: 900; }
+.lp__section-h { font-size: clamp(2rem, 4vw, 3rem); line-height: .96; }
+.lp__btn {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .16em;
+  border-radius: 999px;
+  padding: 14px 24px;
+  transition: transform 160ms cubic-bezier(.23,1,.32,1), box-shadow 200ms ease;
+}
+.lp__btn:active { transform: scale(.97); }
+.lp__btn--primary {
+  background: linear-gradient(180deg, rgba(255,255,255,.28) 0%, rgba(255,255,255,0) 44%, rgba(0,0,0,.08) 100%),
+              linear-gradient(180deg, #F6E3A1 0%, #E2C15A 32%, #D4AF37 58%, #A8862A 100%);
+  color: #0A0A0A;
+  border: 0;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 10px 22px -10px rgba(212,175,55,.55);
+}
+.lp__btn--ghost {
+  border: 2px solid transparent;
+  background: linear-gradient(#0D0B09, #0D0B09) padding-box,
+              repeating-linear-gradient(115deg, #7A5A14 0 3px, #F3D27A 3px 6px, #B8902F 6px 9px) border-box;
+  color: #FFFDF8;
+}
+.lp__quickmeta { flex-basis: 100%; width: 100%; margin-top: var(--s-4); justify-content: center; }

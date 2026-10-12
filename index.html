@@ -52,7 +52,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,800;0,900;1,800;1,900&family=Sora:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Sora:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="styles.css?v=2" />
 
@@ -386,7 +386,7 @@
   "url": "https://www.banginandbeats.com/",
   "speakable": {
     "@type": "SpeakableSpecification",
-    "cssSelector": ["#hero-intro", ".answer-block__h", ".answer-block > p", ".faq__q"]
+    "cssSelector": ["#hero-intro", ".answer-block__h", ".answer-block__body > p", ".faq__q"]
   }
 }
 </script>
@@ -575,53 +575,82 @@
 </header>
 <!-- /CHROME:NAV -->
 
-<!-- ============ HERO · MIXTAPE J-CARD ============ -->
-<section class="hero">
-  <div class="hero__grain" aria-hidden="true"></div>
+<!-- ============ HERO · FULL-BLEED STAGE ============
+     Crowd photo as the stage, the logo as the headline act, the owner's
+     descriptor + slogan, two CTAs, and a gold ticket stub for the next show.
+     (A clean sizzle reel can replace the photo later.) -->
+<section class="hero hero-stage" id="top">
+  <div class="hero-stage__media" aria-hidden="true">
+    <img class="hero-stage__img" src="photos/GSP_2287.jpg" alt="" width="1600" height="1067" fetchpriority="high" />
+  </div>
 
-  <!-- Hero media · still photo for now. The old sizzle reel (Video/hero-v3.mp4)
-       has the previous brand burned into every frame, so it is off until a
-       clean cut exists. To bring a reel back, swap these <img>s for the two
-       <video>s (bg + foreground with data-hero-reel) and restore the sound
-       button; the reel JS below is null-guarded and picks it up again. -->
-  <div class="hero-media hero-media--reel" data-reveal>
-    <img class="hero-reel__bg" src="photos/GSP_2287.jpg" alt="" aria-hidden="true" width="1600" height="1067" />
-    <img class="hero-reel" src="photos/GSP_2287.jpg" alt="The host working a packed room at a Bangin' &amp; Beats throwback party" width="1600" height="1067" fetchpriority="high" />
-    <div class="hero-reel__vignette" aria-hidden="true"></div>
-    <img src="/logos/bangin-beats-logo.png" width="1200" height="699" alt="Bangin' &amp; Beats" class="hero-reel__logo" />
-    <div class="hero-reel__chrome" aria-hidden="true">
-      <span class="hero-reel__tag">
-        <span class="hero-reel__rec"></span>
-        90s &amp; 00s THROWBACK
-      </span>
-      <span class="hero-reel__meta">HIP-HOP &amp; R&amp;B · LIVE</span>
+  <div class="hero-stage__inner">
+    <picture>
+      <source srcset="/logos/bangin-beats-logo.webp" type="image/webp">
+      <img class="hero-stage__logo" src="/logos/bangin-beats-logo.png" alt="Bangin' &amp; Beats™" width="1200" height="699" />
+    </picture>
+    <h1 class="hero-stage__title">
+      THE ULTIMATE <span class="nowrap">HIP-HOP</span> &amp; R&amp;B 90'S / 00'S INTERACTIVE THROWBACK EXPERIENCE
+      <span class="hero-stage__slogan">WHERE YOU ARE PART OF THE ACTION!</span>
+    </h1>
+    <p class="hero-stage__hook">SING-ALONG <span aria-hidden="true">•</span> DANCE <span aria-hidden="true">•</span> PLAY <span aria-hidden="true">•</span> WIN PRIZES</p>
+    <div class="hero-stage__ctas">
+      <a href="/play" class="btn btn--primary btn--lg">Play the Board <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h12m0 0L8 3m5 5l-5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="/gallery" class="btn btn--ghost btn--lg">Explore the Gallery <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h12m0 0L8 3m5 5l-5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
   </div>
 
-  <div class="hero__grid">
-    <!-- LEFT: typographic J-card "tracklist" -->
-    <div class="jcard">
-      <img class="jcard__logo" src="/logos/bangin-beats-logo.png" alt="Bangin' &amp; Beats™" width="1200" height="699" data-reveal />
+  <!-- Ticket stub · next show. No public date is on sale right now, so it
+       points at the list; swap in the date + ticket link when one drops. -->
+  <a class="hero-stub" href="/events">
+    <span class="hero-stub__tear" aria-hidden="true">Admit One</span>
+    <span class="hero-stub__body">
+      <span class="hero-stub__kicker">Next up · Woodbridge, NJ flagship</span>
+      <span class="hero-stub__title">New tour dates dropping soon</span>
+      <span class="hero-stub__meta">Tickets $35 · Three rounds · Prizes all night</span>
+    </span>
+    <span class="hero-stub__cta">See Tour Dates <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h12m0 0L8 3m5 5l-5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+  </a>
 
-      <h1 class="jcard__title" data-reveal data-reveal-stagger>
-        <span class="jcard__title-block jcard__title-block--descriptor">THE ULTIMATE HIP-HOP &amp; R&amp;B 90'S / 00'S INTERACTIVE THROWBACK EXPERIENCE</span>
-        <span class="jcard__title-script">WHERE YOU ARE PART OF THE ACTION!</span>
-      </h1>
+  <!-- Four quick metrics (owner spec, Section 2) -->
+  <ul class="meta-strip hero-stage__metrics" data-reveal data-reveal-stagger>
+    <li>
+      <strong>Fri / Sat / Sun</strong>
+      <span>Upcoming party tour dates</span>
+    </li>
+    <li>
+      <strong>60 Anthems</strong>
+      <span>Loaded into the music pool</span>
+    </li>
+    <li>
+      <strong>3 Rounds</strong>
+      <span>Of interactive music tracks per night</span>
+    </li>
+    <li>
+      <strong>Dance Battles</strong>
+      <span>Mainstage showcase closers</span>
+    </li>
+  </ul>
+</section>
 
-      <p class="eyebrow jcard__hook" data-reveal>
-        <span class="eyebrow__dot"></span>
-        SING-ALONG • DANCE • PLAY • WIN PRIZES
-      </p>
-
-      <p class="jcard__lede" data-reveal id="hero-intro">
+<!-- ============ THE REMIX · intro + the song card ============ -->
+<section class="remix" id="remix">
+  <div class="remix__inner">
+    <div class="remix__copy">
+      <p class="eyebrow" data-reveal><span class="eyebrow__dot"></span> The remix of your favorite night out</p>
+      <p class="remix__lede" data-reveal id="hero-intro">
         Welcome to the remix of your favorite night out! We took the high-stakes fun of a live music board and fused it with the explosive, out-of-your-seat energy of a 90s and 2000s throwback concert.
         No boring, quiet trivia here. Our DJs spin the heavy bass hits, you track your favorite anthems on your song card, and the whole room sings the chorus at the top of their lungs.
       </p>
-      <p class="jcard__lede" data-reveal>
+      <p class="remix__kicker" data-reveal>
         This is not a show where you just sit and watch. You are not a spectator. <strong>YOU ARE THE SHOW.</strong>
       </p>
-
-      <!-- Flippable bingo card · click to reveal a rotating gallery photo.
+      <div class="remix__ctas" data-reveal>
+        <a href="/play" class="btn btn--primary btn--lg">Play the Board <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h12m0 0L8 3m5 5l-5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+    <div class="remix__card">
+      <!-- Flippable song card · click to reveal a rotating gallery photo.
            The card lives on the front face; back face shows a photo + CTA. -->
       <div class="bingocard" data-reveal data-flip-card>
         <div class="bingocard__flipper" role="button" tabindex="0" aria-label="Flip the song card to see a photo from a past night" aria-pressed="false">
@@ -689,269 +718,8 @@
         </div><!-- /flipper -->
       </div>
 
-      <div class="jcard__cta-row" data-reveal>
-        <a href="/play" class="btn btn--primary btn--lg">
-          Play the Board
-          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h12m0 0L8 3m5 5l-5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <a href="/gallery" class="btn btn--ghost btn--lg">
-          Explore the Gallery
-          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h12m0 0L8 3m5 5l-5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <!-- RIGHT: physical cassette with yellow tape, song-title balls -->
-    <div class="tape-stage" aria-hidden="true">
-      <div class="tape-stage__shadow"></div>
-
-      <div class="cassette" data-tilt>
-        <!-- the J-card label on the cassette body -->
-        <div class="cassette__label">
-          <div class="cassette__label-top">
-            <span class="cassette__brand">BEATS</span>
-            <span class="cassette__vol">VOL. 01</span>
-          </div>
-          <div class="cassette__label-mid">90s &amp; 00s Throwback Mix</div>
-          <div class="cassette__label-bot">
-            <span>SIDE A</span>
-            <span class="cassette__nr">·</span>
-            <span>90 MIN</span>
-            <span class="cassette__nr">·</span>
-            <span>NR</span>
-          </div>
-        </div>
-
-        <!-- Reels · SVG-rendered wound tape (turbulence + displacement
-             warps a radial gradient into organic, photo-real wound film) -->
-        <div class="cassette__reels">
-
-          <!-- LEFT REEL -->
-          <div class="cassette__reel cassette__reel--spin">
-            <svg class="cassette__reel-tape" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-              <defs>
-                <!-- Subtle organic warp so the coils aren't mechanically perfect -->
-                <filter id="reel-warp-a" x="-5%" y="-5%" width="110%" height="110%">
-                  <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" result="t"/>
-                  <feDisplacementMap in="SourceGraphic" in2="t" scale="0.6"/>
-                </filter>
-                <!-- Base wound-tape fill: very dark brown core, near-black edge -->
-                <radialGradient id="reel-base-a" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%"  stop-color="#1c100a"/>
-                  <stop offset="70%" stop-color="#120907"/>
-                  <stop offset="100%" stop-color="#050201"/>
-                </radialGradient>
-                <!-- Top-light bronze sheen catching the coiled edge -->
-                <radialGradient id="reel-sheen-a" cx="50%" cy="28%" r="55%">
-                  <stop offset="0%"  stop-color="#8a5a36" stop-opacity=".42"/>
-                  <stop offset="45%" stop-color="#3a2516" stop-opacity=".18"/>
-                  <stop offset="100%" stop-color="#000" stop-opacity="0"/>
-                </radialGradient>
-                <!-- Outer rim shadow -->
-                <radialGradient id="reel-rim-a" cx="50%" cy="50%" r="50%">
-                  <stop offset="80%" stop-color="#000" stop-opacity="0"/>
-                  <stop offset="100%" stop-color="#000" stop-opacity=".75"/>
-                </radialGradient>
-                <mask id="reel-mask-a">
-                  <rect width="100" height="100" fill="#fff"/>
-                  <circle cx="50" cy="50" r="17" fill="#000"/>
-                </mask>
-              </defs>
-              <g mask="url(#reel-mask-a)">
-                <circle cx="50" cy="50" r="50" fill="url(#reel-base-a)"/>
-                <!-- Concentric tape coils, fine, dense rings -->
-                <g fill="none" stroke="#000" stroke-opacity=".55" stroke-width=".45" filter="url(#reel-warp-a)">
-                  <circle cx="50" cy="50" r="49.2"/><circle cx="50" cy="50" r="48.4"/>
-                  <circle cx="50" cy="50" r="47.6"/><circle cx="50" cy="50" r="46.8"/>
-                  <circle cx="50" cy="50" r="46.0"/><circle cx="50" cy="50" r="45.2"/>
-                  <circle cx="50" cy="50" r="44.4"/><circle cx="50" cy="50" r="43.6"/>
-                  <circle cx="50" cy="50" r="42.8"/><circle cx="50" cy="50" r="42.0"/>
-                  <circle cx="50" cy="50" r="41.2"/><circle cx="50" cy="50" r="40.4"/>
-                  <circle cx="50" cy="50" r="39.6"/><circle cx="50" cy="50" r="38.8"/>
-                  <circle cx="50" cy="50" r="38.0"/><circle cx="50" cy="50" r="37.2"/>
-                  <circle cx="50" cy="50" r="36.4"/><circle cx="50" cy="50" r="35.6"/>
-                  <circle cx="50" cy="50" r="34.8"/><circle cx="50" cy="50" r="34.0"/>
-                  <circle cx="50" cy="50" r="33.2"/><circle cx="50" cy="50" r="32.4"/>
-                  <circle cx="50" cy="50" r="31.6"/><circle cx="50" cy="50" r="30.8"/>
-                  <circle cx="50" cy="50" r="30.0"/><circle cx="50" cy="50" r="29.2"/>
-                  <circle cx="50" cy="50" r="28.4"/><circle cx="50" cy="50" r="27.6"/>
-                  <circle cx="50" cy="50" r="26.8"/><circle cx="50" cy="50" r="26.0"/>
-                  <circle cx="50" cy="50" r="25.2"/><circle cx="50" cy="50" r="24.4"/>
-                  <circle cx="50" cy="50" r="23.6"/><circle cx="50" cy="50" r="22.8"/>
-                  <circle cx="50" cy="50" r="22.0"/><circle cx="50" cy="50" r="21.2"/>
-                  <circle cx="50" cy="50" r="20.4"/><circle cx="50" cy="50" r="19.6"/>
-                  <circle cx="50" cy="50" r="18.8"/><circle cx="50" cy="50" r="18.0"/>
-                </g>
-                <!-- bronze tape-edge highlight between coils -->
-                <g fill="none" stroke="#7a4a25" stroke-opacity=".18" stroke-width=".25" filter="url(#reel-warp-a)">
-                  <circle cx="50" cy="50" r="48.0"/><circle cx="50" cy="50" r="45.6"/>
-                  <circle cx="50" cy="50" r="43.2"/><circle cx="50" cy="50" r="40.8"/>
-                  <circle cx="50" cy="50" r="38.4"/><circle cx="50" cy="50" r="36.0"/>
-                  <circle cx="50" cy="50" r="33.6"/><circle cx="50" cy="50" r="31.2"/>
-                  <circle cx="50" cy="50" r="28.8"/><circle cx="50" cy="50" r="26.4"/>
-                  <circle cx="50" cy="50" r="24.0"/><circle cx="50" cy="50" r="21.6"/>
-                  <circle cx="50" cy="50" r="19.2"/>
-                </g>
-                <!-- top-light sheen -->
-                <circle cx="50" cy="50" r="50" fill="url(#reel-sheen-a)"/>
-                <!-- outer rim shadow -->
-                <circle cx="50" cy="50" r="50" fill="url(#reel-rim-a)"/>
-              </g>
-            </svg>
-          </div>
-
-          <div class="cassette__window"></div>
-
-          <!-- RIGHT REEL · same structure, different seed for variation -->
-          <div class="cassette__reel cassette__reel--spin cassette__reel--slow">
-            <svg class="cassette__reel-tape" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-              <defs>
-                <filter id="reel-warp-b" x="-5%" y="-5%" width="110%" height="110%">
-                  <feTurbulence type="fractalNoise" baseFrequency="0.95" numOctaves="2" seed="11" result="t"/>
-                  <feDisplacementMap in="SourceGraphic" in2="t" scale="0.6"/>
-                </filter>
-                <radialGradient id="reel-base-b" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%"  stop-color="#1c100a"/>
-                  <stop offset="70%" stop-color="#120907"/>
-                  <stop offset="100%" stop-color="#050201"/>
-                </radialGradient>
-                <radialGradient id="reel-sheen-b" cx="50%" cy="30%" r="55%">
-                  <stop offset="0%"  stop-color="#8a5a36" stop-opacity=".4"/>
-                  <stop offset="45%" stop-color="#3a2516" stop-opacity=".18"/>
-                  <stop offset="100%" stop-color="#000" stop-opacity="0"/>
-                </radialGradient>
-                <radialGradient id="reel-rim-b" cx="50%" cy="50%" r="50%">
-                  <stop offset="80%" stop-color="#000" stop-opacity="0"/>
-                  <stop offset="100%" stop-color="#000" stop-opacity=".75"/>
-                </radialGradient>
-                <mask id="reel-mask-b">
-                  <rect width="100" height="100" fill="#fff"/>
-                  <circle cx="50" cy="50" r="17" fill="#000"/>
-                </mask>
-              </defs>
-              <g mask="url(#reel-mask-b)">
-                <circle cx="50" cy="50" r="50" fill="url(#reel-base-b)"/>
-                <g fill="none" stroke="#000" stroke-opacity=".55" stroke-width=".45" filter="url(#reel-warp-b)">
-                  <circle cx="50" cy="50" r="49.0"/><circle cx="50" cy="50" r="48.2"/>
-                  <circle cx="50" cy="50" r="47.4"/><circle cx="50" cy="50" r="46.6"/>
-                  <circle cx="50" cy="50" r="45.8"/><circle cx="50" cy="50" r="45.0"/>
-                  <circle cx="50" cy="50" r="44.2"/><circle cx="50" cy="50" r="43.4"/>
-                  <circle cx="50" cy="50" r="42.6"/><circle cx="50" cy="50" r="41.8"/>
-                  <circle cx="50" cy="50" r="41.0"/><circle cx="50" cy="50" r="40.2"/>
-                  <circle cx="50" cy="50" r="39.4"/><circle cx="50" cy="50" r="38.6"/>
-                  <circle cx="50" cy="50" r="37.8"/><circle cx="50" cy="50" r="37.0"/>
-                  <circle cx="50" cy="50" r="36.2"/><circle cx="50" cy="50" r="35.4"/>
-                  <circle cx="50" cy="50" r="34.6"/><circle cx="50" cy="50" r="33.8"/>
-                  <circle cx="50" cy="50" r="33.0"/><circle cx="50" cy="50" r="32.2"/>
-                  <circle cx="50" cy="50" r="31.4"/><circle cx="50" cy="50" r="30.6"/>
-                  <circle cx="50" cy="50" r="29.8"/><circle cx="50" cy="50" r="29.0"/>
-                  <circle cx="50" cy="50" r="28.2"/><circle cx="50" cy="50" r="27.4"/>
-                  <circle cx="50" cy="50" r="26.6"/><circle cx="50" cy="50" r="25.8"/>
-                  <circle cx="50" cy="50" r="25.0"/><circle cx="50" cy="50" r="24.2"/>
-                  <circle cx="50" cy="50" r="23.4"/><circle cx="50" cy="50" r="22.6"/>
-                  <circle cx="50" cy="50" r="21.8"/><circle cx="50" cy="50" r="21.0"/>
-                  <circle cx="50" cy="50" r="20.2"/><circle cx="50" cy="50" r="19.4"/>
-                  <circle cx="50" cy="50" r="18.6"/><circle cx="50" cy="50" r="17.8"/>
-                </g>
-                <g fill="none" stroke="#7a4a25" stroke-opacity=".18" stroke-width=".25" filter="url(#reel-warp-b)">
-                  <circle cx="50" cy="50" r="47.8"/><circle cx="50" cy="50" r="45.4"/>
-                  <circle cx="50" cy="50" r="43.0"/><circle cx="50" cy="50" r="40.6"/>
-                  <circle cx="50" cy="50" r="38.2"/><circle cx="50" cy="50" r="35.8"/>
-                  <circle cx="50" cy="50" r="33.4"/><circle cx="50" cy="50" r="31.0"/>
-                  <circle cx="50" cy="50" r="28.6"/><circle cx="50" cy="50" r="26.2"/>
-                  <circle cx="50" cy="50" r="23.8"/><circle cx="50" cy="50" r="21.4"/>
-                  <circle cx="50" cy="50" r="19.0"/>
-                </g>
-                <circle cx="50" cy="50" r="50" fill="url(#reel-sheen-b)"/>
-                <circle cx="50" cy="50" r="50" fill="url(#reel-rim-b)"/>
-              </g>
-            </svg>
-          </div>
-
-        </div>
-
-        <!-- screw heads -->
-        <span class="cassette__screw cassette__screw--tl"></span>
-        <span class="cassette__screw cassette__screw--tr"></span>
-        <span class="cassette__screw cassette__screw--bl"></span>
-        <span class="cassette__screw cassette__screw--br"></span>
-      </div>
-
-      <!-- Floating song-title chips temporarily removed (Nov 2026).
-           To restore: ask "bring back the floating chips".
-           CSS for .chip and .chip__* still in styles.css. -->
-
-      <!-- Editorial bio · sits naked under the cassette, no card chrome -->
-      <article class="tape-bio" aria-labelledby="tape-bio-title">
-        <p class="tape-bio__kicker">About the Night</p>
-        <h3 class="tape-bio__title" id="tape-bio-title">A throwback party night that runs like a headline set.</h3>
-
-        <p class="tape-bio__dek tape-bio__dek--lead">
-          <span class="tape-bio__dropcap">N</span>o numbers called here. The DJ drops a
-          thirty&#8209;second clip, No Scrubs, Juicy, In Da Club, and the room reacts
-          before the hook even lands. Lock the title on your song card, line it up, and shout
-          &ldquo;THAT&rsquo;S BANGIN&rsquo;!&rdquo;
-        </p>
-
-        <!-- Rotating message slot · the two body messages cycle in place
-             instead of stacking vertically. Saves vertical real estate so
-             the flyer slider below can sit larger. JS auto-cycles every
-             ~8s; dots let you jump manually. Pauses on hover. -->
-        <div class="bio-rotator" data-bio-rotator>
-          <div class="bio-rotator__slide is-active" data-bio-slide>
-            <p class="tape-bio__dek">
-              Every card is unique. Twenty&#8209;four titles drawn from a sixty&#8209;song pool, so the table
-              next to you is hearing the same beat but chasing a different win. Prizes between rounds.
-              Bottle service for full houses. House samples for the close calls.
-            </p>
-          </div>
-          <div class="bio-rotator__slide" data-bio-slide>
-            <blockquote class="tape-bio__quote">
-              <span class="tape-bio__quote-mark" aria-hidden="true">&ldquo;</span>
-              Nobody films it because everybody&rsquo;s singing.
-            </blockquote>
-            <p class="tape-bio__dek">
-              We close on a full dance battle. Hosts pick the champion, the room votes the runner&#8209;up,
-              and the last track is a side B nobody&rsquo;s heard in years. Fridays, Saturdays, Sundays:
-              check the tour dates page for times. Strictly thirty and up. Dress like it&rsquo;s 2003.
-            </p>
-          </div>
-          <div class="bio-rotator__dots" role="tablist" aria-label="Bio messages">
-            <button type="button" class="bio-rotator__dot is-active" data-bio-dot="0" aria-label="Message 1"></button>
-            <button type="button" class="bio-rotator__dot" data-bio-dot="1" aria-label="Message 2"></button>
-          </div>
-        </div>
-
-        <!-- Crowd photo · replaces the past-night flyer slider (was an animation).
-             Sized to the original flyer aspect ratio (4:5) so the
-             surrounding layout stays unchanged. -->
-        <div class="logo-anim" data-reveal>
-          <img class="logo-anim__video" src="photos/GSP_2404.jpg" alt="A guest with the mic at a Bangin' &amp; Beats throwback party" width="1600" height="2400" loading="lazy">
-        </div>
-      </article>
-
     </div>
   </div>
-
-  <!-- bottom meta strip (J-card spine) -->
-  <ul class="meta-strip" data-reveal data-reveal-stagger>
-    <li>
-      <strong>Fri / Sat / Sun</strong>
-      <span>Upcoming party tour dates</span>
-    </li>
-    <li>
-      <strong>60 Anthems</strong>
-      <span>Loaded into the music pool</span>
-    </li>
-    <li>
-      <strong>3 Rounds</strong>
-      <span>Of interactive music tracks per night</span>
-    </li>
-    <li>
-      <strong>Dance Battles</strong>
-      <span>Mainstage showcase closers</span>
-    </li>
-  </ul>
 </section>
 
 <!-- ============ MARQUEE, set as a tape edge ============ -->
@@ -1164,18 +932,21 @@
       <p class="answers__meta">Last updated: October 12, 2026.</p>
     </header>
 
-    <article class="answer-block" data-reveal>
-      <h3 class="answer-block__h">What is Bangin’ &amp; Beats™?</h3>
+    <details class="answer-block" data-reveal>
+      <summary><h3 class="answer-block__h">What is Bangin’ &amp; Beats™?</h3><span class="faq__icon" aria-hidden="true"></span></summary>
+      <div class="answer-block__body">
       <p>
         BANGIN’ &amp; BEATS™ is a premium, live interactive throwback party hosted across major New York and New Jersey nightlife venues, operating proudly under the High Class Experience LLC corporate shield.
       </p>
       <p>
         We completely blend a fun, crowd-powered music game with a high-energy throwback dance party. Our mature, style-conscious 30 &amp; Up demographic enjoys private VIP lounge booths, custom sparkler bottle service presentations, and elite prize giveaways.
       </p>
-    </article>
+      </div>
+    </details>
 
-    <article class="answer-block" data-reveal>
-      <h3 class="answer-block__h">What is an interactive hip-hop throwback party?</h3>
+    <details class="answer-block" data-reveal>
+      <summary><h3 class="answer-block__h">What is an interactive hip-hop throwback party?</h3><span class="faq__icon" aria-hidden="true"></span></summary>
+      <div class="answer-block__body">
       <p>
         An interactive throwback party is a live night out where the crowd plays along with the music
         instead of just listening. At Bangin’ &amp; Beats, every guest gets a custom 5&times;5 song card
@@ -1185,10 +956,12 @@
         the round. A typical night runs three rounds across about three hours, with dance battles,
         lip-sync showdowns, and group sing-alongs between rounds and a mainstage dance battle to close.
       </p>
-    </article>
+      </div>
+    </details>
 
-    <article class="answer-block" data-reveal>
-      <h3 class="answer-block__h">How does the interactive party night work, step by step?</h3>
+    <details class="answer-block" data-reveal>
+      <summary><h3 class="answer-block__h">How does the interactive party night work, step by step?</h3><span class="faq__icon" aria-hidden="true"></span></summary>
+      <div class="answer-block__body">
       <ol class="answer-block__steps">
         <li><strong>Grab your tracklist card.</strong> Every guest gets a unique 5&times;5 song card with 24 titles from that night’s 60&#8209;song pool, plus the BANGIN’ center square.</li>
         <li><strong>The DJ drops a jam.</strong> A 30-to-60 second clip of a throwback classic plays. If the title is on your card, you mark the square.</li>
@@ -1196,10 +969,12 @@
         <li><strong>Line up five and shout.</strong> First guest to line up five squares (row, column, or diagonal) shouts “THAT’S BANGIN’!” and the Hype Emcee verifies the card.</li>
         <li><strong>Three rounds a night.</strong> Premium prizes every round. Between rounds: dance battles, lip-sync showdowns, and sing-alongs. The night closes on a mainstage dance battle.</li>
       </ol>
-    </article>
+      </div>
+    </details>
 
-    <article class="answer-block" data-reveal>
-      <h3 class="answer-block__h">Where can I find a 90s &amp; 00s throwback party in New Jersey or New York?</h3>
+    <details class="answer-block" data-reveal>
+      <summary><h3 class="answer-block__h">Where can I find a 90s &amp; 00s throwback party in New Jersey or New York?</h3><span class="faq__icon" aria-hidden="true"></span></summary>
+      <div class="answer-block__body">
       <p>
         Bangin’ &amp; Beats hosts public throwback party nights at premier nightclubs and upscale lounges
         across New Jersey and New York City, with our flagship room in Woodbridge, NJ, plus shows in
@@ -1209,10 +984,12 @@
         fees beyond that. To book a birthday, bachelorette, corporate event, or venue takeover, use the
         <a href="#contact" data-open-inquiry data-inquiry-topic="Private booking - Other event">contact form</a> or text 201-344-4589.
       </p>
-    </article>
+      </div>
+    </details>
 
-    <article class="answer-block" data-reveal>
-      <h3 class="answer-block__h">How is Bangin’ &amp; Beats™ different from a regular club night?</h3>
+    <details class="answer-block" data-reveal>
+      <summary><h3 class="answer-block__h">How is Bangin’ &amp; Beats™ different from a regular club night?</h3><span class="faq__icon" aria-hidden="true"></span></summary>
+      <div class="answer-block__body">
       <div class="answer-block__compare">
         <table class="compare-table">
           <thead>
@@ -1228,10 +1005,12 @@
           </tbody>
         </table>
       </div>
-    </article>
+      </div>
+    </details>
 
-    <article class="answer-block" data-reveal>
-      <h3 class="answer-block__h">Is a throwback party good for a bachelorette party or birthday?</h3>
+    <details class="answer-block" data-reveal>
+      <summary><h3 class="answer-block__h">Is a throwback party good for a bachelorette party or birthday?</h3><span class="faq__icon" aria-hidden="true"></span></summary>
+      <div class="answer-block__body">
       <p>
         Yes. An interactive throwback party works well for bachelorette parties, milestone birthdays,
         office crews, corporate events, and anniversary parties because it mixes a low-pressure game
@@ -1242,7 +1021,8 @@
         tour host, a contracted mix engineer, custom cards, and pro sound. Parties run about three
         hours. A 50% deposit holds your date. <a href="#contact" data-open-inquiry data-inquiry-topic="Private booking - Other event">Request a private party</a> or text 201-344-4589.
       </p>
-    </article>
+      </div>
+    </details>
 
     <article class="answer-block" data-reveal>
       <h3 class="answer-block__h">By the numbers</h3>
