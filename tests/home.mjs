@@ -29,6 +29,14 @@ export async function homeCheck() {
     const ev = await page.evaluate(() => document.body.innerText.replace(/\s+/g, ' ').toUpperCase());
     for (const must of ["THE ULTIMATE HIP-HOP & R&B 90'S / 00'S INTERACTIVE THROWBACK EXPERIENCE", 'BUY TICKETS — $35', 'EXPLORE PRIVATE PARTIES'])
       if (!ev.includes(must)) f.push(`events missing: ${must}`);
+
+    await page.goto('http://localhost:4174/gallery');
+    const ga = await page.evaluate(() => document.body.innerText.replace(/\s+/g, ' ').toUpperCase());
+    for (const must of ['RECEIPTS FROM THE DANCE FLOOR.', 'THEY MATCHED THE TRACKS. THEY CLAIMED THE NIGHT.',
+                        'TAG US TO GET FEATURED.', 'YOU COULD BE NEXT.', '#BANGINANDBEATS'])
+      if (!ga.includes(must)) f.push(`gallery missing: ${must}`);
+    const stamps = await page.locator('.winners__stamp-label').allInnerTexts();
+    if (stamps.some(s => s.trim().toUpperCase() !== 'WINNER')) f.push(`gallery stamps: ${JSON.stringify(stamps)}`);
   } finally { await browser.close(); server.close(); }
   return f;
 }

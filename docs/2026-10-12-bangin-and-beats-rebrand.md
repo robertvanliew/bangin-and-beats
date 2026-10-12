@@ -10,7 +10,7 @@
 
 **Spec:** `docs/spec-owner-copy.md` is the owner's "update website jargon.docx" as plain text. The original Word doc is at `docs/owner/update website jargon.docx`. Logo source: `docs/owner/bangin-beats-logo-source.png` (1920×1280 PNG, about 3 MB, transparent). `docs/owner/` is git-ignored, so those files stay local.
 
-**Status (2026-10-12):** Tasks 1–6 are done. Task 6 notes: all four events in `content/events.json` have already happened, so all are under Past Nights and the Upcoming list shows the "new dates drop soon / Get Notified" state until the owner publishes a date. Every flyer in `flyers/` has "TAKE ME BACK BINGO" printed in the art (Owner Input 7), so event cards show the existing date-block design instead (`flyer: ""`). The old take-me-back-bingo SimpleTix/Eventbrite/Posh/Facebook listing URLs were cleared from those past events. Event id `evt-hip-hop-rb-bingo-2026-08-15` → `evt-hip-hop-rnb-tour-2026-08-15`. The static no-JS fallback cards (old copies with old JSON-LD) were replaced by the empty state. `admin/events.html` still has old defaults (Task 10). `npm test`: assets, home, play PASS; raw/brand FAIL on later pages. Start at Task 7.
+**Status (2026-10-12):** Tasks 1–7 are done. Task 7 notes: stamps now read WINNER; two winner photos with readable old branding were swapped (feature GSP_2351 showed "80's R&B & Rap Artists Bingo" cards → GSP_2404; #05 GSP_2436 had the "Thriller Bingo" backdrop → GSP_2405), and GSP_2316 (large "Thriller Bingo" backdrop) left the photo reel. Other gallery photos still show old printed cards or the Thriller backdrop at small size; flag for the owner (Owner Input 7). Instagram/TikTok handles are unconfirmed (Owner Input 4). `npm test`: assets, home, play PASS; raw 874, brand 97 FAIL (later pages). Start at Task 8.
 
 **Paths used below:**
 - `OLD` = `C:\Users\12124\Documents\Take-me-back-bingo` (the live site; read-only until Task 12)
@@ -913,7 +913,7 @@ git add -A && git commit -m "events: Bangin' & Beats copy + events.json" && git 
 **Files:**
 - Modify: `NEW/gallery.html`
 
-- [ ] **Step 1: Add gallery must-haves to `tests/home.mjs`** (same pattern as Task 6)
+- [x] **Step 1: Add gallery must-haves to `tests/home.mjs`** (same pattern as Task 6)
 
 ```js
     await page.goto('http://localhost:4174/gallery');
@@ -927,18 +927,18 @@ git add -A && git commit -m "events: Bangin' & Beats copy + events.json" && git 
 
 Run: `npm test -- home`. Expected: FAIL with the gallery lines.
 
-- [ ] **Step 2: Rewrite** (spec lines 114–152): badges, titles, sub-text; every `<span class="winners__stamp-label">Bingo</span>` → `WINNER` (`sed -i 's#<span class="winners__stamp-label">Bingo</span>#<span class="winners__stamp-label">WINNER</span>#g' gallery.html`); carousel header `★ AROUND THE ROOM — HOSTS, HOOKS, HANDS IN THE AIR.`; the social section with both buttons `@BANGINANDBEATS` → Instagram and TikTok URLs (Owner Input 4); the closing banners. Every `alt="… Take Me Back Bingo …"` → `alt="… Bangin' & Beats …"`:
+- [x] **Step 2: Rewrite** (spec lines 114–152): badges, titles, sub-text; every `<span class="winners__stamp-label">Bingo</span>` → `WINNER` (`sed -i 's#<span class="winners__stamp-label">Bingo</span>#<span class="winners__stamp-label">WINNER</span>#g' gallery.html`); carousel header `★ AROUND THE ROOM — HOSTS, HOOKS, HANDS IN THE AIR.`; the social section with both buttons `@BANGINANDBEATS` → Instagram and TikTok URLs (Owner Input 4); the closing banners. Every `alt="… Take Me Back Bingo …"` → `alt="… Bangin' & Beats …"`:
 
 ```bash
 sed -i "s/Take Me Back Bingo night/Bangin' \&amp; Beats night/g; s/Take Me Back Bingo winner/Bangin' \&amp; Beats winner/g" gallery.html
 ```
 
-- [ ] **Step 3: Run the checks**
+- [x] **Step 3: Run the checks**
 
 Run: `npm test -- home && npm test -- brand 2>&1 | grep "^  /gallery "`
 Expected: PASS; no `/gallery` lines.
 
-- [ ] **Step 4: Commit and push**
+- [x] **Step 4: Commit and push**
 
 ```bash
 git add -A && git commit -m "gallery: Bangin' & Beats copy, WINNER stamps, @banginandbeats social hub" && git push
