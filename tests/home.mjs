@@ -37,6 +37,20 @@ export async function homeCheck() {
       if (!ga.includes(must)) f.push(`gallery missing: ${must}`);
     const stamps = await page.locator('.winners__stamp-label').allInnerTexts();
     if (stamps.some(s => s.trim().toUpperCase() !== 'WINNER')) f.push(`gallery stamps: ${JSON.stringify(stamps)}`);
+
+    const blogMust = {
+      '/blog': ["SONG OF THE WEEK & THE CULTURE AROUND IT.", 'HOW TO PLAN A LIVE THROWBACK TOUR NIGHT THAT COMMANDS THE ROOM.'],
+      '/blog/how-to-plan-a-throwback-party-night': ['THE THREE PILLARS OF A PACKED ROOM', 'THE DUAL TOUR TIMELINES', 'DO YOU RUN A HIGH-CAPACITY ROOM OR VENUE?'],
+      '/blog/song-of-the-week-crazy-in-love': ["WHY 'CRAZY IN LOVE' STILL DOMINATES EVERY THROWBACK PARTY NIGHT.", "THE LIVE SHOW CLIMAX MOMENT."],
+      '/blog/song-of-the-week-juicy-notorious-big': ["WHY 'JUICY' BY BIGGIE STOPS EVERY THROWBACK PARTY ROOM DEAD.", 'THE "JUICY EFFECT."'],
+    };
+    for (const [p, musts] of Object.entries(blogMust)) {
+      await page.goto('http://localhost:4174' + p);
+      // The blog index renders its cards from /content/posts.json after load.
+      if (p === '/blog') await page.waitForSelector('.blog-card', { timeout: 5000 }).catch(() => {});
+      const t = await page.evaluate(() => document.body.innerText.replace(/\s+/g, ' ').toUpperCase().replace(/[’‘]/g, "'").replace(/[“”]/g, '"'));
+      for (const m of musts) if (!t.includes(m)) f.push(`${p} missing: ${m}`);
+    }
   } finally { await browser.close(); server.close(); }
   return f;
 }

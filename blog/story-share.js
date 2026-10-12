@@ -1,4 +1,4 @@
-// Take Me Back Bingo · Blog post "Share to Story" composer.
+// Bangin' & Beats · Blog post "Share to Story" composer.
 //
 // Composes a 1080x1920 Instagram/Facebook-Story-formatted card on page
 // load — cover photo cropped 62% top, dark gradient fade, gold kicker,
@@ -19,7 +19,7 @@
 //   data-share-filename    File name for the downloaded/shared image
 //   data-share-headline    Headline burned into the card (2-4 lines max)
 //   data-share-kicker      Top-left gold kicker (default: SONG OF THE WEEK)
-//   data-share-brand       Brand line below headline (default: TAKE ME BACK BINGO)
+//   data-share-brand       Brand line below headline (default: BANGIN' & BEATS™)
 //
 // The iOS Safari trap: navigator.share() with a file must be called
 // SYNCHRONOUSLY inside the click handler. Awaiting anything first kills
@@ -34,10 +34,10 @@
   var title    = btn.getAttribute('data-share-title')    || document.title;
   var text     = btn.getAttribute('data-share-text')     || title;
   var imgPath  = btn.getAttribute('data-share-image');
-  var filename = btn.getAttribute('data-share-filename') || 'take-me-back-bingo.jpg';
+  var filename = btn.getAttribute('data-share-filename') || 'bangin-and-beats.jpg';
   var headline = btn.getAttribute('data-share-headline') || title;
   var kicker   = btn.getAttribute('data-share-kicker')   || 'SONG OF THE WEEK';
-  var brand    = btn.getAttribute('data-share-brand')    || 'TAKE ME BACK BINGO';
+  var brand    = btn.getAttribute('data-share-brand')    || "BANGIN' & BEATS™";
   var url      = window.location.href;
 
   // Human-readable URL for the burned-in card. Only the root domain fits
@@ -45,7 +45,7 @@
   // clipped when Instagram cropped the image for the preview. Full URL
   // still passes to navigator.share as text so it's clickable on any
   // platform that supports link previews (X, FB feed, WhatsApp, iMessage).
-  var displayUrl = 'takemebackbingo.com';
+  var displayUrl = 'banginandbeats.com';
 
   var storyFile = null;         // fully-composed 1080x1920 story card
   var rawPhotoFile = null;      // raw cover photo as a fallback

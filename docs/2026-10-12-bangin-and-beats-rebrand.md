@@ -10,7 +10,7 @@
 
 **Spec:** `docs/spec-owner-copy.md` is the owner's "update website jargon.docx" as plain text. The original Word doc is at `docs/owner/update website jargon.docx`. Logo source: `docs/owner/bangin-beats-logo-source.png` (1920×1280 PNG, about 3 MB, transparent). `docs/owner/` is git-ignored, so those files stay local.
 
-**Status (2026-10-12):** Tasks 1–7 are done. Task 7 notes: stamps now read WINNER; two winner photos with readable old branding were swapped (feature GSP_2351 showed "80's R&B & Rap Artists Bingo" cards → GSP_2404; #05 GSP_2436 had the "Thriller Bingo" backdrop → GSP_2405), and GSP_2316 (large "Thriller Bingo" backdrop) left the photo reel. Other gallery photos still show old printed cards or the Thriller backdrop at small size; flag for the owner (Owner Input 7). Instagram/TikTok handles are unconfirmed (Owner Input 4). `npm test`: assets, home, play PASS; raw 874, brand 97 FAIL (later pages). Start at Task 8.
+**Status (2026-10-12):** Tasks 1–8 are done. Task 8 notes: **removed `"type": "module"` from package.json** — every `api/*.js` is CommonJS and under that flag the handlers load as empty module objects (Vercel would have no handler); all test/script ESM files are `.mjs`, so nothing else needed it. Blog posts rewritten from the spec; the existing brand-neutral "The Story Behind It" sections were kept. The planning post shows the spec date (Oct 6, 2026) and uses it for datePublished. The spec's "next show" cards are templates with placeholders and no upcoming date exists, so both song posts say "new dates dropping soon" and link to /events. Juicy spec typo "generations of cars" kept as "ears"; "the club feels earned" kept as written (owner to confirm). Covers using GSP_2436 (Thriller Bingo backdrop) were swapped. Pre-existing bug fixed: blog index showed each date one day early (UTC parse). `$12,000` claim carries the OWNER INPUT 6 comment. `npm test`: assets, home, play PASS; raw/brand FAIL only on Task 9/10 files. Start at Task 9.
 
 **Paths used below:**
 - `OLD` = `C:\Users\12124\Documents\Take-me-back-bingo` (the live site; read-only until Task 12)
@@ -952,7 +952,7 @@ git add -A && git commit -m "gallery: Bangin' & Beats copy, WINNER stamps, @bang
 - Rename: `NEW/blog/how-to-plan-a-music-bingo-night.html` → `NEW/blog/how-to-plan-a-throwback-party-night.html`
 - Modify: `NEW/blog/index.html`, `NEW/blog/song-of-the-week-crazy-in-love.html`, `NEW/blog/song-of-the-week-juicy-notorious-big.html`, `NEW/blog/story-share.js`, `NEW/content/posts.json`, `NEW/api/rss.js`
 
-- [ ] **Step 1: Add blog must-haves to `tests/home.mjs`**
+- [x] **Step 1: Add blog must-haves to `tests/home.mjs`**
 
 ```js
     const blogMust = {
@@ -970,14 +970,14 @@ git add -A && git commit -m "gallery: Bangin' & Beats copy, WINNER stamps, @bang
 
 Run: `npm test -- home`. Expected: FAIL (the renamed post 404s, and the strings are missing).
 
-- [ ] **Step 2: Rename the post**
+- [x] **Step 2: Rename the post**
 
 ```bash
 git mv blog/how-to-plan-a-music-bingo-night.html blog/how-to-plan-a-throwback-party-night.html
 grep -rl "how-to-plan-a-music-bingo-night" . --exclude-dir=node_modules --exclude-dir=.git | xargs sed -i 's#how-to-plan-a-music-bingo-night#how-to-plan-a-throwback-party-night#g'
 ```
 
-- [ ] **Step 3: Rewrite each page from the spec**
+- [x] **Step 3: Rewrite each page from the spec**
 
 - `blog/index.html`: spec lines 179–200.
 - `blog/how-to-plan-a-throwback-party-night.html`: spec lines 201–252. Where the spec repeats a section (Sections 8–10 appear twice), use the **first** "CORRECTED" version. Section 8's `$12,000` sentence goes in as written, but leave an HTML comment `<!-- OWNER INPUT 6: attorney to confirm "$12,000" claim -->`. `SUBMIT A VENUE INQUIRY ➔` → `/#contact`.
@@ -987,12 +987,12 @@ grep -rl "how-to-plan-a-music-bingo-night" . --exclude-dir=node_modules --exclud
 - `content/posts.json`: new titles, excerpts and slugs to match.
 - `blog/story-share.js` and `api/rss.js`: brand strings and URLs per the Term Mapping (`grep -n -i "bingo\|take me back" blog/story-share.js api/rss.js`).
 
-- [ ] **Step 4: Run the checks**
+- [x] **Step 4: Run the checks**
 
 Run: `npm test -- home && npm test -- brand 2>&1 | grep "^  /blog"`
 Expected: PASS; no `/blog` lines.
 
-- [ ] **Step 5: Commit and push**
+- [x] **Step 5: Commit and push**
 
 ```bash
 git add -A && git commit -m "blog: rebrand index + 3 posts from spec, rename planning post slug, RSS" && git push

@@ -12,9 +12,9 @@
 // CommonJS (no package.json in the repo). global fetch is Node 18+.
 
 const OWNER   = process.env.GH_OWNER  || "robertvanliew";
-const REPO    = process.env.GH_REPO   || "takemebackbingo";
+const REPO    = process.env.GH_REPO   || "bangin-and-beats";
 const BRANCH  = process.env.GH_BRANCH || "main";
-const SITE    = "https://www.takemebackbingo.com";
+const SITE    = "https://www.banginandbeats.com";
 
 const EVENTS_URL = `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/content/events.json`;
 const POSTS_URL  = `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/content/posts.json`;
@@ -82,17 +82,17 @@ function renderFeed(feedItems) {
      xmlns:dc="http://purl.org/dc/elements/1.1/"
      xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
-    <title>Take Me Back Bingo</title>
-    <link>${SITE}/</link>
+    <title>Bangin' &#38; Beats™ Blog</title>
+    <link>${SITE}/blog</link>
     <atom:link href="${SITE}/rss.xml" rel="self" type="application/rss+xml" />
-    <description>Hip-hop and R&#38;B live music bingo events, throwback nights, dance battles, and prizes across NJ and NY.</description>
+    <description>Bangin' &#38; Beats™: live 90s &#38; 00s hip-hop and R&#38;B interactive throwback parties, Song of the Week, and tour dates across NJ and NY.</description>
     <language>en-us</language>
     <copyright>&#169; ${new Date().getUTCFullYear()} High Class Experience LLC. All rights reserved.</copyright>
     <lastBuildDate>${now}</lastBuildDate>
     <ttl>60</ttl>
     <image>
       <url>${SITE}/logos/og-image.jpg</url>
-      <title>Take Me Back Bingo</title>
+      <title>Bangin' &#38; Beats™ Blog</title>
       <link>${SITE}/</link>
     </image>
 ${items}
@@ -116,7 +116,7 @@ function renderEventItem(e) {
       <link>${xml(url)}</link>
       <guid isPermaLink="true">${xml(url)}</guid>
       <pubDate>${xml(pub)}</pubDate>
-      <dc:creator>Take Me Back Bingo</dc:creator>
+      <dc:creator>Bangin' &#38; Beats</dc:creator>
       <category>Event</category>
       <description>${xml(description)}</description>
       <content:encoded><![CDATA[<p><img src="${imageUrl}" alt="${xml(e.flyerAlt || e.title)}" /></p><p>${htmlSafe(description)}</p>${e.simpletix ? `<p><a href="${xml(e.simpletix)}">Buy tickets</a></p>` : ""}]]></content:encoded>
@@ -136,7 +136,7 @@ function renderPostItem(p) {
       <link>${xml(url)}</link>
       <guid isPermaLink="true">${xml(url)}</guid>
       <pubDate>${xml(pub)}</pubDate>
-      <dc:creator>${xml(p.author || "Take Me Back Bingo")}</dc:creator>
+      <dc:creator>${xml(p.author || "Bangin' & Beats")}</dc:creator>
       <category>${xml(category)}</category>
       <description>${xml(excerpt)}</description>
       <content:encoded><![CDATA[<p><img src="${imageUrl}" alt="${xml(p.coverImageAlt || p.title)}" /></p><p>${htmlSafe(excerpt)}</p><p><a href="${xml(url)}">Read the full post →</a></p>]]></content:encoded>
