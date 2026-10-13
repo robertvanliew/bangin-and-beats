@@ -10,7 +10,7 @@
 
 **Spec:** `docs/spec-owner-copy.md` is the owner's "update website jargon.docx" as plain text. The original Word doc is at `docs/owner/update website jargon.docx`. Logo source: `docs/owner/bangin-beats-logo-source.png` (1920×1280 PNG, about 3 MB, transparent). `docs/owner/` is git-ignored, so those files stay local.
 
-**Status (2026-10-12):** Tasks 1–10 are done; `npm test` is fully green (raw, brand, assets, home, play). Task 10: Formspree now posts to the owner's form `xzedaygd` (contact pop-up on home/events/gallery, Play-page city boxes); ImprovMX forwarding is live (info@, tickets@, sha@, catch-all → banginandbeats@gmail.com; MX + SPF verified in public DNS). Also done since Task 9: logo-matched premium redesign, competitor-informed hero (background video cut from the old reel with branding removed, gold ticket stub, owner's All-Black ribbon copy), sticky mobile ticket bar, transparent favicon, `docs/backend-setup.md`. Still needed from the owner before/at Task 11: Resend key + audience, Brevo key/list + rebranded automation emails, GA4 ID, GitHub token, the All-Black show's date + ticket link. **Task 11 in progress (2026-10-12):** Steps 1, 2 and 4 are done. www.banginandbeats.com is live on Vercel with SSL; the apex 308-redirects to www; the GoDaddy parking A records were removed; MX for ImprovMX is intact. `X-Robots-Tag: noindex` stays until Task 12. **Next: Task 11 Steps 3, 5–8 (Resend check, live form tests, admin, real iPhone, owner review).**
+**Status (2026-10-12):** Tasks 1–10 are done; `npm test` is fully green (raw, brand, assets, home, play). Task 10: Formspree now posts to the owner's form `xzedaygd` (contact pop-up on home/events/gallery, Play-page city boxes); ImprovMX forwarding is live (info@, tickets@, sha@, catch-all → banginandbeats@gmail.com; MX + SPF verified in public DNS). Also done since Task 9: logo-matched premium redesign, competitor-informed hero (background video cut from the old reel with branding removed, gold ticket stub, owner's All-Black ribbon copy), sticky mobile ticket bar, transparent favicon, `docs/backend-setup.md`. Still needed from the owner before/at Task 11: Resend key + audience, Brevo key/list + rebranded automation emails, GA4 ID, GitHub token, the All-Black show's date + ticket link. **LAUNCHED (2026-10-13):** The user called launch. Noindex removed from NEW (security headers kept). OLD `vercel.json` now 301s every URL straight to its banginandbeats.com match (cleanUrls removed so `.html` URLs also redirect in one hop; RSS feeds go to the new feed). `node tests/check-redirects.mjs`: all 23 www.takemebackbingo.com URLs pass; the bare takemebackbingo.com still 308s to www first until the old Vercel project's apex domain is switched from "Redirect" to "Production" (user action). IndexNow ping: 202 for 20 URLs. Search Console domain property verified and sitemap submitted. **Next: apex setting, re-run Step 5, Change of Address (Step 6.3), Bing Webmaster import, Step 7 off-site list, Step 8 two-week watch.** Task 11 Steps 5-8 (live form tests, admin, real iPhone, owner review) are still open and run post-launch.
 
 **Paths used below:**
 - `OLD` = `C:\Users\12124\Documents\Take-me-back-bingo` (the live site; read-only until Task 12)
@@ -1175,7 +1175,7 @@ Ops work (no code tests). Each step has a concrete check.
 **Interfaces:**
 - Consumes: the URL Map.
 
-- [ ] **Step 1: Write `NEW/tests/check-redirects.mjs`** (Review Focus 4)
+- [x] **Step 1: Write `NEW/tests/check-redirects.mjs`** (Review Focus 4)
 
 ```js
 const MAP = {
@@ -1208,12 +1208,12 @@ console.log(fail ? `${fail} failures` : 'all redirects OK');
 process.exit(fail ? 1 : 0);
 ```
 
-- [ ] **Step 2: Run it against the current live site and confirm it fails**
+- [x] **Step 2: Run it against the current live site and confirm it fails**
 
 Run: `node tests/check-redirects.mjs`
 Expected: FAIL on every line (the old site still serves 200s).
 
-- [ ] **Step 3: Remove the pre-launch noindex from NEW** by deleting only the `{ "key": "X-Robots-Tag", "value": "noindex" }` entry from the `/(.*)` headers block in `NEW/vercel.json` (keep the security headers next to it), then commit and push:
+- [x] **Step 3: Remove the pre-launch noindex from NEW** by deleting only the `{ "key": "X-Robots-Tag", "value": "noindex" }` entry from the `/(.*)` headers block in `NEW/vercel.json` (keep the security headers next to it), then commit and push:
 
 ```bash
 git add vercel.json && git commit -m "launch: allow indexing" && git push
@@ -1221,7 +1221,7 @@ git add vercel.json && git commit -m "launch: allow indexing" && git push
 
 Check: `curl -sI https://www.banginandbeats.com/ | grep -i x-robots` prints nothing.
 
-- [ ] **Step 4: Turn OLD into a redirect server.** In `OLD`, make sure the Vercel project's domain settings serve `takemebackbingo.com` directly, with no Vercel-level apex→www redirect (otherwise the bare domain would chain 308→301). Set both domains to "Connect to an environment: Production", not "Redirect to". Then replace `OLD/vercel.json` with:
+- [x] **Step 4: Turn OLD into a redirect server.** In `OLD`, make sure the Vercel project's domain settings serve `takemebackbingo.com` directly, with no Vercel-level apex→www redirect (otherwise the bare domain would chain 308→301). Set both domains to "Connect to an environment: Production", not "Redirect to". Then replace `OLD/vercel.json` with:
 
 ```json
 {
