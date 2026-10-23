@@ -367,7 +367,7 @@
   "name": "Bangin' & Beats",
   "alternateName": ["Bangin' & Beats™", "Bangin and Beats"],
   "description": "Live 90s and 2000s hip-hop and R&B interactive throwback parties with a play-along song card, dance battles, and prizes.",
-  "publisher": { "@id": "https://www.banginandbeats.com/#organization" },
+  "publisher": { "@type": "Organization", "@id": "https://www.banginandbeats.com/#organization", "name": "Bangin' & Beats", "url": "https://www.banginandbeats.com/", "logo": { "@type": "ImageObject", "url": "https://www.banginandbeats.com/logos/bangin-beats-logo.png" } },
   "inLanguage": "en-US"
 }
 </script>
@@ -470,7 +470,7 @@
     "https://www.instagram.com/banginandbeats",
     "https://www.tiktok.com/@banginandbeats"
   ],
-  "parentOrganization": { "@id": "https://www.banginandbeats.com/#organization" }
+  "parentOrganization": { "@type": "Organization", "@id": "https://www.banginandbeats.com/#organization", "name": "Bangin' & Beats", "url": "https://www.banginandbeats.com/", "logo": { "@type": "ImageObject", "url": "https://www.banginandbeats.com/logos/bangin-beats-logo.png" } }
 }
 </script>
 
@@ -511,8 +511,16 @@
     "2000s music",
     "Live DJ performance"
   ],
-  "worksFor": { "@id": "https://www.banginandbeats.com/#organization" },
-  "performerIn": { "@id": "https://www.banginandbeats.com/#localbusiness" }
+  "worksFor": {
+    "@type": "Organization",
+    "@id": "https://www.banginandbeats.com/#organization",
+    "name": "Bangin' & Beats",
+    "url": "https://www.banginandbeats.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.banginandbeats.com/logos/bangin-beats-logo.png"
+    }
+  }
 }
 </script>
 
@@ -534,13 +542,16 @@
     "Dance battles",
     "Lip-sync showdowns"
   ],
-  "hasCredential": [
-    "Def Comedy Jam featured comedian",
-    "BET's Comic View featured comedian",
-    "The Apollo Theater featured comedian"
-  ],
-  "worksFor": { "@id": "https://www.banginandbeats.com/#organization" },
-  "performerIn": { "@id": "https://www.banginandbeats.com/#localbusiness" }
+  "worksFor": {
+    "@type": "Organization",
+    "@id": "https://www.banginandbeats.com/#organization",
+    "name": "Bangin' & Beats",
+    "url": "https://www.banginandbeats.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.banginandbeats.com/logos/bangin-beats-logo.png"
+    }
+  }
 }
 </script>
 
@@ -560,10 +571,11 @@
   "uploadDate": "2026-10-23T12:00:00-04:00",
   "duration": "PT16S",
   "contentUrl": "https://www.banginandbeats.com/videos/commercial.mp4",
-  "embedUrl": "https://www.banginandbeats.com/#commercial",
   "publisher": {
     "@type": "Organization",
+    "@id": "https://www.banginandbeats.com/#organization",
     "name": "Bangin' & Beats",
+    "url": "https://www.banginandbeats.com/",
     "logo": {
       "@type": "ImageObject",
       "url": "https://www.banginandbeats.com/logos/bangin-beats-logo.png"
@@ -1079,8 +1091,8 @@
       <div class="answer-block__body">
       <p>
         Bangin’ &amp; Beats hosts public throwback party nights at premier nightclubs and upscale lounges
-        across New Jersey and New York City, with our flagship room in Woodbridge, NJ, plus shows in
-        Newark, Edison, and NYC. Tickets are $35 and every public show is strictly 30 &amp; Up. Upcoming
+        across New Jersey and New York City, with public nights at our flagship room, Lake Chateau Banquets
+        in Woodbridge, NJ, and private parties in Newark, Edison, NYC and beyond. Tickets are $35 and every public show is strictly 30 &amp; Up. Upcoming
         dates, venues, and ticket links are on the <a href="/events">tour dates page</a>. We also bring the
         show to private parties within roughly 50 miles of NYC at the standard rate, with simple travel
         fees beyond that. To book a birthday, bachelorette, corporate event, or venue takeover, use the
@@ -1464,6 +1476,7 @@
           <li><a href="/edison-nj">Edison Scheduled Shows</a></li>
           <li><a href="/nyc-throwback-party">The NYC Event Tour</a></li>
           <li><a href="/events">View Upcoming Tour Dates</a></li>
+          <li><a href="/songs">Full Song List</a></li>
           <li><a href="/gallery">Visual Media Gallery</a></li>
           <li><a href="/blog">Cultural Blog Columns</a></li>
           <li><a href="#contact" data-open-inquiry>Master Contact Portal</a></li>

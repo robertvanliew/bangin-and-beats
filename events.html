@@ -106,6 +106,9 @@
   ]
 }
 </script>
+<!-- STAMP:EVENTS-SCHEMA -->
+
+<!-- /STAMP:EVENTS-SCHEMA -->
 </head>
 <body>
 
@@ -154,7 +157,9 @@
       </header>
 
       <ol class="events-list" id="events-upcoming-list">
-        <li class="event-card event-card--empty"><div class="event-card__body" style="padding:32px;"><p class="event-card__copy">New tour dates drop soon. Tickets land here first. Join the list and you&rsquo;ll know before anyone.</p><div class="event-card__cta-row"><a class="btn btn--primary btn--lg" href="#newsletter">Get Notified</a></div></div></li>
+<!-- STAMP:EVENTS-UPCOMING -->
+<li class="event-card event-card--empty"><div class="event-card__body" style="padding:32px;"><p class="event-card__copy">New tour dates drop soon. Tickets land here first. Join the list and you&rsquo;ll know before anyone.</p><div class="event-card__cta-row"><a class="btn btn--primary btn--lg" href="#newsletter">Get Notified</a></div></div></li>
+<!-- /STAMP:EVENTS-UPCOMING -->
       </ol>
     </section>
 
@@ -165,7 +170,46 @@
         <span class="events-section__count" data-events-count-past>Sold out shows</span>
       </header>
 
-      <ol class="events-list events-list--past" id="events-past-list"></ol>
+      <ol class="events-list events-list--past" id="events-past-list">
+<!-- STAMP:EVENTS-PAST -->
+<li class="event-card event-card--past" id="evt-hip-hop-rnb-tour-2026-08-15">
+  <div class="event-card__body">
+    <span class="event-card__badge event-card__badge--sold">Past</span>
+    <p class="event-card__kicker">The Bounce Masta DJ Doo Wop + Jersey Club King DJ Tameil</p>
+    <h3 class="event-card__title">Hip-Hop &amp; R&amp;B Tour — Summer</h3>
+    <dl class="event-card__meta"><div><dt>Date</dt><dd>Saturday, August 15, 2026</dd></div><div><dt>Venue</dt><dd>Lake Chateau Banquets · Woodbridge, NJ</dd></div><div><dt>Doors</dt><dd>3:00 PM · Showtime 4:00 PM</dd></div></dl>
+    
+  </div>
+</li>
+<li class="event-card event-card--past" id="evt-summer-jam-2026">
+  <div class="event-card__body">
+    <span class="event-card__badge event-card__badge--sold">Past</span>
+    <p class="event-card__kicker">DJ Tameil · Hosted by Comedian Talent</p>
+    <h3 class="event-card__title">Summer Jam</h3>
+    <dl class="event-card__meta"><div><dt>Date</dt><dd>Friday, June 26, 2026</dd></div><div><dt>Venue</dt><dd>Lake Chateau Banquets · Woodbridge, NJ</dd></div><div><dt>Doors</dt><dd>Doors 6:00 PM · Show 7:00 PM</dd></div></dl>
+    <p class="event-card__copy">Comedian Talent (Def Comedy Jam, BET&#39;s Comic View, The Apollo) on the mic, DJ Tameil on the ones and twos. 90s and 2000s all night, dance and lip sync battles between rounds, prizes on the table. Cancer-free folks on the B-day guestlist.</p>
+  </div>
+</li>
+<li class="event-card event-card--past" id="evt-reminisce">
+  <div class="event-card__body">
+    <span class="event-card__badge event-card__badge--sold">Sold Out</span>
+    <p class="event-card__kicker">High Class Exclusive</p>
+    <h3 class="event-card__title">Reminisce Night</h3>
+    <dl class="event-card__meta"><div><dt>Date</dt><dd>Saturday, April 25, 2026</dd></div><div><dt>Venue</dt><dd>Lake Chateau Banquets · Woodbridge, NJ</dd></div></dl>
+    <p class="event-card__copy">The launch night. Packed room, hip-hop and R&amp;B from the 90s and 2000s, dance battle into the early hours. Photos live in the gallery.</p>
+  </div>
+</li>
+<li class="event-card event-card--past" id="evt-thriller">
+  <div class="event-card__body">
+    <span class="event-card__badge event-card__badge--sold">Sold Out</span>
+    <p class="event-card__kicker">Michael Jackson Tribute</p>
+    <h3 class="event-card__title">Thriller Night</h3>
+    <dl class="event-card__meta"><div><dt>Date</dt><dd>Saturday, March 14, 2026</dd></div><div><dt>Venue</dt><dd>Lake Chateau Banquets · Woodbridge, NJ</dd></div></dl>
+    <p class="event-card__copy">An MJ-only set list. From Off the Wall through Thriller, Bad, Dangerous and the late-era hits. Hosted by Rey Gibbs with DJ Nix In The Mix. Sold out the room.</p>
+  </div>
+</li>
+<!-- /STAMP:EVENTS-PAST -->
+</ol>
     </section>
 
     <!-- CTA strip · bottom callout banner (owner spec, events page) -->
@@ -226,6 +270,7 @@
           <li><a href="/edison-nj">Edison Scheduled Shows</a></li>
           <li><a href="/nyc-throwback-party">The NYC Event Tour</a></li>
           <li><a href="/events">View Upcoming Tour Dates</a></li>
+          <li><a href="/songs">Full Song List</a></li>
           <li><a href="/gallery">Visual Media Gallery</a></li>
           <li><a href="/blog">Cultural Blog Columns</a></li>
           <li><a href="#contact" data-open-inquiry>Master Contact Portal</a></li>
@@ -949,6 +994,7 @@
     if (e.dj)   performers.push({ "@type": "Person", "name": e.dj });
     if (e.host) performers.push({ "@type": "Person", "name": e.host });
     const offers = [];
+    if (!e.simpletix && !e.eventbrite && !e.posh) offers.push({ "@type": "Offer", "name": e.priceLabel || "General admission", "price": e.price || "35.00", "priceCurrency": "USD", "availability": availability, "url": url });
     if (e.simpletix) {
       const o = {
         "@type": "Offer",
@@ -1029,7 +1075,7 @@
     // wipe the site-wide Organization / WebSite schemas.
     // One Event schema per event, for Google Search event results.
     document.querySelectorAll("script[data-events-schema]").forEach(s => s.remove());
-    events.forEach(e => {
+    events.filter(e => e.section === "upcoming" && e.startDate).forEach(e => {
       [buildSchema(e)].forEach(schema => {
         if (!schema) return;
         const s = document.createElement("script");

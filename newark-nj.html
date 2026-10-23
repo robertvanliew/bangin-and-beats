@@ -213,6 +213,7 @@
           <li><a href="/edison-nj">Edison Scheduled Shows</a></li>
           <li><a href="/nyc-throwback-party">The NYC Event Tour</a></li>
           <li><a href="/events">View Upcoming Tour Dates</a></li>
+          <li><a href="/songs">Full Song List</a></li>
           <li><a href="/gallery">Visual Media Gallery</a></li>
           <li><a href="/blog">Cultural Blog Columns</a></li>
           <li><a href="#contact" data-open-inquiry>Master Contact Portal</a></li>
@@ -403,37 +404,57 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": "https://www.banginandbeats.com/#localbusiness-newark",
-  "name": "Bangin' & Beats · Serving Newark",
+  "@type": "Service",
+  "@id": "https://www.banginandbeats.com/#service-newark",
+  "name": "Interactive throwback party · Newark, NJ",
+  "serviceType": "Interactive 90s & 2000s hip-hop and R&B throwback party",
   "url": "https://www.banginandbeats.com/newark-nj",
   "description": "The closest 90s & 00s hip-hop and R&B interactive throwback party to Newark, NJ. 20 minutes south at Lake Chateau Banquets in Woodbridge. Private parties available across Essex County. Strictly 30 & Up.",
-  "telephone": "+1-201-344-4589",
-  "email": "info@banginandbeats.com",
-  "areaServed": [
-    { "@type": "City", "name": "Newark" },
-    { "@type": "City", "name": "East Orange" },
-    { "@type": "City", "name": "Irvington" },
-    { "@type": "City", "name": "Bloomfield" },
-    { "@type": "AdministrativeArea", "name": "Essex County" }
-  ],
-  "location": {
-    "@type": "Place",
-    "name": "Lake Chateau Banquets",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "1002 US-9",
-      "addressLocality": "Woodbridge Township",
-      "addressRegion": "NJ",
-      "postalCode": "07095",
-      "addressCountry": "US"
-    }
+  "provider": {
+    "@type": "EntertainmentBusiness",
+    "@id": "https://www.banginandbeats.com/#localbusiness",
+    "name": "Bangin' & Beats",
+    "url": "https://www.banginandbeats.com/",
+    "telephone": "+1-201-344-4589",
+    "email": "info@banginandbeats.com"
   },
-  "sameAs": [
-    "https://www.instagram.com/banginandbeats",
-    "https://www.tiktok.com/@banginandbeats"
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "Newark"
+    },
+    {
+      "@type": "City",
+      "name": "East Orange"
+    },
+    {
+      "@type": "City",
+      "name": "Irvington"
+    },
+    {
+      "@type": "City",
+      "name": "Bloomfield"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Essex County"
+    }
   ],
-  "parentOrganization": { "@id": "https://www.banginandbeats.com/#organization" }
+  "availableChannel": {
+    "@type": "ServiceChannel",
+    "serviceLocation": {
+      "@type": "Place",
+      "name": "Lake Chateau Banquets",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1002 US-9",
+        "addressLocality": "Woodbridge Township",
+        "addressRegion": "NJ",
+        "postalCode": "07095",
+        "addressCountry": "US"
+      }
+    }
+  }
 }
 </script>
 
