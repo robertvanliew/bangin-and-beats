@@ -5366,3 +5366,77 @@ html.modal-open body { position: fixed; left: 0; right: 0; width: 100%; }
   .modal__panel, .modal__scrim { transition: opacity 120ms linear !important; transform: none !important; }
   .modal__done { animation: none; }
 }
+
+/* =========================================================
+   THE OFFICIAL SPOT · owner's 15s commercial (home, commercial.js)
+   Vertical video in a gold-edged frame beside the pitch.
+   ========================================================= */
+.spot {
+  background:
+    radial-gradient(60% 70% at 20% 50%, rgba(212,175,55,.14), transparent 70%),
+    var(--bg);
+  color: var(--text);
+  padding: var(--s-9) var(--s-6);
+  border-top: 1px solid var(--rule);
+  overflow: hidden;
+}
+.spot__inner {
+  max-width: 1120px; margin: 0 auto;
+  display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
+  gap: clamp(32px, 6vw, 88px); align-items: center;
+}
+.spot__stage { margin: 0; justify-self: center; width: 100%; max-width: 420px; }
+.spot__frame {
+  position: relative; aspect-ratio: 9 / 16; width: 100%;
+  max-height: 82svh; margin: 0 auto;
+  border-radius: 26px; overflow: hidden; background: #000;
+  padding: 3px; background: var(--rope);
+  box-shadow: 0 0 0 1px rgba(212,175,55,.25), 0 40px 90px -30px rgba(0,0,0,.85), 0 0 80px -20px rgba(212,175,55,.35);
+}
+.spot__video {
+  display: block; width: 100%; height: 100%; object-fit: cover;
+  border-radius: 23px; background: #000;
+}
+.spot__sound {
+  position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%);
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 44px; padding: 0 18px; border-radius: 999px;
+  border: 1px solid rgba(212,175,55,.6);
+  background: rgba(10,10,10,.62); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  color: var(--pearl-hi, #FFF8E7); font-family: var(--font-body); font-weight: 600; font-size: 14px; letter-spacing: .02em;
+  cursor: pointer; transition: background var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.spot__sound:hover { background: rgba(212,175,55,.22); }
+.spot__sound:active { transform: translateX(-50%) scale(.97); }
+.spot__sound:focus-visible, .spot__play:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.spot__ico--on { display: none; }
+.spot__sound.is-on .spot__ico--on { display: block; }
+.spot__sound.is-on .spot__ico--off { display: none; }
+.spot__play {
+  position: absolute; inset: 0; margin: auto; width: 76px; height: 76px; border-radius: 50%;
+  display: grid; place-items: center; border: 0; cursor: pointer; color: #0A0A0A;
+  background: linear-gradient(135deg, #F3D77A, var(--gold) 55%, #9C7A1E);
+  box-shadow: 0 12px 34px -8px rgba(212,175,55,.7);
+}
+.spot__play[hidden] { display: none; }
+.spot__copy { max-width: 540px; }
+.spot__title { margin: var(--s-3) 0 var(--s-4); }
+.spot__sub { font-size: var(--fs-20); line-height: 1.55; color: var(--text-muted); margin: 0 0 var(--s-5); text-wrap: pretty; }
+.spot__beats { list-style: none; padding: 0; margin: 0 0 var(--s-6); display: flex; flex-wrap: wrap; gap: 10px; }
+.spot__beats li {
+  font-family: var(--font-display); font-weight: 800; text-transform: uppercase; letter-spacing: .08em; font-size: 15px;
+  padding: 8px 16px; border-radius: 999px; color: var(--gold);
+  border: 1px solid rgba(212,175,55,.45); background: rgba(212,175,55,.06);
+}
+.spot__ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+@media (max-width: 860px) {
+  .spot { padding: var(--s-8) var(--s-4); }
+  .spot__inner { grid-template-columns: 1fr; text-align: center; }
+  .spot__copy { margin: 0 auto; order: -1; }
+  .spot__beats, .spot__ctas { justify-content: center; }
+  .spot__stage { max-width: 340px; }
+}
+@media (max-width: 480px) {
+  .spot__stage { max-width: 300px; }
+  .spot__ctas .btn { width: 100%; justify-content: center; }
+}
