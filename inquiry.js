@@ -8,13 +8,15 @@
  * Other scripts can call window.BBInquiry.open({ topic, context }).
  *
  * Phones get a bottom sheet (styles.css); the Android back button closes it.
- * Submissions post JSON to the owner's Formspree form.
+ * Submissions post JSON to /api/inquiry, which emails a branded lead
+ * notification to the inbox and a confirmation to the sender (Formspree is
+ * the server-side fallback).
  */
 (function () {
   var modal = document.getElementById('inquiry-modal');
   if (!modal) return;
 
-  var FORMSPREE_ENDPOINT = 'https://formspree.io/f/xzedaygd';
+  var ENDPOINT = '/api/inquiry';
   var DRAFT_KEY = 'bb-inquiry-draft';
   var panel = modal.querySelector('.modal__panel');
   var form = modal.querySelector('[data-inquiry-form]');
@@ -221,13 +223,13 @@
     new FormData(form).forEach(function (v, k) { payload[k] = v; });
     var name = (payload.name || '').split(' ')[0];
 
-    fetch(form.getAttribute('action') || FORMSPREE_ENDPOINT, {
+    fetch(ENDPOINT, {
       method: 'POST',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     })
       .then(function (res) {
-        if (!res.ok) throw new Error('Formspree responded ' + res.status);
+        if (!res.ok) throw new Error('inquiry responded ' + res.status);
         track('inquiry_submit', { topic: payload.topic || 'unspecified', page: location.pathname });
         form.reset();
         store(function (s) { s.removeItem(DRAFT_KEY); });
