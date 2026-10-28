@@ -10,9 +10,10 @@ export async function homeCheck() {
     await page.goto('http://localhost:4174/');
     const text = await page.evaluate(() => document.body.innerText.replace(/\s+/g, ' '));
     for (const must of [
-      "THE ULTIMATE HIP-HOP & R&B 90'S / 00'S INTERACTIVE THROWBACK EXPERIENCE",
+      "THE ULTIMATE 90s & 00s HIP-HOP & R&B INTERACTIVE PARTY!",
       'WHERE YOU ARE PART OF THE ACTION!',
-      'SING-ALONG • DANCE • PLAY • WIN PRIZES',
+      'SING-ALONG • DANCE • WIN BIG',
+      'GENERAL ADMISSION TICKET · $35.00',
       'HOW WE ROCK THE ROOM.',
       'GRAB YOUR TRACKLIST CARD',
       'YOU ARE THE HEADLINE ACT.',
@@ -27,7 +28,7 @@ export async function homeCheck() {
 
     await page.goto('http://localhost:4174/events');
     const ev = await page.evaluate(() => document.body.innerText.replace(/\s+/g, ' ').toUpperCase());
-    for (const must of ["THE ULTIMATE HIP-HOP & R&B 90'S / 00'S INTERACTIVE THROWBACK EXPERIENCE", 'BUY TICKETS — $35', 'EXPLORE PRIVATE PARTIES'])
+    for (const must of ["THE ULTIMATE 90S & 00S HIP-HOP & R&B INTERACTIVE PARTY!", 'BUY TICKETS — $35', 'EXPLORE PRIVATE PARTIES', 'GENERAL ADMISSION TICKET · $35.00'])
       if (!ev.includes(must)) f.push(`events missing: ${must}`);
 
     await page.goto('http://localhost:4174/gallery');
