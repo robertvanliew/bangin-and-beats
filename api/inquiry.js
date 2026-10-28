@@ -92,7 +92,7 @@ const button = (href, label, primary = true) => `<a href="${href}" style="displa
 
 // ---------- 1. notification to the inbox ----------
 function notificationHtml(d) {
-  const first = esc(d.name.split(/\s+/)[0] || 'them');
+  const first = esc(safeFirst(d.name) || 'them');
   const pageUrl = d.page ? SITE + d.page : SITE;
   const isBooking = /^private booking/i.test(d.topic);
   const body = `
@@ -122,7 +122,7 @@ ${HEADER(isBooking ? 'New booking lead' : 'New inquiry', esc(topicLabel(d.topic)
 
 // ---------- 2. confirmation to the lead ----------
 function confirmationHtml(d) {
-  const first = esc(d.name.split(/\s+/)[0] || 'there');
+  const first = esc(safeFirst(d.name) || 'there');
   const summary = [
     ['Request', esc(topicLabel(d.topic))],
     ['Date', d.eventDate ? esc(prettyDate(d.eventDate)) : ''],
@@ -183,6 +183,32 @@ async function formspreeFallback(d) {
   if (!r.ok) throw new Error('formspree ' + r.status);
 }
 
+// ---------- spam guard ----------
+// Bots stuff scam links into short fields (name, city) so our confirmation
+// email carries them to a victim. Anything that looks like that is dropped
+// silently (200, no emails) so the bot learns nothing.
+const URL_RE = /(https?:\/\/|www\.|\.[a-z]{2,}\/)/i;
+const MIN_FILL_MS = 2500; // a person can't open, fill and send the form faster
+function spamReason(d, b) {
+  const t = Number(b._t);
+  if (!Number.isFinite(t) || t < MIN_FILL_MS) return 'too_fast_or_scripted';
+  if ([d.name, d.city, d.phone, d.topic, d.headcount].some((v) => URL_RE.test(v))) return 'link_in_short_field';
+  if (/@/.test(d.name) || d.name.length > 80 || !/\p{L}/u.test(d.name)) return 'bad_name';
+  if (d.phone && !/^\+?[\d\s().-]{7,20}$/.test(d.phone)) return 'bad_phone';
+  if (d.eventDate) {
+    const today = new Date().toISOString().slice(0, 10);
+    if (d.eventDate < today) return 'past_event_date';
+  }
+  if ((d.message.match(/https?:\/\//gi) || []).length > 2) return 'link_spam';
+  // Random-token gibberish ("JhqZozD S4j2FfJ hCgnsSY"): most words flip case mid-word or mix digits.
+  const words = d.message.split(/\s+/).filter((w) => w.length >= 4);
+  const odd = words.filter((w) => /[a-z][A-Z]|[A-Za-z]\d|\d[A-Za-z]/.test(w)).length;
+  if (words.length >= 3 && odd / words.length >= 0.5) return 'gibberish';
+  return '';
+}
+// Only letters (any language), apostrophes and hyphens make it into the greeting.
+const safeFirst = (name) => ((String(name).split(/\s+/)[0] || '').match(/[\p{L}'’-]+/u) || [''])[0].slice(0, 30);
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') { res.setHeader('Allow', 'POST'); return res.status(405).json({ error: 'method not allowed' }); }
   const b = await readBody(req);
@@ -204,12 +230,13 @@ module.exports = async function handler(req, res) {
   };
   if (!d.name || !d.message) return res.status(400).json({ error: 'name and message are required' });
   if (!EMAIL_RE.test(d.email)) return res.status(400).json({ error: 'invalid email' });
-  if ((d.message.match(/https?:\/\//gi) || []).length > 3) return res.status(200).json({ ok: true }); // link spam
+  const spam = spamReason(d, b);
+  if (spam) { console.warn('inquiry: dropped as spam', spam); return res.status(200).json({ ok: true }); }
 
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.INQUIRY_FROM || process.env.NEWSLETTER_FROM || "Bangin' & Beats <hello@banginandbeats.com>";
   const to = (process.env.INQUIRY_TO || 'info@banginandbeats.com').split(',').map((s) => s.trim()).filter(Boolean);
-  const first = d.name.split(/\s+/)[0];
+  const first = safeFirst(d.name) || 'there';
 
   let notified = false;
   if (apiKey) {

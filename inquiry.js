@@ -105,9 +105,11 @@
 
   function isOpen() { return !modal.hidden; }
 
+  var openedAt = 0;
   function open(opts) {
     opts = opts || {};
     if (isOpen()) { applyContext(opts.topic, opts.context); return; }
+    openedAt = Date.now();
     lastFocus = document.activeElement;
     // Fresh form each open (unless a send just finished, which resets anyway).
     form.hidden = false;
@@ -221,6 +223,7 @@
 
     var payload = {};
     new FormData(form).forEach(function (v, k) { payload[k] = v; });
+    payload._t = openedAt ? Date.now() - openedAt : 0; // fill time, checked server-side
     var name = (payload.name || '').split(' ')[0];
 
     fetch(ENDPOINT, {
