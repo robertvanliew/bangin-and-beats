@@ -1941,7 +1941,15 @@
         <label class="modal__field"><span class="modal__label">Event Date</span><input type="date" name="eventDate" /></label>
         <label class="modal__field"><span class="modal__label">City, State</span><input type="text" name="city" placeholder="Newark, NJ" autocomplete="address-level2" enterkeyhint="next" /></label>
       </div>
-      <label class="modal__field" data-booking-only hidden><span class="modal__label">Expected Headcount</span><input type="number" name="headcount" placeholder="e.g. 75" min="1" inputmode="numeric" /></label>
+      <div class="modal__row" data-booking-only hidden>
+        <label class="modal__field"><span class="modal__label">Expected Headcount</span><input type="number" name="headcount" placeholder="e.g. 75" min="1" inputmode="numeric" /></label>
+        <label class="modal__field"><span class="modal__label">What is your estimated event budget range?</span>
+          <select name="budget"><option value="" selected>Select a range</option><option>Under $1,500</option><option>$1,500 – $2,499</option><option>$2,500 – $4,499</option><option>$4,500 – $7,499</option><option>$7,500+</option></select>
+        </label>
+      </div>
+      <label class="modal__field"><span class="modal__label">How did you hear about the tour?</span>
+        <select name="source"><option value="" selected>Choose one</option><option>Instagram</option><option>TikTok</option><option>Facebook</option><option>Word of Mouth / Attended a Past Tour Stop</option><option>Google Search / Maps</option></select>
+      </label>
 
       <label class="modal__field"><span class="modal__label">Message</span><textarea name="message" rows="4" required placeholder="Tell us about your event: venue type, vibe, must-haves."></textarea></label>
 

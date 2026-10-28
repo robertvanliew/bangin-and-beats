@@ -23,6 +23,9 @@ const HOTLINE_TEL = '+12013444589';
 const IG = 'https://www.instagram.com/banginandbeats';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const BUDGETS = ["Under $1,500","$1,500 – $2,499","$2,500 – $4,499","$4,500 – $7,499","$7,500+"];
+const SOURCES = ["Instagram","TikTok","Facebook","Word of Mouth / Attended a Past Tour Stop","Google Search / Maps"];
+const pick = (v, list) => (list.includes(v) ? v : ''); // only the form's own options are accepted
 const MAX = { name: 120, email: 254, phone: 40, topic: 80, message: 5000, eventDate: 20, city: 120, headcount: 10, context: 300, page: 200 };
 
 function readBody(req) {
@@ -106,6 +109,8 @@ ${HEADER(isBooking ? 'New booking lead' : 'New inquiry', esc(topicLabel(d.topic)
     ${row('Event date', d.eventDate ? `<strong>${esc(prettyDate(d.eventDate))}</strong>` : '')}
     ${row('Location', esc(d.city))}
     ${row('Headcount', d.headcount ? esc(d.headcount) + ' guests' : '')}
+    ${row('Budget', d.budget ? `<strong>${esc(d.budget)}</strong>` : '')}
+    ${row('Heard about us', esc(d.source))}
     ${row('Re', esc(d.context))}
     ${row('Message', esc(d.message).replace(/\n/g, '<br>'))}
     ${row('From page', `<a href="${esc(pageUrl)}" style="color:#7A5E12;text-decoration:none;">${esc(d.page || '/')}</a>`)}
@@ -159,7 +164,7 @@ function plainText(d, forLead) {
        '', `Request: ${topicLabel(d.topic)}`, opt(d.eventDate, `Date: ${prettyDate(d.eventDate)}`), opt(d.city, `Location: ${d.city}`), opt(d.headcount, `Guests: ${d.headcount}`),
        '', `Need us sooner? Call or text ${HOTLINE}, or reply to this email.`, '', SITE]
     : [`New inquiry: ${topicLabel(d.topic)}`, '', `Name: ${d.name}`, `Email: ${d.email}`, opt(d.phone, `Phone: ${d.phone}`), opt(d.eventDate, `Event date: ${prettyDate(d.eventDate)}`),
-       opt(d.city, `Location: ${d.city}`), opt(d.headcount, `Headcount: ${d.headcount}`), opt(d.context, `Re: ${d.context}`), '', d.message, '', `From page: ${SITE}${d.page || '/'}`];
+       opt(d.city, `Location: ${d.city}`), opt(d.headcount, `Headcount: ${d.headcount}`), opt(d.budget, `Budget: ${d.budget}`), opt(d.source, `Heard about us: ${d.source}`), opt(d.context, `Re: ${d.context}`), '', d.message, '', `From page: ${SITE}${d.page || '/'}`];
   return lines.filter((l) => l !== null).join('\n');
 }
 
@@ -224,6 +229,8 @@ module.exports = async function handler(req, res) {
     eventDate: clean(b.eventDate, MAX.eventDate),
     city: clean(b.city, MAX.city),
     headcount: clean(String(b.headcount || ''), MAX.headcount),
+    budget: pick(clean(b.budget, 40), BUDGETS),
+    source: pick(clean(b.source, 80), SOURCES),
     message: clean(b.message, MAX.message),
     context: clean(b.context, MAX.context),
     page: clean(b.page, MAX.page).replace(/[^\w\-/.]/g, ''),
